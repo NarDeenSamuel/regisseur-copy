@@ -1,0 +1,1951 @@
+<div class="container-fluid px-3 py-2 bg-section">
+
+  <div class="header-wrapper">
+
+    <!-- Left Side -->
+    <div class="left-section">
+
+      <app-side-bar></app-side-bar>
+
+      <img
+        src="assets/images/smallLogo.png"
+        class="logo-img"
+        alt="logo"
+      >
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+
+      <app-navbar></app-navbar>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="container-fluid px-3 px-lg-4 py-3 profile-header">
+
+  <!-- Header Row -->
+
+  <div class="row align-items-center mb-4">
+
+    <!-- Left -->
+
+    <div class="col-lg-7">
+
+      <small class="text-secondary d-block mb-2">
+        Onboarding / Profile Setup
+      </small>
+
+      <h2 class="text-white fw-semibold mb-2">
+        Complete Your Profile
+      </h2>
+
+      <p class="text-secondary small mb-0">
+        Add your business details, links, media, and service presence to make your service provider profile stand out on Régisseur.
+      </p>
+
+    </div>
+
+    <!-- Right -->
+
+    <div class="col-lg-5">
+
+      <div
+        class="d-flex justify-content-lg-end justify-content-start mt-3 mt-lg-0"
+      >
+
+        <div class="d-flex align-items-center gap-2">
+
+          <span class="badge bg-dark border border-secondary px-3 py-2">
+
+            Step 1 of 2
+
+          </span>
+
+          <div class="progress-line active"></div>
+
+          <div class="progress-dot active"></div>
+
+          <div class="progress-line"></div>
+
+          <div class="progress-dot"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Cards Row -->
+
+  <div class="row g-3">
+
+    <!-- User Type -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="card bg-dark-card border-secondary h-100">
+
+        <div class="card-body">
+
+          <div
+            class="d-flex align-items-center justify-content-between mb-2"
+          >
+
+            <small class="text-secondary">
+              User Type
+            </small>
+
+            <i class="fa-solid fa-lock text-secondary small"></i>
+
+          </div>
+
+          <div class="text-white fw-semibold">
+
+            Business
+
+          </div>
+
+          <small class="text-secondary">
+
+            Auto-filled from signup
+
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- User Role -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="card bg-dark-card border-secondary h-100">
+
+        <div class="card-body">
+
+          <div
+            class="d-flex align-items-center justify-content-between mb-2"
+          >
+
+            <small class="text-secondary">
+              User Role
+            </small>
+
+            <i class="fa-solid fa-lock text-secondary small"></i>
+
+          </div>
+
+          <div class="text-white fw-semibold">
+
+            Service Provider
+
+          </div>
+
+          <small class="text-secondary">
+
+            Auto-filled from signup
+
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Mapping -->
+
+    <div class="col-lg-6">
+
+      <div class="card bg-dark-card border-danger h-100">
+
+        <div class="card-body">
+
+          <div
+            class="d-flex align-items-center gap-2 mb-2"
+          >
+
+            <span class="text-white fw-semibold">
+
+              User Type & Role Mapping
+
+            </span>
+
+            <i
+              class="fa-solid fa-circle-info text-secondary"
+            ></i>
+
+          </div>
+
+          <small class="text-secondary d-block">
+
+            1- Individual / [1-1 No Role / 1-2 Artist / Talent / 1-3 Producer / Organizer]
+
+          </small>
+
+          <small class="text-secondary d-block">
+
+            2- Business / [2-1 Vendor / 2-2 Service Provider / 2-3 Space]
+
+          </small>
+
+          <small class="text-secondary d-block">
+
+            3- Organization / [3-1 Space]
+
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Note -->
+
+  <div
+    class="alert profile-note mt-3 d-flex align-items-center"
+  >
+
+    <i
+      class="fa-solid fa-circle-exclamation text-danger me-2"
+    ></i>
+
+    <small class="text-secondary mb-0">
+
+      Note: User Type and User Role are auto-filled from signup and cannot be edited here.
+
+    </small>
+
+  </div>
+
+</div>
+
+
+<form
+  [formGroup]="profileForm"
+  (ngSubmit)="submitForm()"
+>
+
+  <div class="container-fluid py-4 px-3 px-xl-4 profile-container">
+
+    <!-- ROW 1 -->
+
+    <div class="row g-3 mb-3">
+
+  <div class="col-12 col-xl-6">
+
+  <div class="card profile-card h-100">
+
+    <div class="card-body">
+
+      <h5 class="section-title mb-4">
+
+        <span class="step-number">1</span>
+
+        Basic Information
+
+      </h5>
+
+      <div class="row g-3">
+
+        <!-- Business Name -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Business Name
+
+            <span class="text-danger">*</span>
+
+          </label>
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="companyName"
+            placeholder="Business Name"
+          >
+
+        </div>
+
+        <!-- Business Email -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Business Email Address
+
+            <span class="text-danger">*</span>
+
+          </label>
+ <input
+  type="email"
+  class="form-control custom-input"
+  formControlName="businessEmail"
+  placeholder="Enter business email"
+  readonly
+>
+
+        </div>
+
+        <!-- Business Phone -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Business Phone Number
+
+            <span class="text-danger">*</span>
+
+          </label>
+
+          <div class="phone-wrapper">
+
+            <!-- Country -->
+
+            <div
+              class="custom-country-select"
+              (click)="toggleCountryDropdown()"
+            >
+
+              <div class="selected-country">
+
+                <img
+                  [src]="selectedCountry.flag"
+                  class="country-flag"
+                  alt=""
+                >
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+              </div>
+
+              <div
+                class="country-menu"
+                *ngIf="showCountryDropdown"
+              >
+
+                <div
+                  class="country-option"
+                  *ngFor="let country of countries"
+                  (click)="selectCountry(country); $event.stopPropagation()"
+                >
+
+                  <img
+                    [src]="country.flag"
+                    class="country-flag"
+                    alt=""
+                  >
+
+                  <span>
+
+                    {{ country.code }}
+
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Country Code -->
+
+            <div class="country-code">
+
+              {{ selectedCountry.code }}
+
+            </div>
+
+            <!-- Phone -->
+
+            <input
+              type="text"
+              class="phone-input"
+              formControlName="businessPhone"
+              placeholder="Business Phone Number"
+            >
+
+          </div>
+
+        </div>
+
+        <!-- Display Name -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Display / Brand Name
+
+            <span class="text-secondary">
+
+              (optional)
+
+            </span>
+
+          </label>
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="displayName"
+            placeholder="Display / Brand Name"
+          >
+
+        </div>
+
+        <!-- Headline -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Tagline / Headline
+
+            <span class="text-secondary">
+
+              (optional)
+
+            </span>
+
+          </label>
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="headline"
+            placeholder="Tagline / Headline"
+          >
+
+        </div>
+
+        <!-- Primary Contact -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Primary Contact Name
+
+            <span class="text-secondary">
+
+              (optional)
+
+            </span>
+
+          </label>
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="primaryContactName"
+            placeholder="Primary Contact Name"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="col-12 col-xl-6">
+
+  <div class="card profile-card h-100">
+
+    <div class="card-body">
+
+      <h5 class="section-title mb-4">
+
+        <span class="step-number">2</span>
+
+        Profile Details
+
+      </h5>
+
+      <!-- Service Category -->
+
+      <div class="mb-3">
+
+        <label class="form-label text-light fw-medium">
+
+          Service Category / Specialty
+
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select custom-input"
+          formControlName="serviceCategory"
+        >
+
+          <option value="">
+            Select Service Category
+          </option>
+
+          <option value="Event Operations & Production">
+            Event Operations & Production
+          </option>
+
+          <option value="Technical Production">
+            Technical Production
+          </option>
+
+          <option value="Event Staffing">
+            Event Staffing
+          </option>
+
+          <option value="Venue Operations">
+            Venue Operations
+          </option>
+
+          <option value="Logistics & Transportation">
+            Logistics & Transportation
+          </option>
+
+          <option value="Marketing & Promotions">
+            Marketing & Promotions
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Subcategory -->
+
+      <div class="mb-3">
+
+        <label class="form-label text-light fw-medium">
+
+          Subcategory / Specialty
+
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <select
+          class="form-select custom-input"
+          formControlName="subCategory"
+        >
+
+          <option value="">
+            Select Subcategory
+          </option>
+
+          <option value="Production Management & Staffing">
+            Production Management & Staffing
+          </option>
+
+          <option value="Stage Management">
+            Stage Management
+          </option>
+
+          <option value="Event Coordination">
+            Event Coordination
+          </option>
+
+          <option value="Guest Experience">
+            Guest Experience
+          </option>
+
+          <option value="Operations Management">
+            Operations Management
+          </option>
+
+          <option value="Vendor Coordination">
+            Vendor Coordination
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Company Name -->
+
+      <div class="mb-3">
+
+        <label class="form-label text-light fw-medium">
+
+          Company / Organization Name
+
+          <span class="text-secondary">
+
+            (optional)
+
+          </span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control custom-input"
+          formControlName="companyName"
+          placeholder="Company / Organization Name"
+        >
+
+      </div>
+
+      <!-- Bio -->
+
+      <div class="mb-1">
+
+        <label class="form-label text-light fw-medium">
+
+          Profile Summary / Bio
+
+          <span class="text-danger">*</span>
+
+        </label>
+
+        <textarea
+          rows="5"
+          maxlength="500"
+          class="form-control custom-input"
+          formControlName="bio"
+          placeholder="Tell us about your services..."
+        ></textarea>
+
+        <div class="text-end small text-secondary mt-1">
+
+          {{ profileForm.get('bio')?.value?.length || 0 }}/500
+
+        </div>
+
+      </div>
+
+      <!-- Service Area -->
+
+      <div class="mb-3">
+
+        <label class="form-label text-light fw-medium">
+
+          Service Area Focus
+
+          <span class="text-secondary">
+
+            (optional)
+
+          </span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control custom-input"
+          formControlName="serviceAreaFocus"
+          placeholder="Corporate events, conferences, brand activations"
+        >
+
+      </div>
+
+      <!-- Years + Availability -->
+
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label text-light fw-medium">
+
+            Years in Business
+
+            <span class="text-danger">*</span>
+
+          </label>
+
+          <select
+            class="form-select custom-input"
+            formControlName="yearsInBusiness"
+          >
+
+            <option value="">
+              Select Years
+            </option>
+
+            <option value="0-1 Years">
+              0 - 1 Years
+            </option>
+
+            <option value="1-3 Years">
+              1 - 3 Years
+            </option>
+
+            <option value="3-5 Years">
+              3 - 5 Years
+            </option>
+
+            <option value="5-8 Years">
+              5 - 8 Years
+            </option>
+
+            <option value="8+ Years">
+              8+ Years
+            </option>
+
+            <option value="10+ Years">
+              10+ Years
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="col-md-6 mb-3">
+
+          <label class="form-label text-light fw-medium">
+
+            Availability / Working Hours
+
+            <span class="text-danger">*</span>
+
+          </label>
+
+          <select
+            class="form-select custom-input"
+            formControlName="workingHours"
+          >
+
+            <option value="">
+              Select Availability
+            </option>
+
+            <option value="Weekdays">
+              Weekdays
+            </option>
+
+            <option value="Weekends">
+              Weekends
+            </option>
+
+            <option value="Weekdays & Weekends">
+              Weekdays & Weekends
+            </option>
+
+            <option value="Evenings">
+              Evenings
+            </option>
+
+            <option value="Flexible">
+              Flexible
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+    </div>
+
+    <!-- ROW 2 -->
+
+    <div class="row g-3 mb-3">
+
+       <div class="col-12 col-xl-6">
+
+  <div class="card profile-card h-100">
+
+    <div class="card-body">
+
+      <h5 class="section-title mb-4">
+
+        <span class="step-number">3</span>
+
+        Links & Social Media
+
+      </h5>
+
+      <!-- Website -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-solid fa-globe social-icon website"></i>
+
+            <span>Website / Portfolio Link</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="website"
+            placeholder="https://yourwebsite.com"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Instagram -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-brands fa-instagram social-icon instagram"></i>
+
+            <span>Instagram</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="instagram"
+            placeholder="https://instagram.com/username"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Facebook -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-brands fa-facebook-f social-icon facebook"></i>
+
+            <span>Facebook</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="facebook"
+            placeholder="https://facebook.com/username"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- LinkedIn -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-brands fa-linkedin-in social-icon linkedin"></i>
+
+            <span>LinkedIn</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="linkedin"
+            placeholder="https://linkedin.com/in/username"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- X -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-brands fa-x-twitter social-icon twitter"></i>
+
+            <span>X / Twitter</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="twitter"
+            placeholder="https://x.com/username"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- TikTok -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-brands fa-tiktok social-icon tiktok"></i>
+
+            <span>TikTok</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="tiktok"
+            placeholder="https://tiktok.com/@username"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Youtube -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-brands fa-youtube social-icon youtube"></i>
+
+            <span>YouTube</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="youtube"
+            placeholder="https://youtube.com/@channel"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Additional -->
+
+      <div class="row align-items-center g-2 social-row">
+
+        <div class="col-12 col-md-4">
+
+          <div class="social-label">
+
+            <i class="fa-solid fa-link social-icon additional"></i>
+
+            <span>Additional Link</span>
+
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-8">
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            formControlName="additionalLink"
+            placeholder="https://linktr.ee/username"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+       <div class="col-12 col-xl-6">
+
+  <div class="card profile-card h-100">
+
+    <div class="card-body">
+
+      <h5 class="section-title mb-4">
+
+        <span class="step-number">4</span>
+
+        Location & Local Preferences
+
+      </h5>
+
+      <div class="row g-3">
+
+        <!-- Country -->
+
+        <div class="col-md-6">
+
+          <label class="form-label text-light fw-medium">
+
+            Country
+
+            <span class="text-danger">*</span>
+
+          </label>
+
+         <select
+  class="form-select custom-input"
+  formControlName="country"
+  (change)="onCountryChange($event)"
+>
+
+  <option
+    *ngFor="let country of allCountries"
+    [value]="country.code"
+  >
+
+    {{ country.name }}
+
+  </option>
+
+</select>
+
+        </div>
+
+        <!-- City -->
+
+        <div class="col-md-6">
+
+          <label class="form-label text-light fw-medium">
+
+            City
+
+            <span class="text-danger">*</span>
+
+          </label>
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            placeholder="Enter city"
+            formControlName="city"
+          >
+
+        </div>
+
+        <!-- State -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            State / Region
+
+            <span class="text-secondary">
+              (optional)
+            </span>
+
+          </label>
+
+          <select
+  class="form-select custom-input"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+
+    {{ state }}
+
+  </option>
+
+</select>
+
+        </div>
+
+        <!-- Address -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Full Address
+
+          </label>
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            placeholder="Enter full address"
+            formControlName="address"
+          >
+
+        </div>
+
+        <!-- Postal Code -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Postal Code
+
+          </label>
+
+          <input
+            type="text"
+            class="form-control custom-input"
+            placeholder="Enter postal code"
+            formControlName="postalCode"
+          >
+
+        </div>
+
+        <!-- Preferred Areas -->
+
+        <div class="col-12">
+
+          <label class="form-label text-light fw-medium">
+
+            Preferred Areas / Cities
+
+          </label>
+
+          <div class="language-select-wrapper">
+
+            <div
+              class="selected-languages"
+              *ngIf="selectedAreas.length"
+            >
+
+              <span
+                *ngFor="let area of selectedAreas"
+                class="language-chip"
+              >
+
+                {{ area }}
+
+                <i
+                  class="fa-solid fa-xmark"
+                  (click)="removeArea(area)"
+                ></i>
+
+              </span>
+
+            </div>
+
+            <div class="custom-language-dropdown">
+
+              <div
+                class="dropdown-selected"
+                (click)="showAreaDropdown = !showAreaDropdown"
+              >
+
+                <span class="text-secondary">
+
+                  Select Area
+
+                </span>
+
+                <i
+                  class="fa-solid"
+                  [class.fa-chevron-down]="!showAreaDropdown"
+                  [class.fa-chevron-up]="showAreaDropdown"
+                ></i>
+
+              </div>
+
+              <div
+                class="dropdown-menu-custom custom-scroll"
+                *ngIf="showAreaDropdown"
+              >
+
+                <div
+                  class="dropdown-item-custom"
+                  *ngFor="let area of allAreas"
+                  (click)="selectArea(area)"
+                >
+
+                  {{ area }}
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+    </div>
+
+    <!-- ROW 3 -->
+
+   <div class="row g-3 mb-3">
+ <div class="col-12">
+
+  <div class="card profile-card">
+
+    <div class="card-body">
+
+      <h5 class="section-title mb-4">
+
+        <span class="step-number">5</span>
+
+        Media & Profile
+
+      </h5>
+
+      <div class="row g-4">
+
+        <!-- PROFILE PHOTO -->
+
+        <div class="col-12 col-md-6 col-lg-3">
+
+          <div class="media-box">
+
+            <label class="media-title">
+
+              Logo
+            <span class="text-danger">*</span>
+
+            </label>
+
+            <div class="media-preview profile-preview">
+
+              <img
+                *ngIf="profilePhotoPreview"
+                [src]="profilePhotoPreview"
+              >
+
+              <div
+                *ngIf="!profilePhotoPreview"
+                class="empty-media"
+              >
+
+                <i class="fa-regular fa-user"></i>
+
+              </div>
+
+            </div>
+
+            <label class="btn btn-dark w-100 mt-3">
+
+              {{ profilePhotoPreview ? 'Change Photo' : 'Upload Photo' }}
+
+              <input
+                hidden
+                type="file"
+                accept="image/*"
+                (change)="onProfilePhotoChange($event)"
+              >
+
+            </label>
+<button
+  *ngIf="profilePhotoPreview"
+  class="btn btn-outline-danger w-100 mt-2"
+  type="button"
+  (click)="removeProfilePhoto()"
+>
+
+  Remove Photo
+
+</button>
+            <small class="text-secondary d-block mt-2">
+
+              JPG, PNG or WebP. Max 5MB.
+
+            </small>
+
+          </div>
+
+        </div>
+
+        <!-- BANNER -->
+
+<div class="col-12 col-md-6 col-lg-3">
+
+  <div class="media-box">
+
+    <label class="media-title">
+
+      Banner / Cover Image
+            <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="banner-preview">
+
+      <img
+        *ngIf="bannerPreview"
+        [src]="bannerPreview"
+      >
+
+      <div
+        *ngIf="!bannerPreview"
+        class="empty-media"
+      >
+
+        <i class="fa-regular fa-image"></i>
+
+      </div>
+
+    </div>
+
+    <!-- Upload / Change -->
+
+    <label class="btn btn-dark w-100 mt-3">
+
+      {{ bannerPreview ? 'Change Banner' : 'Upload Banner' }}
+
+      <input
+        hidden
+        type="file"
+        accept="image/*"
+        (change)="onBannerChange($event)"
+      >
+
+    </label>
+
+    <!-- Remove -->
+
+    <button
+      *ngIf="bannerPreview"
+      class="btn btn-outline-danger w-100 mt-2"
+      type="button"
+      (click)="removeBanner()"
+    >
+
+      Remove Banner
+
+    </button>
+
+    <small class="text-secondary d-block mt-2">
+
+      JPG, PNG or WebP. Max 10MB.
+
+    </small>
+
+  </div>
+
+</div>
+
+        <!-- GALLERY -->
+
+        <div class="col-12 col-md-6 col-lg-3">
+
+          <div class="media-box">
+
+            <label class="media-title">
+
+              Gallery / Portfolio
+            <span class="text-danger">*</span>
+
+            </label>
+
+            <div class="gallery-grid">
+
+              <div
+                *ngFor="let image of galleryPreviews; let i = index"
+                class="gallery-item"
+              >
+
+                <img [src]="image">
+
+                <button
+                  type="button"
+                  class="remove-btn"
+                  (click)="removeGalleryImage(i)"
+                >
+
+                  <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+              </div>
+
+              <div
+                *ngIf="!galleryPreviews.length"
+                class="empty-media h-100"
+              >
+
+                <i class="fa-regular fa-images"></i>
+
+              </div>
+
+            </div>
+
+            <label class="btn btn-dark w-100 mt-3">
+
+              Upload Gallery
+
+              <input
+                hidden
+                type="file"
+                multiple
+                accept="image/*"
+                (change)="onGalleryChange($event)"
+              >
+
+            </label>
+  <small class="text-secondary d-block mt-2">
+
+              JPG, PNG or WebP. Max 5MB.
+
+            </small>
+          </div>
+
+        </div>
+
+        <!-- PDF -->
+
+        <div class="col-12 col-md-6 col-lg-3">
+
+          <div class="media-box">
+
+            <label class="media-title">
+
+              Company Deck / Certifications
+            <span class="text-danger">*</span>
+
+            </label>
+
+           <div class="pdf-preview">
+
+  <button
+    *ngIf="aboutFile"
+    class="remove-btn"
+    type="button"
+    (click)="removeAboutFile()"
+  >
+
+    <i class="fa-solid fa-xmark"></i>
+
+  </button>
+
+  <ng-container *ngIf="aboutFile">
+
+    <i class="fa-regular fa-file-pdf text-danger fs-1"></i>
+
+    <div class="mt-2">
+      {{ aboutFileName }}
+    </div>
+
+    <small class="text-secondary">
+      {{ aboutFileSize }}
+    </small>
+
+  </ng-container>
+
+  <div
+    *ngIf="!aboutFile"
+    class="empty-media"
+  >
+
+    <i class="fa-regular fa-file-lines"></i>
+
+  </div>
+
+</div>
+
+            <label class="btn btn-dark w-100 mt-3">
+
+              Upload File
+
+              <input
+                hidden
+                type="file"
+                accept=".pdf,.ppt,.pptx"
+                (change)="onAboutFileChange($event)"
+              >
+
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+    </div>
+
+    <!-- ROW 4 -->
+
+    <div class="row g-3">
+
+    <div class="col-12 col-xl-6">
+
+  <div class="card profile-card h-100">
+
+    <div class="card-body">
+
+      <h5 class="section-title mb-4">
+
+        <span class="step-number">6</span>
+
+        Contact & Visibility
+
+      </h5>
+
+      <!-- Allow Service Inquiries -->
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div>
+
+          <span class="text-light">
+            Allow contact / service inquiries
+          </span>
+
+          <i class="fa-solid fa-circle-info text-secondary ms-2 small"></i>
+
+        </div>
+
+        <div class="form-check form-switch m-0">
+
+          <input
+            class="form-check-input custom-switch"
+            type="checkbox"
+            formControlName="allowServiceInquiries"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Show Profile Publicly -->
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div>
+
+          <span class="text-light">
+            Show profile publicly when complete
+          </span>
+
+          <i class="fa-solid fa-circle-info text-secondary ms-2 small"></i>
+
+        </div>
+
+        <div class="form-check form-switch m-0">
+
+          <input
+            class="form-check-input custom-switch"
+            type="checkbox"
+            formControlName="showProfilePublicly"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Platform Updates -->
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div>
+
+          <span class="text-light">
+            Receive platform updates
+          </span>
+
+          <i class="fa-solid fa-circle-info text-secondary ms-2 small"></i>
+
+        </div>
+
+        <div class="form-check form-switch m-0">
+
+          <input
+            class="form-check-input custom-switch"
+            type="checkbox"
+            formControlName="receivePlatformUpdates"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Social Links -->
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+
+          <span class="text-light">
+            Show social links on public profile
+          </span>
+
+          <i class="fa-solid fa-circle-info text-secondary ms-2 small"></i>
+
+        </div>
+
+        <div class="form-check form-switch m-0">
+
+          <input
+            class="form-check-input custom-switch"
+            type="checkbox"
+            formControlName="showSocialLinks"
+          >
+
+        </div>
+
+      </div>
+
+      <!-- Preferred Contact Method -->
+
+      <div class="mb-4">
+
+        <label class="form-label text-light fw-medium">
+
+          Preferred Contact Method
+
+          <span class="text-danger">*</span>
+
+          <i class="fa-solid fa-circle-info text-secondary ms-2 small"></i>
+
+        </label>
+
+        <select
+          class="form-select custom-input"
+          formControlName="preferredContactMethod"
+        >
+
+          <option value="">
+            Select Contact Method
+          </option>
+
+          <option value="Email">
+            Email
+          </option>
+
+          <option value="Phone">
+            Phone
+          </option>
+
+          <option value="Platform Message">
+            Platform Message
+          </option>
+
+          <option value="WhatsApp">
+            WhatsApp
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- Public Contact Email -->
+
+      <div>
+
+        <label class="form-label text-light fw-medium">
+
+          Public contact / booking email
+
+          <span class="text-secondary">
+            (optional)
+          </span>
+
+        </label>
+
+        <input
+          type="email"
+          class="form-control custom-input"
+          formControlName="publicContactEmail"
+          placeholder="bookings@example.com"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+      <div class="col-12 col-xl-6">
+
+  <div class="card profile-card h-100">
+
+    <div class="card-body">
+
+      <h5 class="section-title mb-2">
+
+        <span class="step-number">7</span>
+
+        Production Skills & Tags
+            <span class="text-danger">*</span>
+
+      </h5>
+
+      <p class="text-secondary mb-3">
+
+        Add production skills and tags that describe your expertise.
+
+      </p>
+
+      <!-- Selected Skills -->
+
+      <div class="mb-4">
+
+        <div class="language-select-wrapper">
+
+          <div
+            class="selected-languages"
+            *ngIf="selectedSkills.length"
+          >
+
+            <span
+              *ngFor="let skill of selectedSkills"
+              class="language-chip"
+            >
+
+              {{ skill }}
+
+              <i
+                class="fa-solid fa-xmark"
+                (click)="removeSkill(skill)"
+              ></i>
+
+            </span>
+
+          </div>
+
+          <div class="custom-language-dropdown">
+
+            <div
+              class="dropdown-selected"
+              (click)="showSkillsDropdown = !showSkillsDropdown"
+            >
+
+              <span class="text-secondary">
+
+                Select Production Skills
+
+              </span>
+
+              <i
+                class="fa-solid"
+                [class.fa-chevron-down]="!showSkillsDropdown"
+                [class.fa-chevron-up]="showSkillsDropdown"
+              ></i>
+
+            </div>
+
+            <div
+              class="dropdown-menu-custom"
+              *ngIf="showSkillsDropdown"
+            >
+
+              <div
+                class="dropdown-item-custom"
+                *ngFor="let skill of allSkills"
+                (click)="selectSkill(skill)"
+              >
+
+                {{ skill }}
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Suggested Tags -->
+
+      <div class="mb-4">
+
+        <label class="form-label text-light fw-medium">
+
+          Suggested tags
+
+        </label>
+
+        <div class="d-flex flex-wrap gap-2 mt-2">
+
+          <button
+            type="button"
+            class="btn atmosphere-btn"
+            *ngFor="let tag of suggestedTags"
+            (click)="selectSkill(tag)"
+          >
+
+            {{ tag }}
+
+          </button>
+
+          <button
+            type="button"
+            class="btn p-0 border-0 bg-transparent text-danger fw-semibold"
+            (click)="showCustomTagInput = !showCustomTagInput"
+          >
+
+            + Add Custom Tag
+
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Custom Tag -->
+
+      <div *ngIf="showCustomTagInput">
+
+        <input
+          #customTagInput
+          type="text"
+          class="form-control custom-input"
+          placeholder="Enter custom tag"
+        >
+
+        <button
+          type="button"
+          class="btn btn-danger mt-2"
+          (click)="addCustomTag(customTagInput.value); customTagInput.value=''"
+        >
+
+          Add Tag
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+    </div>
+
+    <!-- ACTIONS -->
+<div
+  *ngIf="validationMessage"
+  class="alert alert-danger mb-3"
+>
+  {{ validationMessage }}
+</div>
+
+<div
+  *ngIf="successMessage"
+  class="alert alert-success mb-3"
+>
+  {{ successMessage }}
+</div>
+ <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+
+     <button
+  type="button"
+  class="btn btn-danger px-4"
+  (click)="submitForm(false)"
+  [disabled]="isLoading"
+>
+
+  <span
+    *ngIf="isLoading"
+    class="spinner-border spinner-border-sm me-2"
+    role="status"
+    aria-hidden="true"
+  ></span>
+
+  {{ isLoading ? 'Saving...' : 'Save & Continue' }}
+
+</button>
+    <button
+  type="button"
+  class="btn btn-outline-secondary px-4"
+  (click)="submitForm(true)"
+  [disabled]="isLoading"
+>
+  Save Draft
+</button>
+
+      <button
+        type="button"
+        class="btn btn-outline-secondary px-4"
+      >
+        Preview Profile
+      </button>
+
+    </div>
+
+
+  </div>
+
+</form>

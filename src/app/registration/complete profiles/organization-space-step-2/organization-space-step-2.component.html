@@ -1,0 +1,1222 @@
+<div class="container-fluid px-3 py-2 bg-section">
+
+  <div class="header-wrapper">
+
+    <!-- Left Side -->
+    <div class="left-section">
+
+      <app-side-bar></app-side-bar>
+
+      <img
+        src="assets/images/smallLogo.png"
+        class="logo-img"
+        alt="logo"
+      >
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+
+      <app-navbar></app-navbar>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- header section -->
+
+<div class="container-fluid px-3 px-lg-4 py-3 profile-header">
+  <!-- Header Row -->
+
+  <div class="row align-items-center mb-4">
+    <!-- Left -->
+
+    <div class="col-lg-7">
+      <small class="text-secondary d-block mb-2"> Onboarding / Spaces </small>
+
+      <h2 class="text-white fw-semibold mb-2">Spaces</h2>
+
+      <p class="text-secondary small mb-0">
+        Add and manage the spaces you want to showcase, operate, or make
+        available on Régisseur.
+      </p>
+    </div>
+
+    <!-- Right -->
+
+    <div class="col-lg-5">
+      <div
+        class="d-flex justify-content-lg-end justify-content-start mt-3 mt-lg-0"
+      >
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge bg-dark border border-secondary px-3 py-2">
+            Step 2 of 2
+          </span>
+
+          <div class="progress-line active"></div>
+
+          <div class="progress-dot active"></div>
+
+          <div class="progress-line active"></div>
+
+          <div class="progress-dot active"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cards Row -->
+
+  <div class="row g-3">
+    <!-- User Type -->
+
+    <div class="col-lg-3 col-md-6">
+      <div class="card bg-dark-card border-secondary h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <small class="text-secondary"> User Type </small>
+
+            <i class="fa-solid fa-lock text-secondary small"></i>
+          </div>
+
+          <div class="text-white fw-semibold">Organization</div>
+
+          <small class="text-secondary"> Auto-filled from sign-up </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Role -->
+
+    <div class="col-lg-3 col-md-6">
+      <div class="card bg-dark-card border-secondary h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <small class="text-secondary"> User Role </small>
+
+            <i class="fa-solid fa-lock text-secondary small"></i>
+          </div>
+
+          <div class="text-white fw-semibold">Space / Venue / Location</div>
+
+          <small class="text-secondary"> Auto-filled from sign-up </small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mapping -->
+
+    <div class="col-lg-6">
+      <div class="card bg-dark-card border-danger h-100">
+        <div class="card-body">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="text-white fw-semibold">
+              User Type & Role Mapping
+            </span>
+
+            <i class="fa-solid fa-circle-info text-secondary"></i>
+          </div>
+
+          <small class="text-secondary d-block">
+            1- Individual / [1-1 No Role / 1-2 Artist / Talent / 1-3 Producer /
+            Organizer]
+          </small>
+
+          <small class="text-secondary d-block">
+            2- Business / [2-1 Vendor / 2-2 Service Provider / 2-3 Space]
+          </small>
+
+          <small class="text-secondary d-block">
+            3- Organization / [3-1 Space]
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="alert profile-note mt-3 d-flex align-items-center">
+    <i class="fa-solid fa-circle-exclamation text-danger me-2"></i>
+
+    <small class="text-secondary mb-0">
+      Note: User Type and User Role are auto-filled from signup and cannot be
+      edited here.
+    </small>
+  </div>
+</div>
+<!-- action buttons -->
+
+<div class="bg-dark-wrapper p-2 px-4">
+  <div class="d-flex flex-wrap gap-2">
+    <div class="d-flex flex-wrap gap-2">
+      <!-- Interest / Alert -->
+
+
+
+      <!-- Spaces -->
+      <button
+        type="button"
+        class="btn custom-red-btn d-flex align-items-center gap-2"
+      >
+        <i class="fa-solid fa-circle-plus"></i>
+        <span>Add Space</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- table -->
+
+<div class="vendors-wrapper px-4 pt-2">
+  <div class="vendors-table-card">
+    <!-- HEADER -->
+
+    <div class="vendors-header">
+      <div class="container-fluid">
+        <div class="row align-items-center g-3">
+          <!-- TABS -->
+
+          <div class="col-lg-5">
+            <div class="vendors-tabs">
+              <button
+                *ngFor="let filter of filters"
+                (click)="setFilter(filter)"
+                [class.active]="activeFilter === filter"
+              >
+                {{ filter }}
+              </button>
+            </div>
+          </div>
+
+          <!-- SEARCH -->
+
+          <div class="col-lg-3">
+            <div class="position-relative">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+              <input
+                type="text"
+                class="table-search"
+                placeholder="Search your items..."
+                [(ngModel)]="searchTerm"
+              />
+            </div>
+          </div>
+
+          <!-- CATEGORY -->
+
+          <div class="col-lg-2">
+            <select
+              class="table-select"
+              [(ngModel)]="selectedCategory"
+              (change)="applyFilters()"
+            >
+              <option value="">Category: All</option>
+
+              <option *ngFor="let item of categoryOptions" [value]="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+
+          <!-- SORT + FILTER -->
+
+          <div class="col-lg-2">
+            <div class="d-flex gap-2">
+              <select class="table-select" [(ngModel)]="selectedSort">
+                <option value="Newest">Sort: Newest</option>
+
+                <option value="Oldest">Sort: Oldest</option>
+              </select>
+
+              <button class="header-btn">
+                <i class="fa-solid fa-filter"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="custom-table-wrapper" *ngIf="filteredItems.length > 0">
+      <table class="vendors-table">
+        <thead>
+          <tr>
+            <th class="item-col">Item</th>
+
+            <th class="type-col">Type</th>
+
+            <th class="category-col">Category</th>
+
+            <th class="status-col">Preference / Status</th>
+
+            <th class="location-col">Location / Scope</th>
+
+            <th class="notification-col">Notifications</th>
+
+            <th class="action-col text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of paginatedItems; let i = index">
+            <!-- ITEM -->
+
+            <td class="item-col">
+              <div class="event-info">
+                <img [src]="item.image" alt="" />
+
+                <div class="event-text">
+                  <h6>
+                    {{ item.title }}
+                  </h6>
+
+                  <span>
+                    {{ item.description }}
+                  </span>
+                </div>
+              </div>
+            </td>
+
+            <!-- TYPE -->
+
+            <td class="type-col">
+              <span class="badge-type" [ngClass]="item.typeClass">
+                {{ item.type }}
+              </span>
+            </td>
+
+            <!-- CATEGORY -->
+
+            <td class="category-col">
+              {{ item.category }}
+            </td>
+
+            <!-- STATUS -->
+
+            <td class="status-col">
+              <span class="badge-status" [ngClass]="item.statusClass">
+                {{ item.status }}
+              </span>
+            </td>
+
+            <!-- LOCATION -->
+
+            <td class="location-col">
+              {{ item.location }}
+            </td>
+
+            <!-- NOTIFICATIONS -->
+
+            <td class="notification-col">
+              <div class="form-check form-switch m-0">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [checked]="item.notifications"
+                />
+              </div>
+            </td>
+
+            <!-- ACTIONS -->
+
+            <td class="action-col">
+              <div class="action-buttons">
+                <button class="action-btn">
+                  <i class="fa-regular fa-eye"></i>
+                </button>
+
+                <button class="action-btn">
+                  <i class="fa-regular fa-pen"></i>
+                </button>
+
+                <button class="action-btn">
+                  <i class="fa-regular fa-copy"></i>
+                </button>
+
+                <button class="action-btn">
+                  <i class="fa-regular fa-trash-can"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- EMPTY STATE -->
+
+    <!-- EMPTY STATE -->
+
+    <div
+      class="empty-state offerings-empty-state"
+      *ngIf="filteredItems.length === 0"
+    >
+      <div class="empty-icon">
+        <i class="fa-regular fa-folder-open"></i>
+      </div>
+
+      <h3>No spaces yet</h3>
+
+      <p>
+        You haven't added any spaces yet.
+
+        <br />
+
+        Get started by adding your first space.
+      </p>
+
+      <button
+        type="button"
+        class="btn empty-btn"
+        data-bs-toggle="modal"
+        data-bs-target="#spaceInvitationModal"
+      >
+        <i class="fa-solid fa-circle-plus me-2"></i>
+        Add Space
+      </button>
+    </div>
+    <!-- FOOTER -->
+
+    <div class="table-footer">
+      <p>
+        Showing
+
+        {{ filteredItems.length ? (currentPage - 1) * itemsPerPage + 1 : 0 }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage > filteredItems.length
+            ? filteredItems.length
+            : currentPage * itemsPerPage
+        }}
+
+        of
+
+        {{ filteredItems.length }}
+
+        items
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div class="pagination-box" *ngIf="filteredItems.length">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <ng-container *ngFor="let page of visiblePages">
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+            {{ page }}
+          </button>
+
+          <span *ngIf="page === '...'" class="dots"> ... </span>
+        </ng-container>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPagesCount"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+        <select
+          class="per-page-select"
+          [(ngModel)]="itemsPerPage"
+          (change)="changeItemsPerPage()"
+        >
+          <option [value]="10">10</option>
+
+          <option [value]="20">20</option>
+
+          <option [value]="30">30</option>
+
+          <option [value]="50">50</option>
+        </select>
+
+        <i class="fa-solid fa-chevron-down select-icon"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- models -->
+
+<div
+  class="modal fade"
+  id="spaceInvitationModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content restriction-modal">
+
+      <!-- CLOSE -->
+
+      <button
+        type="button"
+        class="btn-close btn-close-white custom-close"
+        data-bs-dismiss="modal"
+      ></button>
+
+      <div class="modal-body custom-modal-body">
+
+        <!-- HEADER -->
+
+        <div class="text-center mb-4">
+
+          <div class="warning-icon danger">
+            <i class="fa-solid fa-building"></i>
+          </div>
+
+          <h3 class="modal-title-custom mt-3">
+            Add New Space
+          </h3>
+
+          <p class="modal-subtitle">
+            Start setting up a new Space, Venue, or Location under your Business account.
+            <br>
+            Add the key details below to create the space draft and continue the onboarding setup.
+          </p>
+
+        </div>
+
+        <!-- 1. SPACE STRUCTURE -->
+
+        <h6 class="section-title mb-3">
+          1. Space Structure
+        </h6>
+
+        <div class="row g-3 mb-4">
+
+          <div
+            class="col-lg-3 col-md-6"
+            *ngFor="let item of spaceStructures"
+          >
+
+            <div
+              class="option-card h-100"
+              [class.active-option]="spaceDraftForm.spaceStructure === item.value"
+              (click)="spaceDraftForm.spaceStructure = item.value"
+            >
+
+              <div class="radio-check">
+                <i
+                  class="fa-solid"
+                  [ngClass]="spaceDraftForm.spaceStructure === item.value
+                  ? 'fa-circle-check'
+                  : 'fa-circle'"
+                ></i>
+              </div>
+
+              <div class="option-icon">
+                <i
+                  class="fa-solid"
+                  [ngClass]="item.icon"
+                ></i>
+              </div>
+
+              <h6>{{ item.title }}</h6>
+
+              <p>{{ item.subtitle }}</p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row g-4">
+
+          <!-- LEFT -->
+
+          <div class="col-lg-8">
+
+            <h6 class="section-title mb-3">
+              2. Space / Venue / Location Details
+            </h6>
+
+            <div class="row g-3">
+
+              <div class="col-md-7">
+
+                <label class="modal-label">
+                  Space / Venue / Location Name
+                  <span class="text-danger">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  class="modal-input"
+                  placeholder="Enter space name"
+                  [(ngModel)]="spaceDraftForm.spaceName"
+                >
+
+              </div>
+
+              <div class="col-md-5">
+
+                <label class="modal-label">
+                  Display Name
+                  <span class="text-secondary">(optional)</span>
+                </label>
+
+                <input
+                  type="text"
+                  class="modal-input"
+                  placeholder="Enter public name"
+                  [(ngModel)]="spaceDraftForm.displayName"
+                >
+
+              </div>
+
+              <div class="col-12">
+
+                <label class="modal-label">
+                  Full Address
+                  <span class="text-danger">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  class="modal-input"
+                  placeholder="Enter full address"
+                  [(ngModel)]="spaceDraftForm.fullAddress"
+                >
+
+              </div>
+
+              <div class="col-md-6">
+
+                <label class="modal-label">
+                  Country
+                  <span class="text-danger">*</span>
+                </label>
+
+                <select
+                  class="modal-select"
+                  [(ngModel)]="spaceDraftForm.country"
+                  (change)="onCountryChange()"
+                >
+
+                  <option value="">Select country</option>
+
+                  <option
+                    *ngFor="let country of countriesList"
+                    [value]="country.name"
+                  >
+                    {{ country.name }}
+                  </option>
+
+                </select>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <label class="modal-label">
+                  City
+                  <span class="text-danger">*</span>
+                </label>
+
+                <select
+                  class="modal-select"
+                  [(ngModel)]="spaceDraftForm.city"
+                >
+
+                  <option value="">Select city</option>
+
+                  <option
+                    *ngFor="let city of cities"
+                    [value]="city"
+                  >
+                    {{ city }}
+                  </option>
+
+                </select>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <label class="modal-label">
+                  Primary Category
+                  <span class="text-danger">*</span>
+                </label>
+
+                <select
+                  class="modal-select"
+                  [(ngModel)]="spaceDraftForm.primaryCategory"
+                >
+
+                  <option value="">Select primary category</option>
+
+                  <option
+                    *ngFor="let category of primaryCategories"
+                    [value]="category"
+                  >
+                    {{ category }}
+                  </option>
+
+                </select>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <label class="modal-label">
+                  Secondary Category
+                </label>
+
+                <select
+                  class="modal-select"
+                  [(ngModel)]="spaceDraftForm.secondaryCategory"
+                >
+
+                  <option value="">Select secondary category</option>
+
+                  <option
+                    *ngFor="let category of secondaryCategories"
+                    [value]="category"
+                  >
+                    {{ category }}
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="col-lg-4">
+
+            <h6 class="section-title mb-3">
+              3. Contact Details
+            </h6>
+
+            <div class="row g-3">
+
+              <div class="col-12">
+
+                <label class="modal-label">
+                  Phone Number
+                  <span class="text-danger">*</span>
+                </label>
+
+                <div class="phone-wrapper">
+
+                  <div class="country-dropdown">
+
+                    <div
+                      class="country-selected"
+                      (click)="showCountryDropdown = !showCountryDropdown"
+                    >
+
+                      <img
+                        [src]="selectedCountry.flag"
+                        alt=""
+                      >
+
+                      <span>
+                        {{ selectedCountry.code }}
+                      </span>
+
+                      <i class="fa-solid fa-chevron-down"></i>
+
+                    </div>
+
+                    <div
+                      class="country-menu"
+                      *ngIf="showCountryDropdown"
+                    >
+
+                      <div
+                        class="country-item"
+                        *ngFor="let country of countries"
+                        (click)="selectCountry(country)"
+                      >
+
+                        <img
+                          [src]="country.flag"
+                          alt=""
+                        >
+
+                        <span>{{ country.name }}</span>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  <input
+                    type="text"
+                    class="phone-input"
+                    placeholder="(555) 123-4567"
+                    [(ngModel)]="spaceDraftForm.phone"
+                  >
+
+                </div>
+
+              </div>
+
+              <div class="col-12">
+
+                <label class="modal-label">
+                  Email
+                  <span class="text-danger">*</span>
+                </label>
+
+                <input
+                  type="email"
+                  class="modal-input"
+                  placeholder="hello@yourspace.com"
+                  [(ngModel)]="spaceDraftForm.email"
+                >
+
+              </div>
+
+              <div class="col-12">
+
+                <label class="modal-label">
+                  Primary Contact Full Name
+                  <span class="text-danger">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  class="modal-input"
+                  placeholder="Enter full name"
+                  [(ngModel)]="spaceDraftForm.primaryContactName"
+                >
+
+              </div>
+
+              <div class="col-12">
+
+                <label class="modal-label">
+                  Primary Contact Email
+                  <span class="text-danger">*</span>
+                </label>
+
+                <input
+                  type="email"
+                  class="modal-input"
+                  placeholder="contact@yourspace.com"
+                  [(ngModel)]="spaceDraftForm.primaryContactEmail"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="info-box mt-4">
+
+          <i class="fa-solid fa-circle-info"></i>
+
+          <div>
+            <strong>What happens next?</strong>
+
+            <br>
+
+            After creating the draft, you'll continue the setup flow
+            to define the space details, structure, media, and publishing preferences.
+          </div>
+
+        </div>
+
+        <div
+          *ngIf="validationMessage"
+          class="alert alert-danger mt-3"
+        >
+          {{ validationMessage }}
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer border-0">
+
+        <button
+          type="button"
+          class="btn btn-outline-light flex-fill"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger flex-fill"
+          (click)="createSpaceDraft()"
+        >
+          Create Space Draft
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Preference Overview -->
+
+<div class="container-fluid px-3 pt-3 preference-section">
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+
+    <h6 class="text-white mb-0">
+      Spaces Overview
+    </h6>
+
+    <a
+      href="javascript:void(0)"
+      class="text-danger text-decoration-none fw-semibold"
+    >
+      View Analytics
+    </a>
+
+  </div>
+
+  <div class="row g-3">
+
+    <!-- Active Spaces -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="overview-card">
+
+        <div class="d-flex justify-content-between align-items-start">
+
+          <div>
+
+            <div class="text-white mb-2">
+              Active Spaces
+            </div>
+
+            <h2 class="text-white mb-1">
+              0
+            </h2>
+
+            <small class="text-secondary">
+              Published & live
+            </small>
+
+          </div>
+
+          <div class="icon-circle green">
+
+            <i class="fa-regular fa-images"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Drafts -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="overview-card">
+
+        <div class="d-flex justify-content-between align-items-start">
+
+          <div>
+
+            <div class="text-white mb-2">
+              Drafts
+            </div>
+
+            <h2 class="text-white mb-1">
+              0
+            </h2>
+
+            <small class="text-secondary">
+              Not yet published
+            </small>
+
+          </div>
+
+          <div class="icon-circle orange">
+
+            <i class="fa-regular fa-file-lines"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Total Spaces -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="overview-card">
+
+        <div class="d-flex justify-content-between align-items-start">
+
+          <div>
+
+            <div class="text-white mb-2">
+              Total Spaces
+            </div>
+
+            <h2 class="text-white mb-1">
+              0
+            </h2>
+
+            <small class="text-secondary">
+              Across all categories
+            </small>
+
+          </div>
+
+          <div class="icon-circle blue">
+
+            <i class="fa-regular fa-copy"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Total Views -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="overview-card">
+
+        <div class="d-flex justify-content-between align-items-start">
+
+          <div>
+
+            <div class="text-white mb-2">
+              Total Views
+            </div>
+
+            <h2 class="text-white mb-1">
+              0
+            </h2>
+
+            <small class="text-secondary">
+              Last 30 days
+            </small>
+
+          </div>
+
+          <div class="icon-circle purple">
+
+            <i class="fa-regular fa-eye"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- Top Match -->
+
+<div class="container-fluid preference-section px-4 py-2">
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <div class="feed-card h-100">
+        <h5 class="feed-title">Top Match This Week</h5>
+
+        <!-- NO DATA -->
+
+        <ng-container *ngIf="!topMatch; else topMatchData">
+          <div
+            class="d-flex flex-column justify-content-center align-items-center text-center top-match-content"
+          >
+            <div class="match-icon">
+              <i class="fa-solid fa-chart-column"></i>
+            </div>
+
+            <h3 class="empty-title">No data yet</h3>
+
+            <p class="empty-text mb-0">
+              Add interests to see personalized matches.
+            </p>
+          </div>
+        </ng-container>
+
+        <!-- DATA -->
+
+        <ng-template #topMatchData>
+          <div class="top-match-card">
+            <img [src]="topMatch.image" alt="" class="top-match-image" />
+
+            <div class="top-match-info">
+              <h4>
+                {{ topMatch.title }}
+              </h4>
+
+              <p>
+                {{ topMatch.subtitle }}
+              </p>
+
+              <div class="saved-info">
+                <i class="fa-solid fa-user-group"></i>
+
+                <span>
+                  {{ topMatch.savedBy }}
+                  saved by friends
+                </span>
+              </div>
+            </div>
+
+            <div class="match-badge">{{ topMatch.matchPercent }}% Match</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <!-- Tips -->
+
+    <div class="col-lg-6">
+      <div class="feed-card h-100">
+        <h5 class="feed-title mb-4">Tips to Personalize Your Feed</h5>
+
+        <div class="tip-item">
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span> Add at least 3 interests to improve recommendations. </span>
+        </div>
+
+        <div class="tip-item">
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span> Save events or venues you love for quick access. </span>
+        </div>
+
+        <div class="tip-item">
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span> Follow talents to get updates on their activities. </span>
+        </div>
+
+        <div class="tip-item">
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span> Turn on alerts to never miss what matters. </span>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="button" class="btn btn-link view-tips-btn">
+            View all tips
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- buttons -->
+
+<div class="container-fluid px-4 pb-4 preference-section">
+  <div class="row g-2 align-items-center">
+    <!-- Back -->
+
+    <div class="col-lg-3 col-md-6">
+      <button
+        type="button"
+        class="btn btn-dark border border-secondary-subtle w-100 d-flex align-items-center justify-content-between small py-2"
+                       routerLink="/organization-space"
+
+      >
+        <span>
+          <i class="fa-solid fa-arrow-left me-2"></i>
+          Back to Profile
+        </span>
+      </button>
+    </div>
+
+    <!-- Save Draft -->
+
+    <div class="col-lg-3 col-md-6">
+      <button
+        type="button"
+        class="btn btn-dark border border-secondary-subtle w-100 d-flex align-items-center justify-content-between small py-2"
+      >
+        <span>Save Draft</span>
+
+        <i class="fa-regular fa-floppy-disk"></i>
+      </button>
+    </div>
+
+    <!-- Preview -->
+
+    <div class="col-lg-3 col-md-6">
+      <button
+        type="button"
+        class="btn btn-dark border border-secondary-subtle w-100 d-flex align-items-center justify-content-between small py-2"
+      >
+        <span>Preview Feed</span>
+
+        <i class="fa-regular fa-eye"></i>
+      </button>
+    </div>
+
+    <!-- Finish -->
+
+    <div class="col-lg-3 col-md-6">
+      <button
+        type="button"
+        class="btn btn-danger w-100 d-flex align-items-center justify-content-center gap-3 small py-2 finish-btn"
+      routerLink="/home"
+      >
+        <span>Finish Setup</span>
+
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Support -->
+
+  <div class="text-center mt-2">
+    <small class="text-secondary">
+      Need help?
+
+      <a href="#" class="text-danger text-decoration-none fw-semibold">
+        Contact support
+      </a>
+    </small>
+  </div>
+</div>

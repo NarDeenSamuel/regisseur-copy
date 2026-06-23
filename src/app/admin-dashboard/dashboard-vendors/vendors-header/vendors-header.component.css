@@ -1,0 +1,359 @@
+/* ================================================= */
+/* ================= TICKETING HEADER ============== */
+/* ================================================= */
+
+.ticketing-header{
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 24px;
+
+  position: relative;
+}
+
+/* ================= LEFT SIDE ================= */
+
+.ticketing-header .ticketing-header-left h1{
+
+  color: #fff;
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  margin-bottom: 6px;
+}
+
+.ticketing-header .ticketing-breadcrumb{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  font-size: 12px;
+}
+
+.ticketing-header .ticketing-breadcrumb a{
+
+  color: #8b8b8b;
+
+  text-decoration: none;
+
+  transition: 0.3s;
+}
+
+.ticketing-header .ticketing-breadcrumb a:hover{
+
+  color: #fff;
+}
+
+.ticketing-header .ticketing-breadcrumb span{
+
+  color: #666;
+}
+
+.ticketing-header .ticketing-breadcrumb p{
+
+  color: #ff2d2d;
+
+  margin: 0;
+
+  font-weight: 500;
+}
+
+/* ================= RIGHT SIDE ================= */
+
+.ticketing-header .ticketing-header-right{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+/* ================= SEARCH BOX ================= */
+
+.ticketing-header .ticketing-search-box{
+
+  width: 280px;
+
+  height: 42px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  border-radius: 12px;
+
+  background: rgba(255,255,255,0.03);
+
+  padding: 0 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.ticketing-header .ticketing-search-box i{
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+.ticketing-header .ticketing-search-box input{
+
+  flex: 1;
+
+  background: transparent;
+
+  border: none;
+
+  outline: none;
+
+  color: #fff;
+
+  font-size: 12px;
+}
+
+.ticketing-header .ticketing-search-box input::placeholder{
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+.ticketing-header .ticketing-search-box span{
+
+  color: #888;
+
+  font-size: 11px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  padding: 2px 6px;
+
+  border-radius: 5px;
+}
+
+/* ================= NOTIFICATION ================= */
+
+.ticketing-header .ticketing-notification{
+
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.03);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  position: relative;
+
+  cursor: pointer;
+}
+
+.ticketing-header .ticketing-notification i{
+
+  color: #fff;
+
+  font-size: 15px;
+}
+
+.ticketing-header .ticketing-notification span{
+
+  position: absolute;
+
+  top: -4px;
+
+  right: -2px;
+
+  width: 16px;
+
+  height: 16px;
+
+  border-radius: 50%;
+
+  background: #ff2d2d;
+
+  color: #fff;
+
+  font-size: 10px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-weight: 600;
+}
+
+/* ================= CREATE BUTTON ================= */
+
+.ticketing-header .ticketing-create-btn{
+
+  height: 42px;
+
+  padding: 0 18px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff2d2d,
+      #ff4747
+    );
+
+  color: #fff;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.ticketing-header .ticketing-create-btn:hover{
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(255,45,45,0.3);
+}
+
+.ticketing-header .ticketing-create-btn i{
+
+  font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:992px){
+
+  .ticketing-header{
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .ticketing-header .ticketing-header-right{
+
+    width: 100%;
+  }
+
+  .ticketing-header .ticketing-search-box{
+
+    width: 100%;
+  }
+}
+
+/* ================================================= */
+/* ================= MOBILE HEADER ================= */
+/* ================================================= */
+
+@media(max-width:768px){
+
+  .ticketing-header{
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 18px;
+  }
+
+  /* ====================================== */
+  /* RIGHT SIDE */
+  /* ====================================== */
+
+  .ticketing-header .ticketing-header-right{
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+  }
+
+  /* ====================================== */
+  /* SEARCH */
+  /* ====================================== */
+
+  .ticketing-header .ticketing-search-box{
+
+    flex: 1;
+
+    width: auto;
+
+    min-width: 0;
+  }
+
+  /* ====================================== */
+  /* NOTIFICATION */
+  /* ====================================== */
+
+  .ticketing-header .ticketing-notification{
+
+    flex: 0 0 42px;
+  }
+
+  /* ====================================== */
+  /* CREATE BUTTON */
+  /* ====================================== */
+
+  .ticketing-header .ticketing-create-btn{
+
+    width: 100%;
+
+    justify-content: center;
+  }
+}
+
+/* cards */
+
+.col-xl-custom{
+
+  flex: 0 0 20%;
+
+  max-width: 20%;
+}

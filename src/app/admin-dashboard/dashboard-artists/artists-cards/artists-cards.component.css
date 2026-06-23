@@ -1,0 +1,251 @@
+/* ========================================== */
+/* COL */
+/* ========================================== */
+
+.col-xl-custom{
+
+  flex:0 0 16.666%;
+
+  max-width:16.666%;
+}
+
+/* ========================================== */
+/* CARD */
+/* ========================================== */
+
+.stats-card{
+
+  padding:12px;
+
+  height:110px;
+
+  background:#0E0E0E;
+
+  border:
+    1px solid rgba(255,255,255,0.05);
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  transition:.3s;
+}
+
+.stats-card:hover{
+
+  transform:translateY(-2px);
+
+  border-color:
+    rgba(255,255,255,.08);
+}
+
+/* ========================================== */
+/* WRAPPER */
+/* ========================================== */
+
+.stats-wrapper{
+
+  display:flex;
+
+  gap:12px;
+
+  height:100%;
+}
+
+/* ========================================== */
+/* LEFT */
+/* ========================================== */
+
+.stats-left{
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  width:52px;
+}
+
+/* ========================================== */
+/* ICON */
+/* ========================================== */
+
+.stats-icon{
+
+  width:48px;
+
+  height:48px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.01)
+    );
+
+  border:
+    1px solid rgba(255,255,255,0.04);
+}
+
+.stats-icon i{
+
+  font-size:20px;
+}
+
+/* ========================================== */
+/* ICON COLORS */
+/* ========================================== */
+
+.artists-red i{
+
+  color:#ff2d2d;
+}
+
+.artists-green i{
+
+  color:#32d74b;
+}
+
+.artists-blue i{
+
+  color:#4a8dff;
+}
+
+.artists-orange i{
+
+  color:#ff9f0a;
+}
+
+.artists-yellow i{
+
+  color:#ffcc00;
+}
+
+.artists-purple i{
+
+  color:#b26dff;
+}
+
+/* ========================================== */
+/* GROWTH */
+/* ========================================== */
+
+.growth{
+
+  font-size:11px;
+
+  font-weight:600;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:4px;
+}
+
+.growth.positive{
+
+  color:#39d353;
+}
+
+/* ========================================== */
+/* RIGHT */
+/* ========================================== */
+
+.stats-right{
+
+  flex:1;
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:space-between;
+}
+
+/* ========================================== */
+/* TITLE */
+/* ========================================== */
+
+.stats-right h6{
+
+  color:#b1b1b1;
+
+  font-size:10px;
+
+  line-height:1.4;
+
+  margin-bottom:5px;
+
+  font-weight:500;
+}
+
+/* ========================================== */
+/* NUMBER */
+/* ========================================== */
+
+.stats-right h2{
+
+  color:#fff;
+
+  font-size:20px;
+
+  line-height:1;
+
+  margin:0;
+
+  font-weight:700;
+}
+
+/* ========================================== */
+/* TEXT */
+/* ========================================== */
+
+.stats-right span{
+
+  color:#7d7d7d;
+
+  font-size:10px;
+}
+
+/* ========================================== */
+/* TABLET */
+/* ========================================== */
+
+@media(max-width:992px){
+
+  .col-xl-custom{
+
+    flex:0 0 33.333%;
+
+    max-width:33.333%;
+  }
+}
+
+/* ========================================== */
+/* MOBILE */
+/* ========================================== */
+
+@media(max-width:768px){
+
+  .col-xl-custom{
+
+    flex:0 0 100%;
+
+    max-width:100%;
+  }
+}
+

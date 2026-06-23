@@ -1,0 +1,1172 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="vendors-wrapper">
+
+<div class="vendors-table-card">
+
+  <!-- HEADER -->
+
+  <div class="vendors-header">
+
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <!-- FILTERS -->
+
+        <div class="col-md-9">
+
+          <div class="vendors-tabs">
+
+            <button
+              *ngFor="let filter of filters"
+              (click)="setFilter(filter)"
+              [class.active]="activeFilter === filter"
+            >
+
+              {{ filter }}
+
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="col-md-3">
+
+          <div class="vendors-actions">
+
+            <!-- FILTER -->
+
+            <div class="filter-dropdown">
+
+              <button
+                class="header-btn"
+                (click)="toggleFilterMenu()"
+              >
+
+                <i class="fa-solid fa-filter"></i>
+
+                Filters
+
+              </button>
+
+              <!-- MENU -->
+
+              <div
+                class="filter-menu"
+                *ngIf="showFilterMenu"
+              >
+
+                <!-- CATEGORY -->
+
+                <div class="small-select-wrapper">
+
+                  <label>Category</label>
+
+                  <select
+                    [(ngModel)]="selectedCategory"
+                    (change)="applyFilters()"
+                  >
+
+                    <option value="">
+                      All Categories
+                    </option>
+
+                    <option
+                      *ngFor="
+                        let item of categoryOptions
+                      "
+                      [value]="item"
+                    >
+
+                      {{ item }}
+
+                    </option>
+
+                  </select>
+
+                </div>
+
+                <!-- STATUS -->
+
+                <div class="small-select-wrapper">
+
+                  <label>Status</label>
+
+                  <select
+                    [(ngModel)]="selectedStatus"
+                    (change)="applyFilters()"
+                  >
+
+                    <option value="">
+                      All Status
+                    </option>
+
+                    <option
+                      *ngFor="
+                        let item of statusOptions
+                      "
+                      [value]="item"
+                    >
+
+                      {{ item }}
+
+                    </option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- EXPORT -->
+
+            <button
+              class="header-btn"
+              (click)="exportPDF()"
+            >
+
+              <i class="fa-solid fa-download"></i>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TABLE -->
+
+  <div class="custom-table-wrapper">
+
+    <table class="vendors-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Producer / Company</th>
+
+          <th>Contact</th>
+
+          <th>Location</th>
+
+          <th>Type</th>
+
+          <th>Active Projects</th>
+
+          <th>Rating</th>
+
+          <th>Status</th>
+
+          <th>Joined</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="
+            let vendor of paginatedVendors;
+            let i = index
+          "
+        >
+
+          <!-- PRODUCER -->
+
+          <td>
+
+            <div class="event-info">
+
+              <img
+                [src]="vendor.image"
+                alt=""
+              >
+
+              <div class="event-text">
+
+                <h5>
+
+                  {{ vendor.title }}
+
+                </h5>
+
+                <span>
+
+                  <i
+                    class="
+                      fa-solid
+                      fa-circle-check
+                    "
+                    style="
+                      color:#1d9bf0;
+                      font-size:11px;
+                    "
+                  ></i>
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </td>
+
+          <!-- CONTACT -->
+
+          <td>
+
+            <div class="table-double-text">
+
+              <h6>
+
+                {{ vendor.subTitle }}
+
+              </h6>
+
+              <span>
+
+                {{ vendor.email }}
+
+              </span>
+
+              <span>
+
+                {{ vendor.phone }}
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- LOCATION -->
+
+          <td>
+
+            <span class="single-text">
+
+              {{ vendor.flag }}
+
+              {{ vendor.location }}
+
+            </span>
+
+          </td>
+
+          <!-- TYPE -->
+
+          <td>
+
+            <span
+              class="status-badge"
+              [ngClass]="vendor.categoryClass"
+            >
+
+              {{ vendor.type }}
+
+            </span>
+
+          </td>
+
+          <!-- ACTIVE PROJECTS -->
+
+          <td>
+
+            <div class="table-double-text">
+
+              <h6>
+
+                {{ vendor.projects }}
+
+              </h6>
+
+              <span>
+
+                {{ vendor.revenue }}
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- RATING -->
+
+          <td>
+
+            <div class="table-double-text">
+
+              <h6>
+
+                {{ vendor.rating }} ⭐
+
+              </h6>
+
+              <span>
+
+                ({{ vendor.reviews }})
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- STATUS -->
+
+          <td>
+
+            <span
+              class="status-badge"
+              [ngClass]="
+                getStatusClass(
+                  vendor.status
+                )
+              "
+            >
+
+              {{ vendor.status }}
+
+            </span>
+
+          </td>
+
+          <!-- JOINED -->
+
+          <td>
+
+            <span class="single-text">
+
+              {{ vendor.joined }}
+
+            </span>
+
+          </td>
+
+          <!-- ACTIONS -->
+
+          <td class="menu-cell">
+
+            <button
+              class="dots-btn"
+              (click)="toggleMenu(i)"
+            >
+
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+
+            </button>
+
+            <div
+              class="action-menu"
+              *ngIf="openedMenu === i"
+            >
+
+              <button>
+
+                <i class="fa-regular fa-pen-to-square"></i>
+
+                Edit
+
+              </button>
+
+              <button class="delete-btn">
+
+                <i class="fa-regular fa-trash-can"></i>
+
+                Delete
+
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="table-footer">
+
+    <p>
+
+      Showing
+
+      {{
+        (currentPage - 1) * itemsPerPage + 1
+      }}
+
+      to
+
+      {{
+        currentPage * itemsPerPage >
+        filteredVendors.length
+        ? filteredVendors.length
+        : currentPage * itemsPerPage
+      }}
+
+      of {{ filteredVendors.length }} producers
+
+    </p>
+
+    <!-- PAGINATION -->
+
+    <div class="pagination-box">
+
+      <button
+        (click)="prevPage()"
+        [disabled]="currentPage === 1"
+      >
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+      </button>
+
+      <ng-container
+        *ngFor="let page of visiblePages"
+      >
+
+        <button
+          *ngIf="page !== '...'"
+          (click)="changePage(+page)"
+          [class.active]="currentPage === page"
+        >
+
+          {{ page }}
+
+        </button>
+
+        <span
+          *ngIf="page === '...'"
+          class="dots"
+        >
+
+          ...
+
+        </span>
+
+      </ng-container>
+
+      <button
+        (click)="nextPage()"
+        [disabled]="
+          currentPage === totalPagesCount
+        "
+      >
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+    <!-- PER PAGE -->
+
+    <div class="per-page-wrapper">
+
+      <select
+        class="per-page-select"
+        [(ngModel)]="itemsPerPage"
+        (change)="changeItemsPerPage()"
+      >
+
+        <option [value]="5">5 / page</option>
+
+        <option [value]="10">10 / page</option>
+
+        <option [value]="15">15 / page</option>
+
+        <option [value]="20">20 / page</option>
+
+      </select>
+
+      <i class="fa-solid fa-chevron-down select-icon"></i>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+</div>
+<div class="col-md-4">
+
+<div class="producers-type-card">
+
+  <!-- HEADER -->
+
+  <div class="producers-type-header">
+
+    <h3>Producers by Type</h3>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <div class="producers-type-content">
+
+    <!-- CHART -->
+
+    <div class="producers-chart-wrapper">
+
+      <div class="producers-chart">
+
+        <svg viewBox="0 0 42 42">
+
+  <!-- BG -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#171717"
+    stroke-width="4"
+  />
+
+  <!-- ORGANIZER -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#3b82f6"
+    stroke-width="4"
+    [attr.stroke-dasharray]="organizerPercent + ' 100'"
+    stroke-dashoffset="0"
+  />
+
+  <!-- MANAGER -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#6dd56d"
+    stroke-width="4"
+    [attr.stroke-dasharray]="managerPercent + ' 100'"
+    [attr.stroke-dashoffset]="-organizerPercent"
+  />
+
+  <!-- AGENCY -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#ff9f0a"
+    stroke-width="4"
+    [attr.stroke-dasharray]="agencyPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(organizerPercent + managerPercent)"
+  />
+
+  <!-- OTHER -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#b8b8b8"
+    stroke-width="4"
+    [attr.stroke-dasharray]="otherPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(organizerPercent + managerPercent + agencyPercent)"
+  />
+
+  <!-- PROMOTER -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#9b6dff"
+    stroke-width="4"
+    [attr.stroke-dasharray]="promoterPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(organizerPercent + managerPercent + agencyPercent + otherPercent)"
+  />
+
+</svg>
+        <!-- CENTER -->
+
+        <div class="chart-center">
+
+          <h2>{{ totalProducers }}</h2>
+
+          <span>Total</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LIST -->
+
+    <div class="producers-type-list">
+
+      <!-- ITEM -->
+
+      <div class="producer-type-item">
+
+        <div class="producer-type-left">
+
+          <span
+            class="producer-dot"
+            style="background:#9b6dff"
+          ></span>
+
+          <p>Promoter</p>
+
+        </div>
+
+        <span>
+
+          {{ promoterCount }}
+
+          ({{ promoterPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="producer-type-item">
+
+        <div class="producer-type-left">
+
+          <span
+            class="producer-dot"
+            style="background:#3b82f6"
+          ></span>
+
+          <p>Organizer</p>
+
+        </div>
+
+        <span>
+
+          {{ organizerCount }}
+
+          ({{ organizerPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="producer-type-item">
+
+        <div class="producer-type-left">
+
+          <span
+            class="producer-dot"
+            style="background:#6dd56d"
+          ></span>
+
+          <p>Manager</p>
+
+        </div>
+
+        <span>
+
+          {{ managerCount }}
+
+          ({{ managerPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="producer-type-item">
+
+        <div class="producer-type-left">
+
+          <span
+            class="producer-dot"
+            style="background:#ff9f0a"
+          ></span>
+
+          <p>Agency</p>
+
+        </div>
+
+        <span>
+
+          {{ agencyCount }}
+
+          ({{ agencyPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="producer-type-item">
+
+        <div class="producer-type-left">
+
+          <span
+            class="producer-dot"
+            style="background:#b8b8b8"
+          ></span>
+
+          <p>Other</p>
+
+        </div>
+
+        <span>
+
+          {{ otherCount }}
+
+          ({{ otherPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="top-locations-card my-2">
+
+  <!-- HEADER -->
+
+  <div class="top-locations-header">
+
+    <h3>Top Locations</h3>
+
+    <button
+      class="view-all-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#locationsModal"
+    >
+
+      View All
+
+    </button>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div class="top-locations-list">
+
+    <div
+      class="location-item"
+      *ngFor="
+        let item of topLocations;
+        let i = index
+      "
+    >
+
+      <!-- TOP -->
+
+      <div class="location-top">
+
+        <h4
+          data-bs-toggle="modal"
+          data-bs-target="#locationsModal"
+          *ngIf="i === 0"
+        >
+
+          {{ item.location }}
+
+        </h4>
+
+        <h4 *ngIf="i !== 0">
+
+          {{ item.location }}
+
+        </h4>
+
+        <span>
+
+          {{ item.total }}
+
+        </span>
+
+      </div>
+
+      <!-- PROGRESS -->
+
+      <div class="location-progress">
+
+        <div
+          class="location-progress-fill"
+          [style.width.%]="item.percent"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ==================================== -->
+<!-- MODAL -->
+<!-- ==================================== -->
+
+<div
+  class="modal fade"
+  id="locationsModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content artist-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header artist-modal-header">
+
+        <h5>
+
+          All Locations
+
+        </h5>
+
+        <!-- <button
+          type="button"
+          class="close-btn-modal"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button> -->
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body artist-modal-body">
+
+        <div
+          class="artist-modal-row"
+          *ngFor="
+            let item of allLocations
+          "
+        >
+
+          <!-- LEFT -->
+
+          <div class="artist-modal-left">
+
+            <div>
+
+              <h4>
+
+                {{ item.location }}
+
+              </h4>
+
+              <span>
+
+                {{ item.count }} Producers
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="artist-modal-right">
+
+            <h3>
+
+              {{ item.total }}
+
+            </h3>
+
+            <span>
+
+              Total Projects
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer artist-modal-footer">
+
+        <button
+          type="button"
+          class="close-artist-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="top-revenue-card">
+
+  <!-- HEADER -->
+
+  <div class="top-revenue-header">
+
+    <h3>
+      Top Producers by Revenue (30 Days)
+    </h3>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div class="top-revenue-list">
+
+    <div
+      class="top-revenue-item"
+
+      *ngFor="
+        let item of topRevenueReports;
+        let i = index
+      "
+
+      [attr.data-bs-toggle]="
+        i === 0 ? 'modal' : null
+      "
+
+      [attr.data-bs-target]="
+        i === 0
+        ? '#revenueReportsModal'
+        : null
+      "
+    >
+
+      <!-- LEFT -->
+
+      <div class="top-revenue-left">
+
+        <div class="top-revenue-rank">
+
+          {{ i + 1 }}
+
+        </div>
+
+        <h4>
+
+          {{ item.title }}
+
+        </h4>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <h5>
+
+        {{ item.revenue }}
+
+      </h5>
+
+    </div>
+
+  </div>
+
+  <!-- VIEW -->
+
+  <div
+    class="top-revenue-view"
+
+    data-bs-toggle="modal"
+
+    data-bs-target="#revenueReportsModal"
+  >
+
+    View All Reports
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </div>
+
+</div>
+
+<div
+  class="modal fade"
+  id="revenueReportsModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content artist-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header artist-modal-header">
+
+        <h5>
+
+          All Revenue Reports
+
+        </h5>
+
+        <!-- <button
+          type="button"
+          class="close-btn-modal"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button> -->
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body artist-modal-body">
+
+        <div
+          class="artist-modal-row"
+
+          *ngFor="
+            let item of allRevenueReports;
+            let i = index
+          "
+        >
+
+          <!-- LEFT -->
+
+          <div class="artist-modal-left">
+
+            <div class="artist-rank-modal">
+
+              {{ i + 1 }}
+
+            </div>
+
+            <div>
+
+              <h4>
+
+                {{ item.title }}
+
+              </h4>
+
+              <span>
+
+                {{ item.location }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="artist-modal-right">
+
+            <h3>
+
+              {{ item.revenue }}
+
+            </h3>
+
+            <span>
+
+              Revenue
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer artist-modal-footer">
+
+        <button
+          type="button"
+          class="close-artist-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+
+

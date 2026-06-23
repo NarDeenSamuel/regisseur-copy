@@ -1,0 +1,1084 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-9">
+<div class="events-wrapper">
+
+  <div class="events-table-card">
+
+    <!-- ===================================== -->
+    <!-- =============== HEADER ============== -->
+    <!-- ===================================== -->
+
+    <div class="events-header">
+
+
+       <div class="container-fluid">
+        <div class="row">
+           <!-- FILTERS -->
+          <div class="col-md-7">
+ <div class="events-tabs">
+
+        <button
+          *ngFor="let filter of filters"
+          (click)="setFilter(filter)"
+          [class.active]="activeFilter === filter"
+        >
+
+          {{ filter }}
+
+        </button>
+
+      </div>
+
+          </div>
+             <!-- ACTIONS -->
+<div class="col-md-5">
+
+<div class="events-actions">
+
+  <!-- FILTER -->
+
+  <div class="filter-dropdown">
+
+    <button
+      class="header-btn"
+      (click)="toggleFilterMenu()"
+    >
+
+      <i class="fa-solid fa-filter"></i>
+
+      Filters
+
+    </button>
+
+    <!-- MENU -->
+
+    <div
+      class="filter-menu"
+      *ngIf="showFilterMenu"
+    >
+
+      <!-- SORT BOOKINGS -->
+
+      <button
+        (click)="sortByBookings()"
+      >
+
+        <i class="fa-solid fa-arrow-down-wide-short"></i>
+
+        Bookings High → Low
+
+      </button>
+
+      <!-- SORT REVENUE -->
+
+      <button
+        (click)="sortByRevenue()"
+      >
+
+        <i class="fa-solid fa-dollar-sign"></i>
+
+        Revenue High → Low
+
+      </button>
+
+      <!-- CATEGORY -->
+
+      <div class="small-select-wrapper">
+
+        <label>Category</label>
+
+        <select
+          [(ngModel)]="selectedCategory"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Categories
+          </option>
+
+          <option
+            *ngFor="let item of categoryOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- TYPE -->
+
+      <div class="small-select-wrapper">
+
+        <label>Type</label>
+
+        <select
+          [(ngModel)]="selectedType"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Types
+          </option>
+
+          <option
+            *ngFor="let item of typeOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DATE -->
+
+<!-- DESKTOP BUTTON -->
+
+<div class="desktop-date-picker">
+
+  <button
+    type="button"
+    class="header-btn"
+    (click)="openDatePicker(dateInput)"
+  >
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </button>
+
+  <input
+    #dateInput
+    type="date"
+    class="hidden-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+</div>
+
+<!-- MOBILE & TABLET BUTTON -->
+
+<div class="mobile-date-picker">
+
+  <input
+    type="date"
+    class="real-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+  <div class="header-btn">
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </div>
+
+</div>
+  <!-- EXPORT -->
+
+  <button
+    class="header-btn"
+    (click)="exportPDF()"
+  >
+
+    <i class="fa-solid fa-download"></i>
+
+
+  </button>
+
+</div>
+</div>
+
+        </div>
+
+       </div>
+
+
+
+
+
+
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- ================ TABLE ============== -->
+    <!-- ===================================== -->
+
+    <div class="custom-table-wrapper">
+
+      <table class="events-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Event</th>
+
+            <th>Date & Time</th>
+
+            <th>Venue</th>
+
+            <th>Organizer</th>
+
+            <th>Status</th>
+
+            <th>Bookings</th>
+
+            <th>Revenue</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let event of paginatedEvents;
+              let i = index
+            "
+          >
+
+            <!-- EVENT -->
+
+            <td>
+
+              <div class="event-info">
+
+                <img
+                  [src]="event.image"
+                  alt=""
+                >
+
+                <div class="event-text">
+
+                  <h5>{{ event.title }}</h5>
+
+                  <span>{{ event.type }}</span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+            <!-- DATE -->
+
+            <td>
+
+              <div class="table-double-text">
+
+                <h6>{{ event.date }}</h6>
+
+                <span>{{ event.time }}</span>
+
+              </div>
+
+            </td>
+
+            <!-- VENUE -->
+
+            <td>
+
+              <div class="table-double-text">
+
+                <h6>{{ event.venue }}</h6>
+
+                <span>{{ event.location }}</span>
+
+              </div>
+
+            </td>
+
+            <!-- ORGANIZER -->
+
+            <td>
+
+              <span class="single-text">
+
+                {{ event.organizer }}
+
+              </span>
+
+            </td>
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="event.statusClass"
+              >
+
+                {{ event.status }}
+
+              </span>
+
+            </td>
+
+            <!-- BOOKINGS -->
+
+            <td>
+
+              <div class="booking-progress">
+
+                <span>
+                  {{ event.bookings }}
+                </span>
+
+                <div class="progress-line">
+
+                  <div
+                    class="progress-fill"
+                    [style.width.%]="event.progress"
+                    [ngClass]="event.progressClass"
+                  ></div>
+
+                </div>
+
+              </div>
+
+            </td>
+
+            <!-- REVENUE -->
+
+            <td class="revenue">
+
+              {{ event.revenue }}
+
+            </td>
+
+            <!-- ACTIONS -->
+
+            <td class="menu-cell">
+
+              <button
+                class="dots-btn"
+                (click)="toggleMenu(i)"
+              >
+
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+
+              </button>
+
+              <div
+                class="action-menu"
+                *ngIf="openedMenu === i"
+              >
+
+                <button>
+
+                  <i class="fa-regular fa-pen-to-square"></i>
+
+                  Edit
+
+                </button>
+
+                <button class="delete-btn">
+
+                  <i class="fa-regular fa-trash-can"></i>
+
+                  Delete
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- =============== FOOTER ============== -->
+    <!-- ===================================== -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+
+        {{
+          (currentPage - 1) * itemsPerPage + 1
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          filteredEvents.length
+          ? filteredEvents.length
+          : currentPage * itemsPerPage
+        }}
+
+        of {{ filteredEvents.length }} events
+
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div class="pagination-box">
+
+        <!-- PREV -->
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+
+          <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <!-- NUMBERS -->
+
+        <ng-container
+          *ngFor="let page of visiblePages"
+        >
+
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+
+            {{ page }}
+
+          </button>
+
+          <span
+            *ngIf="page === '...'"
+            class="dots"
+          >
+
+            ...
+
+          </span>
+
+        </ng-container>
+
+        <!-- NEXT -->
+
+        <button
+          (click)="nextPage()"
+          [disabled]="
+            currentPage === totalPagesCount
+          "
+        >
+
+          <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+
+  <select
+    class="per-page-select"
+    [(ngModel)]="itemsPerPage"
+    (change)="changeItemsPerPage()"
+  >
+
+    <option [value]="5">5 / page</option>
+
+    <option [value]="10">10 / page</option>
+
+    <option [value]="15">15 / page</option>
+
+    <option [value]="20">20 / page</option>
+
+  </select>
+
+  <i class="fa-solid fa-chevron-down select-icon"></i>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+<div class="col-md-3">
+<!-- calendar -->
+
+<div class="calendar-box">
+
+  <!-- HEADER -->
+
+  <div class="calendar-header">
+
+    <h3>Calendar</h3>
+
+  </div>
+
+  <!-- MONTH -->
+
+  <div class="calendar-month">
+
+    <button (click)="prevMonth()">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <h4>
+      {{ currentMonthName }} {{ currentYear }}
+    </h4>
+
+    <button (click)="nextMonth()">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+  <!-- TABLE -->
+
+  <table class="calendar-table">
+
+    <thead>
+
+      <tr>
+
+        <th *ngFor="let day of weekDays">
+
+          {{ day }}
+
+        </th>
+
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let week of calendarWeeks">
+
+        <td *ngFor="let day of week">
+
+          <!-- EMPTY -->
+
+          <span
+            *ngIf="!day"
+            class="empty-cell"
+          ></span>
+
+          <!-- DAY -->
+
+          <button
+            *ngIf="day"
+            class="calendar-day"
+            (click)="selectDate(day)"
+            [class.active]="isSelected(day)"
+          >
+
+            {{ day }}
+
+          </button>
+
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+
+<!-- QUICK ACTIONS -->
+<!-- ========================================== -->
+
+<div class="quick-actions-box my-2">
+
+  <h3>Quick Actions</h3>
+
+  <!-- CREATE EVENT -->
+
+  <button
+    class="quick-action-item"
+    data-bs-toggle="modal"
+    data-bs-target="#createEventModal"
+  >
+
+    <div class="action-left">
+
+      <i class="fa-regular fa-calendar-plus"></i>
+
+      <span>Create Event</span>
+
+    </div>
+
+  </button>
+
+  <!-- BOOKING REQUESTS -->
+
+  <button
+    class="quick-action-item"
+    data-bs-toggle="modal"
+    data-bs-target="#bookingModal"
+  >
+
+    <div class="action-left">
+
+      <i class="fa-regular fa-address-book"></i>
+
+      <span>Booking Requests</span>
+
+    </div>
+
+    <div class="action-count">
+      14
+    </div>
+
+  </button>
+
+  <!-- EVENT TEMPLATES -->
+
+  <button
+    class="quick-action-item"
+    data-bs-toggle="modal"
+    data-bs-target="#templatesModal"
+  >
+
+    <div class="action-left">
+
+      <i class="fa-solid fa-folder-tree"></i>
+
+      <span>Event Templates</span>
+
+    </div>
+
+  </button>
+
+  <!-- EVENT SETTINGS -->
+
+  <button
+    class="quick-action-item"
+    data-bs-toggle="modal"
+    data-bs-target="#settingsModal"
+  >
+
+    <div class="action-left">
+
+      <i class="fa-solid fa-gear"></i>
+
+      <span>Event Settings</span>
+
+    </div>
+
+  </button>
+
+</div>
+
+<!-- ========================================== -->
+<!-- CREATE EVENT MODAL -->
+<!-- ========================================== -->
+
+<div
+  class="modal fade custom-modal"
+  id="createEventModal"
+  tabindex="-1"
+>
+
+  <div class="modal-dialog modal-dialog-centered custom-modal-dialog">
+
+    <div class="modal-content custom-modal-content">
+
+      <div class="modal-header custom-modal-header">
+
+        <h5>Create Event</h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+      <div class="modal-body custom-modal-body">
+
+        Create Event Content Here
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- BOOKING MODAL -->
+<!-- ========================================== -->
+
+<div
+  class="modal fade custom-modal"
+  id="bookingModal"
+  tabindex="-1"
+>
+
+  <div class="modal-dialog modal-dialog-centered custom-modal-dialog">
+
+    <div class="modal-content custom-modal-content">
+
+      <div class="modal-header custom-modal-header">
+
+        <h5>Booking Requests</h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+      <div class="modal-body custom-modal-body">
+
+        Booking Requests Content Here
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- TEMPLATES MODAL -->
+<!-- ========================================== -->
+
+<div
+  class="modal fade custom-modal"
+  id="templatesModal"
+  tabindex="-1"
+>
+
+  <div class="modal-dialog modal-dialog-centered custom-modal-dialog">
+
+    <div class="modal-content custom-modal-content">
+
+      <div class="modal-header custom-modal-header">
+
+        <h5>Event Templates</h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+      <div class="modal-body custom-modal-body">
+
+        Templates Content Here
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- SETTINGS MODAL -->
+<!-- ========================================== -->
+
+<div
+  class="modal fade custom-modal"
+  id="settingsModal"
+  tabindex="-1"
+>
+
+  <div class="modal-dialog modal-dialog-centered custom-modal-dialog">
+
+    <div class="modal-content custom-modal-content">
+
+      <div class="modal-header custom-modal-header">
+
+        <h5>Event Settings</h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+      <div class="modal-body custom-modal-body">
+
+        Settings Content Here
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ========================================== -->
+<!-- TOP EVENTS BY REVENUE -->
+<!-- ========================================== -->
+
+<div class="top-revenue-card">
+
+  <!-- TITLE -->
+
+  <div class="top-revenue-header">
+
+    <h3>Top Events by Revenue</h3>
+
+  </div>
+
+  <!-- ITEMS -->
+
+  <div
+    class="revenue-item"
+    *ngFor="let item of topRevenueEvents"
+  >
+
+    <!-- TOP -->
+
+    <div class="revenue-top">
+
+      <h5>{{ item.title }}</h5>
+
+      <span>{{ item.revenue }}</span>
+
+    </div>
+
+    <!-- BAR -->
+
+    <div class="revenue-line">
+
+      <div
+        class="revenue-fill"
+        [style.width.%]="item.revenuePercent"
+      ></div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <button
+    class="view-reports-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#reportsModal"
+  >
+
+    View All Reports
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+
+<!-- ========================================== -->
+<!-- MODAL -->
+<!-- ========================================== -->
+
+<div
+  class="modal fade"
+  id="reportsModal"
+  tabindex="-1"
+>
+
+  <div class="modal-dialog modal-dialog-centered custom-report-modal">
+
+    <div class="modal-content report-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header report-modal-header">
+
+        <h5>
+          Revenue Reports
+        </h5>
+
+        <!-- FILTER -->
+
+      <div class="report-filters">
+
+  <!-- YEAR -->
+
+  <div class="filter-select-wrapper">
+
+    <i class="fa-regular fa-calendar"></i>
+
+    <select
+      class="year-filter"
+      [(ngModel)]="selectedRevenueYear"
+      (change)="filterRevenueByMonth()"
+    >
+
+      <option value="all">
+        All Years
+      </option>
+
+      <option
+        *ngFor="let year of revenueYears"
+        [value]="year"
+      >
+
+        {{ year }}
+
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- MONTH -->
+
+  <div class="filter-select-wrapper">
+
+    <i class="fa-regular fa-calendar-days"></i>
+
+    <select
+      class="month-filter"
+      [(ngModel)]="selectedRevenueMonth"
+      (change)="filterRevenueByMonth()"
+    >
+
+      <option value="all">
+        All Months
+      </option>
+
+      <option
+        *ngFor="let month of revenueMonths"
+        [value]="month.value"
+      >
+
+        {{ month.label }}
+
+      </option>
+
+    </select>
+
+  </div>
+
+</div>
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body report-modal-body">
+
+        <div
+          class="report-row"
+          *ngFor="let item of filteredRevenueEvents"
+        >
+
+          <!-- LEFT -->
+
+          <div class="report-left">
+
+            <img
+              [src]="item.image"
+              alt=""
+            >
+
+            <div>
+
+              <h4>{{ item.title }}</h4>
+
+              <span>{{ item.date }}</span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="report-right">
+
+            <h3>{{ item.revenue }}</h3>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!-- FOOTER -->
+
+<div class="modal-footer report-modal-footer">
+
+  <button
+    type="button"
+    class="close-report-btn"
+    data-bs-dismiss="modal"
+  >
+
+    Close
+
+  </button>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+</div>

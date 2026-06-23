@@ -1,0 +1,299 @@
+<button
+  class="btn btn-dark border-secondary dashboard-menu-btn"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#dashboardSidebar"
+>
+  <i class="fa-solid fa-bars"></i>
+</button>
+<div
+  class="offcanvas offcanvas-start text-bg-dark"
+  tabindex="-1"
+  id="dashboardSidebar"
+>
+  <div class="offcanvas-header border-bottom border-secondary">
+    <img src="assets/images/smallLogo.png" class="sidebar-logo">
+
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      data-bs-dismiss="offcanvas"
+    ></button>
+  </div>
+
+  <div class="offcanvas-body p-0">
+
+    <!-- DASHBOARD -->
+
+    <div class="section-title">
+      DASHBOARD
+    </div>
+
+    <a
+      class="menu-item"
+      routerLink="/home"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <i class="fa-regular fa-house menu-icon"></i>
+
+      <div>
+        <div class="menu-title">Dashboard Home</div>
+
+        <div class="menu-subtitle">
+          Main overview of your activity, performance,
+          alerts, and shortcuts.
+        </div>
+      </div>
+    </a>
+
+    <!-- MY ACTIVITY -->
+
+    <div class="section-title">
+      MY ACTIVITY
+    </div>
+
+    <a
+      class="menu-item"
+      routerLink="/tickets"
+      data-bs-dismiss="offcanvas"
+      routerLinkActive="active-link"
+    >
+      <i class="fa-solid fa-ticket menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Tickets & RSVP</div>
+
+        <div class="menu-subtitle">
+          Tickets, event attendance, guest passes,
+          and RSVP confirmations.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/orders"
+      data-bs-dismiss="offcanvas"
+      routerLinkActive="active-link"
+    >
+      <i class="fa-solid fa-microphone menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Orders</div>
+
+        <div class="menu-subtitle">
+          Items, services, rentals, spaces,
+          or bookings you purchased.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/inquiries"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-regular fa-message menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Inquiries</div>
+
+        <div class="menu-subtitle">
+          Questions, quote requests and
+          booking communications.
+        </div>
+      </div>
+    </a>
+
+    <!-- MY BUSINESS -->
+
+    <div class="section-title">
+      MY BUSINESS
+    </div>
+
+    <a
+      class="menu-item"
+      routerLink="/services"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-solid fa-wand-magic-sparkles menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Services</div>
+
+        <div class="menu-subtitle">
+          Professional services you offer.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/products"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-solid fa-box-open menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Products</div>
+
+        <div class="menu-subtitle">
+          Physical products available for sale.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/rentals"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-solid fa-toolbox menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Rentals</div>
+
+        <div class="menu-subtitle">
+          Equipment and product rentals.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/spaces"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-solid fa-building menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Space Operations</div>
+
+        <div class="menu-subtitle">
+          Spaces, venues and locations.
+        </div>
+      </div>
+    </a>
+
+    <!-- MANAGE -->
+
+    <div class="section-title">
+      MANAGE
+    </div>
+
+    <a
+      class="menu-item"
+      routerLink="/events"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-regular fa-calendar-days menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Events & Guests</div>
+
+        <div class="menu-subtitle">
+          Event management and guests.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/projects"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-solid fa-users-gear menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Projects & Crew</div>
+
+        <div class="menu-subtitle">
+          Productions, teams and crew.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/agreements"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-regular fa-file-lines menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Agreements</div>
+
+        <div class="menu-subtitle">
+          Contracts and approvals.
+        </div>
+      </div>
+    </a>
+
+    <!-- FINANCE -->
+
+    <div class="section-title">
+      FINANCE
+    </div>
+
+    <a
+      class="menu-item"
+      routerLink="/payments"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-regular fa-credit-card menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Payments</div>
+
+        <div class="menu-subtitle">
+          Transactions and balances.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/revenue"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-solid fa-chart-line menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Revenue</div>
+
+        <div class="menu-subtitle">
+          Revenue from services and events.
+        </div>
+      </div>
+    </a>
+
+    <a
+      class="menu-item"
+      routerLink="/expenses"
+      routerLinkActive="active-link"
+      data-bs-dismiss="offcanvas"
+    >
+      <i class="fa-solid fa-money-bill-wave menu-icon"></i>
+
+      <div>
+        <div class="menu-title">My Expenses</div>
+
+        <div class="menu-subtitle">
+          Expenses and operational costs.
+        </div>
+      </div>
+    </a>
+
+  </div>
+</div>

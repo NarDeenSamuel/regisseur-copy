@@ -1,0 +1,459 @@
+<div class="container-fluid px-0 py-3 ">
+<div class="row">
+<div class="col-md-8">
+<div class="booking-wrapper">
+
+  <!-- ================= LEFT TABLE ================= -->
+
+  <div class="booking-table-card">
+
+    <!-- Header -->
+
+    <div class="table-header">
+
+      <div>
+
+        <h2>Booking Operations</h2>
+
+        <p>
+          Live requests, contracts, deposits,
+          and technical review status
+        </p>
+
+      </div>
+
+      <button class="view-btn">
+
+        View All Bookings
+
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+      </button>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-responsive custom-table-wrapper">
+
+      <table class="booking-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Booking ID</th>
+
+            <th>Event</th>
+
+            <th>Organizer</th>
+
+            <th>Talent</th>
+
+            <th>Status</th>
+
+            <th>Value</th>
+
+            <th></th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let booking of paginatedBookings;
+              let i = index
+            "
+          >
+
+            <td>{{ booking.id }}</td>
+
+            <td>{{ booking.event }}</td>
+
+            <td>{{ booking.organizer }}</td>
+
+            <td>{{ booking.talent }}</td>
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="booking.statusClass"
+              >
+
+                <span class="dot"></span>
+
+                {{ booking.status }}
+
+              </span>
+
+            </td>
+
+            <td class="value">
+              {{ booking.value }}
+            </td>
+
+            <!-- ACTIONS -->
+
+            <td class="menu-cell">
+
+              <button
+                type="button"
+                class="dots-btn"
+                (click)="toggleMenu(i)"
+              >
+
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+
+              </button>
+
+              <div
+                class="action-menu"
+                *ngIf="openedMenu === i"
+              >
+
+                <button>
+
+                  <i class="fa-regular fa-pen-to-square"></i>
+
+                  Edit
+
+                </button>
+
+                <button class="delete-btn">
+
+                  <i class="fa-regular fa-trash-can"></i>
+
+                  Delete
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+        {{
+          (currentPage - 1) * itemsPerPage + 1
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          bookings.length
+          ? bookings.length
+          : currentPage * itemsPerPage
+        }}
+
+        of {{ bookings.length }} results
+
+      </p>
+
+     <!-- PAGINATION -->
+
+<div class="pagination-box">
+
+  <!-- PREV -->
+
+  <button
+    (click)="prevPage()"
+    [disabled]="currentPage === 1"
+  >
+
+    <i class="fa-solid fa-chevron-left"></i>
+
+  </button>
+
+  <!-- NUMBERS -->
+
+  <ng-container
+    *ngFor="let page of visiblePages"
+  >
+
+    <!-- NUMBER -->
+
+    <button
+      *ngIf="page !== '...'"
+      (click)="changePage(+page)"
+      [class.active]="currentPage === page"
+    >
+
+      {{ page }}
+
+    </button>
+
+    <!-- DOTS -->
+
+    <span
+      *ngIf="page === '...'"
+      class="dots"
+    >
+
+      ...
+
+    </span>
+
+  </ng-container>
+
+  <!-- NEXT -->
+
+  <button
+    (click)="nextPage()"
+    [disabled]="currentPage === totalPagesCount"
+  >
+
+    <i class="fa-solid fa-chevron-right"></i>
+
+  </button>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+<div class="col-md-4">
+<!-- ================= RIGHT SIDE ================= -->
+
+<div class="right-side-wrapper">
+
+  <!-- ========================================== -->
+  <!-- ============== TALENT POOL ============== -->
+  <!-- ========================================== -->
+
+  <div class="talent-card">
+
+    <!-- TITLE -->
+
+    <div class="talent-title">
+
+      <i class="fa-solid fa-users"></i>
+
+      <h3>Talent Pool</h3>
+
+    </div>
+
+    <!-- ITEMS -->
+
+    <div class="talent-list">
+
+      <!-- ITEM -->
+
+      <div class="talent-item">
+
+        <div class="talent-left">
+
+          <i class="fa-solid fa-guitar"></i>
+
+          <span>Musicians</span>
+
+        </div>
+
+        <span class="talent-number">
+          386
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="talent-item">
+
+        <div class="talent-left">
+
+          <i class="fa-solid fa-headphones"></i>
+
+          <span>DJs</span>
+
+        </div>
+
+        <span class="talent-number">
+          214
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="talent-item">
+
+        <div class="talent-left">
+
+          <i class="fa-solid fa-camera"></i>
+
+          <span>Photographers</span>
+
+        </div>
+
+        <span class="talent-number">
+          178
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="talent-item">
+
+        <div class="talent-left">
+
+          <i class="fa-solid fa-microphone"></i>
+
+          <span>Singers</span>
+
+        </div>
+
+        <span class="talent-number">
+          156
+        </span>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="talent-item">
+
+        <div class="talent-left">
+
+          <i class="fa-solid fa-gear"></i>
+
+          <span>Technicians</span>
+
+        </div>
+
+        <span class="talent-number">
+          92
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- ============= PRIORITY REVIEW ============ -->
+  <!-- ========================================== -->
+
+  <div class="priority-card">
+
+    <!-- HEADER -->
+
+    <div class="priority-header">
+
+      <i class="fa-solid fa-shield-halved"></i>
+
+      <h3>Priority Review</h3>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="priority-stats">
+
+      <!-- ITEM -->
+
+      <div class="priority-item">
+
+        <i class="fa-regular fa-file-lines"></i>
+
+        <h4>7</h4>
+
+        <p>
+          bookings need
+          agreement
+          confirmation
+        </p>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="priority-item">
+
+        <i class="fa-solid fa-shield"></i>
+
+        <h4>92%</h4>
+
+        <p>
+          Verified
+          Talent
+        </p>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="priority-item">
+
+        <i class="fa-regular fa-clock"></i>
+
+        <h4>2.1</h4>
+
+        <p>
+          days
+          Avg Review
+        </p>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="priority-item">
+
+        <i class="fa-solid fa-percent"></i>
+
+        <h4>5%</h4>
+
+        <p>
+          Platform
+          Fee
+        </p>
+
+      </div>
+
+      <!-- ITEM -->
+
+      <div class="priority-item border-none">
+
+        <i class="fa-solid fa-scale-balanced"></i>
+
+        <h4>3</h4>
+
+        <p>
+          Open
+          Disputes
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+</div>
+</div>

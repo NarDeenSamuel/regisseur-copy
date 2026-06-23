@@ -1,0 +1,621 @@
+<div class="container-fluid px-3 py-2 bg-section">
+
+  <div class="header-wrapper">
+
+    <!-- Left Side -->
+    <div class="left-section">
+
+      <app-side-bar></app-side-bar>
+
+      <img
+        src="assets/images/smallLogo.png"
+        class="logo-img"
+        alt="logo"
+      >
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+
+      <app-navbar></app-navbar>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="events-page">
+
+  <div class="events-header">
+
+    <!-- Left -->
+
+    <div class="header-left">
+
+      <h1 class="page-title">
+        All Events
+      </h1>
+
+      <p class="page-subtitle">
+        Discover events, talents, vendors, and spaces tailored to your interests.
+      </p>
+
+    </div>
+
+    <!-- Right -->
+
+    <div class="header-right">
+
+<div class="view-switch">
+
+  <button
+    class="view-btn"
+    [class.active]="viewMode === 'grid'"
+    (click)="viewMode='grid'"
+  >
+    <i class="fa-solid fa-border-all"></i>
+    <span>Grid</span>
+  </button>
+
+  <button
+    class="view-btn"
+    [class.active]="viewMode === 'list'"
+    (click)="viewMode='list'"
+  >
+    <i class="fa-solid fa-list"></i>
+    <span>List</span>
+  </button>
+
+</div>
+      <div class="dropdown">
+
+  <button
+  class="sort-btn dropdown-toggle"
+  data-bs-toggle="dropdown"
+>
+
+  Sort by:
+  {{
+    sortBy === 'relevant'
+      ? 'Most Relevant'
+      : (sortBy | titlecase)
+  }}
+
+</button>
+
+  <ul class="dropdown-menu sort-menu">
+
+ <li>
+  <a
+    class="dropdown-item"
+    (click)="sortBy='relevant'; applyFilters()"
+  >
+    Most Relevant
+  </a>
+</li>
+
+<li>
+  <a
+    class="dropdown-item"
+    (click)="sortBy='newest'; applyFilters()"
+  >
+    Newest
+  </a>
+</li>
+
+<li>
+  <a
+    class="dropdown-item"
+    (click)="sortBy='oldest'; applyFilters()"
+  >
+    Oldest
+  </a>
+</li>
+
+<li>
+  <a
+    class="dropdown-item"
+    (click)="sortBy='price'; applyFilters()"
+  >
+    Price
+  </a>
+</li>
+  </ul>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="container-fluid bg-black py-2">
+  <div class="row">
+    <div class="col-md-3">
+<div class="filters-card">
+
+  <!-- Search -->
+
+  <div class="mb-4">
+
+    <div class="search-wrapper">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        class="form-control filter-input"
+        placeholder="Search events..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+      >
+
+    </div>
+
+  </div>
+
+  <!-- Header -->
+
+  <div class="filters-header">
+
+    <h6>Filters</h6>
+
+    <button
+      class="clear-btn"
+      (click)="clearFilters()"
+    >
+      Clear all
+    </button>
+
+  </div>
+
+  <!-- Event Type -->
+
+  <div class="filter-section">
+
+    <div class="filter-title">
+      Event Type
+    </div>
+
+    <div
+      class="form-check"
+      *ngFor="let type of eventTypes"
+    >
+
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [value]="type"
+        (change)="toggleType(type)"
+      >
+
+      <label class="form-check-label">
+        {{type}}
+      </label>
+
+    </div>
+
+  </div>
+
+  <!-- Date -->
+
+<div class="filter-section">
+
+  <label class="filter-title">
+    Date
+  </label>
+
+  <div class="input-icon-wrapper">
+    <i class="fa-regular fa-calendar input-icon"></i>
+
+    <input
+      type="date"
+      class="form-control filter-input custom-date"
+      [(ngModel)]="selectedDateRange"
+      (change)="applyFilters()"
+    >
+  </div>
+
+</div>
+
+  <!-- Location -->
+
+<div class="dropdown w-100">
+
+  <button
+    class="btn custom-dropdown w-100 text-start d-flex justify-content-between align-items-center"
+    data-bs-toggle="dropdown"
+  >
+    {{ selectedLocation || 'Select location' }}
+
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+
+  <ul class="dropdown-menu custom-menu w-100">
+
+    <li
+      *ngFor="let location of locations"
+    >
+      <a
+        class="dropdown-item"
+        (click)="selectedLocation = location; applyFilters()"
+      >
+        {{ location }}
+      </a>
+    </li>
+
+  </ul>
+
+</div>
+
+  <!-- Price -->
+
+  <div class="filter-section">
+
+    <label class="filter-title">
+      Price Range
+    </label>
+
+    <input
+      type="range"
+      class="form-range"
+      min="0"
+      max="500"
+      [(ngModel)]="priceRange"
+      (input)="applyFilters()"
+    >
+
+    <div class="price-values">
+
+      <span>$0</span>
+
+      <span>${{priceRange}}+</span>
+
+    </div>
+
+  </div>
+
+  <!-- Organizer -->
+<div class="filter-section">
+
+  <label class="filter-title">
+    Organizer
+  </label>
+
+  <div class="dropdown w-100">
+
+    <button
+      class="btn custom-dropdown w-100 text-start d-flex justify-content-between align-items-center"
+      type="button"
+      data-bs-toggle="dropdown"
+    >
+
+      <span>
+        <i class="fa-regular fa-user me-2"></i>
+
+        {{ selectedOrganizer || 'Select organizer' }}
+      </span>
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+    <ul class="dropdown-menu custom-menu w-100">
+
+      <li
+        *ngFor="let organizer of organizers"
+      >
+        <a
+          class="dropdown-item"
+          href="javascript:void(0)"
+          (click)="selectedOrganizer = organizer; applyFilters()"
+        >
+          {{ organizer }}
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</div>
+  <!-- Buttons -->
+
+  <button
+    class="btn apply-btn w-100"
+    (click)="applyFilters()"
+  >
+    Apply Filters
+  </button>
+
+  <button
+    class="btn save-btn w-100 mt-3"
+  >
+    <i class="fa-regular fa-bookmark me-2"></i>
+    Save Search
+  </button>
+
+</div>
+    </div>
+  <div class="col-md-9">
+
+  <!-- Tabs -->
+  <div class="events-wrapper">
+
+    <div class="tabs-bar">
+
+      <button
+        *ngFor="let tab of tabs"
+        class="tab-btn"
+        [class.active]="selectedCategory === tab.name"
+        (click)="selectTab(tab.name)"
+      >
+        {{tab.name}}
+
+        <span class="tab-count">
+          {{tab.count}}
+        </span>
+
+      </button>
+
+    </div>
+
+    <!-- Grid View -->
+
+    <div
+      *ngIf="viewMode === 'grid'"
+      class="events-grid"
+    >
+
+      <div
+  class="event-card"
+  *ngFor="let event of paginatedEvents"
+>
+
+  <div class="event-image-wrapper">
+
+    <img
+      [src]="event.image"
+      [alt]="event.title"
+      class="event-image"
+    >
+
+    <span
+      class="event-badge"
+      [class.upcoming]="event.status === 'Upcoming'"
+    >
+      {{event.status}}
+    </span>
+
+    <button
+      class="wishlist-btn"
+      (click)="toggleFavorite(event)"
+    >
+
+      <i
+        class="fa-heart"
+        [class.fa-solid]="event.favorite"
+        [class.fa-regular]="!event.favorite"
+        [class.text-danger]="event.favorite"
+      ></i>
+
+    </button>
+
+  </div>
+
+  <div class="event-body">
+
+    <h5 class="event-title">
+      {{event.title}}
+    </h5>
+
+    <div class="event-type">
+      {{event.type}}
+    </div>
+
+    <div class="event-meta">
+
+      <i class="fa-solid fa-location-dot"></i>
+
+      <span>
+        {{event.location}}
+      </span>
+
+    </div>
+
+    <div class="event-meta">
+
+      <i class="fa-regular fa-calendar"></i>
+
+      <span>
+        {{event.date}}
+      </span>
+
+    </div>
+
+    <div class="event-price">
+      {{event.priceLabel}}
+    </div>
+
+    <div class="event-actions">
+
+      <button>
+        <i class="fa-solid fa-share-nodes"></i>
+      </button>
+
+      <button
+  class="save-btn-card"
+  (click)="toggleSave(event)"
+>
+
+  <i
+    class="fa-bookmark"
+    [class.fa-solid]="event.saved"
+    [class.fa-regular]="!event.saved"
+    [class.saved-icon]="event.saved"
+  ></i>
+
+</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+    </div>
+
+    <!-- List View -->
+
+   <!-- List View -->
+
+<div
+  *ngIf="viewMode === 'list'"
+  class="events-list"
+>
+
+  <div
+    class="event-list-card"
+    *ngFor="let event of paginatedEvents"
+  >
+
+    <img
+      [src]="event.image"
+      class="list-image"
+    >
+
+    <div class="list-content">
+
+      <span class="event-badge">
+        {{event.status}}
+      </span>
+
+      <h5>{{event.title}}</h5>
+
+      <p>{{event.type}}</p>
+
+      <div class="event-meta">
+        <i class="fa-solid fa-location-dot"></i>
+        {{event.location}}
+      </div>
+
+      <div class="event-meta">
+        <i class="fa-regular fa-calendar"></i>
+        {{event.date}}
+      </div>
+
+    </div>
+
+    <div class="list-side">
+
+      <div class="list-price">
+        {{event.priceLabel}}
+      </div>
+
+      <div class="list-actions">
+
+        <button
+          class="action-btn"
+          (click)="toggleFavorite(event)"
+        >
+          <i
+            class="fa-heart"
+            [class.fa-solid]="event.favorite"
+            [class.fa-regular]="!event.favorite"
+            [class.text-danger]="event.favorite"
+          ></i>
+        </button>
+
+        <button
+          class="action-btn"
+          (click)="toggleSave(event)"
+        >
+          <i
+            class="fa-bookmark"
+            [class.fa-solid]="event.saved"
+            [class.fa-regular]="!event.saved"
+            [class.text-white]="event.saved"
+          ></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- Footer -->
+
+    <div class="events-footer">
+
+      <div class="results-count">
+
+        Showing
+        {{startItem}}
+        -
+        {{endItem}}
+        of
+        {{filteredEvents.length}}
+        events
+
+      </div>
+
+      <div class="pagination-custom">
+
+        <button
+          class="page-btn"
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button
+          *ngFor="let page of visiblePages"
+          class="page-btn"
+          [class.active]="page === currentPage"
+          (click)="changePage(page)"
+        >
+          {{page}}
+        </button>
+
+        <button
+          class="page-btn"
+          [disabled]="currentPage === totalPages"
+          (click)="changePage(currentPage + 1)"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+      </div>
+
+      <div class="page-size-wrapper">
+
+        <span>Events per page:</span>
+
+        <select
+          [(ngModel)]="pageSize"
+          (change)="changePage(1)"
+          class="page-size-select"
+        >
+          <option [value]="6">6</option>
+          <option [value]="12">12</option>
+          <option [value]="20">20</option>
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+  </div>
+</div>

@@ -1,0 +1,248 @@
+.events-header{
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 24px;
+
+  position: relative;
+}
+/* ================= LEFT SIDE ================= */
+
+.events-header .header-left h1 {
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.events-header .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.events-header .breadcrumb a {
+  color: #8b8b8b;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.events-header .breadcrumb a:hover {
+  color: #fff;
+}
+
+.events-header .breadcrumb span {
+  color: #666;
+}
+
+.events-header .breadcrumb p {
+  color: #ff2d2d;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ================= RIGHT SIDE ================= */
+
+.events-header .header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ================= SEARCH BOX ================= */
+
+.events-header .search-box {
+  width: 280px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.events-header .search-box i {
+  color: #888;
+  font-size: 13px;
+}
+
+.events-header .search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 12px;
+}
+
+.events-header .search-box input::placeholder {
+  color: #777;
+  font-size: 12px;
+}
+
+.events-header .search-box span {
+  color: #888;
+  font-size: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+/* ================= NOTIFICATION ================= */
+
+.events-header .notification {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.events-header .notification i {
+  color: #fff;
+  font-size: 15px;
+}
+
+.events-header .notification span {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ff2d2d;
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+
+/* ================= CREATE BUTTON ================= */
+
+.events-header .create-btn {
+  height: 42px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #ff2d2d, #ff4747);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.events-header .create-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 45, 45, 0.3);
+}
+
+.events-header .create-btn i {
+  font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+  .events-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .events-header .header-right {
+    width: 100%;
+  }
+
+  .events-header .search-box {
+    width: 100%;
+  }
+}
+/* ================================================= */
+/* ================= MOBILE HEADER ================= */
+/* ================================================= */
+
+@media(max-width:768px){
+
+  .events-header{
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 18px;
+  }
+
+  /* ====================================== */
+  /* RIGHT SIDE */
+  /* ====================================== */
+
+  .events-header .header-right{
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+  }
+
+  /* ====================================== */
+  /* SEARCH */
+  /* ====================================== */
+
+  .events-header .search-box{
+
+    flex: 1;
+
+    width: auto;
+
+    min-width: 0;
+  }
+
+  /* ====================================== */
+  /* NOTIFICATION */
+  /* ====================================== */
+
+  .events-header .notification{
+
+    flex: 0 0 42px;
+  }
+
+  /* ====================================== */
+  /* CREATE BUTTON */
+  /* ====================================== */
+
+  .events-header .create-btn{
+
+    width: 100%;
+
+    justify-content: center;
+  }
+}

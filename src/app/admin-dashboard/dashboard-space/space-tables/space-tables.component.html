@@ -1,0 +1,1148 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="space-wrapper">
+
+  <div class="space-table-card">
+
+    <!-- ===================================== -->
+    <!-- =============== HEADER ============== -->
+    <!-- ===================================== -->
+
+    <div class="space-header">
+
+
+       <div class="container-fluid">
+        <div class="row">
+           <!-- FILTERS -->
+          <div class="col-md-4">
+ <div class="space-tabs">
+
+        <button
+          *ngFor="let filter of filters"
+          (click)="setFilter(filter)"
+          [class.active]="activeFilter === filter"
+        >
+
+          {{ filter }}
+
+        </button>
+
+      </div>
+
+          </div>
+             <!-- ACTIONS -->
+<div class="col-md-8">
+
+<div class="space-actions">
+
+  <!-- FILTER -->
+
+  <div class="filter-dropdown">
+
+    <button
+      class="header-btn"
+      (click)="toggleFilterMenu()"
+    >
+
+      <i class="fa-solid fa-filter"></i>
+
+      Filters
+
+    </button>
+
+    <!-- MENU -->
+
+    <div
+      class="filter-menu"
+      *ngIf="showFilterMenu"
+    >
+
+      <!-- TYPE FILTER -->
+
+      <div class="small-select-wrapper">
+
+        <label>Space Type</label>
+
+        <select
+          [(ngModel)]="selectedCategory"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Types
+          </option>
+
+          <option
+            *ngFor="let item of categoryOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- STATUS FILTER -->
+
+      <div class="small-select-wrapper">
+
+        <label>Status</label>
+
+        <select
+          [(ngModel)]="selectedType"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Status
+          </option>
+
+          <option
+            *ngFor="let item of typeOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LOCATION -->
+
+  <div class="filter-dropdown">
+
+    <button
+      class="header-btn"
+      (click)="toggleLocationMenu()"
+    >
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+      {{
+        selectedLocation
+        || 'All Locations'
+      }}
+
+    </button>
+
+    <div
+      class="filter-menu"
+      *ngIf="showLocationMenu"
+    >
+
+      <div class="small-select-wrapper">
+
+        <label>Location</label>
+
+        <select
+          [(ngModel)]="selectedLocation"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Locations
+          </option>
+
+          <option
+            *ngFor="let item of locationOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CALENDAR -->
+
+  <div class="desktop-date-picker">
+
+    <button
+      type="button"
+      class="header-btn"
+      (click)="openDatePicker(dateInput)"
+    >
+
+      <i class="fa-regular fa-calendar"></i>
+
+      Availability Calendar
+
+    </button>
+
+    <input
+      #dateInput
+      type="date"
+      class="hidden-date-input"
+      [(ngModel)]="selectedDate"
+      (change)="applyFilters()"
+    >
+
+  </div>
+
+  <!-- EXPORT -->
+
+  <button
+    class="header-btn"
+    (click)="exportPDF()"
+  >
+
+    <i class="fa-solid fa-download"></i>
+
+
+
+  </button>
+
+</div>
+</div>
+
+        </div>
+
+       </div>
+
+
+
+
+
+
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- ================ TABLE ============== -->
+    <!-- ===================================== -->
+
+    <div class="custom-table-wrapper">
+
+     <table class="space-table">
+
+  <thead>
+
+    <tr>
+
+      <th>Space</th>
+
+      <th>Type</th>
+
+      <th>Location</th>
+
+      <th>Capacity</th>
+
+      <th>Availability</th>
+
+      <th>Utilization</th>
+
+      <th>Status</th>
+
+      <th>Actions</th>
+
+    </tr>
+
+  </thead>
+
+  <tbody>
+
+    <tr
+      *ngFor="
+        let project of paginatedspace;
+        let i = index
+      "
+    >
+
+      <!-- SPACE -->
+
+      <td>
+
+        <div class="event-info">
+
+          <img
+            [src]="project.image"
+            alt=""
+          >
+
+          <div class="event-text">
+
+            <h5>{{ project.title }}</h5>
+
+            <span>{{ project.subTitle }}</span>
+
+          </div>
+
+        </div>
+
+      </td>
+
+      <!-- TYPE -->
+
+      <td>
+
+        <span
+          class="status-badge"
+          [ngClass]="project.typeClass"
+        >
+
+          {{ project.type }}
+
+        </span>
+
+      </td>
+
+      <!-- LOCATION -->
+
+      <td>
+
+        <div class="table-double-text">
+
+          <h6>{{ project.location }}</h6>
+
+          <span>{{ project.city }}</span>
+
+        </div>
+
+      </td>
+
+      <!-- CAPACITY -->
+
+      <td>
+
+        <div class="table-double-text">
+
+          <h6>{{ project.capacity }}</h6>
+
+          <span>{{ project.capacityType }}</span>
+
+        </div>
+
+      </td>
+
+      <!-- AVAILABILITY -->
+
+      <td>
+
+        <div class="table-double-text">
+
+          <h6>{{ project.availability }}</h6>
+
+          <span style="color:#32d74b">
+
+            {{ project.availableDates }}
+
+          </span>
+
+        </div>
+
+      </td>
+
+      <!-- UTILIZATION -->
+
+      <td>
+
+        <div class="project-progress-wrapper">
+
+          <span class="progress-text">
+
+            {{ project.progress }}%
+
+          </span>
+
+          <div class="progress-line">
+
+            <div
+              class="progress-fill"
+              [style.width.%]="project.progress"
+              [ngClass]="
+                getProgressClass(
+                  project.progress,
+                  project.status
+                )
+              "
+            ></div>
+
+          </div>
+
+        </div>
+
+      </td>
+
+      <!-- STATUS -->
+
+      <td>
+
+        <span
+          class="status-badge"
+          [ngClass]="getStatusClass(project.status)"
+        >
+
+          {{ project.status }}
+
+        </span>
+
+      </td>
+
+      <!-- ACTIONS -->
+
+      <td class="menu-cell">
+
+        <button
+          class="dots-btn"
+          (click)="toggleMenu(i)"
+        >
+
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+
+        </button>
+
+        <div
+          class="action-menu"
+          *ngIf="openedMenu === i"
+        >
+
+          <button>
+
+            <i class="fa-regular fa-pen-to-square"></i>
+
+            Edit
+
+          </button>
+
+          <button class="delete-btn">
+
+            <i class="fa-regular fa-trash-can"></i>
+
+            Delete
+
+          </button>
+
+        </div>
+
+      </td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+    </div>
+
+    <!-- ===================================== -->
+    <!-- =============== FOOTER ============== -->
+    <!-- ===================================== -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+
+        {{
+          (currentPage - 1) * itemsPerPage + 1
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          filteredspace.length
+          ? filteredspace.length
+          : currentPage * itemsPerPage
+        }}
+
+        of {{ filteredspace.length }} space
+
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div class="pagination-box">
+
+        <!-- PREV -->
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+
+          <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <!-- NUMBERS -->
+
+        <ng-container
+          *ngFor="let page of visiblePages"
+        >
+
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+
+            {{ page }}
+
+          </button>
+
+          <span
+            *ngIf="page === '...'"
+            class="dots"
+          >
+
+            ...
+
+          </span>
+
+        </ng-container>
+
+        <!-- NEXT -->
+
+        <button
+          (click)="nextPage()"
+          [disabled]="
+            currentPage === totalPagesCount
+          "
+        >
+
+          <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+
+  <select
+    class="per-page-select"
+    [(ngModel)]="itemsPerPage"
+    (change)="changeItemsPerPage()"
+  >
+
+    <option [value]="5">5 / page</option>
+
+    <option [value]="10">10 / page</option>
+
+    <option [value]="15">15 / page</option>
+
+    <option [value]="20">20 / page</option>
+
+  </select>
+
+  <i class="fa-solid fa-chevron-down select-icon"></i>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+<div class="col-md-4">
+
+<!-- charts -->
+
+
+<div class="availability-card">
+
+  <!-- HEADER -->
+
+  <div class="availability-header">
+
+    <h3>
+
+      Availability Overview
+
+    </h3>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <div class="availability-content">
+
+    <!-- CHART -->
+
+<div class="availability-chart-wrapper">
+
+  <canvas #availabilityCanvas></canvas>
+
+  <div class="availability-chart-center">
+
+    <h2>{{ space.length }}</h2>
+
+    <span>Total Spaces</span>
+
+  </div>
+
+</div>
+
+    <!-- LIST -->
+
+    <div class="availability-list">
+
+      <!-- AVAILABLE -->
+
+      <div class="availability-item">
+
+        <div class="availability-left">
+
+          <span
+            class="
+              availability-dot
+              green
+            "
+          ></span>
+
+          <p>Available</p>
+
+        </div>
+
+        <span>
+
+          {{ availableCount }}
+
+          ({{ availablePercent }}%)
+
+        </span>
+
+      </div>
+
+      <!-- BOOKED -->
+
+      <div class="availability-item">
+
+        <div class="availability-left">
+
+          <span
+            class="
+              availability-dot
+              blue
+            "
+          ></span>
+
+          <p>Booked</p>
+
+        </div>
+
+        <span>
+
+          {{ bookedCount }}
+
+          ({{ bookedPercent }}%)
+
+        </span>
+
+      </div>
+
+      <!-- MAINTENANCE -->
+
+      <div class="availability-item">
+
+        <div class="availability-left">
+
+          <span
+            class="
+              availability-dot
+              orange
+            "
+          ></span>
+
+          <p>Maintenance</p>
+
+        </div>
+
+        <span>
+
+          {{ maintenanceCount }}
+
+          ({{ maintenancePercent }}%)
+
+        </span>
+
+      </div>
+
+      <!-- BLOCKED -->
+
+      <div class="availability-item">
+
+        <div class="availability-left">
+
+          <span
+            class="
+              availability-dot
+              red
+            "
+          ></span>
+
+          <p>Blocked</p>
+
+        </div>
+
+        <span>
+
+          0 (0%)
+
+        </span>
+
+      </div>
+
+      <!-- INACTIVE -->
+
+      <div class="availability-item">
+
+        <div class="availability-left">
+
+          <span
+            class="
+              availability-dot
+              gray
+            "
+          ></span>
+
+          <p>Inactive</p>
+
+        </div>
+
+        <span>
+
+          0 (0%)
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="spaces-type-card my-2">
+
+  <!-- HEADER -->
+
+  <div class="spaces-type-header">
+
+    <h3>Spaces by Type</h3>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div class="spaces-type-list">
+
+    <!-- ITEM -->
+
+    <div
+      class="spaces-type-item"
+      *ngFor="
+        let item of spacesByType
+      "
+    >
+
+      <!-- LEFT -->
+
+      <div class="spaces-type-left">
+
+        <div
+  class="spaces-icon"
+  [ngClass]="
+    getSpaceClass(item.name)
+  "
+>
+
+  <i
+    [class]="
+      getSpaceIcon(item.name)
+    "
+  ></i>
+
+</div>
+
+        <h4>{{ item.name }}</h4>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <span>
+
+        {{ item.count }}
+
+        ({{ item.percent }}%)
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <button
+    class="view-spaces-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#spacesModal"
+  >
+
+    View All Spaces
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+
+<!-- ===================================== -->
+<!-- MODAL -->
+<!-- ===================================== -->
+
+<div
+  class="modal fade"
+  id="spacesModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content spaces-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header spaces-modal-header">
+
+        <h5>Top Spaces By Type</h5>
+<!--
+        <button
+          type="button"
+          class="close-btn-modal"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button> -->
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body spaces-modal-body">
+
+        <div
+          class="space-modal-row"
+          *ngFor="
+            let item of spacesByType
+          "
+        >
+
+          <!-- LEFT -->
+
+          <div class="space-modal-left">
+
+            <div
+              class="spaces-icon"
+              [ngClass]="
+                getSpaceClass(item.name)
+              "
+            >
+
+              <i
+                [class]="
+                  getSpaceIcon(item.name)
+                "
+              ></i>
+
+            </div>
+
+            <h4>
+
+              {{ item.name }}
+
+            </h4>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="space-modal-right">
+
+            <h3>
+
+              {{ item.count }}
+
+            </h3>
+
+            <span>
+
+              ({{ item.percent }}%)
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer spaces-modal-footer">
+
+        <button
+          type="button"
+          class="close-spaces-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- ====================================== -->
+<!-- TOP LOCATIONS -->
+<!-- ====================================== -->
+
+<div class="locations-card">
+
+  <!-- HEADER -->
+
+  <div class="locations-header">
+
+    <h3>
+
+      Top Locations by Utilization
+
+    </h3>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div
+    class="location-item"
+    *ngFor="
+      let item of topLocations
+    "
+  >
+
+    <!-- TOP -->
+
+    <div class="location-top">
+
+      <h4>
+
+        {{ item.location }}
+
+      </h4>
+
+      <span>
+
+        {{ item.progress }}%
+
+      </span>
+
+    </div>
+
+    <!-- PROGRESS -->
+
+    <div class="location-progress">
+
+      <div
+        class="location-progress-fill"
+        [style.width.%]="item.progress"
+      ></div>
+
+    </div>
+
+  </div>
+
+  <!-- BUTTON -->
+
+  <button
+    class="view-locations-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#locationsModal"
+  >
+
+    View All Locations
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+
+<!-- ====================================== -->
+<!-- MODAL -->
+<!-- ====================================== -->
+
+<div
+  class="modal fade"
+  id="locationsModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content spaces-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header spaces-modal-header">
+
+        <h5>
+
+          Top Locations By Utilization
+
+        </h5>
+
+        <button
+          type="button"
+          class="close-btn-modal"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body spaces-modal-body">
+
+        <div
+          class="space-modal-row"
+          *ngFor="
+            let item of topLocations
+          "
+        >
+
+          <!-- LEFT -->
+
+          <div class="space-modal-left">
+
+            <div
+              class="spaces-icon spaces-red"
+            >
+
+              <i class="fa-solid fa-location-dot"></i>
+
+            </div>
+
+            <div>
+
+              <h4>
+
+                {{ item.location }}
+
+              </h4>
+
+              <span>
+
+                {{ item.totalSpaces }}
+
+                Spaces
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="space-modal-right">
+
+            <h3>
+
+              {{ item.progress }}%
+
+            </h3>
+
+            <span>
+
+              Utilization
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer spaces-modal-footer">
+
+        <button
+          type="button"
+          class="close-spaces-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+

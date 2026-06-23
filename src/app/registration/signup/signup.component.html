@@ -1,0 +1,4087 @@
+<form
+  [formGroup]="signUpForm"
+  (ngSubmit)="submitForm()"
+>
+
+  <!-- HEADER -->
+
+  <div class="secure-title text-center">
+    <i class="fa-solid fa-shield"></i>
+    Create Account
+  </div>
+
+  <h2 class="title text-center">
+    Sign up
+  </h2>
+
+  <!-- USER TYPES -->
+<div class="container-floud p-0">
+  <div class="row g-3">
+    <div class="col-md-12">
+ <div class="section-title">
+  User Type
+</div>
+
+<div class="cards-row">
+
+  <div
+    class="select-card"
+    *ngFor="let type of userTypes"
+    [class.active]="selectedUserType === type"
+    (click)="selectUserType(type)"
+  >
+
+  <i [class]="getUserTypeIcon(type)"></i>
+
+    <span>
+      {{ type }}
+    </span>
+
+  </div>
+
+</div>
+    </div>
+    <div class="col-md-12">
+
+
+  <!-- ROLES -->
+
+ <div class="section-title">
+  Primary Role
+</div>
+
+<div class="cards-row">
+
+  <div
+    *ngFor="let role of roles"
+    class="select-card role-card"
+    [class.active]="selectedRole === role.name"
+    [class.locked]="isRoleLocked(role)"
+    (click)="selectRole(role)"
+  >
+
+    <i
+      *ngIf="isRoleLocked(role)"
+      class="fa-solid fa-lock"
+    ></i>
+
+   <i
+  *ngIf="!isRoleLocked(role)"
+  [class]="getRoleIcon(role.name)"
+></i>
+    <span>
+      {{ role.name }}
+    </span>
+
+  </div>
+
+</div>
+<button
+  type="button"
+  class="btn btn-outline-danger btn-sm mt-2 w-100"
+  *ngIf="selectedUserType === 'Individual' && selectedRole"
+  (click)="clearRole()"
+>
+  <i class="fa-solid fa-xmark me-2"></i>
+  Remove Primary Role
+</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <!-- GRIDS -->
+
+<!-- Individual  -->
+
+<div
+  *ngIf="currentFormKey === 'Individual'"
+>
+
+   <div class="form-grid pt-4">
+
+    <!-- ACCOUNT -->
+
+    <div class="form-section">
+
+      <h3>
+        <i class="fa-regular fa-user"></i>
+        Account Information
+      </h3>
+
+      <div class="form-group">
+        <label>First Name
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter first name"
+          formControlName="firstName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Last Name
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter last name"
+          formControlName="lastName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email Address
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter email address"
+          formControlName="email"
+        />
+      </div>
+
+
+    <div class="form-group">
+
+  <label>Phone Number
+      <span class="text-danger">*</span>
+
+  </label>
+
+  <div class="phone-wrapper">
+
+    <!-- COUNTRY SELECT -->
+
+    <div
+      class="custom-country-select"
+      (click)="toggleCountryDropdown()"
+    >
+
+      <!-- SELECTED -->
+
+      <div class="selected-country">
+
+        <img
+          [src]="selectedCountry.flag"
+          alt=""
+          class="country-flag"
+        />
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+      </div>
+
+      <!-- DROPDOWN -->
+
+      <div
+        class="country-menu"
+        *ngIf="showCountryDropdown"
+      >
+
+        <div
+  class="country-option"
+  *ngFor="let country of countries"
+  (click)="selectCountry(country); $event.stopPropagation()"
+>
+
+          <img [src]="country.flag" alt="" class="country-flag" />
+
+          <span>
+            {{ country.code }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CODE -->
+
+    <div class="country-code">
+
+      {{ selectedCountry.code }}
+
+    </div>
+
+    <!-- PHONE INPUT -->
+
+    <input type="text" class="phone-input" placeholder="Phone Number" formControlName="phone" />
+
+  </div>
+
+</div>
+
+    </div>
+
+    <!-- PROFILE -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-regular fa-user"></i>
+    Profile Details
+  </h3>
+
+  <!-- DISPLAY NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Display / Professional Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter display or professional name"
+      formControlName="displayName"
+    />
+
+  </div>
+
+  <!-- COMPANY / ORGANIZATION -->
+
+  <div class="form-group">
+
+    <label>
+      Company / Organization Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter company or organization name"
+      formControlName="companyName"
+    />
+
+  </div>
+
+  <!-- RECEIVE PLATFORM UPDATES -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="receiveUpdates"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Receive platform updates
+      </h4>
+
+      <p>
+        Get updates about opportunities and features.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- PROFILE SUMMARY -->
+
+  <div class="form-group">
+
+    <label>
+      Profile Summary (short description) (optional)
+    </label>
+
+    <div class="textarea-wrapper">
+
+      <textarea
+        class="form-control textarea"
+        maxlength="300"
+        placeholder="Tell us about yourself, your background, and what you do..."
+        formControlName="summary"
+      ></textarea>
+
+      <span class="char-count">
+
+        {{ signUpForm.get('summary')?.value?.length || 0 }}/300
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+   <!-- LOCATION -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-location-dot"></i>
+    Location & Address
+  </h3>
+
+  <!-- COUNTRY -->
+
+  <div class="form-group">
+
+    <label>
+      Country
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter country"
+      formControlName="country"
+    /> -->
+<select
+  class="form-control"
+  formControlName="country"
+>
+ <option
+  *ngFor="let country of allCountries"
+  [value]="country.code"
+>
+  {{ country.name }}
+</option>
+
+
+</select>
+  </div>
+
+  <!-- CITY -->
+
+  <div class="form-group">
+
+    <label>
+      City
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter city"
+      formControlName="city"
+    />
+
+  </div>
+
+  <!-- STATE / REGION -->
+
+  <div class="form-group">
+
+    <label>
+      State / Region (optional)
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter state / region"
+      formControlName="region"
+    /> -->
+
+
+<select
+  class="form-control"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+    {{ state }}
+  </option>
+
+</select>
+
+  </div>
+
+  <!-- FULL ADDRESS -->
+
+  <div class="form-group">
+
+    <label>
+      Full Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter full address"
+      formControlName="address"
+    />
+
+  </div>
+
+  <!-- POSTAL CODE -->
+
+  <div class="form-group">
+
+    <label>
+      Postal Code
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter postal code"
+      formControlName="postalCode"
+    />
+
+  </div>
+
+
+</div>
+  </div>
+
+
+</div>
+
+
+
+<!-- Individual Artist -->
+
+<div
+  *ngIf="currentFormKey === 'Individual-Artist & Talent'"
+>
+
+   <div class="form-grid pt-4">
+
+    <!-- ACCOUNT -->
+
+    <div class="form-section">
+
+      <h3>
+        <i class="fa-regular fa-user"></i>
+        Account Information
+      </h3>
+
+      <div class="form-group">
+        <label>First Name
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter first name"
+          formControlName="firstName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Last Name
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter last name"
+          formControlName="lastName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email Address
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter email address"
+          formControlName="email"
+        />
+      </div>
+
+
+    <div class="form-group">
+
+  <label>Phone Number
+      <span class="text-danger">*</span>
+
+  </label>
+
+  <div class="phone-wrapper">
+
+    <!-- COUNTRY SELECT -->
+
+    <div
+      class="custom-country-select"
+      (click)="toggleCountryDropdown()"
+    >
+
+      <!-- SELECTED -->
+
+      <div class="selected-country">
+
+        <img
+          [src]="selectedCountry.flag"
+          alt=""
+          class="country-flag"
+        />
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+      </div>
+
+      <!-- DROPDOWN -->
+
+      <div
+        class="country-menu"
+        *ngIf="showCountryDropdown"
+      >
+
+        <div
+  class="country-option"
+  *ngFor="let country of countries"
+  (click)="selectCountry(country); $event.stopPropagation()"
+>
+
+          <img [src]="country.flag" alt="" class="country-flag" />
+
+          <span>
+            {{ country.code }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CODE -->
+
+    <div class="country-code">
+
+      {{ selectedCountry.code }}
+
+    </div>
+
+    <!-- PHONE INPUT -->
+
+    <input type="text" class="phone-input" placeholder="Phone Number" formControlName="phone" />
+
+  </div>
+
+</div>
+
+    </div>
+
+    <!-- PROFILE -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-regular fa-user"></i>
+    Artist / Talent Details
+  </h3>
+
+  <!-- Stage Name -->
+
+  <div class="form-group">
+
+    <label>
+      Professional / Stage Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter stage or professional name"
+      formControlName="displayName"
+    />
+
+  </div>
+
+  <!-- Talent Category -->
+
+  <div class="form-group">
+
+    <label>
+      Talent Category
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="select-wrapper">
+
+      <select
+        class="form-select"
+        formControlName="talentCategory"
+      >
+
+        <option value="">
+          Select talent category
+        </option>
+
+        <option>Singer</option>
+        <option>Musician</option>
+        <option>DJ</option>
+        <option>Dancer</option>
+        <option>Actor</option>
+        <option>Comedian</option>
+        <option>Influencer</option>
+
+      </select>
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </div>
+
+  </div>
+
+  <!-- Portfolio -->
+
+  <div class="form-group">
+
+    <label>
+      Portfolio / Social Link (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter website or social link"
+      formControlName="portfolioLink"
+    />
+
+  </div>
+
+  <!-- Direct Booking -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="acceptDirectBooking"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Accept direct booking requests
+      </h4>
+
+      <p>
+        Allow organizers to send you booking inquiries.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Platform Updates -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="receiveUpdates"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Receive platform updates
+      </h4>
+
+      <p>
+        Get updates about opportunities and features.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Summary -->
+
+  <div class="form-group">
+
+    <label>
+      Profile Summary (short description) (optional)
+    </label>
+
+    <div class="textarea-wrapper">
+
+      <textarea
+        class="form-control textarea"
+        maxlength="300"
+        placeholder="Tell us about your talent, style, experience, and what you offer..."
+        formControlName="summary"
+      ></textarea>
+
+      <span class="char-count">
+
+        {{ signUpForm.get('summary')?.value?.length || 0 }}/300
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+   <!-- LOCATION -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-location-dot"></i>
+    Location & Address
+  </h3>
+
+  <!-- COUNTRY -->
+
+  <div class="form-group">
+
+    <label>
+      Country
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter country"
+      formControlName="country"
+    /> -->
+<select
+  class="form-control"
+  formControlName="country"
+>
+ <option
+  *ngFor="let country of allCountries"
+  [value]="country.code"
+>
+  {{ country.name }}
+</option>
+
+
+</select>
+  </div>
+
+  <!-- CITY -->
+
+  <div class="form-group">
+
+    <label>
+      City
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter city"
+      formControlName="city"
+    />
+
+  </div>
+
+  <!-- STATE / REGION -->
+
+  <div class="form-group">
+
+    <label>
+      State / Region (optional)
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter state / region"
+      formControlName="region"
+    /> -->
+
+
+<select
+  class="form-control"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+    {{ state }}
+  </option>
+
+</select>
+
+  </div>
+
+  <!-- FULL ADDRESS -->
+
+  <div class="form-group">
+
+    <label>
+      Full Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter full address"
+      formControlName="address"
+    />
+
+  </div>
+
+  <!-- POSTAL CODE -->
+
+  <div class="form-group">
+
+    <label>
+      Postal Code
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter postal code"
+      formControlName="postalCode"
+    />
+
+  </div>
+
+  <!-- COVERAGE AREA -->
+
+  <div class="form-group">
+
+    <label>
+      Coverage Area (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter cities, regions, or remote service area"
+      formControlName="coverageArea"
+    />
+
+  </div>
+
+</div>
+  </div>
+
+
+</div>
+
+
+
+<!-- Individual Organizer -->
+
+<div
+  *ngIf="currentFormKey === 'Individual-Producer / Organizer'"
+>
+
+  <div class="form-grid pt-4">
+
+    <!-- ACCOUNT -->
+
+    <div class="form-section">
+
+      <h3>
+        <i class="fa-regular fa-user"></i>
+        Account Information
+      </h3>
+
+      <div class="form-group">
+        <label>First Name
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter first name"
+          formControlName="firstName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Last Name
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter last name"
+          formControlName="lastName"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Email Address
+            <span class="text-danger">*</span>
+
+        </label>
+
+        <input
+          type="email"
+          class="form-control"
+          placeholder="Enter email address"
+          formControlName="email"
+        />
+      </div>
+
+
+    <div class="form-group">
+
+  <label>Phone Number          <span class="text-danger">*</span>
+</label>
+
+  <div class="phone-wrapper">
+
+    <!-- COUNTRY SELECT -->
+
+    <div
+      class="custom-country-select"
+      (click)="toggleCountryDropdown()"
+    >
+
+      <!-- SELECTED -->
+
+      <div class="selected-country">
+
+        <img
+          [src]="selectedCountry.flag"
+          alt=""
+          class="country-flag"
+        />
+
+        <i class="fa-solid fa-chevron-down"></i>
+
+      </div>
+
+      <!-- DROPDOWN -->
+
+      <div
+        class="country-menu"
+        *ngIf="showCountryDropdown"
+      >
+
+        <div
+  class="country-option"
+  *ngFor="let country of countries"
+  (click)="selectCountry(country); $event.stopPropagation()"
+>
+
+          <img [src]="country.flag" alt="" class="country-flag" />
+
+          <span>
+            {{ country.code }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CODE -->
+
+    <div class="country-code">
+
+      {{ selectedCountry.code }}
+
+    </div>
+
+    <!-- PHONE INPUT -->
+
+    <input type="text" class="phone-input" placeholder="Phone Number" formControlName="phone" />
+
+  </div>
+
+</div>
+<div class="form-group mt-3">
+
+  <label class="mb-2 d-block">
+    Select Type
+  </label>
+
+  <div class="d-flex gap-4">
+
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="producer"
+        value="2"
+        formControlName="producerType"
+      >
+
+      <label class="form-check-label" for="producer">
+        Producer
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="radio"
+        id="organizer"
+        value="3"
+        formControlName="producerType"
+      >
+
+      <label class="form-check-label" for="organizer">
+        Organizer
+      </label>
+    </div>
+
+  </div>
+
+</div>
+    </div>
+
+    <!-- PROFILE -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-regular fa-user"></i>
+    Producer / Organizer Details
+  </h3>
+
+  <!-- BRAND NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Professional / Brand Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter professional or brand name"
+      formControlName="brandName"
+    />
+
+  </div>
+
+  <!-- EVENT TYPE -->
+
+  <div class="form-group">
+
+    <label>
+      Event Type / Specialty
+                <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="select-wrapper">
+
+      <select
+        class="form-select"
+        formControlName="eventType"
+      >
+
+        <option value="">
+          Select event type or specialty
+        </option>
+
+        <option>Wedding Planner</option>
+        <option>Concert Organizer</option>
+        <option>Festival Organizer</option>
+        <option>Corporate Events</option>
+        <option>Private Events</option>
+        <option>Event Producer</option>
+
+      </select>
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </div>
+
+  </div>
+
+  <!-- COMPANY -->
+
+  <div class="form-group">
+
+    <label>
+      Company / Organization Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter company or organization name"
+      formControlName="companyName"
+    />
+
+  </div>
+
+  <!-- BOOKING REQUESTS -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="acceptProjectRequests"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Accept booking / project requests
+      </h4>
+
+      <p>
+        Allow event owners to send you booking and project inquiries.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- UPDATES -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="receiveUpdates"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Receive platform updates
+      </h4>
+
+      <p>
+        Get updates about opportunities, features, and tools.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- SUMMARY -->
+
+  <div class="form-group">
+
+    <label>
+      Profile Summary (short description) (optional)
+    </label>
+
+    <div class="textarea-wrapper">
+
+      <textarea
+        class="form-control textarea"
+        maxlength="300"
+        placeholder="Tell us about the events you produce, your production background, and any hospitality or event expertise..."
+        formControlName="organizerSummary"
+      ></textarea>
+
+      <span class="char-count">
+        {{ signUpForm.get('organizerSummary')?.value?.length || 0 }}/300
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+   <!-- LOCATION -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-location-dot"></i>
+    Location & Address
+  </h3>
+
+  <!-- COUNTRY -->
+
+   <div class="form-group">
+
+    <label>
+      Country
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter country"
+      formControlName="country"
+    /> -->
+<select
+  class="form-control"
+  formControlName="country"
+>
+ <option
+  *ngFor="let country of allCountries"
+  [value]="country.code"
+>
+  {{ country.name }}
+</option>
+
+
+</select>
+  </div>
+  <!-- CITY -->
+
+  <div class="form-group">
+
+    <label>
+      City
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter city"
+      formControlName="city"
+    />
+
+  </div>
+
+  <!-- STATE / REGION -->
+
+    <div class="form-group">
+
+    <label>
+      State / Region (optional)
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter state / region"
+      formControlName="region"
+    /> -->
+
+
+<select
+  class="form-control"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+    {{ state }}
+  </option>
+
+</select>
+
+  </div>
+  <!-- FULL ADDRESS -->
+
+  <div class="form-group">
+
+    <label>
+      Full Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter full address"
+      formControlName="address"
+    />
+
+  </div>
+
+  <!-- POSTAL CODE -->
+
+  <div class="form-group">
+
+    <label>
+      Postal Code
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter postal code"
+      formControlName="postalCode"
+    />
+
+  </div>
+
+  <!-- COVERAGE AREA -->
+
+  <div class="form-group">
+
+    <label>
+      Coverage Area (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter cities, regions, or remote service area"
+      formControlName="coverageArea"
+    />
+
+  </div>
+
+</div>
+  </div>
+
+</div>
+<!-- Business Vendor -->
+
+<div
+  *ngIf="currentFormKey === 'Business-Vendor'"
+>
+
+ <div class="form-grid pt-4">
+
+    <!-- ACCOUNT -->
+
+    <div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-building"></i>
+    Business Information
+  </h3>
+
+  <!-- Company Name -->
+
+  <div class="form-group">
+
+    <label>
+      Company Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter company name"
+      formControlName="companyName"
+    />
+
+  </div>
+
+  <!-- Business Email -->
+
+  <div class="form-group">
+
+    <label>
+      Business Email Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter business email"
+      formControlName="businessEmail"
+    />
+
+  </div>
+
+  <!-- Business Phone -->
+
+  <div class="form-group">
+
+    <label>
+      Business Phone Number
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <div
+        class="custom-country-select"
+        (click)="toggleDropdown('business')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="businessCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+        <div
+  class="country-menu"
+  *ngIf="activeDropdown === 'business'"
+>
+
+  <div
+    class="country-option"
+    *ngFor="let country of countries"
+    (click)="selectBusinessCountry(country); $event.stopPropagation()"
+  >
+
+    <img
+      [src]="country.flag"
+      alt=""
+      class="country-flag"
+    />
+
+    <span>
+      {{ country.code }}
+    </span>
+
+  </div>
+
+</div>
+
+      </div>
+
+      <div class="country-code">
+
+        {{ businessCountry.code }}
+
+      </div>
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="businessPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <!-- Business Website -->
+
+  <div class="form-group">
+
+    <label>
+      Business Website (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter business website"
+      formControlName="businessWebsite"
+    />
+
+  </div>
+
+  <!-- Registration / Tax ID -->
+
+  <div class="form-group">
+
+    <label>
+      Registration / Tax ID (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter registration number or tax ID"
+      formControlName="taxId"
+    />
+
+  </div>
+<hr class="bg-light border-2" />
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-store"></i>
+    Vendor Profile Details
+  </h3>
+
+  <!-- SERVICE / COMPANY NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Service / Company Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter service or company name"
+      formControlName="serviceCompanyName"
+    />
+
+  </div>
+
+  <!-- SERVICE CATEGORY -->
+
+  <div class="form-group">
+
+    <label>
+      Service Category (optional)
+    </label>
+
+    <div class="select-wrapper">
+
+      <select
+        class="form-select"
+        formControlName="serviceCategory"
+      >
+
+        <option value="">
+          Select service category
+        </option>
+
+        <option>Catering</option>
+        <option>Photography</option>
+        <option>Videography</option>
+        <option>Decoration</option>
+        <option>Sound & Lighting</option>
+        <option>Transportation</option>
+        <option>Security</option>
+        <option>Equipment Rental</option>
+
+      </select>
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+</div>
+
+    <!-- PROFILE -->
+<div class="form-section">
+
+  <h3>
+    <i class="fa-regular fa-user"></i>
+    Primary Contact
+  </h3>
+
+  <!-- FIRST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact First Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter first name"
+      formControlName="contactFirstName"
+    />
+
+  </div>
+
+  <!-- LAST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact Last Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter last name"
+      formControlName="contactLastName"
+    />
+
+  </div>
+
+  <!-- EMAIL -->
+
+  <div class="form-group">
+
+    <label>
+      Primary Contact Email
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter contact email"
+      formControlName="contactEmail"
+    />
+
+  </div>
+
+  <!-- PHONE -->
+
+  <div class="form-group">
+
+    <label>
+      Phone Number
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <div
+        class="custom-country-select"
+       (click)="toggleDropdown('contact')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="contactCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+       <div
+  class="country-menu"
+  *ngIf="activeDropdown === 'contact'"
+>
+
+  <div
+    class="country-option"
+    *ngFor="let country of countries"
+    (click)="selectContactCountry(country); $event.stopPropagation()"
+  >
+
+    <img
+      [src]="country.flag"
+      alt=""
+      class="country-flag"
+    />
+
+    <span>
+      {{ country.code }}
+    </span>
+
+  </div>
+
+</div>
+
+      </div>
+
+      <div class="country-code">
+        {{ contactCountry.code }}
+      </div>
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="contactPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <!-- ACCEPT BOOKING -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="acceptVendorRequests"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Accept booking / vendor inquiries
+      </h4>
+
+      <p>
+        Allow event organizers to send you booking and vendor inquiries.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RECEIVE UPDATES -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="receiveUpdates"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Receive platform updates
+      </h4>
+
+      <p>
+        Get updates about opportunities, features, and tools.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+   <!-- LOCATION -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-location-dot"></i>
+    Location & Address
+  </h3>
+
+  <!-- COUNTRY -->
+
+  <div class="form-group">
+
+    <label>
+      Country
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter country"
+      formControlName="country"
+    /> -->
+<select
+  class="form-control"
+  formControlName="country"
+>
+ <option
+  *ngFor="let country of allCountries"
+  [value]="country.code"
+>
+  {{ country.name }}
+</option>
+
+
+</select>
+  </div>
+  <!-- CITY -->
+
+  <div class="form-group">
+
+    <label>
+      City
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter city"
+      formControlName="city"
+    />
+
+  </div>
+
+  <!-- STATE / REGION -->
+
+  <div class="form-group">
+
+    <label>
+      State / Region (optional)
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter state / region"
+      formControlName="region"
+    /> -->
+
+
+<select
+  class="form-control"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+    {{ state }}
+  </option>
+
+</select>
+
+  </div>
+
+  <!-- FULL ADDRESS -->
+
+  <div class="form-group">
+
+    <label>
+      Full Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter full address"
+      formControlName="address"
+    />
+
+  </div>
+
+  <!-- POSTAL CODE -->
+
+  <div class="form-group">
+
+    <label>
+      Postal Code
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter postal code"
+      formControlName="postalCode"
+    />
+
+  </div>
+
+  <!-- CAPACITY -->
+
+  <div class="form-group">
+
+    <label>
+      Capacity (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter guest capacity"
+      formControlName="capacity"
+    />
+
+  </div>
+
+  <!-- BUSINESS SUMMARY -->
+
+  <div class="form-group">
+
+    <label>
+      Business Summary (short description) (optional)
+    </label>
+
+    <div class="textarea-wrapper">
+
+      <textarea
+        class="form-control textarea"
+        maxlength="300"
+        placeholder="Tell us about your space, venue type, amenities, capacity, and what makes your location unique."
+        formControlName="businessSummary"
+      ></textarea>
+
+      <span class="char-count">
+
+        {{ signUpForm.get('businessSummary')?.value?.length || 0 }}/300
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+  </div>
+
+</div>
+<!-- Business Service -->
+
+<div
+  *ngIf="currentFormKey === 'Business-Service Provider'"
+>
+
+
+ <div class="form-grid pt-4">
+
+    <!-- ACCOUNT -->
+
+  <div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-building"></i>
+    Business Information
+  </h3>
+
+  <!-- COMPANY NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Company Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter company name"
+      formControlName="companyName"
+    />
+
+  </div>
+
+  <!-- BUSINESS EMAIL -->
+
+  <div class="form-group">
+
+    <label>
+      Business Email Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter business email"
+      formControlName="businessEmail"
+    />
+
+  </div>
+
+  <!-- BUSINESS PHONE -->
+
+  <div class="form-group">
+
+    <label>
+      Business Phone Number
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <div
+        class="custom-country-select"
+        (click)="toggleDropdown('business')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="businessCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+        <div
+          class="country-menu"
+          *ngIf="activeDropdown === 'business'"
+        >
+
+          <div
+            class="country-option"
+            *ngFor="let country of countries"
+            (click)="selectBusinessCountry(country); $event.stopPropagation()"
+          >
+
+            <img
+              [src]="country.flag"
+              alt=""
+              class="country-flag"
+            />
+
+            <span>
+              {{ country.code }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="country-code">
+
+        {{ businessCountry.code }}
+
+      </div>
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="businessPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <!-- BUSINESS WEBSITE -->
+
+  <div class="form-group">
+
+    <label>
+      Business Website (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter business website"
+      formControlName="businessWebsite"
+    />
+
+  </div>
+
+  <!-- TAX ID -->
+
+  <div class="form-group">
+
+    <label>
+      Registration / Tax ID (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter registration number or tax ID"
+      formControlName="taxId"
+    />
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- SERVICE PROVIDER PROFILE -->
+
+  <h3>
+    <i class="fa-solid fa-store"></i>
+    Service Provider Profile Details
+  </h3>
+
+  <!-- SERVICE COMPANY NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Service / Company Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter service or company name"
+      formControlName="serviceCompanyName"
+    />
+
+  </div>
+
+  <!-- SERVICE CATEGORY -->
+
+  <div class="form-group">
+
+    <label>
+      Service Category (optional)
+    </label>
+
+    <div class="select-wrapper">
+
+      <select
+        class="form-select"
+        formControlName="serviceCategory"
+      >
+
+        <option value="">
+          Select service category
+        </option>
+
+        <option>Photography</option>
+        <option>Videography</option>
+        <option>Catering</option>
+        <option>Decoration</option>
+        <option>Security</option>
+        <option>Transportation</option>
+        <option>Marketing</option>
+        <option>Entertainment Services</option>
+
+      </select>
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- PROFILE -->
+<div class="form-section">
+
+  <h3>
+    <i class="fa-regular fa-user"></i>
+    Primary Contact
+  </h3>
+
+  <!-- CONTACT FIRST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact First Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter first name"
+      formControlName="contactFirstName"
+    />
+
+  </div>
+
+  <!-- CONTACT LAST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact Last Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter last name"
+      formControlName="contactLastName"
+    />
+
+  </div>
+
+  <!-- CONTACT EMAIL -->
+
+  <div class="form-group">
+
+    <label>
+      Primary Contact Email
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter contact email"
+      formControlName="contactEmail"
+    />
+
+  </div>
+
+  <!-- CONTACT PHONE -->
+
+  <div class="form-group">
+
+    <label>
+      Phone Number
+                      <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <div
+        class="custom-country-select"
+        (click)="toggleDropdown('contact')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="contactCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+        <div
+          class="country-menu"
+          *ngIf="activeDropdown === 'contact'"
+        >
+
+          <div
+            class="country-option"
+            *ngFor="let country of countries"
+            (click)="selectContactCountry(country); $event.stopPropagation()"
+          >
+
+            <img
+              [src]="country.flag"
+              alt=""
+              class="country-flag"
+            />
+
+            <span>
+              {{ country.code }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="country-code">
+
+        {{ contactCountry.code }}
+
+      </div>
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="contactPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ACCEPT SERVICE INQUIRIES -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="acceptServiceInquiries"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Accept booking / service inquiries
+      </h4>
+
+      <p>
+        Allow event organizers to send you booking and service inquiries.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RECEIVE PLATFORM UPDATES -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="receiveUpdates"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Receive platform updates
+      </h4>
+
+      <p>
+        Get updates about opportunities, features, and tools.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+   <!-- LOCATION -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-location-dot"></i>
+    Location & Address
+  </h3>
+
+  <!-- COUNTRY -->
+
+  <div class="form-group">
+
+    <label>
+      Country
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter country"
+      formControlName="country"
+    /> -->
+<select
+  class="form-control"
+  formControlName="country"
+>
+ <option
+  *ngFor="let country of allCountries"
+  [value]="country.code"
+>
+  {{ country.name }}
+</option>
+
+
+</select>
+  </div>
+  <!-- CITY -->
+
+  <div class="form-group">
+
+    <label>
+      City
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter city"
+      formControlName="city"
+    />
+
+  </div>
+
+  <!-- STATE / REGION -->
+
+  <div class="form-group">
+
+    <label>
+      State / Region (optional)
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter state / region"
+      formControlName="region"
+    /> -->
+
+
+<select
+  class="form-control"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+    {{ state }}
+  </option>
+
+</select>
+
+  </div>
+
+  <!-- FULL ADDRESS -->
+
+  <div class="form-group">
+
+    <label>
+      Full Address
+              <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter full address"
+      formControlName="address"
+    />
+
+  </div>
+
+  <!-- POSTAL CODE -->
+
+  <div class="form-group">
+
+    <label>
+      Postal Code
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter postal code"
+      formControlName="postalCode"
+    />
+
+  </div>
+
+  <!-- COVERAGE AREA -->
+
+  <div class="form-group">
+
+    <label>
+      Coverage Area (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter cities, regions, or remote service area"
+      formControlName="coverageArea"
+    />
+
+  </div>
+
+  <!-- BUSINESS SUMMARY -->
+
+  <div class="form-group">
+
+    <label>
+      Business Summary (short description) (optional)
+    </label>
+
+    <div class="textarea-wrapper">
+
+      <textarea
+        class="form-control textarea"
+        maxlength="300"
+        placeholder="Tell us about your services, specialties, coverage areas, and what makes your business unique."
+        formControlName="businessSummary"
+      ></textarea>
+
+      <span class="char-count">
+
+        {{ signUpForm.get('businessSummary')?.value?.length || 0 }}/300
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+  </div>
+
+</div>
+<!-- Business Venue -->
+
+<div
+  *ngIf="currentFormKey === 'Business-Space / Venue'"
+>
+
+   <div class="form-grid pt-4">
+
+    <!-- ACCOUNT -->
+
+  <div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-building"></i>
+    Business Information
+  </h3>
+
+  <!-- COMPANY NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Company Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter company name"
+      formControlName="companyName"
+    />
+
+  </div>
+
+  <!-- BUSINESS EMAIL -->
+
+  <div class="form-group">
+
+    <label>
+      Business Email Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter business email"
+      formControlName="businessEmail"
+    />
+
+  </div>
+
+  <!-- BUSINESS PHONE -->
+
+  <div class="form-group">
+
+    <label>
+      Business Phone Number
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <div
+        class="custom-country-select"
+        (click)="toggleDropdown('business')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="businessCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+        <div
+          class="country-menu"
+          *ngIf="activeDropdown === 'business'"
+        >
+
+          <div
+            class="country-option"
+            *ngFor="let country of countries"
+            (click)="selectBusinessCountry(country); $event.stopPropagation()"
+          >
+
+            <img
+              [src]="country.flag"
+              alt=""
+              class="country-flag"
+            />
+
+            <span>
+              {{ country.code }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="country-code">
+
+        {{ businessCountry.code }}
+
+      </div>
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="businessPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <!-- BUSINESS WEBSITE -->
+
+  <div class="form-group">
+
+    <label>
+      Business Website (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter business website"
+      formControlName="businessWebsite"
+    />
+
+  </div>
+
+  <!-- TAX ID -->
+
+  <div class="form-group">
+
+    <label>
+      Registration / Tax ID (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter registration number or tax ID"
+      formControlName="taxId"
+    />
+
+  </div>
+  <!-- SERVICE PROVIDER PROFILE -->
+<hr class="section-divider">
+
+<!-- SPACE / VENUE DETAILS -->
+
+<h3>
+  <i class="fa-regular fa-map"></i>
+  Space / Venue Details
+</h3>
+
+<!-- SPACE NAME -->
+
+<div class="form-group">
+
+  <label>
+    Space / Venue Name (optional)
+  </label>
+
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Enter space or venue name"
+    formControlName="venueName"
+  />
+
+</div>
+
+<!-- VENUE TYPE -->
+
+<div class="form-group">
+
+  <label>
+    Venue / Location Type
+      <span class="text-danger">*</span>
+
+  </label>
+
+  <div class="select-wrapper">
+
+    <select
+      class="form-select"
+      formControlName="venueType"
+    >
+
+      <option value="">
+        Select venue type
+      </option>
+
+      <option>Event Hall</option>
+      <option>Wedding Venue</option>
+      <option>Conference Center</option>
+      <option>Theater</option>
+      <option>Studio</option>
+      <option>Restaurant</option>
+      <option>Hotel Ballroom</option>
+      <option>Outdoor Space</option>
+      <option>Night Club</option>
+      <option>Private Venue</option>
+
+    </select>
+
+    <i class="fa-solid fa-chevron-down"></i>
+
+  </div>
+
+</div>
+</div>
+
+    <!-- PROFILE -->
+<div class="form-section">
+
+  <h3>
+    <i class="fa-regular fa-user"></i>
+    Primary Contact
+  </h3>
+
+  <!-- CONTACT FIRST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact First Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter first name"
+      formControlName="contactFirstName"
+    />
+
+  </div>
+
+  <!-- CONTACT LAST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact Last Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter last name"
+      formControlName="contactLastName"
+    />
+
+  </div>
+
+  <!-- CONTACT EMAIL -->
+
+  <div class="form-group">
+
+    <label>
+      Primary Contact Email
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter contact email"
+      formControlName="contactEmail"
+    />
+
+  </div>
+
+  <!-- CONTACT PHONE -->
+
+  <div class="form-group">
+
+    <label>
+      Phone Number
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <div
+        class="custom-country-select"
+        (click)="toggleDropdown('contact')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="contactCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+        <div
+          class="country-menu"
+          *ngIf="activeDropdown === 'contact'"
+        >
+
+          <div
+            class="country-option"
+            *ngFor="let country of countries"
+            (click)="selectContactCountry(country); $event.stopPropagation()"
+          >
+
+            <img
+              [src]="country.flag"
+              alt=""
+              class="country-flag"
+            />
+
+            <span>
+              {{ country.code }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="country-code">
+
+        {{ contactCountry.code }}
+
+      </div>
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="contactPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ACCEPT DIRECT BOOKING -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="acceptDirectBooking"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Accept direct booking requests
+      </h4>
+
+      <p>
+        Allow clients and organizers to send venue booking inquiries.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RECEIVE UPDATES -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="receiveUpdates"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Receive platform updates
+      </h4>
+
+      <p>
+        Get updates about opportunities, features, and tools.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+   <!-- LOCATION -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-location-dot"></i>
+    Location & Address
+  </h3>
+
+  <!-- COUNTRY -->
+
+ <div class="form-group">
+
+    <label>
+      Country
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter country"
+      formControlName="country"
+    /> -->
+<select
+  class="form-control"
+  formControlName="country"
+>
+ <option
+  *ngFor="let country of allCountries"
+  [value]="country.code"
+>
+  {{ country.name }}
+</option>
+
+
+</select>
+  </div>
+  <!-- CITY -->
+
+  <div class="form-group">
+
+    <label>
+      City
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter city"
+      formControlName="city"
+    />
+
+  </div>
+
+  <!-- STATE / REGION -->
+
+    <div class="form-group">
+
+    <label>
+      State / Region (optional)
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter state / region"
+      formControlName="region"
+    /> -->
+
+
+<select
+  class="form-control"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+    {{ state }}
+  </option>
+
+</select>
+
+  </div>
+
+  <!-- FULL ADDRESS -->
+
+  <div class="form-group">
+
+    <label>
+      Full Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter full address"
+      formControlName="address"
+    />
+
+  </div>
+
+  <!-- POSTAL CODE -->
+
+  <div class="form-group">
+
+    <label>
+      Postal Code
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter postal code"
+      formControlName="postalCode"
+    />
+
+  </div>
+
+  <!-- CAPACITY -->
+
+  <div class="form-group">
+
+    <label>
+      Capacity (optional)
+    </label>
+
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter guest capacity"
+      formControlName="capacity"
+    />
+
+  </div>
+
+  <!-- BUSINESS SUMMARY -->
+
+  <div class="form-group">
+
+    <label>
+      Business Summary (short description) (optional)
+    </label>
+
+    <div class="textarea-wrapper">
+
+      <textarea
+        class="form-control textarea"
+        maxlength="300"
+        placeholder="Tell us about your space, venue type, amenities, capacity, and what makes your location unique."
+        formControlName="businessSummary"
+      ></textarea>
+
+      <span class="char-count">
+
+        {{ signUpForm.get('businessSummary')?.value?.length || 0 }}/300
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+  </div>
+
+</div>
+
+
+
+
+
+<!-- Organization Venue -->
+
+<div
+  *ngIf="currentFormKey === 'Organization-Space / Venue'"
+>
+
+     <div class="form-grid pt-4">
+
+    <!-- ACCOUNT -->
+
+ <div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-building-columns"></i>
+    Organization Information
+  </h3>
+
+  <!-- ORGANIZATION NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Organization Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter organization name"
+      formControlName="organizationName"
+    />
+
+  </div>
+
+  <!-- ORGANIZATION EMAIL -->
+
+  <div class="form-group">
+
+    <label>
+      Organization Email Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter organization email"
+      formControlName="organizationEmail"
+    />
+
+  </div>
+
+  <!-- ORGANIZATION PHONE -->
+
+  <div class="form-group">
+
+    <label>
+      Organization Phone Number
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <div
+        class="custom-country-select"
+        (click)="toggleDropdown('organization')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="organizationCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+        <div
+          class="country-menu"
+          *ngIf="activeDropdown === 'organization'"
+        >
+
+          <div
+            class="country-option"
+            *ngFor="let country of countries"
+            (click)="selectOrganizationCountry(country); $event.stopPropagation()"
+          >
+
+            <img
+              [src]="country.flag"
+              alt=""
+              class="country-flag"
+            />
+
+            <span>
+              {{ country.code }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="country-code">
+
+        {{ organizationCountry.code }}
+
+      </div>
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="organizationPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <!-- WEBSITE -->
+
+  <div class="form-group">
+
+    <label>
+      Organization Website (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter organization website"
+      formControlName="organizationWebsite"
+    />
+
+  </div>
+
+  <!-- TAX ID -->
+
+  <div class="form-group">
+
+    <label>
+      Registration / Tax ID (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter registration number or tax ID"
+      formControlName="organizationTaxId"
+    />
+
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- ORGANIZATION / SPACE DETAILS -->
+
+  <h3>
+    <i class="fa-solid fa-building-user"></i>
+    Organization / Space Details
+  </h3>
+
+  <!-- NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Organization / Space Name (optional)
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter organization or space name"
+      formControlName="organizationSpaceName"
+    />
+
+  </div>
+
+  <!-- TYPE -->
+
+  <div class="form-group">
+
+    <label>
+      Organization Type
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="select-wrapper">
+
+      <select
+        class="form-select"
+        formControlName="organizationType"
+      >
+
+        <option value="">
+          Select organization type
+        </option>
+
+        <option>Community Organization</option>
+        <option>Non-Profit Organization</option>
+        <option>Educational Institution</option>
+        <option>Government Organization</option>
+        <option>Religious Organization</option>
+        <option>Cultural Center</option>
+        <option>Arts Organization</option>
+        <option>Sports Organization</option>
+        <option>Event Association</option>
+        <option>Other Organization</option>
+
+      </select>
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- PROFILE -->
+<div class="form-section">
+
+  <h3>
+    <i class="fa-regular fa-user"></i>
+    Primary Contact
+  </h3>
+
+  <!-- CONTACT FIRST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact First Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter first name"
+      formControlName="contactFirstName"
+    />
+
+  </div>
+
+  <!-- CONTACT LAST NAME -->
+
+  <div class="form-group">
+
+    <label>
+      Contact Last Name
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter last name"
+      formControlName="contactLastName"
+    />
+
+  </div>
+
+  <!-- CONTACT EMAIL -->
+
+  <div class="form-group">
+
+    <label>
+      Primary Contact Email
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="email"
+      class="form-control"
+      placeholder="Enter contact email"
+      formControlName="contactEmail"
+    />
+
+  </div>
+
+  <!-- PHONE -->
+
+  <div class="form-group">
+
+    <label>
+      Phone Number
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <div class="phone-wrapper">
+
+      <!-- FLAG -->
+
+      <div
+        class="custom-country-select"
+        (click)="toggleDropdown('contact')"
+      >
+
+        <div class="selected-country">
+
+          <img
+            [src]="contactCountry.flag"
+            alt=""
+            class="country-flag"
+          />
+
+          <i class="fa-solid fa-chevron-down"></i>
+
+        </div>
+
+        <div
+          class="country-menu"
+          *ngIf="activeDropdown === 'contact'"
+        >
+
+          <div
+            class="country-option"
+            *ngFor="let country of countries"
+            (click)="selectContactCountry(country); $event.stopPropagation()"
+          >
+
+            <img
+              [src]="country.flag"
+              alt=""
+              class="country-flag"
+            />
+
+            <span>
+              {{ country.code }}
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- COUNTRY CODE -->
+
+      <div class="country-code">
+
+        {{ contactCountry.code }}
+
+      </div>
+
+      <!-- PHONE -->
+
+      <input
+        type="text"
+        class="phone-input"
+        placeholder="Enter phone number"
+        formControlName="contactPhone"
+      />
+
+    </div>
+
+  </div>
+
+  <!-- SPACER LIKE DESIGN -->
+
+  <div class="section-divider"></div>
+
+  <!-- ACCEPT DIRECT BOOKING -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="acceptDirectBooking"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Accept direct booking requests
+      </h4>
+
+      <p>
+        Allow clients and organizers to send venue booking inquiries.
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- RECEIVE PLATFORM UPDATES -->
+
+  <div class="updates-toggle">
+
+    <label class="switch">
+
+      <input
+        type="checkbox"
+        formControlName="receiveUpdates"
+      >
+
+      <span class="slider"></span>
+
+    </label>
+
+    <div class="updates-text">
+
+      <h4>
+        Receive platform updates
+      </h4>
+
+      <p>
+        Get updates about opportunities, features, and tools.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+   <!-- LOCATION -->
+
+<div class="form-section">
+
+  <h3>
+    <i class="fa-solid fa-location-dot"></i>
+    Location & Address
+  </h3>
+
+  <!-- COUNTRY -->
+
+   <div class="form-group">
+
+    <label>
+      Country
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter country"
+      formControlName="country"
+    /> -->
+<select
+  class="form-control"
+  formControlName="country"
+>
+ <option
+  *ngFor="let country of allCountries"
+  [value]="country.code"
+>
+  {{ country.name }}
+</option>
+
+
+</select>
+  </div>
+
+  <!-- CITY -->
+
+  <div class="form-group">
+
+    <label>
+      City
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter city"
+      formControlName="city"
+    />
+
+  </div>
+
+  <!-- STATE -->
+
+  <div class="form-group">
+
+    <label>
+      State / Region (optional)
+    </label>
+
+    <!-- <input
+      type="text"
+      class="form-control"
+      placeholder="Enter state / region"
+      formControlName="region"
+    /> -->
+
+
+<select
+  class="form-control"
+  formControlName="region"
+>
+
+  <option value="">
+    Select State
+  </option>
+
+  <option
+    *ngFor="let state of states"
+    [value]="state"
+  >
+    {{ state }}
+  </option>
+
+</select>
+
+  </div>
+
+  <!-- ADDRESS -->
+
+  <div class="form-group">
+
+    <label>
+      Full Address
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter full address"
+      formControlName="address"
+    />
+
+  </div>
+
+  <!-- POSTAL CODE -->
+
+  <div class="form-group">
+
+    <label>
+      Postal Code
+        <span class="text-danger">*</span>
+
+    </label>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter postal code"
+      formControlName="postalCode"
+    />
+
+  </div>
+
+  <!-- CAPACITY -->
+
+  <div class="form-group">
+
+    <label>
+      Capacity (optional)
+    </label>
+
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter guest capacity"
+      formControlName="capacity"
+    />
+
+  </div>
+
+  <!-- ORGANIZATION SUMMARY -->
+
+  <div class="form-group">
+
+    <label>
+      Organization Summary (short description) (optional)
+    </label>
+
+    <div class="textarea-wrapper">
+
+      <textarea
+        class="form-control textarea"
+        maxlength="300"
+        placeholder="Tell us about your organization, venue type, mission, amenities, capacity, and what makes your location unique."
+        formControlName="organizationSummary"
+      ></textarea>
+
+      <span class="char-count">
+
+        {{
+          signUpForm.get('organizationSummary')?.value?.length || 0
+        }}/300
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+  </div>
+
+
+</div>
+
+
+  <!-- SECURITY -->
+
+  <div class="security-section">
+
+    <h3>
+      <i class="fa-solid fa-shield"></i>
+      Security
+    </h3>
+
+    <div class="security-grid">
+
+      <div class="form-group">
+
+        <label>Password
+                        <span class="text-danger">*</span>
+
+        </label>
+
+        <div class="input-wrapper">
+
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control"
+            placeholder="Enter password"
+            formControlName="password"
+          />
+
+          <i
+            class="fa-solid toggle-password"
+            [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"
+            (click)="togglePassword()"
+          ></i>
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Confirm Password
+                        <span class="text-danger">*</span>
+
+        </label>
+
+        <div class="input-wrapper">
+
+          <input
+            [type]="showConfirmPassword ? 'text' : 'password'"
+            class="form-control"
+            placeholder="Confirm password"
+            formControlName="confirmPassword"
+          />
+
+          <i
+            class="fa-solid toggle-password"
+            [ngClass]="showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"
+            (click)="toggleConfirmPassword()"
+          ></i>
+
+        </div>
+
+      </div>
+ <!-- REFERRAL -->
+
+  <div class="form-group referral-group">
+
+    <label>
+      Referral / Invite Code (optional)
+    </label>
+
+    <div class="referral-wrapper">
+
+      <div class="referral-icon">
+
+        <i class="fa-solid fa-gift"></i>
+
+      </div>
+
+      <input
+        type="text"
+        class="referral-input"
+        placeholder="Enter code (optional)"
+        formControlName="referralCode"
+      />
+
+    </div>
+
+  </div>
+    </div>
+<div
+  class="text-danger small mt-1"
+  *ngIf="
+    signUpForm.get('confirmPassword')?.touched &&
+    !passwordsMatch()
+  "
+>
+  Passwords do not match
+</div>
+  </div>
+
+  <!-- CHECKBOXES -->
+
+  <div class="check-row">
+
+    <input
+      type="checkbox"
+      class="form-check-input"
+      formControlName="acceptTerms"
+    >
+
+    <label>
+      I agree to the
+      <span>Terms of Service</span>
+      and
+      <span>Privacy Policy </span>
+                    <span class="text-danger">*</span>
+
+    </label>
+
+  </div>
+
+  <div class="check-row">
+
+    <input
+      type="checkbox"
+      class="form-check-input"
+      formControlName="receiveNews"
+    >
+
+    <label>
+      Send me product updates and platform news
+    </label>
+
+  </div>
+
+  <!-- BUTTON -->
+<div
+  *ngIf="showValidationMessage"
+  class="alert alert-danger mt-3"
+>
+  {{ registerErrorMessage }}
+</div>
+
+<button
+    type="submit"
+    class="btn create-btn"
+    [disabled]="isLoading"
+  >
+    <span
+      *ngIf="isLoading"
+      class="spinner-border spinner-border-sm me-2"
+      role="status"
+    ></span>
+
+    {{ isLoading ? 'Creating...' : 'Create Account' }}
+  </button>
+
+</form>
+<div
+  *ngIf="isOtpModalOpen"
+  class="otp-overlay"
+>
+
+  <div class="otp-modal">
+
+    <div class="otp-header">
+
+      <h3>Email Verification</h3>
+
+      <p>
+        We've sent a verification code
+        to your email address.
+      </p>
+
+    </div>
+
+    <div class="otp-body">
+<input
+  type="text"
+  maxlength="6"
+  class="form-control otp-input"
+  [(ngModel)]="otp"
+  (input)="otpErrorMessage=''"
+  placeholder="Enter OTP"
+>
+<p
+  *ngIf="otpErrorMessage"
+  class="otp-error"
+>
+  {{ otpErrorMessage }}
+</p>
+      <div class="timer-text">
+
+        OTP expires in
+
+        <span>
+          {{ formattedTime }}
+        </span>
+
+      </div>
+
+      <button
+        class="btn btn-primary w-100 mt-3"
+        (click)="verifyOtp()"
+      >
+        Verify
+      </button>
+
+      <button
+        *ngIf="canResendOtp"
+        class="btn btn-outline-light w-100 mt-2"
+        (click)="resendOtp()"
+      >
+        Resend OTP
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,331 @@
+/* ================= Header ================= */
+
+.top-header {
+
+  padding: 10px 0 22px 0;
+
+  border-bottom: 1px solid #111;
+}
+
+/* ================= Breadcrumb ================= */
+
+.breadcrumb-text {
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  font-size: 12px;
+
+  margin-bottom: 10px;
+}
+
+/* Links */
+
+.breadcrumb-text a {
+
+  color: #8f8f8f;
+
+  text-decoration: none;
+
+  transition: 0.3s ease;
+}
+
+.breadcrumb-text a:hover {
+
+  color: #fff;
+}
+
+/* Slash */
+
+.breadcrumb-text span {
+
+  color: #555;
+}
+/* ================= Title ================= */
+
+.dashboard-title {
+
+  font-size: 28px;
+
+  font-weight: 700;
+
+  color: #fff;
+
+  margin: 0;
+}
+
+/* ================= Header Actions ================= */
+
+.header-actions {
+
+  display: flex;
+
+  justify-content: flex-end;
+
+  align-items: center;
+
+  gap: 14px;
+
+  height: 100%;
+}
+
+/* ================= Search ================= */
+
+.search-box {
+
+  width: 100%;
+
+  max-width: 360px;
+
+  height: 48px;
+
+  border: 1px solid #1b1b1b;
+
+  border-radius: 14px;
+
+  background: #050505;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 16px;
+}
+
+.search-box i {
+
+  color: #8f8f8f;
+
+  font-size: 14px;
+}
+
+.search-box input {
+
+  width: 100%;
+
+  background: transparent;
+
+  border: none;
+
+  outline: none;
+
+  color: #fff;
+
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+
+  color: #666;
+}
+
+/* ================= Notification ================= */
+
+.notification-box {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  position: relative;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+.notification-box i {
+
+  color: #fff;
+
+  font-size: 18px;
+}
+
+/* Badge */
+
+.notification-badge {
+
+  position: absolute;
+
+  top: 0;
+
+  right: -2px;
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: #ff002f;
+
+  color: #fff;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+/* ================= Button ================= */
+
+.booking-btn {
+
+  height: 48px;
+
+  padding: 0 22px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    180deg,
+    #ff1d35,
+    #d1001f
+  );
+
+  color: #fff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  transition: 0.3s ease;
+
+  flex-shrink: 0;
+}
+
+.booking-btn:hover {
+
+  transform: translateY(-2px);
+
+  opacity: 0.9;
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 992px) {
+
+  /* Hide breadcrumb */
+
+  .breadcrumb-text {
+
+    display: none;
+  }
+
+  .dashboard-title {
+
+    font-size: 24px;
+
+    margin-bottom: 18px;
+  }
+
+  .header-actions {
+
+    flex-wrap: wrap;
+
+    justify-content: space-between;
+
+    gap: 14px;
+  }
+
+  /* Search */
+
+  .search-box {
+
+    flex: 1;
+
+    max-width: unset;
+  }
+
+  /* Bell */
+
+  .notification-box {
+
+    width: 44px;
+
+    height: 44px;
+  }
+
+  /* Button */
+
+  .booking-btn {
+
+    width: 100%;
+
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .top-header {
+
+    padding-top: 5px;
+  }
+
+  .dashboard-title {
+
+    font-size: 20px;
+
+    line-height: 1.4;
+  }
+
+  .header-actions {
+
+    gap: 12px;
+  }
+
+  .search-box {
+
+    height: 46px;
+
+    padding: 0 14px;
+  }
+
+  .search-box input {
+
+    font-size: 13px;
+  }
+
+  .booking-btn {
+
+    height: 46px;
+
+    font-size: 13px;
+  }
+
+  .notification-box i {
+
+    font-size: 17px;
+  }
+}

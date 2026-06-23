@@ -1,0 +1,273 @@
+body{
+  overflow-x:hidden;
+}
+
+.logo-img{
+  height:42px;
+}
+
+.navbar{
+  min-height:72px;
+  overflow:hidden;
+}
+
+/* Menu */
+
+.nav-item-custom{
+
+  display:flex !important;
+  align-items:center;
+  gap:.45rem;
+
+  color:#9ca3af !important;
+
+  padding:1.2rem .75rem !important;
+
+  border-bottom:2px solid transparent;
+
+  transition:.25s;
+}
+
+.nav-item-custom:hover{
+
+  color:#fff !important;
+
+  border-bottom:2px solid #ff1e1e;
+}
+
+.active-nav{
+
+  color:#fff !important;
+
+  border-bottom:2px solid #ff1e1e;
+}
+
+/* Search */
+
+.search-box{
+  min-width:120px;
+  max-width:180px;
+  width:100%;
+}
+
+/* Notification */
+
+.notification-badge{
+
+  position:absolute;
+
+  top:-8px;
+  right:-10px;
+
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  background:#ff1e1e;
+
+  color:#fff;
+
+  font-size:10px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Profile */
+
+.profile-card{
+
+  /* background:#171b22;
+
+  border:1px solid #3b3b3b; */
+
+  border-radius:10px;
+
+  padding:8px 12px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  flex-shrink:1;
+}
+
+.profile-name{
+
+  color:#fff;
+
+  font-size:.9rem;
+
+  font-weight:600;
+
+  line-height:1.1;
+}
+
+.profile-role{
+
+  color:#8d96a0;
+
+  font-size:.8rem;
+}
+
+.form-control:focus{
+  box-shadow:none !important;
+}
+
+/* Offcanvas */
+
+.offcanvas{
+
+  width:280px;
+
+   background:#181818  !important;
+
+}
+.bg-dark-search{
+  background:#181818 !important;
+}
+.bg-dark-search::placeholder{
+  color: #8d96a0;
+  opacity: 1;
+}
+.mobile-link{
+
+  display:flex;
+  align-items:center;
+
+  color:#c8c8c8 !important;
+
+  padding:14px 0;
+
+  border-bottom:1px solid rgba(255,255,255,.06);
+
+  transition:.25s;
+}
+
+.mobile-link:hover{
+
+  color:#fff !important;
+
+  padding-left:10px;
+}
+
+/* Large Laptop */
+
+@media(max-width:1400px){
+
+  .nav-item-custom{
+
+    padding:1.2rem .55rem !important;
+  }
+
+  .search-box{
+
+    max-width:150px;
+  }
+
+}
+
+/* Small Laptop */
+
+@media(max-width:1200px){
+
+  .profile-role{
+    display:none;
+  }
+
+  .search-box{
+    display:none;
+  }
+
+}
+
+/* Tablet */
+
+@media(max-width:991.98px){
+
+  .logo-img{
+    height:34px;
+  }
+
+  .navbar{
+    min-height:64px;
+  }
+
+}
+
+/* Prevent overflow */
+
+.navbar-collapse,
+.navbar-nav{
+  min-width:0;
+}
+.profile-card-mobile{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  /* background:#1d232c;
+
+  border:1px solid #2f3742; */
+
+  border-radius:12px;
+
+  padding:12px;
+
+  margin-bottom:10px;
+}
+
+.profile-card-mobile .profile-name{
+
+  color:#fff;
+
+  font-size:.9rem;
+
+  font-weight:600;
+}
+
+.profile-card-mobile .profile-role{
+
+  color:#8d96a0;
+
+  font-size:.8rem;
+}
+.bg-section{
+  background-color: black;
+}
+
+.logo-img{
+  width: 200px;
+}
+.navbar-brand{
+  gap: 10px;
+}
+
+.dashboard-menu-btn{
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+}
+
+.logo-img{
+  height: 42px;
+  width: auto;
+}
+.nav-link.active-nav {
+  color: #fff !important;
+  border-bottom: 2px solid #ff1e1e;
+}
+
+.mobile-link.active-nav {
+  color: #fff !important;
+}

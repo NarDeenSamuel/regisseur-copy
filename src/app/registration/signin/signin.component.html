@@ -1,0 +1,243 @@
+<form
+  [formGroup]="signInForm"
+  (ngSubmit)="submitForm()"
+>
+
+  <!-- TITLE -->
+  <h2 class="title">
+    Sign in
+  </h2>
+
+  <!-- EMAIL -->
+
+  <div class="form-group">
+
+    <label>Email address</label>
+
+    <div class="input-wrapper">
+
+      <i class="fa-regular fa-envelope"></i>
+
+      <input
+        type="email"
+        class="form-control"
+        placeholder="Enter your email"
+        formControlName="email"
+      />
+
+    </div>
+
+  </div>
+
+  <!-- PASSWORD -->
+
+  <div class="form-group">
+
+    <label>Password</label>
+
+    <div class="input-wrapper">
+
+      <i class="fa-solid fa-lock"></i>
+
+      <input
+        [type]="showPassword ? 'text' : 'password'"
+        class="form-control"
+        placeholder="Enter your password"
+        formControlName="password"
+      />
+
+      <i
+  class="toggle-password"
+  [ngClass]="showPassword ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'"
+  (click)="togglePassword()"
+></i>
+
+    </div>
+
+  </div>
+<p
+  *ngIf="loginErrorMessage"
+  class="login-error"
+>
+  {{ loginErrorMessage }}
+</p>
+  <!-- REMEMBER -->
+
+  <div class="remember-row">
+
+    <div class="form-check">
+
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="remember"
+        formControlName="rememberMe"
+      >
+
+      <label
+        class="form-check-label"
+        for="remember"
+      >
+        Remember me
+      </label>
+
+    </div>
+
+    <a href="#">
+      Forgot password?
+    </a>
+
+  </div>
+
+  <!-- BUTTON -->
+
+  <button
+    type="submit"
+    class="btn login-btn"
+  >
+    Login
+  </button>
+
+  <!-- DIVIDER -->
+<div class="bottom-text">
+
+  <span class="line"></span>
+
+  <p>
+    Don’t have an account?
+
+    <span
+      class="signup-link"
+      routerLink="/registration/signup"
+    >
+      Sign up
+    </span>
+  </p>
+
+  <span class="line"></span>
+
+</div>
+  <div class="divider">
+    <span>or continue with</span>
+  </div>
+
+  <!-- GOOGLE -->
+
+  <button
+    type="button"
+    class="google-btn"
+  >
+
+    <img
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+      alt=""
+    />
+
+    Sign in with Google
+
+  </button>
+
+
+
+  <!-- TEXT -->
+
+  <div class="security-text">
+
+    <i class="fa-solid fa-lock"></i>
+
+    Protected by role-based access and
+    optional two-factor authentication.
+
+  </div>
+
+</form>
+<div
+  *ngIf="isOtpModalOpen"
+  class="otp-overlay"
+>
+
+  <div class="otp-modal">
+
+    <div class="otp-header">
+
+      <h3>Email Verification</h3>
+
+      <p>
+        We've sent a verification code
+        to your email address.
+      </p>
+
+    </div>
+
+   <div class="otp-body">
+
+  <input
+    type="text"
+    maxlength="6"
+    class="form-control otp-input"
+    [(ngModel)]="otp"
+    [ngModelOptions]="{standalone:true}"
+    (input)="otpMessage=''"
+    placeholder="Enter OTP"
+  >
+<p
+  *ngIf="otpMessage"
+  class="otp-error"
+>
+  {{ otpMessage }}
+</p>
+
+<p
+  *ngIf="otpSuccessMessage"
+  style="
+    color:#22c55e;
+    text-align:center;
+    font-weight:600;
+    margin-top:10px;
+  "
+>
+  {{ otpSuccessMessage }}
+</p>
+
+<button
+  class="btn btn-danger w-100 mt-3"
+  (click)="verifyOtp()"
+  [disabled]="isVerifyingOtp"
+>
+
+  <span
+    *ngIf="isVerifyingOtp"
+    class="spinner-border spinner-border-sm me-2"
+  ></span>
+
+  {{
+    isVerifyingOtp
+      ? 'Verifying...'
+      : 'Verify'
+  }}
+
+</button>
+
+ <button
+  class="btn btn-outline-light w-100 mt-2"
+  (click)="resendOtp()"
+  [disabled]="isResendingOtp"
+>
+
+  <span
+    *ngIf="isResendingOtp"
+    class="spinner-border spinner-border-sm me-2"
+  ></span>
+
+  {{
+    isResendingOtp
+      ? 'Sending...'
+      : 'Resend OTP'
+  }}
+
+</button>
+</div>
+
+  </div>
+
+</div>

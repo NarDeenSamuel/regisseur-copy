@@ -1,0 +1,192 @@
+
+
+/* cards  */
+
+.col-xl-custom {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+/* CARD */
+
+.stats-card {
+  padding: 14px 16px;
+  height: 108px;
+
+  background: #0E0E0E;
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  position: relative;
+
+  transition: 0.3s;
+}
+
+.stats-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  /* background:
+    radial-gradient(
+      circle at top left,
+      rgba(255, 0, 51, 0.08),
+      transparent 45%
+    ); */
+
+  pointer-events: none;
+}
+
+.stats-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255, 0, 51, 0.15);
+}
+
+/* WRAPPER */
+
+.stats-wrapper {
+  display: flex;
+  gap: 14px;
+  height: 100%;
+}
+
+/* LEFT */
+
+.stats-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 58px;
+}
+
+/* ICON */
+
+.stats-icon {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.01)
+    );
+
+  border: 1px solid rgba(255,255,255,0.04);
+
+  box-shadow:
+    inset 0 0 10px rgba(255,255,255,0.03),
+    0 0 10px rgba(255,255,255,0.03);
+}
+
+.stats-icon i {
+  color:#FF0033;
+  font-size: 22px;
+}
+
+/* GROWTH */
+
+.growth {
+  font-size: 11px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.growth.positive {
+  color: #39d353;
+}
+
+.growth.neutral {
+  color: #9a9a9a;
+}
+
+/* RIGHT */
+
+.stats-right {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding-top: 2px;
+}
+
+/* TITLE */
+
+.stats-right h6 {
+  color: #b1b1b1;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+
+  margin-bottom: 6px;
+
+  font-weight: 500;
+}
+
+/* NUMBER */
+
+.stats-right h2 {
+  color: #fff;
+
+  font-size: 24px;
+
+  line-height: 1;
+
+  margin: 0;
+
+  font-weight: 700;
+}
+
+/* TEXT */
+
+.stats-right span {
+  color: #7d7d7d;
+
+  font-size: 11px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1400px) {
+
+  .col-xl-custom {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+  }
+}
+
+@media (max-width: 992px) {
+
+  .col-xl-custom {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .col-xl-custom {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

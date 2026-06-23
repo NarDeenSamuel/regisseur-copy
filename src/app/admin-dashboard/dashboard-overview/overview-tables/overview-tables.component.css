@@ -1,0 +1,1081 @@
+
+
+
+
+/* ================================================= */
+/* ================= WRAPPER ======================= */
+/* ================================================= */
+
+.booking-wrapper{
+
+  width: 100%;
+
+  /* margin-top: 28px; */
+}
+
+/* ================================================= */
+/* ================= TABLE CARD ==================== */
+/* ================================================= */
+
+.booking-table-card{
+
+  width: 100%;
+
+  background: #070707;
+
+  border: 1px solid #181818;
+
+  border-radius: 22px;
+
+  padding: 22px;
+
+  overflow: hidden;
+}
+
+/* ================================================= */
+/* ================= HEADER ======================== */
+/* ================================================= */
+
+.table-header{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-bottom: 22px;
+}
+
+.table-header h2{
+
+  color: #fff;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  margin-bottom: 4px;
+}
+
+.table-header p{
+
+  color: #7f7f7f;
+
+  font-size: 13px;
+
+  margin: 0;
+}
+
+/* BUTTON */
+
+.view-btn{
+
+  border: 1px solid #242424;
+
+  background: #111;
+
+  color: #fff;
+
+  border-radius: 14px;
+
+  padding: 12px 18px;
+
+  font-size: 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  transition: .3s;
+
+  white-space: nowrap;
+}
+
+.view-btn:hover{
+
+  background: #191919;
+}
+
+/* ================================================= */
+/* ================= TABLE ========================= */
+/* ================================================= */
+
+.custom-table-wrapper{
+
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+.booking-table{
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  min-width: 950px;
+}
+
+/* HEAD */
+
+.booking-table thead{
+
+  background: #0b0b0b;
+}
+
+.booking-table th{
+
+  color: #9b9b9b;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  padding: 18px 14px;
+
+  text-align: left;
+
+  border-bottom: 1px solid #1b1b1b;
+}
+
+/* BODY */
+
+.booking-table td{
+
+  padding: 18px 14px;
+
+  border-bottom: 1px solid #131313;
+
+  color: #fff;
+
+  font-size: 14px;
+
+  white-space: nowrap;
+}
+
+.booking-table tr:last-child td{
+
+  border-bottom: none;
+}
+
+/* VALUE */
+
+.value{
+
+  font-weight: 600;
+}
+
+/* ================================================= */
+/* ================= STATUS ======================== */
+/* ================================================= */
+
+.status-badge{
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 9px 14px;
+
+  border-radius: 50px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+}
+
+.dot{
+
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+}
+
+/* PENDING */
+
+.pending{
+
+  background: rgba(255, 183, 0, 0.14);
+
+  color: #f6b300;
+}
+
+.pending .dot{
+
+  background: #f6b300;
+}
+
+/* PAID */
+
+.paid{
+
+  background: rgba(0, 255, 98, 0.12);
+
+  color: #39ff78;
+}
+
+.paid .dot{
+
+  background: #39ff78;
+}
+
+/* REVIEW */
+
+.review{
+
+  background: rgba(0, 174, 255, 0.12);
+
+  color: #00b7ff;
+}
+
+.review .dot{
+
+  background: #00b7ff;
+}
+
+/* CONFIRMED */
+
+.confirmed{
+
+  background: rgba(39, 255, 104, 0.12);
+
+  color: #42ff75;
+}
+
+.confirmed .dot{
+
+  background: #42ff75;
+}
+
+/* TECHNICAL */
+
+.technical{
+
+  background: rgba(255, 187, 0, 0.15);
+
+  color: #ffb700;
+}
+
+.technical .dot{
+
+  background: #ffb700;
+}
+
+/* ================================================= */
+/* ================= ACTION MENU =================== */
+/* ================================================= */
+
+.menu-cell{
+
+  position: relative;
+
+  width: 40px;
+}
+
+.dots-btn{
+
+  width: 34px;
+
+  height: 34px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #8f8f8f;
+
+  border-radius: 10px;
+
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+.dots-btn:hover{
+
+  background: #111;
+
+  color: #fff;
+}
+
+.action-menu{
+
+  position: absolute;
+
+  top: 42px;
+
+  right: 0;
+
+  width: 140px;
+
+  background: #0d0d0d;
+
+  border: 1px solid #202020;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  z-index: 9999;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.45);
+}
+
+.action-menu button{
+
+  width: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  padding: 13px 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 13px;
+
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+.action-menu button:hover{
+
+  background: #161616;
+}
+
+.delete-btn{
+
+  color: #ff4d67 !important;
+}
+
+/* ================================================= */
+/* ================= FOOTER ======================== */
+/* ================================================= */
+
+.table-footer{
+
+  margin-top: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+}
+
+.table-footer p{
+
+  color: #7f7f7f;
+
+  font-size: 13px;
+
+  margin: 0;
+}
+
+/* PAGINATION */
+
+.pagination-box{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.pagination-box button{
+
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 12px;
+
+  border: 1px solid #202020;
+
+  background: #0d0d0d;
+
+  color: #9f9f9f;
+
+  transition: .3s;
+
+  font-size: 13px;
+}
+
+.pagination-box button:hover{
+
+  border-color: #A40101;
+
+  color: #fff;
+}
+
+.pagination-box button.active{
+
+  background: #140305;
+
+  border-color: #A40101;
+
+  color: #fff;
+}
+
+/* ================================================= */
+/* ================= SCROLLBAR ===================== */
+/* ================================================= */
+
+.custom-table-wrapper::-webkit-scrollbar{
+
+  height: 6px;
+}
+
+.custom-table-wrapper::-webkit-scrollbar-thumb{
+
+  background: #222;
+
+  border-radius: 20px;
+}
+
+/* ================================================= */
+/* ================= TABLET ======================== */
+/* ================================================= */
+
+@media (max-width: 992px){
+
+  .booking-table{
+
+    min-width: 850px;
+  }
+
+  .table-header{
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .view-btn{
+
+    width: 100%;
+
+    justify-content: center;
+  }
+}
+
+/* ================================================= */
+/* ================= MOBILE ======================== */
+/* ================================================= */
+
+@media (max-width: 576px){
+
+  .booking-table-card{
+
+    padding: 16px;
+  }
+
+  .table-header h2{
+
+    font-size: 18px;
+  }
+
+  .table-header p{
+
+    font-size: 12px;
+  }
+
+  .booking-table th{
+
+    font-size: 12px;
+
+    padding: 14px 12px;
+  }
+
+  .booking-table td{
+
+    font-size: 13px;
+
+    padding: 14px 12px;
+  }
+
+  .status-badge{
+
+    font-size: 11px;
+
+    padding: 8px 12px;
+  }
+
+  .pagination-box{
+
+    width: 100%;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+  }
+
+  .table-footer{
+
+    justify-content: center;
+
+    text-align: center;
+  }
+}
+.pagination-box{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+/* BUTTON */
+
+.pagination-box button{
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 14px;
+
+  border: 1px solid #1f1f1f;
+
+  background: #0b0b0b;
+
+  color: #bdbdbd;
+
+  font-size: 14px;
+
+  transition: .3s ease;
+
+  cursor: pointer;
+}
+
+/* HOVER */
+
+.pagination-box button:hover{
+
+  border-color: #303030;
+
+  color: #fff;
+}
+
+/* ACTIVE */
+
+.pagination-box button.active{
+
+  border-color: #b10012;
+
+  background: rgba(161,1,1,.12);
+
+  color: #fff;
+}
+
+/* DISABLED */
+
+.pagination-box button:disabled{
+
+  opacity: .4;
+
+  cursor: not-allowed;
+}
+
+/* DOTS */
+
+.pagination-box .dots{
+
+  color: #7c7c7c;
+
+  font-size: 18px;
+
+  padding: 0 2px;
+}
+
+/* MOBILE */
+
+@media(max-width:576px){
+
+  .pagination-box{
+
+    gap: 8px;
+  }
+
+  .pagination-box button{
+
+    width: 38px;
+
+    height: 38px;
+
+    font-size: 13px;
+  }
+}
+
+
+
+/* ============================================== */
+/* =============== RIGHT SIDE =================== */
+/* ============================================== */
+
+.right-side-wrapper{
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* ============================================== */
+/* =============== COMMON CARD ================== */
+/* ============================================== */
+
+.talent-card,
+.priority-card{
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.01)
+    ),
+    #070707;
+
+  border: 1px solid #1a1a1a;
+
+  border-radius: 24px;
+
+  padding: 20px;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+/* ============================================== */
+/* =============== TALENT CARD ================== */
+/* ============================================== */
+
+.talent-title{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+}
+
+/* ICON */
+
+.talent-title i{
+
+  color: #c60000;
+
+  font-size: 18px;
+}
+
+/* TITLE */
+
+.talent-title h3{
+
+  color: #fff;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+/* LIST */
+
+.talent-list{
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap:5px;
+}
+
+/* ITEM */
+
+.talent-item{
+
+  height: 50px;
+
+  border: 1px solid #232323;
+
+  border-radius: 16px;
+
+  padding: 0px 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.01)
+    );
+
+  transition: .25s ease;
+}
+
+/* HOVER */
+
+.talent-item:hover{
+
+  border-color: #2e2e2e;
+
+  transform: translateY(-1px);
+}
+
+/* LEFT */
+
+.talent-left{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+/* ICON */
+
+.talent-left i{
+
+  color: #bdbdbd;
+
+  font-size: 17px;
+}
+
+/* TEXT */
+
+.talent-left span{
+
+  color: #ededed;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+/* NUMBER */
+
+.talent-number{
+
+  color: #fff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+/* ============================================== */
+/* ============== PRIORITY CARD ================= */
+/* ============================================== */
+
+.priority-card{
+
+  border: 1px solid #a1080c;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(95,0,0,0.22),
+      rgba(0,0,0,0.96)
+    );
+
+  border-radius: 28px;
+
+  padding: 22px 20px 18px;
+}
+
+/* ============================================== */
+/* ================= HEADER ===================== */
+/* ============================================== */
+
+.priority-header{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+}
+
+/* ICON */
+
+.priority-header i{
+
+  color: #ff1b1b;
+
+  font-size: 18px;
+}
+
+/* TITLE */
+
+.priority-header h3{
+
+  color: #ff2d2d;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+/* ============================================== */
+/* ================= STATS ====================== */
+/* ============================================== */
+
+.priority-stats{
+
+  display: flex;
+
+  align-items: stretch;
+
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+/* ITEM */
+
+.priority-item{
+
+  flex: 1;
+
+  text-align: center;
+
+  padding: 0 10px;
+
+  border-right: 1px solid rgba(255,255,255,0.08);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+/* LAST ITEM */
+
+.priority-item:last-child{
+
+  border-right: none;
+}
+
+/* ICON */
+
+.priority-item i{
+
+  color: #ff0000;
+
+  font-size: 22px;
+
+  margin-bottom: 16px;
+}
+
+/* NUMBER */
+
+.priority-item h4{
+
+  color: #fff;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  margin-bottom: 10px;
+
+  line-height: 1;
+}
+
+/* TEXT */
+
+.priority-item p{
+
+  color: #c7c7c7;
+
+  font-size: 11px;
+
+  line-height: 1.7;
+
+  margin: 0;
+
+  max-width: 90px;
+}
+
+/* ============================================== */
+/* ================= TABLET ===================== */
+/* ============================================== */
+
+@media (max-width: 992px){
+
+  .priority-card{
+
+    padding: 20px 16px;
+  }
+
+  .priority-item{
+
+    padding: 0 8px;
+  }
+
+  .priority-item i{
+
+    font-size: 20px;
+  }
+
+  .priority-item h4{
+
+    font-size: 17px;
+  }
+
+  .priority-item p{
+
+    font-size: 10px;
+  }
+}
+
+/* ============================================== */
+/* ================= MOBILE ===================== */
+/* ============================================== */
+
+@media (max-width: 768px){
+
+  .talent-card,
+  .priority-card{
+
+    padding: 16px;
+  }
+
+  .talent-title h3,
+  .priority-header h3{
+
+    font-size: 15px;
+  }
+
+  .talent-item{
+
+    height: 56px;
+
+    padding: 0 14px;
+  }
+
+  .talent-left span{
+
+    font-size: 13px;
+  }
+
+  .talent-number{
+
+    font-size: 13px;
+  }
+
+  .priority-header{
+
+    margin-bottom: 20px;
+  }
+
+  .priority-stats{
+
+    display: grid;
+
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 22px;
+  }
+
+  .priority-item{
+
+    border-right: none;
+
+    padding: 0;
+  }
+
+  .priority-item i{
+
+    font-size: 20px;
+
+    margin-bottom: 12px;
+  }
+
+  .priority-item h4{
+
+    font-size: 17px;
+  }
+
+  .priority-item p{
+
+    font-size: 10px;
+
+    line-height: 1.6;
+
+    max-width: 100px;
+  }
+}
+
+/* ============================================== */
+/* ============== SMALL MOBILE ================== */
+/* ============================================== */
+
+@media (max-width: 480px){
+
+  .priority-stats{
+
+    grid-template-columns: repeat(1,1fr);
+
+    gap: 28px;
+  }
+
+  .priority-item{
+
+    padding-bottom: 18px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .priority-item:last-child{
+
+    border-bottom: none;
+
+    padding-bottom: 0;
+  }
+}
+
+

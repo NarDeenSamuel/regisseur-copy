@@ -1,0 +1,306 @@
+/* ========== Layout ========== */
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+  overflow: hidden;
+}
+
+/* ========== Sidebar ========== */
+
+.sidebar {
+
+  width: 250px;
+
+  background: #050505;
+
+  border-right: 1px solid #161616;
+
+  padding: 18px 14px;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  height: 100vh;
+
+  z-index: 9999999999999 !important;
+
+  overflow-y: auto;
+
+  transition: all 0.3s ease;
+}
+
+/* Logo */
+
+.logo {
+
+  width: 150px;
+
+  margin-bottom: 5px;
+
+  object-fit: contain;
+}
+.admin-title{
+  color: #666;
+  font-size: 14px;
+  font-weight: 600;
+  padding-left: 15px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.logo-container hr {
+  border: none;
+  border-top: 1px solid #666;
+  margin: 10px 0;
+}
+/* ========== Menu ========== */
+
+.menu {
+
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+}
+
+.menu li {
+
+  margin-bottom: 6px;
+}
+
+/* Tabs */
+
+.menu a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding: 12px 14px;
+
+  text-decoration: none;
+
+  color: #bdbdbd;
+
+  font-size: 15px;
+
+  font-weight: 500;
+
+  transition: 0.3s ease;
+
+  background: transparent;
+
+  border-left: 3px solid transparent;
+}
+
+/* Icons */
+
+.menu a i {
+
+  width: 18px;
+
+  font-size: 16px;
+
+  color: #8d8d8d;
+
+  transition: 0.3s ease;
+}
+
+/* Hover */
+
+.menu a:hover {
+
+  background: linear-gradient(
+    90deg,
+    #2A0008 0%,
+    #1D050A 45%,
+    rgba(29, 5, 10, 0) 100%
+  );
+
+  color: #fff;
+
+  border-left: 3px solid #ff0033;
+}
+
+.menu a:hover i {
+
+  color: #fff;
+}
+
+/* Active */
+
+.menu a.active {
+
+  background: linear-gradient(
+    90deg,
+    #2A0008 0%,
+    #1D050A 45%,
+    rgba(29, 5, 10, 0) 100%
+  );
+
+  color: #fff;
+
+  border-left: 3px solid #ff0033;
+}
+
+.menu a.active i {
+
+  color: #fff;
+}
+
+/* ========== Content ========== */
+
+.content {
+
+  flex: 1;
+
+  margin-left: 250px;
+
+  min-height: 100vh;
+
+  background: #000;
+
+  color: #fff;
+
+  padding: 24px;
+
+  overflow-y: auto;
+}
+
+/* ========== Scrollbar ========== */
+
+.sidebar::-webkit-scrollbar {
+
+  width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+
+  background: #222;
+
+  border-radius: 10px;
+}
+
+/* ========== Mobile Menu Button ========== */
+
+.menu-toggle {
+
+  display: none;
+
+  position: fixed;
+
+  top: 14px;
+
+  left: 14px;
+
+  z-index: 1200;
+
+  width: 42px;
+
+  height: 42px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+.menu-toggle.hide {
+
+  display: none !important;
+}
+
+/* Close Button */
+
+.close-btn {
+
+  display: none;
+
+  align-self: flex-end;
+
+  background: transparent;
+
+  border: none;
+
+  color: #fff;
+
+  font-size: 22px;
+
+  margin-bottom: 15px;
+
+  cursor: pointer;
+}
+
+/* Overlay */
+
+.overlay {
+
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  z-index: 999;
+}
+
+/* ========== Responsive ========== */
+
+@media (max-width: 992px) {
+
+  /* Sidebar hidden by default */
+
+  .sidebar {
+
+    left: -250px;
+  }
+
+  /* Open sidebar */
+
+  .sidebar.open {
+
+    left: 0;
+  }
+
+  /* Content full width */
+
+  .content {
+
+    margin-left: 0;
+
+    width: 100%;
+
+    padding-top: 70px;
+  }
+
+  /* Mobile Button */
+
+  .menu-toggle {
+
+    display: block;
+  }
+
+  /* Close Button */
+
+  .close-btn {
+
+    display: block;
+  }
+}

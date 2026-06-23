@@ -1,0 +1,100 @@
+<div class="auth-wrapper">
+
+  <div class="main-content">
+
+    <!-- LEFT SIDE -->
+    <div class="left-side">
+
+      <div class="content">
+
+        <div class="logo">
+          <img
+            src="/assets/images/smallLogo.png"
+            alt="logo"
+            class="img-fluid"
+          />
+        </div>
+
+        <div class="hero-text">
+          <h1>
+            Welcome to <br />
+            <span>Régisseur</span>
+          </h1>
+
+          <p>
+            The operating system for events, talent,
+            ticketing, vendors, and space.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right-side">
+
+  <div class="login-card">
+
+    <div class="secure-access">
+      <i class="fa-solid fa-shield"></i>
+      Secure Access
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+
+      <button
+        class="tab-btn"
+        routerLink="/registration/signin"
+        routerLinkActive="active"
+      >
+        Sign in
+      </button>
+
+      <button
+        class="tab-btn"
+        routerLink="/registration/signup"
+        routerLinkActive="active"
+      >
+        Sign up
+      </button>
+
+    </div>
+
+    <!-- COMPONENTS HERE -->
+    <router-outlet></router-outlet>
+
+  </div>
+   <div class="support-text">
+
+    Need help?
+
+    <span>
+      Contact support
+    </span>
+
+  </div>
+
+</div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+
+    <div class="footer-left">
+      © 2024 Régisseur, Inc. All rights reserved.
+    </div>
+
+    <div class="footer-links">
+
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Support</a>
+
+    </div>
+
+  </div>
+
+</div>

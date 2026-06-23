@@ -1,0 +1,224 @@
+<div class="container-fluid px-3 py-2 bg-section">
+  <div class="header-wrapper">
+    <!-- Left Side -->
+    <div class="left-section">
+      <app-side-bar></app-side-bar>
+
+      <img src="assets/images/smallLogo.png" class="logo-img" alt="logo" />
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+</div>
+<div class="event-hero">
+
+  <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+
+    <!-- LEFT -->
+
+    <div>
+
+      <div class="breadcrumb-custom mb-2">
+
+        My Events & Guests
+
+        <i class="fa-solid fa-chevron-right mx-2"></i>
+
+        Summer Music Festival 2025
+
+      </div>
+
+      <h1 class="event-title">
+        Summer Music Festival 2025
+      </h1>
+
+      <div class="event-meta">
+
+        <span>
+          <i class="fa-regular fa-calendar"></i>
+          Concert
+        </span>
+
+        <span>
+          <i class="fa-solid fa-location-dot"></i>
+          Central Park Arena, New York
+        </span>
+
+        <span>
+          <i class="fa-regular fa-calendar-days"></i>
+          May 24, 2025
+        </span>
+
+        <span>
+          <i class="fa-regular fa-clock"></i>
+          4:00 PM - 11:00 PM
+        </span>
+
+      </div>
+
+      <div class="d-flex gap-2 mt-3">
+
+        <span class="badge-live">
+
+          <i class="fa-solid fa-circle"></i>
+
+          On Sale
+
+        </span>
+
+        <span class="badge-published">
+
+          <i class="fa-solid fa-circle-check"></i>
+
+          Published
+
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="d-flex gap-2 flex-wrap">
+
+      <button class="btn action-dark-btn">
+
+        <i class="fa-solid fa-pen"></i>
+
+        Edit Event
+
+      </button>
+
+      <button class="btn action-dark-btn">
+
+        <i class="fa-solid fa-share-nodes"></i>
+
+        Share Event
+
+      </button>
+
+      <button class="btn btn-danger px-4">
+
+        <i class="fa-solid fa-qrcode me-2"></i>
+
+        Open Check-In Mode
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- TABS -->
+
+<div class="event-tabs-wrapper">
+
+  <div class="event-tabs">
+
+    <a
+      routerLink="overview"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Overview
+    </a>
+
+    <a
+      routerLink="ticket-orders"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Ticket Orders
+    </a>
+
+    <a
+      routerLink="guests"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Guests
+    </a>
+
+    <a
+      routerLink="crew"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Crew
+    </a>
+
+    <a
+      routerLink="program"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Program & Performance
+    </a>
+
+    <a
+      routerLink="rsvp"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      RSVP & Invitations
+    </a>
+
+    <a
+      routerLink="check-in"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Check-In & Access
+    </a>
+
+    <a
+      routerLink="seating"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Seating / Zones
+    </a>
+
+    <a
+      routerLink="refunds"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Refunds
+    </a>
+
+    <a
+      routerLink="reports"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Reports
+    </a>
+
+    <a
+      routerLink="settings"
+      routerLinkActive="active"
+      class="event-tab"
+    >
+      Settings
+    </a>
+
+  </div>
+
+</div>
+
+<!-- CHILD PAGES -->
+
+<div class="tab-content-area bg-black">
+
+  <router-outlet></router-outlet>
+
+</div>

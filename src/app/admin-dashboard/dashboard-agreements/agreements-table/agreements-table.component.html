@@ -1,0 +1,1270 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="events-wrapper">
+
+  <div class="events-table-card">
+
+    <!-- ===================================== -->
+    <!-- =============== HEADER ============== -->
+    <!-- ===================================== -->
+
+    <div class="events-header">
+
+
+       <div class="container-fluid">
+        <div class="row">
+           <!-- FILTERS -->
+          <div class="col-md-7">
+ <div class="events-tabs">
+
+        <button
+          *ngFor="let filter of filters"
+          (click)="setFilter(filter)"
+          [class.active]="activeFilter === filter"
+        >
+
+          {{ filter }}
+
+        </button>
+
+      </div>
+
+          </div>
+             <!-- ACTIONS -->
+<div class="col-md-5">
+
+<div class="events-actions">
+
+  <!-- FILTER -->
+
+  <div class="filter-dropdown">
+
+    <button
+      class="header-btn"
+      (click)="toggleFilterMenu()"
+    >
+
+      <i class="fa-solid fa-filter"></i>
+
+      Filters
+
+    </button>
+
+    <!-- MENU -->
+
+    <div
+      class="filter-menu"
+      *ngIf="showFilterMenu"
+    >
+
+
+
+      <!-- CATEGORY -->
+
+      <div class="small-select-wrapper">
+
+        <label>Category</label>
+
+        <select
+          [(ngModel)]="selectedCategory"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Categories
+          </option>
+
+          <option
+            *ngFor="let item of categoryOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- TYPE -->
+
+      <div class="small-select-wrapper">
+
+        <label>Type</label>
+
+        <select
+          [(ngModel)]="selectedType"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Types
+          </option>
+
+          <option
+            *ngFor="let item of typeOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DATE -->
+
+<!-- DESKTOP BUTTON -->
+
+<div class="desktop-date-picker">
+
+  <button
+    type="button"
+    class="header-btn"
+    (click)="openDatePicker(dateInput)"
+  >
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </button>
+
+  <input
+    #dateInput
+    type="date"
+    class="hidden-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+</div>
+
+<!-- MOBILE & TABLET BUTTON -->
+
+<div class="mobile-date-picker">
+
+  <input
+    type="date"
+    class="real-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+  <div class="header-btn">
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </div>
+
+</div>
+  <!-- EXPORT -->
+
+  <button
+    class="header-btn"
+    (click)="exportPDF()"
+  >
+
+    <i class="fa-solid fa-download"></i>
+
+
+  </button>
+
+</div>
+</div>
+
+        </div>
+
+       </div>
+
+
+
+
+
+
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- ================ TABLE ============== -->
+    <!-- ===================================== -->
+
+    <div class="custom-table-wrapper">
+
+      <table class="events-table">
+
+        <thead>
+
+  <tr>
+
+    <th>Agreement Title</th>
+
+    <th>Type</th>
+
+    <th>Party A</th>
+
+    <th>Party B</th>
+
+    <th>Related To</th>
+
+    <th>Value</th>
+
+    <th>Start Date</th>
+
+    <th>End Date</th>
+
+    <th>Status</th>
+
+    <th>Actions</th>
+
+  </tr>
+
+</thead>
+
+<tbody>
+
+  <tr
+    *ngFor="
+      let event of paginatedEvents;
+      let i = index
+    "
+  >
+
+    <!-- AGREEMENT -->
+
+    <td>
+
+      <div class="event-info">
+
+        <img
+          [src]="event.image"
+          alt=""
+        >
+
+        <div class="event-text">
+
+          <h5>
+
+            {{ event.title }}
+
+          </h5>
+
+          <span>
+
+            {{ event.agreementId }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- TYPE -->
+
+    <td>
+
+      <span
+        class="status-badge"
+        [ngClass]="event.typeClass"
+      >
+
+        {{ event.category }}
+
+      </span>
+
+    </td>
+
+    <!-- PARTY A -->
+
+    <td>
+
+      <div class="event-info">
+
+        <img
+          [src]="event.partyAImage"
+          alt=""
+          class="mini-avatar"
+        >
+
+        <div class="event-text">
+
+          <h5>
+
+            {{ event.partyA }}
+
+          </h5>
+
+          <span>
+
+            {{ event.partyARole }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- PARTY B -->
+
+    <td>
+
+      <div class="event-info">
+
+        <img
+          [src]="event.partyBImage"
+          alt=""
+          class="mini-avatar"
+        >
+
+        <div class="event-text">
+
+          <h5>
+
+            {{ event.partyB }}
+
+          </h5>
+
+          <span>
+
+            {{ event.partyBRole }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- RELATED -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6>
+
+          {{ event.relatedTo }}
+
+        </h6>
+
+        <span>
+
+          {{ event.project }}
+
+        </span>
+
+      </div>
+
+    </td>
+
+    <!-- VALUE -->
+
+    <td class="revenue">
+
+      {{ event.value }}
+
+    </td>
+
+    <!-- START -->
+
+    <td>
+
+      <span class="single-text">
+
+        {{ event.startDate }}
+
+      </span>
+
+    </td>
+
+    <!-- END -->
+
+    <td>
+
+      <span class="single-text">
+
+        {{ event.endDate }}
+
+      </span>
+
+    </td>
+
+    <!-- STATUS -->
+
+    <td>
+
+      <span
+        class="status-badge"
+        [ngClass]="event.statusClass"
+      >
+
+        {{ event.status }}
+
+      </span>
+
+    </td>
+
+    <!-- ACTIONS -->
+
+    <td class="menu-cell">
+
+      <button
+        class="dots-btn"
+        (click)="toggleMenu(i)"
+      >
+
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+
+      </button>
+
+      <div
+        class="action-menu"
+        *ngIf="openedMenu === i"
+      >
+
+        <button>
+
+          <i class="fa-regular fa-pen-to-square"></i>
+
+          Edit
+
+        </button>
+
+        <button class="delete-btn">
+
+          <i class="fa-regular fa-trash-can"></i>
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </td>
+
+  </tr>
+
+</tbody>
+      </table>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- =============== FOOTER ============== -->
+    <!-- ===================================== -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+
+        {{
+          (currentPage - 1) * itemsPerPage + 1
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          filteredEvents.length
+          ? filteredEvents.length
+          : currentPage * itemsPerPage
+        }}
+
+        of {{ filteredEvents.length }} events
+
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div class="pagination-box">
+
+        <!-- PREV -->
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+
+          <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <!-- NUMBERS -->
+
+        <ng-container
+          *ngFor="let page of visiblePages"
+        >
+
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+
+            {{ page }}
+
+          </button>
+
+          <span
+            *ngIf="page === '...'"
+            class="dots"
+          >
+
+            ...
+
+          </span>
+
+        </ng-container>
+
+        <!-- NEXT -->
+
+        <button
+          (click)="nextPage()"
+          [disabled]="
+            currentPage === totalPagesCount
+          "
+        >
+
+          <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+
+  <select
+    class="per-page-select"
+    [(ngModel)]="itemsPerPage"
+    (change)="changeItemsPerPage()"
+  >
+
+    <option [value]="5">5 / page</option>
+
+    <option [value]="10">10 / page</option>
+
+    <option [value]="15">15 / page</option>
+
+    <option [value]="20">20 / page</option>
+
+  </select>
+
+  <i class="fa-solid fa-chevron-down select-icon"></i>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+<div class="col-md-4">
+
+<div class="artists-category-card">
+
+  <!-- HEADER -->
+
+  <div class="artists-category-header">
+
+    <h3>Agreements by Status</h3>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <div class="artists-category-content">
+
+    <!-- CHART -->
+
+    <div class="artists-chart-wrapper">
+
+      <div class="artists-chart">
+
+        <svg viewBox="0 0 42 42">
+
+          <!-- BG -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#171717"
+            stroke-width="4"
+          />
+
+          <!-- PENDING -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#ffb000"
+            stroke-width="4"
+            [attr.stroke-dasharray]="pendingPercent + ' 100'"
+            stroke-dashoffset="0"
+          />
+
+          <!-- EXECUTED -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#2f7df6"
+            stroke-width="4"
+            [attr.stroke-dasharray]="executedPercent + ' 100'"
+            [attr.stroke-dashoffset]="-pendingPercent"
+          />
+
+          <!-- EXPIRED -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#ff2d2d"
+            stroke-width="4"
+            [attr.stroke-dasharray]="expiredPercent + ' 100'"
+            [attr.stroke-dashoffset]="-(pendingPercent + executedPercent)"
+          />
+
+          <!-- CANCELLED -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#9d9d9d"
+            stroke-width="4"
+            [attr.stroke-dasharray]="cancelledPercent + ' 100'"
+            [attr.stroke-dashoffset]="-(pendingPercent + executedPercent + expiredPercent)"
+          />
+
+          <!-- ACTIVE -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#47d45a"
+            stroke-width="4"
+            [attr.stroke-dasharray]="activePercent + ' 100'"
+            [attr.stroke-dashoffset]="-(pendingPercent + executedPercent + expiredPercent + cancelledPercent)"
+          />
+
+        </svg>
+
+        <!-- CENTER -->
+
+        <div class="chart-center">
+
+          <h2>{{ totalAgreements }}</h2>
+
+          <span>Total</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LIST -->
+
+    <div class="artists-category-list">
+
+      <!-- ACTIVE -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#47d45a"
+          ></span>
+
+          <p>Active</p>
+
+        </div>
+
+        <span>
+
+          {{ activeCount }}
+
+          ({{ activePercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- PENDING -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#ffb000"
+          ></span>
+
+          <p>Pending</p>
+
+        </div>
+
+        <span>
+
+          {{ pendingCount }}
+
+          ({{ pendingPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- EXECUTED -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#2f7df6"
+          ></span>
+
+          <p>Executed</p>
+
+        </div>
+
+        <span>
+
+          {{ executedCount }}
+
+          ({{ executedPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- EXPIRED -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#ff2d2d"
+          ></span>
+
+          <p>Expired</p>
+
+        </div>
+
+        <span>
+
+          {{ expiredCount }}
+
+          ({{ expiredPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- CANCELLED -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#9d9d9d"
+          ></span>
+
+          <p>Cancelled</p>
+
+        </div>
+
+        <span>
+
+          {{ cancelledCount }}
+
+          ({{ cancelledPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="expiration-card my-2">
+
+  <!-- HEADER -->
+
+  <div class="expiration-header">
+
+    <h3>
+      Upcoming Expirations
+    </h3>
+
+    <button
+      class="view-all-btn"
+      data-bs-toggle="modal"
+      data-bs-target="#expirationsModal"
+    >
+
+      View All
+
+    </button>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div class="expiration-list">
+
+    <div
+      class="expiration-item"
+
+      *ngFor="
+        let item of topUpcomingExpirations;
+        let i = index
+      "
+
+      [attr.data-bs-toggle]="
+        i === 0 ? 'modal' : null
+      "
+
+      [attr.data-bs-target]="
+        i === 0
+        ? '#expirationsModal'
+        : null
+      "
+    >
+
+      <!-- LEFT -->
+
+      <div class="expiration-left">
+
+        <div class="expiration-icon">
+
+          <i class="fa-regular fa-calendar"></i>
+
+        </div>
+
+        <div>
+
+          <h4>
+
+            {{ item.partyB }}
+
+          </h4>
+
+          <span>
+
+            {{ item.type }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="expiration-right">
+
+        <h5>
+
+          {{ item.endDate }}
+
+        </h5>
+
+        <div
+          class="days-badge"
+
+          [ngClass]="{
+            'danger':
+            item.daysLeft <= 7
+          }"
+        >
+
+          {{ item.daysLeft }}
+          days
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- MODAL -->
+
+<div
+  class="modal fade"
+  id="expirationsModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content artist-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header artist-modal-header">
+
+        <h5>
+          Upcoming Expirations
+        </h5>
+
+        <!-- <button
+          type="button"
+          class="close-btn-modal"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button> -->
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body artist-modal-body">
+
+        <div
+          class="artist-modal-row"
+
+          *ngFor="
+            let item of upcomingExpirations
+          "
+        >
+
+          <!-- LEFT -->
+
+          <div class="artist-modal-left">
+
+            <div class="expiration-icon">
+
+              <i class="fa-regular fa-calendar"></i>
+
+            </div>
+
+            <div>
+
+              <h4>
+
+                {{ item.partyB }}
+
+              </h4>
+
+              <span>
+
+                {{ item.type }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="artist-modal-right">
+
+            <h3>
+
+              {{ item.endDate }}
+
+            </h3>
+
+            <span>
+
+              {{ item.daysLeft }}
+              days left
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer artist-modal-footer">
+
+        <button
+          type="button"
+          class="close-artist-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- card 3 -->
+
+<div class="agreements-type-card">
+
+  <!-- HEADER -->
+
+  <div class="agreements-type-header">
+
+    <h3>Agreements by Type</h3>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div class="agreements-type-list">
+
+    <!-- ARTIST -->
+
+    <div class="agreement-type-item">
+
+      <div class="agreement-type-top">
+
+        <h4>Artist</h4>
+
+        <span>
+
+          {{ artistCount }}
+
+          ({{ artistPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <div class="agreement-progress">
+
+        <div
+          class="agreement-progress-fill artist-fill"
+          [style.width.%]="artistPercent"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <!-- VENUE -->
+
+    <div class="agreement-type-item">
+
+      <div class="agreement-type-top">
+
+        <h4>Venue</h4>
+
+        <span>
+
+          {{ venueCount }}
+
+          ({{ venuePercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <div class="agreement-progress">
+
+        <div
+          class="agreement-progress-fill venue-fill"
+          [style.width.%]="venuePercent"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <!-- VENDOR -->
+
+    <div class="agreement-type-item">
+
+      <div class="agreement-type-top">
+
+        <h4>Vendor</h4>
+
+        <span>
+
+          {{ vendorCount }}
+
+          ({{ vendorPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <div class="agreement-progress">
+
+        <div
+          class="agreement-progress-fill vendor-fill"
+          [style.width.%]="vendorPercent"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <!-- SERVICE -->
+
+    <div class="agreement-type-item">
+
+      <div class="agreement-type-top">
+
+        <h4>Service</h4>
+
+        <span>
+
+          {{ serviceCount }}
+
+          ({{ servicePercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <div class="agreement-progress">
+
+        <div
+          class="agreement-progress-fill service-fill"
+          [style.width.%]="servicePercent"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <!-- MANAGEMENT -->
+
+    <div class="agreement-type-item">
+
+      <div class="agreement-type-top">
+
+        <h4>Management</h4>
+
+        <span>
+
+          {{ managementCount }}
+
+          ({{ managementPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <div class="agreement-progress">
+
+        <div
+          class="agreement-progress-fill management-fill"
+          [style.width.%]="managementPercent"
+        ></div>
+
+      </div>
+
+    </div>
+
+    <!-- OTHERS -->
+
+    <div class="agreement-type-item">
+
+      <div class="agreement-type-top">
+
+        <h4>Others</h4>
+
+        <span>
+
+          {{ othersTypeCount }}
+
+          ({{ othersTypePercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <div class="agreement-progress">
+
+        <div
+          class="agreement-progress-fill others-fill"
+          [style.width.%]="othersTypePercent"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>

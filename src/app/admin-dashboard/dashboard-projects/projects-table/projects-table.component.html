@@ -1,0 +1,1096 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="projects-wrapper">
+
+  <div class="projects-table-card">
+
+    <!-- ===================================== -->
+    <!-- =============== HEADER ============== -->
+    <!-- ===================================== -->
+
+    <div class="projects-header">
+
+
+       <div class="container-fluid">
+        <div class="row">
+           <!-- FILTERS -->
+          <div class="col-md-7">
+ <div class="projects-tabs">
+
+        <button
+          *ngFor="let filter of filters"
+          (click)="setFilter(filter)"
+          [class.active]="activeFilter === filter"
+        >
+
+          {{ filter }}
+
+        </button>
+
+      </div>
+
+          </div>
+             <!-- ACTIONS -->
+<div class="col-md-5">
+
+<div class="projects-actions">
+
+  <!-- FILTER -->
+
+  <div class="filter-dropdown">
+
+    <button
+      class="header-btn"
+      (click)="toggleFilterMenu()"
+    >
+
+      <i class="fa-solid fa-filter"></i>
+
+      Filters
+
+    </button>
+
+    <!-- MENU -->
+
+    <div
+      class="filter-menu"
+      *ngIf="showFilterMenu"
+    >
+
+      <!-- SORT BOOKINGS -->
+
+      <button
+        (click)="sortByBookings()"
+      >
+
+        <i class="fa-solid fa-arrow-down-wide-short"></i>
+
+        Bookings High → Low
+
+      </button>
+
+      <!-- SORT REVENUE -->
+
+      <button
+        (click)="sortByRevenue()"
+      >
+
+        <i class="fa-solid fa-dollar-sign"></i>
+
+        Revenue High → Low
+
+      </button>
+
+      <!-- CATEGORY -->
+
+      <div class="small-select-wrapper">
+
+        <label>Category</label>
+
+        <select
+          [(ngModel)]="selectedCategory"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Categories
+          </option>
+
+          <option
+            *ngFor="let item of categoryOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- TYPE -->
+
+      <div class="small-select-wrapper">
+
+        <label>Type</label>
+
+        <select
+          [(ngModel)]="selectedType"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Types
+          </option>
+
+          <option
+            *ngFor="let item of typeOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DATE -->
+
+<!-- DESKTOP BUTTON -->
+
+<div class="desktop-date-picker">
+
+  <button
+    type="button"
+    class="header-btn"
+    (click)="openDatePicker(dateInput)"
+  >
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </button>
+
+  <input
+    #dateInput
+    type="date"
+    class="hidden-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+</div>
+
+<!-- MOBILE & TABLET BUTTON -->
+
+<div class="mobile-date-picker">
+
+  <input
+    type="date"
+    class="real-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+  <div class="header-btn">
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </div>
+
+</div>
+  <!-- EXPORT -->
+
+  <button
+    class="header-btn"
+    (click)="exportPDF()"
+  >
+
+    <i class="fa-solid fa-download"></i>
+
+
+  </button>
+
+</div>
+</div>
+
+        </div>
+
+       </div>
+
+
+
+
+
+
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- ================ TABLE ============== -->
+    <!-- ===================================== -->
+
+    <div class="custom-table-wrapper">
+
+      <table class="projects-table">
+
+       <thead>
+
+  <tr>
+
+    <th>Project</th>
+
+    <th>Event / Client</th>
+
+    <th>Project Manager</th>
+
+    <th>Status</th>
+
+    <th>Progress</th>
+
+    <th>Budget</th>
+
+    <th>End Date</th>
+
+    <th>Actions</th>
+
+  </tr>
+
+</thead>
+     <tbody>
+
+  <tr
+    *ngFor="
+      let project of paginatedProjects;
+      let i = index
+    "
+  >
+
+    <!-- PROJECT -->
+
+    <td>
+
+      <div class="event-info">
+
+        <img
+          [src]="project.image"
+          alt=""
+        >
+
+        <div class="event-text">
+
+          <h5>{{ project.title }}</h5>
+
+          <span>{{ project.type }}</span>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- EVENT / CLIENT -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6>{{ project.venue }}</h6>
+
+        <span>{{ project.date }}</span>
+
+      </div>
+
+    </td>
+
+    <!-- PROJECT MANAGER -->
+
+    <td>
+
+      <div class="project-manager-info">
+
+        <img
+          [src]="project.organizerImage"
+          alt=""
+          class="manager-img"
+        >
+
+        <span class="single-text">
+
+          {{ project.organizer }}
+
+        </span>
+
+      </div>
+
+    </td>
+
+    <!-- STATUS -->
+
+    <td>
+<span
+  class="status-badge"
+  [ngClass]="getStatusClass(project.status)"
+>
+
+  {{ project.status }}
+
+</span>
+
+    </td>
+
+    <!-- PROGRESS -->
+
+    <td>
+
+      <div class="project-progress-wrapper">
+
+        <span class="progress-text">
+
+          {{ project.progress }}%
+
+        </span>
+
+        <div class="progress-line">
+
+          <div
+            class="progress-fill"
+            [style.width.%]="project.progress"
+            [ngClass]="
+              getProgressClass(
+                project.progress,
+                project.status
+              )
+            "
+          ></div>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- BUDGET -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6 class="revenue">
+
+          {{ project.revenue }}
+
+        </h6>
+
+        <span>
+
+          {{ project.spent }}
+
+        </span>
+
+      </div>
+
+    </td>
+
+    <!-- END DATE -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6>{{ project.date }}</h6>
+
+        <span>{{ project.time }}</span>
+
+      </div>
+
+    </td>
+
+    <!-- ACTIONS -->
+
+    <td class="menu-cell">
+
+      <button
+        class="dots-btn"
+        (click)="toggleMenu(i)"
+      >
+
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+
+      </button>
+
+      <div
+        class="action-menu"
+        *ngIf="openedMenu === i"
+      >
+
+        <button>
+
+          <i class="fa-regular fa-pen-to-square"></i>
+
+          Edit
+
+        </button>
+
+        <button class="delete-btn">
+
+          <i class="fa-regular fa-trash-can"></i>
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </td>
+
+  </tr>
+
+</tbody>
+      </table>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- =============== FOOTER ============== -->
+    <!-- ===================================== -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+
+        {{
+          (currentPage - 1) * itemsPerPage + 1
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          filteredProjects.length
+          ? filteredProjects.length
+          : currentPage * itemsPerPage
+        }}
+
+        of {{ filteredProjects.length }} projects
+
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div class="pagination-box">
+
+        <!-- PREV -->
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+
+          <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <!-- NUMBERS -->
+
+        <ng-container
+          *ngFor="let page of visiblePages"
+        >
+
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+
+            {{ page }}
+
+          </button>
+
+          <span
+            *ngIf="page === '...'"
+            class="dots"
+          >
+
+            ...
+
+          </span>
+
+        </ng-container>
+
+        <!-- NEXT -->
+
+        <button
+          (click)="nextPage()"
+          [disabled]="
+            currentPage === totalPagesCount
+          "
+        >
+
+          <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+
+  <select
+    class="per-page-select"
+    [(ngModel)]="itemsPerPage"
+    (change)="changeItemsPerPage()"
+  >
+
+    <option [value]="5">5 / page</option>
+
+    <option [value]="10">10 / page</option>
+
+    <option [value]="15">15 / page</option>
+
+    <option [value]="20">20 / page</option>
+
+  </select>
+
+  <i class="fa-solid fa-chevron-down select-icon"></i>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+<div class="col-md-4">
+
+<!-- ===================================== -->
+<!-- PROJECT TIMELINE OVERVIEW -->
+<!-- ===================================== -->
+
+<div class="timeline-card">
+
+  <!-- HEADER -->
+
+  <div class="timeline-header">
+
+    <h3>Project Timeline Overview</h3>
+
+    <button class="timeline-filter-btn">
+
+      30 Days
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+  </div>
+
+  <!-- CHART -->
+
+  <div class="timeline-chart-wrapper">
+
+    <canvas id="timelineChart"></canvas>
+
+  </div>
+
+  <!-- LEGEND -->
+
+  <div class="timeline-legend">
+
+    <div class="legend-item">
+
+      <span class="legend-dot blue"></span>
+
+      Started
+
+    </div>
+
+    <div class="legend-item">
+
+      <span class="legend-dot green"></span>
+
+      Completed
+
+    </div>
+
+    <div class="legend-item">
+
+      <span class="legend-dot red"></span>
+
+      Overdue
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="tasks-overview-card my-2">
+
+  <!-- HEADER -->
+
+  <div class="tasks-header">
+
+    <h3>Tasks Overview</h3>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <div class="tasks-content">
+
+    <!-- CHART -->
+
+    <div class="tasks-chart-wrapper">
+
+      <div class="tasks-chart">
+
+        <svg viewBox="0 0 42 42">
+
+          <!-- BG -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#171717"
+            stroke-width="4"
+          />
+
+          <!-- COMPLETED -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#32d74b"
+            stroke-width="4"
+            [attr.stroke-dasharray]="completedPercent + ' 100'"
+            stroke-dashoffset="25"
+          />
+
+          <!-- IN PROGRESS -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#2f7cf6"
+            stroke-width="4"
+            [attr.stroke-dasharray]="progressPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - completedPercent"
+          />
+
+          <!-- PENDING -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#f6a623"
+            stroke-width="4"
+            [attr.stroke-dasharray]="pendingPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - completedPercent - progressPercent"
+          />
+
+          <!-- OVERDUE -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#ff3b30"
+            stroke-width="4"
+            [attr.stroke-dasharray]="overduePercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - completedPercent - progressPercent - pendingPercent"
+          />
+
+        </svg>
+
+        <!-- CENTER -->
+
+        <div class="tasks-center">
+
+          <h2>{{ totalTasks }}</h2>
+
+          <span>Total Tasks</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LEGEND -->
+
+    <div class="tasks-legend">
+
+      <!-- COMPLETED -->
+
+      <div class="task-item">
+
+        <div class="task-left">
+
+          <span
+            class="task-dot"
+            style="background:#32d74b"
+          ></span>
+
+          <p>Completed</p>
+
+        </div>
+
+        <span>
+
+          {{ completedTasks }}
+
+          ({{ completedPercent }}%)
+
+        </span>
+
+      </div>
+
+      <!-- IN PROGRESS -->
+
+      <div class="task-item">
+
+        <div class="task-left">
+
+          <span
+            class="task-dot"
+            style="background:#2f7cf6"
+          ></span>
+
+          <p>In Progress</p>
+
+        </div>
+
+        <span>
+
+          {{ progressTasks }}
+
+          ({{ progressPercent }}%)
+
+        </span>
+
+      </div>
+
+      <!-- PENDING -->
+
+      <div class="task-item">
+
+        <div class="task-left">
+
+          <span
+            class="task-dot"
+            style="background:#f6a623"
+          ></span>
+
+          <p>Pending</p>
+
+        </div>
+
+        <span>
+
+          {{ pendingTasks }}
+
+          ({{ pendingPercent }}%)
+
+        </span>
+
+      </div>
+
+      <!-- OVERDUE -->
+
+      <div class="task-item">
+
+        <div class="task-left">
+
+          <span
+            class="task-dot"
+            style="background:#ff3b30"
+          ></span>
+
+          <p>Overdue</p>
+
+        </div>
+
+        <span>
+
+          {{ overdueTasks }}
+
+          ({{ overduePercent }}%)
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="milestones-card my-2">
+
+  <!-- HEADER -->
+
+  <div class="milestones-header">
+
+    <h3>Upcoming Milestones</h3>
+
+  </div>
+
+  <!-- ITEMS -->
+
+  <div
+    class="milestone-item"
+    *ngFor="
+      let item of upcomingMilestones
+        | slice:0:3
+    "
+  >
+
+    <div class="milestone-left">
+
+      <div class="milestone-icon">
+
+        <i class="fa-regular fa-calendar"></i>
+
+      </div>
+
+      <div class="milestone-text">
+
+        <h4>{{ item.milestone }}</h4>
+
+        <span>{{ item.title }}</span>
+
+      </div>
+
+    </div>
+
+    <div class="milestone-date">
+
+      {{ item.date }}
+
+    </div>
+
+  </div>
+
+  <!-- BUTTON -->
+
+  <button
+    class="view-milestones-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#milestonesModal"
+  >
+
+    View All Milestones
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+<!-- ====================================== -->
+<!-- MILESTONES MODAL -->
+<!-- ====================================== -->
+
+<div class="modal fade" id="milestonesModal" tabindex="-1">
+
+  <div
+    class="
+      modal-dialog
+      modal-dialog-centered
+    "
+  >
+
+    <div class="modal-content milestones-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header milestones-modal-header">
+
+        <h5>
+
+          Upcoming Milestones
+
+        </h5>
+
+        <!-- FILTERS -->
+
+        <div class="milestones-filters">
+
+          <!-- YEAR -->
+
+          <div class="milestones-filter-wrapper">
+
+            <i class="fa-regular fa-calendar"></i>
+
+            <select
+              [(ngModel)]="
+                selectedMilestoneYear
+              "
+              (change)="filterMilestones()"
+            >
+
+              <option value="all">
+
+                All Years
+
+              </option>
+
+              <option
+                *ngFor="
+                  let year of milestoneYears
+                "
+                [value]="year"
+              >
+
+                {{ year }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+          <!-- MONTH -->
+
+          <div class="milestones-filter-wrapper">
+
+            <i class="fa-regular fa-calendar-days"></i>
+
+            <select
+              [(ngModel)]="
+                selectedMilestoneMonth
+              "
+              (change)="filterMilestones()"
+            >
+
+              <option value="all">
+
+                All Months
+
+              </option>
+
+              <option
+                *ngFor="
+                  let month of milestoneMonths
+                "
+                [value]="month.value"
+              >
+
+                {{ month.label }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body milestones-modal-body">
+
+        <div
+          class="milestone-modal-row"
+          *ngFor="
+            let item of filteredMilestones
+          "
+        >
+
+          <!-- LEFT -->
+
+          <div class="milestone-modal-left">
+
+            <div class="milestone-modal-icon">
+
+              <i class="fa-regular fa-calendar"></i>
+
+            </div>
+
+            <div class="milestone-modal-text">
+
+              <h4>
+
+                {{ item.milestone }}
+
+              </h4>
+
+              <span>
+
+                {{ item.title }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="milestone-modal-date">
+
+            {{ item.date }}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer milestones-modal-footer">
+
+        <button
+          class="close-milestones-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+
+

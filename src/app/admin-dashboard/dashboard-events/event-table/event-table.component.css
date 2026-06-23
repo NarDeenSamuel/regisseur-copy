@@ -1,0 +1,2090 @@
+
+
+/* table & controllers */
+
+/* ================================================= */
+/* ================= WRAPPER ======================= */
+/* ================================================= */
+
+.events-wrapper{
+
+  width: 100%;
+}
+
+.events-table-card{
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    ),
+    #070707;
+
+  border: 1px solid #1a1a1a;
+
+  border-radius: 8px;
+
+  position: relative;
+
+  overflow: visible !important;
+
+  isolation: isolate;
+}
+
+/* ================================================= */
+/* ================= HEADER ======================== */
+/* ================================================= */
+
+.events-header{
+
+  padding: 18px;
+
+  border-bottom: 1px solid #161616;
+
+  position: relative;
+
+  z-index: 99999;
+
+  overflow: visible !important;
+  margin-bottom: 0 !important;
+}
+
+/* ================================================= */
+/* ================= TABS ========================== */
+/* ================================================= */
+
+.events-tabs{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.events-tabs::-webkit-scrollbar{
+
+  display: none;
+}
+
+.events-tabs button{
+
+  height: 35px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #9b9b9b;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  padding: 0 10px;
+
+  position: relative;
+
+  transition: .3s;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+.events-tabs button:hover{
+
+  color: #fff;
+}
+
+.events-tabs button.active{
+
+  color: #ff2d3f;
+}
+
+.events-tabs button.active::after{
+
+  content: '';
+
+  position: absolute;
+
+  bottom: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 2px;
+
+  background: #b10012;
+}
+
+/* ================================================= */
+/* ================= ACTIONS ======================= */
+/* ================================================= */
+
+.events-actions{
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  position: relative;
+
+  z-index: 999999;
+
+  overflow: visible !important;
+}
+
+/* ================================================= */
+/* ================= BUTTON ======================== */
+/* ================================================= */
+
+.header-btn{
+
+  height: 44px;
+
+  border-radius: 12px;
+
+  border: 1px solid #1f1f1f;
+
+  background: #0d0d0d;
+
+  color: #e4e4e4;
+
+  padding: 0 16px;
+
+  font-size: 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+
+  transition: .3s ease;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+.header-btn:hover{
+
+  border-color: #353535;
+
+  background: #111;
+}
+
+/* ================================================= */
+/* ================= FILTER ======================== */
+/* ================================================= */
+
+.filter-dropdown{
+
+  position: relative;
+
+  flex-shrink: 0;
+
+  z-index: 9999999;
+}
+
+.filter-menu{
+
+  position: absolute;
+
+  top: calc(100% + 12px);
+
+  left: 0;
+
+  width: 280px;
+
+  background: #0b0b0b;
+
+  border: 1px solid #1d1d1d;
+
+  border-radius: 18px;
+
+  padding: 16px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+
+  z-index: 99999999;
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.7);
+
+  overflow: visible;
+}
+
+.filter-menu button{
+
+  width: 100%;
+
+  height: 48px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 16px;
+
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+.filter-menu button:hover{
+
+  background: #181818;
+}
+
+/* ================================================= */
+/* ================= SELECT ======================== */
+/* ================================================= */
+
+.small-select-wrapper{
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.small-select-wrapper label{
+
+  color: #8d8d8d;
+
+  font-size: 12px;
+}
+
+.small-select-wrapper select{
+
+  width: 100%;
+
+  height: 44px;
+
+  border-radius: 12px;
+
+  border: 1px solid #1f1f1f;
+
+  background: #111;
+
+  color: #fff;
+
+  padding: 0 14px;
+
+  font-size: 13px;
+
+  outline: none;
+}
+
+/* ================================================= */
+/* ================= DATE ========================== */
+/* ================================================= */
+/* ====================================== */
+/* DESKTOP */
+/* ====================================== */
+
+.desktop-date-picker{
+
+  position: relative;
+
+  display: flex;
+}
+
+.hidden-date-input{
+
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  width: 0;
+
+  height: 0;
+}
+
+/* ====================================== */
+/* MOBILE */
+/* ====================================== */
+
+.mobile-date-picker{
+
+  position: relative;
+
+  display: none;
+}
+
+.real-date-input{
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  z-index: 20;
+}
+
+.mobile-date-picker .header-btn{
+
+  pointer-events: none;
+}
+
+/* ====================================== */
+/* RESPONSIVE */
+/* ====================================== */
+
+@media(max-width:992px){
+
+  .desktop-date-picker{
+
+    display: none;
+  }
+
+  .mobile-date-picker{
+
+    display: flex;
+  }
+}
+
+/* ================================================= */
+/* ================= TABLE ========================= */
+/* ================================================= */
+
+.custom-table-wrapper{
+
+  width: 100%;
+
+  overflow-x: auto;
+
+  overflow-y: hidden;
+
+  position: static;
+}
+
+.custom-table-wrapper::-webkit-scrollbar{
+
+  height: 5px;
+}
+
+.custom-table-wrapper::-webkit-scrollbar-thumb{
+
+  background: #222;
+
+  border-radius: 8px;
+}
+
+.events-table{
+
+  width: 100%;
+
+  min-width: 1200px;
+
+  border-collapse: collapse;
+}
+
+/* ================================================= */
+/* ================= TABLE HEAD ==================== */
+/* ================================================= */
+
+.events-table thead{
+
+  background: #0b0b0b;
+}
+
+.events-table th{
+
+  color: #8d8d8d;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  text-align: left;
+
+  padding: 16px 22px;
+
+  border-bottom: 1px solid #171717;
+
+  white-space: nowrap;
+}
+
+/* ================================================= */
+/* ================= TABLE BODY ==================== */
+/* ================================================= */
+
+.events-table td{
+
+  padding: 14px 22px;
+
+  border-bottom: 1px solid #121212;
+
+  white-space: nowrap;
+
+  vertical-align: middle;
+}
+
+.events-table tbody tr:hover{
+
+  background: rgba(255,255,255,.01);
+}
+
+/* ================================================= */
+/* ================= EVENT INFO ==================== */
+/* ================================================= */
+
+.event-info{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 220px;
+}
+
+.event-info img{
+
+  width: 52px;
+
+  height: 52px;
+
+  border-radius: 12px;
+
+  object-fit: cover;
+}
+
+.event-text h5{
+
+  color: #fff;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  margin-bottom: 4px;
+}
+
+.event-text span{
+
+  color: #7f7f7f;
+
+  font-size: 12px;
+}
+
+/* ================================================= */
+/* ================= DOUBLE TEXT =================== */
+/* ================================================= */
+
+.table-double-text{
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.table-double-text h6{
+
+  color: #fff;
+
+  font-size: 13px;
+
+  margin: 0;
+}
+
+.table-double-text span{
+
+  color: #8b8b8b;
+
+  font-size: 12px;
+}
+
+.single-text{
+
+  color: #fff;
+
+  font-size: 13px;
+
+  font-weight: 500;
+}
+
+/* ================================================= */
+/* ================= STATUS ======================== */
+/* ================================================= */
+
+.status-badge{
+
+  height: 34px;
+
+  padding: 0 14px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.upcoming{
+
+  background: rgba(0,140,255,.12);
+
+  color: #2ba8ff;
+}
+
+.live{
+
+  background: rgba(0,255,76,.12);
+
+  color: #41ff70;
+}
+
+.completed{
+
+  background: rgba(255,255,255,.08);
+
+  color: #d2d2d2;
+}
+
+.cancelled{
+
+  background: rgba(255,0,55,.12);
+
+  color: #ff4d67;
+}
+
+/* ================================================= */
+/* ================= PROGRESS ====================== */
+/* ================================================= */
+
+.booking-progress{
+
+  min-width: 120px;
+}
+
+.booking-progress span{
+
+  color: #fff;
+
+  font-size: 13px;
+
+  display: block;
+
+  margin-bottom: 8px;
+}
+
+.progress-line{
+
+  width: 72px;
+
+  height: 4px;
+
+  border-radius: 30px;
+
+  background: #1d1d1d;
+
+  overflow: hidden;
+}
+
+.progress-fill{
+
+  height: 100%;
+
+  border-radius: 30px;
+}
+
+.progress-green{
+
+  background: linear-gradient(
+    90deg,
+    #39ff6f,
+    #128d37
+  );
+}
+
+.progress-gray{
+
+  background: #9f9f9f;
+}
+
+.progress-red{
+
+  background: #ff3a4d;
+}
+
+/* ================================================= */
+/* ================= REVENUE ======================= */
+/* ================================================= */
+
+.revenue{
+
+  color: #fff;
+
+  font-size: 14px;
+
+  font-weight: 600;
+}
+
+/* ================================================= */
+/* ================= ACTION MENU =================== */
+/* ================================================= */
+
+.menu-cell{
+
+  position: relative;
+
+  width: 40px;
+}
+
+.dots-btn{
+
+  width: 36px;
+
+  height: 36px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #8f8f8f;
+
+  border-radius: 10px;
+
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+.dots-btn:hover{
+
+  background: #111;
+
+  color: #fff;
+}
+
+.action-menu{
+
+  position: absolute;
+
+  top: 44px;
+
+  right: 0;
+
+  width: 140px;
+
+  background: #0d0d0d;
+
+  border: 1px solid #202020;
+
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  z-index: 99999;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.45);
+}
+
+.action-menu button{
+
+  width: 100%;
+
+  border: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  padding: 13px 14px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 13px;
+
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+.action-menu button:hover{
+
+  background: #161616;
+}
+
+.delete-btn{
+
+  color: #ff4d67 !important;
+}
+
+/* ================================================= */
+/* ================= FOOTER ======================== */
+/* ================================================= */
+
+.table-footer{
+
+  min-height: 74px;
+
+  padding: 18px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  border-top: 1px solid #161616;
+
+  flex-wrap: wrap;
+}
+
+.table-footer p{
+
+  color: #7e7e7e;
+
+  font-size: 13px;
+
+  margin: 0;
+}
+
+/* ================================================= */
+/* ================= PAGINATION ==================== */
+/* ================================================= */
+
+.pagination-box{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+.pagination-box button{
+
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 10px;
+
+  border: 1px solid #1f1f1f;
+
+  background: #0b0b0b;
+
+  color: #bdbdbd;
+
+  font-size: 13px;
+
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+.pagination-box button:hover{
+
+  border-color: #353535;
+
+  color: #fff;
+}
+
+.pagination-box button.active{
+
+  border-color: #b10012;
+
+  background: rgba(177,0,18,.15);
+
+  color: #fff;
+}
+
+.pagination-box button:disabled{
+
+  opacity: .4;
+
+  cursor: not-allowed;
+}
+
+.pagination-box .dots{
+
+  color: #7c7c7c;
+
+  font-size: 18px;
+}
+
+/* ================================================= */
+/* ================= PER PAGE ====================== */
+/* ================================================= */
+
+.per-page-wrapper{
+
+  position: relative;
+
+  min-width: 120px;
+}
+
+.per-page-select{
+
+  width: 100%;
+
+  height: 40px;
+
+  border-radius: 10px;
+
+  border: 1px solid #202020;
+
+  background: #0c0c0c;
+
+  color: #d8d8d8;
+
+  font-size: 13px;
+
+  padding: 0 38px 0 14px;
+
+  appearance: none;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.select-icon{
+
+  position: absolute;
+
+  right: 14px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #8b8b8b;
+
+  font-size: 11px;
+
+  pointer-events: none;
+}
+
+/* ================================================= */
+/* ================= TABLET ======================== */
+/* ================================================= */
+
+@media(max-width:992px){
+
+  .events-header{
+
+    padding: 16px;
+  }
+
+  .events-header .row{
+
+    gap: 18px;
+  }
+
+  .events-header .col-md-5,
+  .events-header .col-md-7{
+
+    width: 100%;
+  }
+
+  .events-actions{
+
+    justify-content: flex-start;
+  }
+
+  .table-footer{
+
+    justify-content: center;
+  }
+}
+
+/* ================================================= */
+/* ================= MOBILE ======================== */
+/* ================================================= */
+
+@media(max-width:768px){
+
+  .events-tabs{
+
+    gap: 10px;
+
+    padding-bottom: 10px;
+  }
+
+  .events-tabs button{
+
+    padding: 0 16px;
+
+    font-size: 13px;
+  }
+
+
+
+  .events-actions{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: nowrap;
+
+    overflow-x: auto;
+
+    overflow-y: visible !important;
+
+    padding-bottom: 10px;
+
+    padding-right: 14px;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+
+    position: relative;
+
+    z-index: 999999;
+  }
+
+  .events-actions::-webkit-scrollbar{
+
+    display: none;
+  }
+
+  /* BUTTONS */
+
+  .header-btn{
+
+    flex: 0 0 auto;
+
+    min-width: max-content;
+
+    height: 46px;
+
+    padding: 0 18px;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+  }
+
+  /* EXPORT */
+
+  /* .events-actions > button{
+
+    min-width: 110px;
+  } */
+
+  /* FILTER */
+
+  .filter-dropdown{
+
+    position: relative;
+
+    flex: 0 0 auto;
+
+    z-index: 99999999;
+  }
+
+  .filter-menu{
+
+    position: absolute;
+
+    top: 60px;
+
+    left: 0;
+
+    width: 260px;
+
+    z-index: 999999999;
+  }
+
+  .table-footer{
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .per-page-wrapper{
+
+    width: 100%;
+  }
+}
+
+/* ================================================= */
+/* ================= Right Side ======================== */
+/* ================================================= */
+
+
+/* CALENDAR */
+/* ========================================== */
+
+.calendar-box{
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    ),
+    #090909;
+
+  border: 1px solid #171717;
+
+  border-radius: 8px;
+
+  padding: 15px;
+
+  overflow: hidden;
+}
+
+/* ========================================== */
+/* HEADER */
+/* ========================================== */
+
+.calendar-header{
+
+  margin-bottom: 10px;
+}
+
+.calendar-header h3{
+
+  color: #fff;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+/* ========================================== */
+/* MONTH */
+/* ========================================== */
+
+.calendar-month{
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+}
+
+.calendar-month h4{
+
+  color: #fff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+.calendar-month button{
+
+  width: 30px;
+
+  height: 30px;
+
+  border: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+/* ========================================== */
+/* TABLE */
+/* ========================================== */
+
+.calendar-table{
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+}
+
+/* ========================================== */
+/* WEEK DAYS */
+/* ========================================== */
+
+.calendar-table thead th{
+
+  color: #707070;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  padding-bottom: 0px;
+}
+
+/* ========================================== */
+/* DAYS */
+/* ========================================== */
+
+.calendar-table tbody td{
+
+  text-align: center;
+
+  padding:0px 0;
+}
+
+/* ========================================== */
+/* DAY BUTTON */
+/* ========================================== */
+
+.calendar-day{
+
+  width: 25px;
+
+  height: 25px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #f3f3f3;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .25s;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.calendar-day:hover{
+
+  background: rgba(255,255,255,.05);
+}
+
+/* ACTIVE */
+
+.calendar-day.active{
+
+  background: #ff2147;
+
+  color: #fff;
+
+  box-shadow:
+    0 0 20px rgba(255,33,71,.4);
+}
+
+/* EMPTY */
+
+.empty-cell{
+
+  width: 34px;
+
+  height: 34px;
+
+  display: inline-block;
+}
+
+/* ========================================== */
+/* QUICK ACTIONS */
+/* ========================================== */
+
+.quick-actions-box{
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    ),
+    #090909;
+
+  border: 1px solid #171717;
+
+  border-radius: 8px;
+
+  padding: 15px;
+}
+
+.quick-actions-box h3{
+
+  color: #fff;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  margin-bottom: 10px;
+}
+
+/* ========================================== */
+/* ITEM */
+/* ========================================== */
+
+.quick-action-item{
+
+  width: 100%;
+
+  height: 35px;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.quick-action-item:hover{
+
+  opacity: .8;
+}
+
+.action-left{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.action-left i{
+
+  color: #bdbdbd;
+
+  font-size: 15px;
+}
+
+.action-left span{
+
+  color: #bdbdbd;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+/* ========================================== */
+/* COUNT */
+/* ========================================== */
+
+.action-count{
+
+  min-width: 30px;
+
+  height: 30px;
+
+  border-radius: 10px;
+
+  background: #ff2147;
+
+  color: #fff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0 10px;
+
+  box-shadow:
+    0 0 18px rgba(255,33,71,.4);
+}
+
+/* ========================================== */
+/* MODAL */
+/* ========================================== */
+
+/* .custom-modal-dialog{
+
+  max-width: 85vw;
+} */
+
+.custom-modal-content{
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    ),
+    #0b0b0b;
+
+  border: 1px solid #1d1d1d;
+
+  border-radius: 28px;
+
+  overflow: hidden;
+}
+
+/* ========================================== */
+/* HEADER */
+/* ========================================== */
+
+.custom-modal-header{
+
+  border-bottom: 1px solid #1b1b1b;
+
+  padding: 22px 28px;
+
+  background: transparent;
+}
+
+.custom-modal-header h5{
+
+  color: #fff;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+/* ========================================== */
+/* BODY */
+/* ========================================== */
+
+.custom-modal-body{
+
+  min-height: 500px;
+
+  padding: 28px;
+
+  color: #d4d4d4;
+
+  font-size: 14px;
+}
+
+/* ========================================== */
+/* CLOSE */
+/* ========================================== */
+
+.custom-modal .btn-close{
+
+  opacity: 1;
+
+  box-shadow: none;
+}
+
+/* ========================================== */
+/* MOBILE */
+/* ========================================== */
+
+@media(max-width:768px){
+
+  .custom-modal-dialog{
+
+    max-width: 95vw;
+
+    margin: auto;
+  }
+
+  .custom-modal-body{
+
+    min-height: 400px;
+
+    padding: 20px;
+  }
+}
+/* ========================================== */
+/* CARD */
+/* ========================================== */
+
+.top-revenue-card{
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(255,255,255,.03),
+      rgba(255,255,255,.01)
+    ),
+    #090909;
+
+  border: 1px solid #171717;
+
+  border-radius: 8px;
+
+  padding: 15px 15px 5px 15px;
+}
+
+/* ========================================== */
+/* HEADER */
+/* ========================================== */
+
+.top-revenue-header{
+
+  margin-bottom: 10px;
+}
+
+.top-revenue-header h3{
+
+  color: #fff;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+/* ========================================== */
+/* ITEM */
+/* ========================================== */
+
+.revenue-item{
+
+  margin-bottom: 10px;
+}
+
+.revenue-top{
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 6px;
+}
+
+.revenue-top h5{
+
+  color: #d7d7d7;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  margin: 0;
+}
+
+.revenue-top span{
+
+  color: #9e9e9e;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+/* ========================================== */
+/* LINE */
+/* ========================================== */
+
+.revenue-line{
+
+  width: 100%;
+
+  height: 5px;
+
+  border-radius: 999px;
+
+  background: #171717;
+
+  overflow: hidden;
+}
+
+.revenue-fill{
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff003c,
+      #ff3b5f
+    );
+}
+
+/* ========================================== */
+/* VIEW BUTTON */
+/* ========================================== */
+
+.view-reports-btn{
+
+  width: 100%;
+
+  height: 35px;
+
+  margin-top: 14px;
+
+  border: none;
+
+  border-top: 1px solid #1b1b1b;
+
+  background: transparent;
+
+  color: #ff2c4d;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  transition: .3s;
+}
+
+.view-reports-btn i{
+
+  font-size: 12px;
+}
+
+.view-reports-btn:hover{
+
+  color: #ff4d67;
+}
+
+/* ========================================== */
+/* MODAL */
+/* ========================================== */
+
+.report-modal-content{
+
+  background: #090909;
+
+  border: 1px solid #1b1b1b;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+}
+
+/* ========================================== */
+/* HEADER */
+/* ========================================== */
+
+.report-modal-header{
+
+  border-bottom: 1px solid #171717;
+
+  padding: 18px 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+.report-modal-header h5{
+
+  color: #fff;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+/* ========================================== */
+/* FILTERS */
+/* ========================================== */
+
+.report-filters{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.month-filter,
+.year-filter{
+
+  width: 130px;
+
+  height: 40px;
+
+  border-radius: 10px;
+
+  border: 1px solid #232323;
+
+  background: #111;
+
+  color: #fff;
+
+  padding: 0 12px;
+
+  outline: none;
+
+  font-size: 11px;
+
+  font-weight: 500;
+}
+
+/* ========================================== */
+/* BODY */
+/* ========================================== */
+
+.report-modal-body{
+
+  padding: 20px;
+}
+
+/* ========================================== */
+/* ROW */
+/* ========================================== */
+
+.report-row{
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid #161616;
+}
+
+.report-row:last-child{
+
+  border-bottom: none;
+}
+
+/* ========================================== */
+/* LEFT */
+/* ========================================== */
+
+.report-left{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.report-left img{
+
+  width: 58px;
+
+  height: 58px;
+
+  border-radius: 14px;
+
+  object-fit: cover;
+}
+
+.report-left h4{
+
+  color: #fff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  margin-bottom: 4px;
+}
+
+.report-left span{
+
+  color: #8f8f8f;
+
+  font-size: 10px;
+}
+
+/* ========================================== */
+/* RIGHT */
+/* ========================================== */
+
+.report-right h3{
+
+  color: #ff3152;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+  margin: 0;
+}
+
+/* ========================================== */
+/* MOBILE */
+/* ========================================== */
+
+@media(max-width:768px){
+
+  .report-modal-header{
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .report-filters{
+
+    width: 100%;
+  }
+
+  .month-filter,
+  .year-filter{
+
+    flex: 1;
+  }
+
+  .report-row{
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .report-right{
+
+    width: 100%;
+  }
+
+  .report-right h3{
+
+    font-size: 15px;
+  }
+}
+/* ========================================== */
+/* MODAL DIALOG */
+/* ========================================== */
+
+.custom-report-modal{
+
+  width: 100%;
+
+  max-width: 900px;
+
+  margin: 20px auto;
+}
+
+/* ========================================== */
+/* MODAL CONTENT */
+/* ========================================== */
+
+.report-modal-content{
+
+  height: 85vh;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+/* ========================================== */
+/* BODY */
+/* ========================================== */
+
+.report-modal-body{
+
+  padding: 20px;
+
+  overflow-y: auto;
+
+  flex: 1;
+}
+
+/* SCROLLBAR */
+
+.report-modal-body::-webkit-scrollbar{
+
+  width: 5px;
+}
+
+.report-modal-body::-webkit-scrollbar-thumb{
+
+  background: #2a2a2a;
+
+  border-radius: 999px;
+}
+
+/* ========================================== */
+/* FILTERS */
+/* ========================================== */
+
+.report-filters{
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+/* ========================================== */
+/* SELECT WRAPPER */
+/* ========================================== */
+
+.filter-select-wrapper{
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.filter-select-wrapper i{
+
+  position: absolute;
+
+  left: 12px;
+
+  color: #7d7d7d;
+
+  font-size: 11px;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+/* ========================================== */
+/* SELECT */
+/* ========================================== */
+
+.month-filter,
+.year-filter{
+
+  width: 140px;
+
+  height: 40px;
+
+  border-radius: 12px;
+
+  border: 1px solid #232323;
+
+  background: #111;
+
+  color: #fff;
+
+  padding: 0 14px 0 34px;
+
+  outline: none;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  appearance: none;
+}
+
+/* ========================================== */
+/* MOBILE */
+/* ========================================== */
+
+@media(max-width:768px){
+
+  .custom-report-modal{
+
+    max-width: 95vw;
+  }
+
+  .report-modal-content{
+
+    height: 90vh;
+  }
+
+  .report-filters{
+
+    width: 100%;
+  }
+
+  .filter-select-wrapper{
+
+    flex: 1;
+  }
+
+  .month-filter,
+  .year-filter{
+
+    width: 100%;
+  }
+}
+/* ========================================== */
+/* FOOTER */
+/* ========================================== */
+
+.report-modal-footer{
+
+  border-top: 1px solid #171717;
+
+  padding: 18px 24px;
+
+  background: #090909;
+
+  display: flex;
+
+  justify-content: flex-end;
+}
+
+/* ========================================== */
+/* CLOSE BUTTON */
+/* ========================================== */
+
+.close-report-btn{
+
+  min-width: 140px;
+
+  height: 44px;
+
+  border-radius: 12px;
+
+  border: 1px solid #2a2a2a;
+
+  background: #121212;
+
+  color: #fff;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  transition: .3s;
+
+  cursor: pointer;
+}
+
+.close-report-btn:hover{
+
+  background: #181818;
+
+  border-color: #3a3a3a;
+}
+
+/* ========================================== */
+/* MOBILE */
+/* ========================================== */
+
+@media(max-width:768px){
+
+  .report-modal-footer{
+
+    padding: 16px;
+  }
+
+  .close-report-btn{
+
+    width: 100%;
+  }
+}

@@ -1,0 +1,398 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: #020202;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ======================================== */
+/* AUTH WRAPPER */
+/* ======================================== */
+
+.auth-wrapper {
+  min-height: 100vh;
+  background: #020202;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ======================================== */
+/* MAIN CONTENT */
+/* ======================================== */
+
+.main-content {
+  flex: 1;
+  display: flex;
+}
+
+/* ======================================== */
+/* LEFT SIDE */
+/* ======================================== */
+
+.left-side {
+  width: 45%;
+  position: relative;
+
+  background-image: url('/assets/images/registration.jpeg');
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat;
+
+  border-right: 1px solid rgba(255,255,255,.08);
+
+  padding: 60px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+.logo img {
+  width: 180px;
+  margin-bottom: 30px;
+  margin-left: -10px;
+}
+
+/* ======================================== */
+/* HERO TEXT */
+/* ======================================== */
+
+.hero-text h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+.hero-text span {
+  color: #ff1f3d;
+}
+
+.hero-text p {
+  max-width: 320px;
+  color: #d2d2d2;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* ======================================== */
+/* RIGHT SIDE */
+/* ======================================== */
+
+.right-side {
+  width: 55%;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 25px;
+
+  background: transparent;
+}
+
+/* ======================================== */
+/* LOGIN CARD */
+/* ======================================== */
+
+.login-card {
+  /* width: 100%; */
+  /* max-width: 650px; */
+
+  padding: 18px;
+
+  background: rgba(10,10,10,.82);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  border-radius: 24px;
+
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 0 40px rgba(0,0,0,.45);
+}
+
+/* ======================================== */
+/* SECURE ACCESS */
+/* ======================================== */
+
+.secure-access {
+  text-align: center;
+  color: #9d9d9d;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.secure-access i {
+  color: #ff1f3d;
+  margin-right: 5px;
+}
+
+/* ======================================== */
+/* TABS */
+/* ======================================== */
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  flex: 1;
+
+  background: transparent;
+  border: none;
+
+  color: #8d8d8d;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  padding-bottom: 12px;
+
+  transition: .3s;
+}
+
+.tab-btn.active {
+  color: #fff;
+  border-bottom: 2px solid #ff1f3d;
+}
+
+/* ======================================== */
+/* SUPPORT TEXT */
+/* ======================================== */
+
+.support-text {
+  color: #a1a1a1;
+  font-size: 13px;
+}
+
+.support-text span {
+  color: #ff1f3d;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+/* ======================================== */
+/* FOOTER */
+/* ======================================== */
+
+.footer {
+  height: 60px;
+
+  border-top: 1px solid rgba(255,255,255,.08);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 40px;
+
+  background: rgba(0,0,0,.35);
+
+  backdrop-filter: blur(4px);
+}
+
+.footer-left {
+  color: #9a9a9a;
+  font-size: 12px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 25px;
+}
+
+.footer-links a {
+  color: #9c9c9c;
+  text-decoration: none;
+  font-size: 13px;
+  transition: .3s;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* ======================================== */
+/* TABLET */
+/* ======================================== */
+
+@media (max-width: 991px) {
+
+  html,
+  body {
+    overflow-y: auto;
+  }
+
+  /* BACKGROUND FOR WHOLE PAGE */
+
+.auth-wrapper {
+
+  background:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.65)),
+    url('/assets/images/registration.jpeg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+  .main-content {
+    flex-direction: column;
+  }
+
+  /* LEFT SIDE */
+
+  .left-side {
+    width: 100%;
+
+    min-height: auto;
+
+    padding: 40px 24px;
+
+    border-right: none;
+    border-bottom: none;
+
+    background: transparent;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .logo img {
+    width: 150px;
+    margin-bottom: 22px;
+    margin-left: 0;
+  }
+
+  .hero-text h1 {
+    font-size: 34px;
+    margin-bottom: 14px;
+  }
+
+  .hero-text p {
+    max-width: 100%;
+    font-size: 13px;
+  }
+
+  /* RIGHT */
+
+  .right-side {
+    width: 100%;
+
+    padding: 10px 20px 35px;
+
+    gap: 18px;
+
+    background: transparent;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 500px;
+
+    padding: 22px;
+  }
+
+  .tabs {
+    margin-bottom: 22px;
+  }
+
+  .tab-btn {
+    font-size: 14px;
+  }
+
+  /* FOOTER */
+
+  .footer {
+    padding: 0 20px;
+  }
+
+}
+
+/* ======================================== */
+/* MOBILE */
+/* ======================================== */
+
+@media (max-width: 576px) {
+
+  .left-side {
+    padding: 30px 18px 10px;
+  }
+
+  .logo img {
+    width: 120px;
+    margin-bottom: 18px;
+  }
+
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-text p {
+    font-size: 12px;
+    max-width: 260px;
+  }
+
+  .right-side {
+    padding: 10px 14px 24px;
+  }
+
+  .login-card {
+    border-radius: 18px;
+    padding: 18px;
+  }
+
+  .support-text {
+    text-align: center;
+    font-size: 12px;
+  }
+
+  /* FOOTER */
+
+  .footer {
+    height: auto;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 14px;
+  }
+
+  .footer-left {
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .footer-links {
+    gap: 15px;
+  }
+
+  .footer-links a {
+    font-size: 11px;
+  }
+
+}

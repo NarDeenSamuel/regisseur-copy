@@ -1,0 +1,1079 @@
+<div class="container-fluid px-3 py-2 bg-section">
+
+  <div class="header-wrapper">
+
+    <!-- Left Side -->
+    <div class="left-section">
+
+      <app-side-bar></app-side-bar>
+
+      <img
+        src="assets/images/smallLogo.png"
+        class="logo-img"
+        alt="logo"
+      >
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+
+      <app-navbar></app-navbar>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- header section -->
+
+<div class="container-fluid px-3 px-lg-4 py-3 profile-header">
+
+  <!-- Header Row -->
+
+  <div class="row align-items-center mb-4">
+
+    <!-- Left -->
+
+    <div class="col-lg-7">
+
+      <small class="text-secondary d-block mb-2">
+        Onboarding / Interests, Saved & Alerts
+      </small>
+
+      <h2 class="text-white fw-semibold mb-2">
+        Interests, Saved & Alerts
+      </h2>
+
+      <p class="text-secondary small mb-0">
+        Personalize your discovery by adding interests, saving events and venues,
+        following talents, and setting alerts for what matters most to you.
+      </p>
+
+    </div>
+
+    <!-- Right -->
+
+    <div class="col-lg-5">
+
+      <div
+        class="d-flex justify-content-lg-end justify-content-start mt-3 mt-lg-0"
+      >
+
+        <div class="d-flex align-items-center gap-2">
+
+          <span class="badge bg-dark border border-secondary px-3 py-2">
+            Step 2 of 2
+          </span>
+
+          <div class="progress-line active"></div>
+
+          <div class="progress-dot active"></div>
+
+          <div class="progress-line active"></div>
+
+          <div class="progress-dot active"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Cards Row -->
+
+  <div class="row g-3">
+
+    <!-- User Type -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="card bg-dark-card border-secondary h-100">
+
+        <div class="card-body">
+
+          <div
+            class="d-flex align-items-center justify-content-between mb-2"
+          >
+
+            <small class="text-secondary">
+              User Type
+            </small>
+
+            <i class="fa-solid fa-lock text-secondary small"></i>
+
+          </div>
+
+          <div class="text-white fw-semibold">
+            Individual
+          </div>
+
+          <small class="text-secondary">
+            Auto-filled from signup
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- User Role -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <div class="card bg-dark-card border-secondary h-100">
+
+        <div class="card-body">
+
+          <div
+            class="d-flex align-items-center justify-content-between mb-2"
+          >
+
+            <small class="text-secondary">
+              User Role
+            </small>
+
+            <i class="fa-solid fa-lock text-secondary small"></i>
+
+          </div>
+
+          <div class="text-white fw-semibold">
+            Explorer / No Role
+          </div>
+
+          <small class="text-secondary">
+            Auto-filled from signup
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Mapping -->
+
+    <div class="col-lg-6">
+
+      <div class="card bg-dark-card border-danger h-100">
+
+        <div class="card-body">
+
+          <div
+            class="d-flex align-items-center gap-2 mb-2"
+          >
+
+            <span class="text-white fw-semibold">
+              User Type & Role Mapping
+            </span>
+
+            <i
+              class="fa-solid fa-circle-info text-secondary"
+            ></i>
+
+          </div>
+
+          <small class="text-secondary d-block">
+            1- Individual / [1-1 No Role / 1-2 Artist / Talent / 1-3 Producer / Organizer]
+          </small>
+
+          <small class="text-secondary d-block">
+            2- Business / [2-1 Vendor / 2-2 Service Provider / 2-3 Space]
+          </small>
+
+          <small class="text-secondary d-block">
+            3- Organization / [3-1 Space]
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Note -->
+
+  <div
+    class="alert profile-note mt-3 d-flex align-items-center"
+  >
+
+    <i
+      class="fa-solid fa-circle-exclamation text-danger me-2"
+    ></i>
+
+    <small class="text-secondary mb-0">
+      Note: User Type and User Role are auto-filled from signup and cannot be edited here.
+    </small>
+
+  </div>
+
+</div>
+
+<!-- action buttons -->
+
+<div class="bg-dark-wrapper p-2 px-4">
+
+  <div class="d-flex flex-wrap gap-2">
+
+   <div class="d-flex flex-wrap gap-2">
+
+  <!-- Interests -->
+
+  <button
+    type="button"
+    class="btn custom-red-btn d-flex align-items-center gap-2"
+  >
+    <i class="fa-solid fa-circle-plus"></i>
+    <span>Add Interest / Alert</span>
+  </button>
+
+  <!-- Services / Products / Rentals -->
+
+  <button
+    type="button"
+    class="btn custom-red-btn d-flex align-items-center gap-2"
+    routerLink="/Individual-services"
+  >
+    <i class="fa-solid fa-circle-plus"></i>
+    <span>Add Service / Product / Rental</span>
+  </button>
+
+  <!-- Spaces -->
+
+  <button
+    type="button"
+    class="btn custom-red-btn d-flex align-items-center gap-2"
+    routerLink="/Individual-spaces"
+  >
+    <i class="fa-solid fa-circle-plus"></i>
+    <span>Add Space</span>
+  </button>
+
+</div>
+  </div>
+
+</div>
+
+
+
+
+
+
+<!-- table -->
+
+<div class="vendors-wrapper px-4 pt-2">
+
+  <div class="vendors-table-card">
+
+    <!-- HEADER -->
+
+    <div class="vendors-header">
+
+      <div class="container-fluid">
+
+        <div class="row align-items-center g-3">
+
+          <!-- TABS -->
+
+          <div class="col-lg-5">
+
+            <div class="vendors-tabs">
+
+              <button
+                *ngFor="let filter of filters"
+                (click)="setFilter(filter)"
+                [class.active]="activeFilter === filter"
+              >
+                {{ filter }}
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- SEARCH -->
+
+          <div class="col-lg-3">
+
+            <div class="position-relative">
+
+              <i
+                class="fa-solid fa-magnifying-glass search-icon"
+              ></i>
+
+              <input
+                type="text"
+                class="table-search"
+                placeholder="Search your items..."
+                [(ngModel)]="searchTerm"
+              >
+
+            </div>
+
+          </div>
+
+          <!-- CATEGORY -->
+
+          <div class="col-lg-2">
+
+            <select
+              class="table-select"
+              [(ngModel)]="selectedCategory"
+              (change)="applyFilters()"
+            >
+
+              <option value="">
+                Category: All
+              </option>
+
+              <option
+                *ngFor="let item of categoryOptions"
+                [value]="item"
+              >
+                {{ item }}
+              </option>
+
+            </select>
+
+          </div>
+
+          <!-- SORT + FILTER -->
+
+          <div class="col-lg-2">
+
+            <div class="d-flex gap-2">
+
+              <select
+                class="table-select"
+                [(ngModel)]="selectedSort"
+              >
+
+                <option value="Newest">
+                  Sort: Newest
+                </option>
+
+                <option value="Oldest">
+                  Sort: Oldest
+                </option>
+
+              </select>
+
+              <button class="header-btn">
+
+                <i class="fa-solid fa-filter"></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div
+      class="custom-table-wrapper"
+      *ngIf="filteredItems.length > 0"
+    >
+
+      <table class="vendors-table">
+
+        <thead>
+
+  <tr>
+
+    <th class="item-col">
+      Item
+    </th>
+
+    <th class="type-col">
+      Type
+    </th>
+
+    <th class="category-col">
+      Category
+    </th>
+
+    <th class="status-col">
+      Preference / Status
+    </th>
+
+    <th class="location-col">
+      Location / Scope
+    </th>
+
+    <th class="notification-col">
+      Notifications
+    </th>
+
+    <th class="action-col text-center">
+      Actions
+    </th>
+
+  </tr>
+
+</thead>
+    <tbody>
+
+  <tr
+    *ngFor="let item of paginatedItems; let i = index"
+  >
+
+    <!-- ITEM -->
+
+    <td class="item-col">
+
+      <div class="event-info">
+
+        <img
+          [src]="item.image"
+          alt=""
+        >
+
+        <div class="event-text">
+
+          <h6>
+            {{ item.title }}
+          </h6>
+
+          <span>
+            {{ item.description }}
+          </span>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- TYPE -->
+
+    <td class="type-col">
+
+      <span
+        class="badge-type"
+        [ngClass]="item.typeClass"
+      >
+
+        {{ item.type }}
+
+      </span>
+
+    </td>
+
+    <!-- CATEGORY -->
+
+    <td class="category-col">
+
+      {{ item.category }}
+
+    </td>
+
+    <!-- STATUS -->
+
+    <td class="status-col">
+
+      <span
+        class="badge-status"
+        [ngClass]="item.statusClass"
+      >
+
+        {{ item.status }}
+
+      </span>
+
+    </td>
+
+    <!-- LOCATION -->
+
+    <td class="location-col">
+
+      {{ item.location }}
+
+    </td>
+
+    <!-- NOTIFICATIONS -->
+
+    <td class="notification-col">
+
+      <div class="form-check form-switch m-0">
+
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [checked]="item.notifications"
+        >
+
+      </div>
+
+    </td>
+
+    <!-- ACTIONS -->
+
+    <td class="action-col">
+
+      <div class="action-buttons">
+
+        <button class="action-btn">
+          <i class="fa-regular fa-eye"></i>
+        </button>
+
+        <button class="action-btn">
+          <i class="fa-regular fa-pen"></i>
+        </button>
+
+        <button class="action-btn">
+          <i class="fa-regular fa-copy"></i>
+        </button>
+
+        <button class="action-btn">
+          <i class="fa-regular fa-trash-can"></i>
+        </button>
+
+      </div>
+
+    </td>
+
+  </tr>
+
+</tbody>
+
+      </table>
+
+    </div>
+
+    <!-- EMPTY STATE -->
+
+    <div
+      class="empty-state"
+      *ngIf="filteredItems.length === 0"
+    >
+
+      <i class="fa-regular fa-folder-open"></i>
+
+      <h3>
+        No items yet
+      </h3>
+
+      <p>
+
+        You haven't added any interests,
+        saved items, followed talents,
+        or set up any alerts yet.
+
+        <br>
+
+        Get started by adding your first item.
+
+      </p>
+
+      <button
+        type="button"
+        class="btn empty-btn"
+      >
+
+        <i
+          class="fa-solid fa-circle-plus me-2"
+        ></i>
+
+        Add Interest / Alert
+
+      </button>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+
+        {{
+          filteredItems.length
+            ? (currentPage - 1) * itemsPerPage + 1
+            : 0
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          filteredItems.length
+            ? filteredItems.length
+            : currentPage * itemsPerPage
+        }}
+
+        of
+
+        {{ filteredItems.length }}
+
+        items
+
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div
+        class="pagination-box"
+        *ngIf="filteredItems.length"
+      >
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+
+          <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <ng-container
+          *ngFor="let page of visiblePages"
+        >
+
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+
+            {{ page }}
+
+          </button>
+
+          <span
+            *ngIf="page === '...'"
+            class="dots"
+          >
+
+            ...
+
+          </span>
+
+        </ng-container>
+
+        <button
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPagesCount"
+        >
+
+          <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+
+        <select
+          class="per-page-select"
+          [(ngModel)]="itemsPerPage"
+          (change)="changeItemsPerPage()"
+        >
+
+          <option [value]="10">
+            10
+          </option>
+
+          <option [value]="20">
+            20
+          </option>
+
+          <option [value]="30">
+            30
+          </option>
+
+          <option [value]="50">
+            50
+          </option>
+
+        </select>
+
+        <i
+          class="fa-solid fa-chevron-down select-icon"
+        ></i>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+    <!-- Preference Overview -->
+
+
+<div class="container-fluid px-4 preference-section py-3">
+
+  <h5 class="section-title mb-3">
+    Preference Overview
+  </h5>
+
+  <div class="container-fluid p-0">
+
+    <div class="row g-2">
+
+      <div class="col-lg-3 col-md-6">
+        <div class="overview-card">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+              <h6>Active Interests</h6>
+              <h2>0</h2>
+              <span>Personalized topics</span>
+            </div>
+
+            <div class="icon-circle blue">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="overview-card">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+              <h6>Saved Items</h6>
+              <h2>0</h2>
+              <span>Events & venues</span>
+            </div>
+
+            <div class="icon-circle purple">
+              <i class="fa-regular fa-bookmark"></i>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="overview-card">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+              <h6>Following</h6>
+              <h2>0</h2>
+              <span>Talents & organizers</span>
+            </div>
+
+            <div class="icon-circle orange">
+              <i class="fa-solid fa-users"></i>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="overview-card">
+
+          <div class="d-flex justify-content-between align-items-start">
+
+            <div>
+              <h6>Alerts On</h6>
+              <h2>0</h2>
+              <span>Active notifications</span>
+            </div>
+
+            <div class="icon-circle red">
+              <i class="fa-regular fa-bell"></i>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+ <!-- Top Match -->
+
+<div class="container-fluid preference-section px-4 py-2">
+
+  <div class="row g-3">
+
+
+
+  <div class="col-lg-6  ">
+
+  <div class="feed-card h-100 ">
+
+    <h5 class="feed-title">
+      Top Match This Week
+    </h5>
+
+    <!-- NO DATA -->
+
+    <ng-container *ngIf="!topMatch; else topMatchData">
+
+      <div
+        class="d-flex flex-column justify-content-center align-items-center text-center top-match-content"
+      >
+
+        <div class="match-icon">
+
+          <i class="fa-solid fa-chart-column"></i>
+
+        </div>
+
+        <h3 class="empty-title">
+          No data yet
+        </h3>
+
+        <p class="empty-text mb-0">
+          Add interests to see personalized matches.
+        </p>
+
+      </div>
+
+    </ng-container>
+
+    <!-- DATA -->
+
+   <ng-template #topMatchData>
+
+  <div class="top-match-card">
+
+    <img
+      [src]="topMatch.image"
+      alt=""
+      class="top-match-image"
+    >
+
+    <div class="top-match-info">
+
+      <h4>
+        {{ topMatch.title }}
+      </h4>
+
+      <p>
+        {{ topMatch.subtitle }}
+      </p>
+
+      <div class="saved-info">
+
+        <i class="fa-solid fa-user-group"></i>
+
+        <span>
+          {{ topMatch.savedBy }}
+          saved by friends
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="match-badge">
+
+      {{ topMatch.matchPercent }}% Match
+
+    </div>
+
+  </div>
+
+</ng-template>
+
+  </div>
+
+</div>
+
+    <!-- Tips -->
+
+    <div class="col-lg-6">
+
+      <div class="feed-card h-100">
+
+        <h5 class="feed-title mb-4">
+          Tips to Personalize Your Feed
+        </h5>
+
+        <div class="tip-item">
+
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span>
+            Add at least 3 interests to improve recommendations.
+          </span>
+
+        </div>
+
+        <div class="tip-item">
+
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span>
+            Save events or venues you love for quick access.
+          </span>
+
+        </div>
+
+        <div class="tip-item">
+
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span>
+            Follow talents to get updates on their activities.
+          </span>
+
+        </div>
+
+        <div class="tip-item">
+
+          <i class="fa-regular fa-circle-check"></i>
+
+          <span>
+            Turn on alerts to never miss what matters.
+          </span>
+
+        </div>
+
+        <div class="text-center mt-4">
+
+          <button
+            type="button"
+            class="btn btn-link view-tips-btn"
+          >
+            View all tips
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- buttons -->
+
+<div class="container-fluid px-4 pb-4 preference-section">
+
+  <div class="row g-2 align-items-center">
+
+    <!-- Back -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <button
+        type="button"
+        class="btn btn-dark border border-secondary-subtle w-100 d-flex align-items-center justify-content-between small py-2"
+        routerLink="/Individual"
+      >
+
+        <span>
+          <i class="fa-solid fa-arrow-left me-2"></i>
+          Back to Profile
+        </span>
+
+      </button>
+
+    </div>
+
+    <!-- Save Draft -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <button
+        type="button"
+        class="btn btn-dark border border-secondary-subtle w-100 d-flex align-items-center justify-content-between small py-2"
+      >
+
+        <span>Save Draft</span>
+
+        <i class="fa-regular fa-floppy-disk"></i>
+
+      </button>
+
+    </div>
+
+    <!-- Preview -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <button
+        type="button"
+        class="btn btn-dark border border-secondary-subtle w-100 d-flex align-items-center justify-content-between small py-2"
+      >
+
+        <span>Preview Feed</span>
+
+        <i class="fa-regular fa-eye"></i>
+
+      </button>
+
+    </div>
+
+    <!-- Finish -->
+
+    <div class="col-lg-3 col-md-6">
+
+      <button
+        type="button"
+        class="btn btn-danger w-100 d-flex align-items-center justify-content-center gap-3 small py-2 finish-btn"
+      routerLink="/home"
+      >
+
+        <span>Finish Setup</span>
+
+        <i class="fa-solid fa-arrow-right"></i>
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Support -->
+
+  <div class="text-center mt-2">
+
+    <small class="text-secondary">
+
+      Need help?
+
+      <a
+        href="#"
+        class="text-danger text-decoration-none fw-semibold"
+      >
+
+        Contact support
+
+      </a>
+
+    </small>
+
+  </div>
+
+</div>

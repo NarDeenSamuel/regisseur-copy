@@ -1,0 +1,822 @@
+<div class="stats-grid">
+
+  <!-- TOTAL GUESTS -->
+
+  <div class="stat-card purple">
+
+    <div class="icon-circle">
+      <i class="fa-solid fa-users"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Total Guests</h6>
+      <h3>248</h3>
+      <p>All guest records</p>
+    </div>
+
+  </div>
+
+  <!-- CHECKED IN -->
+
+  <div class="stat-card blue">
+
+    <div class="icon-circle">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Checked In</h6>
+      <h3>32</h3>
+      <p>12.9% of total</p>
+    </div>
+
+  </div>
+
+  <!-- VIP -->
+
+  <div class="stat-card gold">
+
+    <div class="icon-circle">
+      <i class="fa-solid fa-crown"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>VIP / Special Access</h6>
+      <h3>46</h3>
+      <p>VIP, backstage, lounge</p>
+    </div>
+
+  </div>
+
+  <!-- RSVP -->
+
+  <div class="stat-card orange">
+
+    <div class="icon-circle">
+      <i class="fa-regular fa-envelope"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Pending RSVP</h6>
+      <h3>18</h3>
+      <p>Awaiting response</p>
+    </div>
+
+  </div>
+
+  <!-- WALK INS -->
+
+  <div class="stat-card cyan">
+
+    <div class="icon-circle">
+      <i class="fa-solid fa-person-walking"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Walk-Ins / Added Onsite</h6>
+      <h3>7</h3>
+      <p>At event entry</p>
+    </div>
+
+  </div>
+
+  <!-- ISSUES -->
+
+  <div class="stat-card red">
+
+    <div class="icon-circle">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Guest Issues</h6>
+      <h3>5</h3>
+      <p>Needs attention</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="container-fluid">
+<div class="row">
+  <div class="col-md-8">
+<div class="buyers-card">
+
+  <!-- HEADER -->
+
+  <div class="buyers-header">
+
+    <h4>
+      All Ticket buyers
+    </h4>
+
+    <div class="header-actions">
+
+      <button class="export-btn">
+
+        <i class="fa-solid fa-download"></i>
+
+        Export buyers
+
+      </button>
+
+      <button class="create-btn">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Create buyer
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- FILTERS -->
+
+<div class="filters-row">
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="text"
+      placeholder="Search by buyer name, order #, email, or phone"
+      [(ngModel)]="searchTerm"
+      (input)="applyFilters()"
+    >
+
+  </div>
+
+  <!-- RSVP STATUS -->
+
+  <select
+    [(ngModel)]="selectedStatus"
+    (change)="applyFilters()"
+    class="filter-select"
+  >
+
+    <option value="">
+      All Statuses
+    </option>
+
+    <option value="Confirmed">
+      Confirmed
+    </option>
+
+    <option value="Pending">
+      Pending
+    </option>
+
+  </select>
+
+  <!-- ACCESS / ZONES -->
+
+  <select
+    [(ngModel)]="selectedAccess"
+    (change)="applyFilters()"
+    class="filter-select"
+  >
+
+    <option value="">
+      All Access / Zones
+    </option>
+
+    <option value="VIP Lounge">
+      VIP Lounge
+    </option>
+
+    <option value="General Admission">
+      General Admission
+    </option>
+
+    <option value="Backstage">
+      Backstage
+    </option>
+
+  </select>
+
+  <!-- FILTER BUTTON -->
+
+  <button
+    class="filter-btn"
+    (click)="applyFilters()"
+  >
+
+    <i class="fa-solid fa-filter me-2"></i>
+
+    Filters
+
+  </button>
+
+</div>
+
+  <!-- TABLE -->
+
+  <div class="table-responsive">
+
+    <table class="table buyers-table">
+
+     <thead>
+
+<tr>
+
+  <th>Buyer #</th>
+
+  <th>Buyer</th>
+
+  <th>Total Guests</th>
+
+  <th>Ticket Type</th>
+
+  <th>Order Mix</th>
+
+  <th>Payment</th>
+
+  <th>Payment Status</th>
+
+  <th>RSVP</th>
+
+  <th>Check-In</th>
+
+  <th>Access / Zone</th>
+
+  <th></th>
+
+</tr>
+
+</thead>
+
+    <tbody>
+
+  <tr *ngFor="let buyer of paginatedBuyers">
+
+    <!-- Buyer # -->
+
+    <td>
+      {{ buyer.orderId }}
+    </td>
+
+    <!-- Buyer -->
+
+    <td>
+
+      <div class="buyer-cell">
+
+        <img
+          [src]="buyer.avatar"
+          class="buyer-avatar"
+        >
+
+        <div>
+
+          <div class="fw-semibold">
+            {{ buyer.buyerName }}
+          </div>
+
+          <small class="text-secondary">
+            {{ buyer.email }}
+          </small>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- Total Guests -->
+
+    <td>
+
+      <div class="fw-semibold">
+        {{ buyer.totalGuests }}
+      </div>
+
+      <small class="text-secondary">
+        {{ buyer.guestBreakdown }}
+      </small>
+
+    </td>
+
+    <!-- Ticket Type -->
+
+    <td>
+
+      <span
+        class="ticket-badge"
+        [ngClass]="{
+          'vip': buyer.ticketType === 'VIP',
+          'ga': buyer.ticketType === 'GA',
+          'backstage': buyer.ticketType === 'Backstage'
+        }"
+      >
+        {{ buyer.ticketType }}
+      </span>
+
+    </td>
+
+    <!-- Order Mix -->
+
+    <td>
+
+      <div class="fw-semibold">
+        {{ buyer.ticketQty }}
+      </div>
+
+      <small class="text-secondary">
+        {{ buyer.guestGroup }}
+      </small>
+
+    </td>
+
+    <!-- Payment -->
+
+    <td>
+
+      <div class="fw-semibold">
+        {{ buyer.paymentAmount }}
+      </div>
+
+    </td>
+
+    <!-- Payment Status -->
+
+    <td>
+
+      <span
+        class="status-badge"
+        [ngClass]="{
+          'paid': buyer.paymentStatus === 'Paid',
+          'comp': buyer.paymentStatus === 'Complimentary'
+        }"
+      >
+        {{ buyer.paymentStatus }}
+      </span>
+
+    </td>
+
+    <!-- RSVP -->
+
+    <td>
+
+      <span
+        class="status-badge"
+        [ngClass]="{
+          'paid': buyer.rsvpStatus === 'Confirmed',
+          'pending': buyer.rsvpStatus === 'Pending'
+        }"
+      >
+        {{ buyer.rsvpStatus }}
+      </span>
+
+      <div class="mt-1">
+
+        <small class="text-secondary">
+          {{ buyer.rsvpCount }}
+        </small>
+
+      </div>
+
+    </td>
+
+    <!-- Check In -->
+
+    <td>
+
+      <span class="checkin-badge checked">
+
+        {{ buyer.checkedIn }}
+
+      </span>
+
+    </td>
+
+    <!-- Access Zone -->
+
+    <td>
+
+      <div class="fw-semibold">
+        {{ buyer.accessZone }}
+      </div>
+
+      <small class="text-secondary">
+        {{ buyer.accessArea }}
+      </small>
+
+    </td>
+
+    <!-- Actions -->
+
+    <td class="action-cell">
+
+      <div class="dropdown">
+
+        <button
+          class="action-btn"
+          data-bs-toggle="dropdown"
+        >
+
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+
+        </button>
+
+        <ul
+          class="dropdown-menu dropdown-menu-end action-menu"
+        >
+
+          <li>
+
+            <button
+              class="dropdown-item"
+              (click)="editBuyer(buyer)"
+            >
+
+              <i class="fa-solid fa-pen me-2"></i>
+
+              Edit Buyer
+
+            </button>
+
+          </li>
+
+          <li>
+
+            <button
+              class="dropdown-item text-danger"
+              (click)="deleteBuyer(buyer)"
+            >
+
+              <i class="fa-regular fa-trash-can me-2"></i>
+
+              Delete Buyer
+
+            </button>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </td>
+
+  </tr>
+
+</tbody>
+
+    </table>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="table-footer">
+
+   <span>
+
+  Showing 1 to {{ paginatedBuyers.length }}
+  of {{ filteredBuyers.length }} buyers
+
+</span>
+    <div class="pagination">
+
+      <button
+        *ngFor="let page of pages"
+        class="page-btn"
+        [class.active]="page===currentPage"
+        (click)="changePage(page)"
+      >
+
+        {{page}}
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="guest-actions my-2">
+
+  <div
+    class="action-card"
+    (click)="addGuest()"
+  >
+    <div class="icon purple">
+      <i class="fa-solid fa-user-plus"></i>
+    </div>
+
+    <div>
+      <h6>Add Guest</h6>
+      <p>Create a new guest record</p>
+    </div>
+  </div>
+
+  <div
+    class="action-card"
+    (click)="importGuestList()"
+  >
+    <div class="icon green">
+      <i class="fa-solid fa-upload"></i>
+    </div>
+
+    <div>
+      <h6>Import Guest List</h6>
+      <p>Upload CSV or Excel guest data</p>
+    </div>
+  </div>
+
+  <div
+    class="action-card"
+    (click)="assignZoneAccess()"
+  >
+    <div class="icon orange">
+      <i class="fa-solid fa-lock"></i>
+    </div>
+
+    <div>
+      <h6>Assign Zone / Access</h6>
+      <p>Manage guest access permissions</p>
+    </div>
+  </div>
+
+  <div
+    class="action-card"
+    (click)="sendGuestUpdate()"
+  >
+    <div class="icon blue">
+      <i class="fa-regular fa-envelope"></i>
+    </div>
+
+    <div>
+      <h6>Send Guest Update</h6>
+      <p>Email or message selected guests</p>
+    </div>
+  </div>
+
+  <div
+    class="action-card"
+    (click)="exportGuests()"
+  >
+    <div class="icon cyan">
+      <i class="fa-solid fa-download"></i>
+    </div>
+
+    <div>
+      <h6>Export Guests</h6>
+      <p>Export guest records to CSV or Excel</p>
+    </div>
+  </div>
+
+</div>
+
+  </div>
+  <div class="col-md-4">
+
+<div class="guest-breakdown-card">
+
+  <h3>Guest Type Breakdown</h3>
+
+  <div class="guest-breakdown-content">
+
+    <div class="guest-chart">
+
+      <svg viewBox="0 0 42 42">
+
+        <!-- bg -->
+
+        <circle
+          cx="21"
+          cy="21"
+          r="15.915"
+          fill="transparent"
+          stroke="#111827"
+          stroke-width="4"
+        />
+
+        <!-- VIP -->
+
+        <circle
+          cx="21"
+          cy="21"
+          r="15.915"
+          fill="transparent"
+          stroke="#f59e0b"
+          stroke-width="4"
+          [attr.stroke-dasharray]="vipPercent + ' 100'"
+          stroke-dashoffset="0"
+        />
+
+        <!-- GA -->
+
+        <circle
+          cx="21"
+          cy="21"
+          r="15.915"
+          fill="transparent"
+          stroke="#3b82f6"
+          stroke-width="4"
+          [attr.stroke-dasharray]="gaPercent + ' 100'"
+          [attr.stroke-dashoffset]="-vipPercent"
+        />
+
+        <!-- Backstage -->
+
+        <circle
+          cx="21"
+          cy="21"
+          r="15.915"
+          fill="transparent"
+          stroke="#8b5cf6"
+          stroke-width="4"
+          [attr.stroke-dasharray]="backstagePercent + ' 100'"
+          [attr.stroke-dashoffset]="-(vipPercent + gaPercent)"
+        />
+
+      </svg>
+
+      <div class="chart-center">
+
+        <h2>{{totalGuestsCount}}</h2>
+
+        <span>Total</span>
+
+      </div>
+
+    </div>
+
+    <div class="guest-list">
+
+      <div class="guest-item">
+
+        <div class="guest-left">
+          <span
+            class="guest-dot"
+            style="background:#f59e0b"
+          ></span>
+
+          <p>VIP Guest</p>
+        </div>
+
+        <strong>{{vipCount}}</strong>
+
+      </div>
+
+      <div class="guest-item">
+
+        <div class="guest-left">
+          <span
+            class="guest-dot"
+            style="background:#3b82f6"
+          ></span>
+
+          <p>General Admission</p>
+        </div>
+
+        <strong>{{gaCount}}</strong>
+
+      </div>
+
+      <div class="guest-item">
+
+        <div class="guest-left">
+          <span
+            class="guest-dot"
+            style="background:#8b5cf6"
+          ></span>
+
+          <p>Backstage</p>
+        </div>
+
+        <strong>{{backstageCount}}</strong>
+
+      </div>
+
+      <div class="guest-total">
+
+        <span>Total Guests</span>
+
+        <strong>{{totalGuestsCount}}</strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="activity-card my-2">
+
+  <div class="activity-header">
+
+    <h3>Recent Guest Activity</h3>
+
+  </div>
+
+  <div class="activity-body">
+
+    <div
+      class="activity-row"
+      *ngFor="let item of activityList"
+    >
+
+      <div class="activity-left">
+
+       <div
+  class="activity-icon"
+  [style.borderColor]="getActivityColor(item.title)"
+  [style.color]="getActivityColor(item.title)"
+>
+
+  <i
+    class="fa-solid"
+    [ngClass]="getActivityIcon(item.title)"
+  ></i>
+
+</div>
+
+        <span class="activity-title">
+          {{item.title}}
+        </span>
+
+      </div>
+
+      <span class="activity-time">
+        {{formatTime(item.createdAt)}}
+      </span>
+
+    </div>
+
+    <div class="activity-footer">
+
+      <a>
+        View All Activity
+        <i class="fa-solid fa-chevron-right"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="zone-card">
+
+  <div class="zone-header">
+
+    <h3>Access Zone Distribution</h3>
+
+  </div>
+
+  <div class="zone-body">
+
+    <div
+      class="zone-row"
+      *ngFor="let zone of zoneDistribution"
+    >
+
+      <div class="zone-name">
+
+        {{zone.name}}
+
+      </div>
+
+      <div class="zone-progress">
+
+        <div
+          class="zone-fill"
+          [style.width.%]="zone.percent"
+          [style.background]="zone.color"
+        ></div>
+
+      </div>
+
+      <div class="zone-count">
+
+        {{zone.count}}
+
+      </div>
+
+    </div>
+
+    <a
+      class="zone-link"
+      href="javascript:void(0)"
+    >
+      View All Zones
+      <i class="fa-solid fa-chevron-right"></i>
+    </a>
+
+  </div>
+
+</div>
+  </div>
+</div>
+</div>

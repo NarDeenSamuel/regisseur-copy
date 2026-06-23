@@ -1,0 +1,912 @@
+<div class="stats-grid">
+
+  <div class="stat-card blue">
+    <div class="icon-circle">
+      <i class="fa-solid fa-receipt"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Total Orders</h6>
+      <h3>85</h3>
+      <p>All time</p>
+    </div>
+  </div>
+
+  <div class="stat-card green">
+    <div class="icon-circle">
+      <i class="fa-solid fa-circle-check"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Paid Orders</h6>
+      <h3>72</h3>
+      <p>84.7% of total</p>
+    </div>
+  </div>
+
+  <div class="stat-card green">
+    <div class="icon-circle">
+      <i class="fa-solid fa-dollar-sign"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Gross Sales</h6>
+      <h3>$18,450</h3>
+      <p>Total sales (USD)</p>
+    </div>
+  </div>
+
+  <div class="stat-card orange">
+    <div class="icon-circle">
+      <i class="fa-solid fa-rotate-left"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Refunded Orders</h6>
+      <h3>7</h3>
+      <p>8.2% of total</p>
+    </div>
+  </div>
+
+  <div class="stat-card yellow">
+    <div class="icon-circle">
+      <i class="fa-solid fa-hourglass-half"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Pending Payments</h6>
+      <h3>4</h3>
+      <p>4.7% of total</p>
+    </div>
+  </div>
+
+  <div class="stat-card purple">
+    <div class="icon-circle">
+      <i class="fa-solid fa-chart-line"></i>
+    </div>
+
+    <div class="stat-content">
+      <h6>Average Order Value</h6>
+      <h3>$217</h3>
+      <p>Per order</p>
+    </div>
+  </div>
+
+</div>
+
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-8">
+<div class="orders-card">
+
+  <!-- HEADER -->
+
+  <div class="orders-header">
+
+    <h4>
+      All Ticket Orders
+    </h4>
+
+    <div class="header-actions">
+
+      <button class="export-btn">
+
+        <i class="fa-solid fa-download"></i>
+
+        Export Orders
+
+      </button>
+
+      <button class="create-btn">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Create Order
+
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- FILTERS -->
+
+  <div class="filters-row">
+
+    <div class="search-box">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        placeholder="Search order number, buyer, or email"
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+      >
+
+    </div>
+
+    <select
+      [(ngModel)]="selectedPayment"
+      (change)="applyFilters()"
+      class="filter-select"
+    >
+
+      <option value="">
+        Payment Status
+      </option>
+
+      <option>Paid</option>
+
+      <option>Pending</option>
+
+      <option>Refunded</option>
+
+      <option>Failed</option>
+
+    </select>
+
+    <select
+      [(ngModel)]="selectedRefund"
+      (change)="applyFilters()"
+      class="filter-select"
+    >
+
+      <option value="">
+        Refund Status
+      </option>
+
+      <option>No Refund</option>
+
+      <option>Refunded</option>
+
+      <option>Partially Refunded</option>
+
+    </select>
+
+    <select
+      [(ngModel)]="selectedTicketType"
+      (change)="applyFilters()"
+      class="filter-select"
+    >
+
+      <option value="">
+        Ticket Type
+      </option>
+
+      <option>VIP</option>
+
+      <option>General Admission</option>
+
+      <option>Early Bird</option>
+
+      <option>Complimentary</option>
+
+    </select>
+
+  </div>
+
+  <!-- TABLE -->
+
+  <div class="table-responsive">
+
+    <table class="table orders-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Order #</th>
+
+          <th>Buyer</th>
+
+          <th>Guests</th>
+
+          <th>Ticket Type</th>
+
+          <th>Qty</th>
+
+          <th>Order Total</th>
+
+          <th>Payment Status</th>
+
+          <th>Refund Status</th>
+
+          <th>Purchase Date</th>
+
+          <th>Check-In</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let order of paginatedOrders">
+
+          <td>{{order.id}}</td>
+
+          <td>
+
+            <div class="buyer-cell">
+
+              <img
+                [src]="order.avatar"
+                class="buyer-avatar"
+              >
+
+              {{order.buyer}}
+
+            </div>
+
+          </td>
+
+          <td>{{order.guests}}</td>
+
+          <td>{{order.ticketType}}</td>
+
+          <td>{{order.qty}}</td>
+
+          <td>{{order.total}}</td>
+
+          <td>
+
+            <span
+              class="status-badge"
+              [ngClass]="{
+                'paid':order.paymentStatus==='Paid',
+                'pending':order.paymentStatus==='Pending',
+                'failed':order.paymentStatus==='Failed',
+                'refunded':order.paymentStatus==='Refunded',
+                'comp':order.paymentStatus==='Complimentary'
+              }"
+            >
+
+              {{order.paymentStatus}}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <span
+              class="status-badge refund-badge"
+            >
+
+              {{order.refundStatus}}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            {{order.purchaseDate}}
+
+            <br>
+
+            <small>
+              {{order.purchaseTime}}
+            </small>
+
+          </td>
+
+          <td>
+
+            <span
+              class="checkin-badge"
+              [ngClass]="{
+                'checked':order.checkIn==='Checked In',
+                'partial':order.checkIn==='Partial Check-In',
+                'notchecked':order.checkIn==='Not Checked In'
+              }"
+            >
+
+              {{order.checkIn}}
+
+            </span>
+
+          </td>
+
+         <td class="action-cell">
+
+  <div class="dropdown">
+
+    <button
+      class="action-btn"
+      type="button"
+      data-bs-toggle="dropdown"
+      data-bs-auto-close="outside"
+    >
+      <i class="fa-solid fa-ellipsis"></i>
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-end action-menu">
+
+      <li>
+
+        <button
+          class="dropdown-item"
+          (click)="editOrder(order)"
+        >
+          <i class="fa-solid fa-pen me-2"></i>
+          Edit Order
+        </button>
+
+      </li>
+
+      <li>
+
+        <button
+          class="dropdown-item text-danger"
+          (click)="deleteOrder(order)"
+        >
+          <i class="fa-regular fa-trash-can me-2"></i>
+          Delete Order
+        </button>
+
+      </li>
+
+    </ul>
+
+  </div>
+
+</td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="table-footer">
+
+    <span>
+
+      Showing 1 to {{paginatedOrders.length}}
+      of {{filteredOrders.length}} orders
+
+    </span>
+
+    <div class="pagination">
+
+      <button
+        *ngFor="let page of pages"
+        class="page-btn"
+        [class.active]="page===currentPage"
+        (click)="changePage(page)"
+      >
+
+        {{page}}
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="row g-3 mt-2">
+
+  <!-- Create Order -->
+
+  <div class="col-xl col-lg-4 col-md-6">
+
+    <button
+      class="quick-action-card"
+      (click)="createOrder()"
+    >
+
+      <div class="d-flex align-items-center">
+
+        <div class="action-icon red">
+
+          <i class="fa-solid fa-cart-plus"></i>
+
+        </div>
+
+        <div class="action-text">
+
+          <h6>Create Order</h6>
+
+          <p>
+            Create a new ticket order for a guest
+          </p>
+
+        </div>
+
+      </div>
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+  </div>
+
+  <!-- Resend Confirmation -->
+
+  <div class="col-xl col-lg-4 col-md-6">
+
+    <button
+      class="quick-action-card"
+      (click)="resendConfirmation()"
+    >
+
+      <div class="d-flex align-items-center">
+
+        <div class="action-icon purple">
+
+          <i class="fa-regular fa-paper-plane"></i>
+
+        </div>
+
+        <div class="action-text">
+
+          <h6>Resend Confirmation</h6>
+
+          <p>
+            Resend order confirmation email
+          </p>
+
+        </div>
+
+      </div>
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+  </div>
+
+  <!-- Process Refund -->
+
+  <div class="col-xl col-lg-4 col-md-6">
+
+    <button
+      class="quick-action-card"
+      (click)="processRefund()"
+    >
+
+      <div class="d-flex align-items-center">
+
+        <div class="action-icon orange">
+
+          <i class="fa-solid fa-arrow-rotate-left"></i>
+
+        </div>
+
+        <div class="action-text">
+
+          <h6>Process Refund</h6>
+
+          <p>
+            Process a full or partial refund
+          </p>
+
+        </div>
+
+      </div>
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+  </div>
+
+  <!-- Transfer Ticket -->
+
+  <div class="col-xl col-lg-4 col-md-6">
+
+    <button
+      class="quick-action-card"
+      (click)="transferTicket()"
+    >
+
+      <div class="d-flex align-items-center">
+
+        <div class="action-icon blue">
+
+          <i class="fa-solid fa-ticket"></i>
+
+        </div>
+
+        <div class="action-text">
+
+          <h6>Transfer Ticket</h6>
+
+          <p>
+            Transfer ticket(s) to another guest
+          </p>
+
+        </div>
+
+      </div>
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+  </div>
+
+  <!-- Export Orders -->
+
+  <div class="col-xl col-lg-4 col-md-6">
+
+    <button
+      class="quick-action-card"
+      (click)="exportOrders()"
+    >
+
+      <div class="d-flex align-items-center">
+
+        <div class="action-icon gray">
+
+          <i class="fa-solid fa-file-arrow-down"></i>
+
+        </div>
+
+        <div class="action-text">
+
+          <h6>Export Orders</h6>
+
+          <p>
+            Export orders to CSV or Excel
+          </p>
+
+        </div>
+
+      </div>
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+  </div>
+
+</div>
+    </div>
+    <div class="col-md-4">
+<div class="artists-category-card">
+
+  <!-- HEADER -->
+
+  <div class="artists-category-header">
+
+    <h3>Order Status Breakdown</h3>
+
+  </div>
+
+  <div class="artists-category-content">
+
+    <!-- CHART -->
+
+    <div class="artists-chart-wrapper">
+
+      <div class="artists-chart">
+
+        <svg viewBox="0 0 42 42">
+
+          <!-- BACKGROUND -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#151c28"
+            stroke-width="4"
+          />
+
+          <!-- PAID -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#47d45a"
+            stroke-width="4"
+            [attr.stroke-dasharray]="paidPercent + ' 100'"
+            stroke-dashoffset="0"
+          />
+
+          <!-- PENDING -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#ffb000"
+            stroke-width="4"
+            [attr.stroke-dasharray]="pendingPercent + ' 100'"
+            [attr.stroke-dashoffset]="-paidPercent"
+          />
+
+          <!-- REFUNDED -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#ff2d2d"
+            stroke-width="4"
+            [attr.stroke-dasharray]="refundedPercent + ' 100'"
+            [attr.stroke-dashoffset]="-(paidPercent + pendingPercent)"
+          />
+
+          <!-- FAILED -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#d60000"
+            stroke-width="4"
+            [attr.stroke-dasharray]="failedPercent + ' 100'"
+            [attr.stroke-dashoffset]="-(paidPercent + pendingPercent + refundedPercent)"
+          />
+
+          <!-- COMPLIMENTARY -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#1da1ff"
+            stroke-width="4"
+            [attr.stroke-dasharray]="complimentaryPercent + ' 100'"
+            [attr.stroke-dashoffset]="-(paidPercent + pendingPercent + refundedPercent + failedPercent)"
+          />
+
+        </svg>
+
+      </div>
+
+    </div>
+
+    <!-- LIST -->
+
+    <div class="artists-category-list">
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#47d45a"
+          ></span>
+
+          <p>Paid</p>
+
+        </div>
+
+        <span>
+          {{paidCount}}
+          ({{paidPercent | number:'1.1-1'}}%)
+        </span>
+
+      </div>
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#ffb000"
+          ></span>
+
+          <p>Pending</p>
+
+        </div>
+
+        <span>
+          {{pendingCount}}
+          ({{pendingPercent | number:'1.1-1'}}%)
+        </span>
+
+      </div>
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#ff2d2d"
+          ></span>
+
+          <p>Refunded</p>
+
+        </div>
+
+        <span>
+          {{refundedCount}}
+          ({{refundedPercent | number:'1.1-1'}}%)
+        </span>
+
+      </div>
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#d60000"
+          ></span>
+
+          <p>Failed</p>
+
+        </div>
+
+        <span>
+          {{failedCount}}
+          ({{failedPercent | number:'1.1-1'}}%)
+        </span>
+
+      </div>
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#1da1ff"
+          ></span>
+
+          <p>Complimentary</p>
+
+        </div>
+
+        <span>
+          {{complimentaryCount}}
+          ({{complimentaryPercent | number:'1.1-1'}}%)
+        </span>
+
+      </div>
+
+      <div class="artist-category-total">
+
+        <strong>Total</strong>
+
+        <strong>{{totalOrders}}</strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="activity-card my-2">
+
+  <div class="activity-header">
+
+    <h5>
+      Recent Order Activity
+    </h5>
+
+  </div>
+
+  <div class="activity-list">
+
+    <div
+      class="activity-item"
+      *ngFor="let item of recentActivities"
+    >
+
+      <div class="activity-left">
+
+        <div
+          class="activity-icon"
+          [ngClass]="getActivityClass(item.title)"
+        >
+
+          <i
+            [class]="getActivityIcon(item.title)"
+          ></i>
+
+        </div>
+
+        <div class="activity-content">
+
+          <h6>
+            {{item.title}}
+          </h6>
+
+          <p>
+            {{item.subtitle}}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="activity-time">
+
+        {{item.time}}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="sales-card">
+
+  <div class="sales-header">
+
+    <h5>
+      Ticket Type Sales
+    </h5>
+
+  </div>
+
+  <div class="sales-body">
+
+    <div
+      *ngFor="let item of ticketSales"
+      class="sales-row"
+    >
+
+      <div class="row align-items-center g-3">
+
+        <div class="col-lg-6 col-md-5">
+
+          <div class="ticket-name">
+            {{item.type}}
+          </div>
+
+        </div>
+
+        <div class="col-lg-5 col-md-5">
+
+          <div class="progress sales-progress">
+
+            <div
+              class="progress-bar"
+              [style.width.%]="item.percent"
+            ></div>
+
+          </div>
+
+        </div>
+
+        <div class="col-lg-1 col-md-2 text-end">
+
+          <span class="sales-count">
+
+            {{item.sold}}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+    </div>
+  </div>
+</div>

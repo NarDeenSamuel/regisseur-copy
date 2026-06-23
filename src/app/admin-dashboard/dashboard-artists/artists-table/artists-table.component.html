@@ -1,0 +1,1228 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="vendors-wrapper">
+
+  <div class="vendors-table-card">
+
+  <!-- HEADER -->
+
+  <div class="vendors-header">
+
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <!-- FILTERS -->
+
+        <div class="col-md-9">
+
+          <div class="vendors-tabs">
+
+            <button
+              *ngFor="let filter of filters"
+              (click)="setFilter(filter)"
+              [class.active]="activeFilter === filter"
+            >
+
+              {{ filter }}
+
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+
+        <div class="col-md-3">
+
+          <div class="vendors-actions">
+
+            <!-- FILTER -->
+
+            <div class="filter-dropdown">
+
+              <button
+                class="header-btn"
+                (click)="toggleFilterMenu()"
+              >
+
+                <i class="fa-solid fa-filter"></i>
+
+                Filters
+
+              </button>
+
+              <!-- MENU -->
+
+              <div
+                class="filter-menu"
+                *ngIf="showFilterMenu"
+              >
+
+                <!-- CATEGORY -->
+
+                <div class="small-select-wrapper">
+
+                  <label>Category</label>
+
+                  <select
+                    [(ngModel)]="selectedCategory"
+                    (change)="applyFilters()"
+                  >
+
+                    <option value="">
+                      All Categories
+                    </option>
+
+                    <option
+                      *ngFor="
+                        let item of categoryOptions
+                      "
+                      [value]="item"
+                    >
+
+                      {{ item }}
+
+                    </option>
+
+                  </select>
+
+                </div>
+
+                <!-- AVAILABILITY -->
+
+                <div class="small-select-wrapper">
+
+                  <label>Availability</label>
+
+                  <select
+                    [(ngModel)]="selectedAvailability"
+                    (change)="applyFilters()"
+                  >
+
+                    <option value="">
+                      All Status
+                    </option>
+
+                    <option
+                      *ngFor="
+                        let item of availabilityOptions
+                      "
+                      [value]="item"
+                    >
+
+                      {{ item }}
+
+                    </option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- EXPORT -->
+
+            <button
+  class="header-btn"
+  (click)="exportPDF()"
+>
+
+  <i class="fa-solid fa-download"></i>
+
+</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TABLE -->
+
+  <div class="custom-table-wrapper">
+
+    <table class="vendors-table">
+
+      <thead>
+
+        <tr>
+
+          <th>Artist</th>
+
+          <th>Category</th>
+
+          <th>Location</th>
+
+          <th>Rating</th>
+
+          <th>Bookings</th>
+
+          <th>Availability</th>
+
+          <th>Status</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="
+            let vendor of paginatedVendors;
+            let i = index
+          "
+        >
+
+          <!-- ARTIST -->
+
+          <td>
+
+            <div class="event-info">
+
+              <img
+                [src]="vendor.image"
+                alt=""
+              >
+
+              <div class="event-text">
+
+                <h5>
+
+                  {{ vendor.title }}
+
+                </h5>
+
+                <span>
+
+                  {{ vendor.subTitle }}
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </td>
+
+          <!-- CATEGORY -->
+
+          <td>
+
+            <span
+              class="status-badge"
+              [ngClass]="vendor.categoryClass"
+            >
+
+              {{ vendor.type }}
+
+            </span>
+
+          </td>
+
+          <!-- LOCATION -->
+
+          <td>
+
+            <span class="single-text">
+
+              {{ vendor.location }}
+
+            </span>
+
+          </td>
+
+          <!-- RATING -->
+
+          <td>
+
+            <div class="table-double-text">
+
+              <h6>
+
+                {{ vendor.rating }} ⭐
+
+              </h6>
+
+              <span>
+
+                ({{ vendor.reviews }} reviews)
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- BOOKINGS -->
+
+          <td>
+
+            <div class="table-double-text">
+
+              <h6>
+
+                {{ vendor.bookings }}
+
+              </h6>
+
+              <span>
+
+                This Month
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- AVAILABILITY -->
+
+          <td>
+
+            <div class="table-double-text">
+
+              <h6>
+
+                {{ vendor.availability }}
+
+              </h6>
+
+              <span
+                [style.color]="
+                  vendor.availabilityStatus
+                  === 'Busy'
+                  ? '#f5a623'
+                  : '#39d353'
+                "
+              >
+
+                {{ vendor.availabilityStatus }}
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- STATUS -->
+
+          <td>
+
+            <span
+              class="status-badge"
+              [ngClass]="
+                getStatusClass(
+                  vendor.status
+                )
+              "
+            >
+
+              {{ vendor.status }}
+
+            </span>
+
+          </td>
+
+          <!-- ACTIONS -->
+
+          <td class="menu-cell">
+
+            <button
+              class="dots-btn"
+              (click)="toggleMenu(i)"
+            >
+
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+
+            </button>
+
+            <div
+              class="action-menu"
+              *ngIf="openedMenu === i"
+            >
+
+              <button>
+
+                <i class="fa-regular fa-pen-to-square"></i>
+
+                Edit
+
+              </button>
+
+              <button class="delete-btn">
+
+                <i class="fa-regular fa-trash-can"></i>
+
+                Delete
+
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="table-footer">
+
+    <p>
+
+      Showing
+
+      {{
+        (currentPage - 1) * itemsPerPage + 1
+      }}
+
+      to
+
+      {{
+        currentPage * itemsPerPage >
+        filteredVendors.length
+        ? filteredVendors.length
+        : currentPage * itemsPerPage
+      }}
+
+      of {{ filteredVendors.length }} artists
+
+    </p>
+
+    <!-- PAGINATION -->
+
+    <div class="pagination-box">
+
+      <button
+        (click)="prevPage()"
+        [disabled]="currentPage === 1"
+      >
+
+        <i class="fa-solid fa-chevron-left"></i>
+
+      </button>
+
+      <ng-container
+        *ngFor="let page of visiblePages"
+      >
+
+        <button
+          *ngIf="page !== '...'"
+          (click)="changePage(+page)"
+          [class.active]="currentPage === page"
+        >
+
+          {{ page }}
+
+        </button>
+
+        <span
+          *ngIf="page === '...'"
+          class="dots"
+        >
+
+          ...
+
+        </span>
+
+      </ng-container>
+
+      <button
+        (click)="nextPage()"
+        [disabled]="
+          currentPage === totalPagesCount
+        "
+      >
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </div>
+
+    <!-- PER PAGE -->
+
+    <div class="per-page-wrapper">
+
+      <select
+        class="per-page-select"
+        [(ngModel)]="itemsPerPage"
+        (change)="changeItemsPerPage()"
+      >
+
+        <option [value]="5">5 / page</option>
+
+        <option [value]="10">10 / page</option>
+
+        <option [value]="15">15 / page</option>
+
+        <option [value]="20">20 / page</option>
+
+      </select>
+
+      <i class="fa-solid fa-chevron-down select-icon"></i>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+
+</div>
+<div class="col-md-4">
+<div class="artists-category-card">
+
+  <!-- HEADER -->
+
+  <div class="artists-category-header">
+
+    <h3>Artists by Category</h3>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <div class="artists-category-content">
+
+    <!-- CHART -->
+
+    <div class="artists-chart-wrapper">
+
+      <div class="artists-chart">
+
+       <svg viewBox="0 0 42 42">
+
+  <!-- BG -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#171717"
+    stroke-width="4"
+  />
+
+  <!-- DJs -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#3b82f6"
+    stroke-width="4"
+    [attr.stroke-dasharray]="djPercent + ' 100'"
+    stroke-dashoffset="0"
+  />
+
+  <!-- Musicians -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#a855f7"
+    stroke-width="4"
+    [attr.stroke-dasharray]="musicianPercent + ' 100'"
+    [attr.stroke-dashoffset]="-djPercent"
+  />
+
+  <!-- Singers -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#ff335f"
+    stroke-width="4"
+    [attr.stroke-dasharray]="singerPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(djPercent + musicianPercent)"
+  />
+
+  <!-- Performers -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#f7b731"
+    stroke-width="4"
+    [attr.stroke-dasharray]="performerPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(djPercent + musicianPercent + singerPercent)"
+  />
+
+  <!-- Photographers -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#93c5fd"
+    stroke-width="4"
+    [attr.stroke-dasharray]="photographerPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(djPercent + musicianPercent + singerPercent + performerPercent)"
+  />
+
+  <!-- Technicians -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#38bdf8"
+    stroke-width="4"
+    [attr.stroke-dasharray]="technicianPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(djPercent + musicianPercent + singerPercent + performerPercent + photographerPercent)"
+  />
+
+  <!-- Others -->
+
+  <circle
+    cx="21"
+    cy="21"
+    r="15.915"
+    fill="transparent"
+    stroke="#6dd56d"
+    stroke-width="4"
+    [attr.stroke-dasharray]="othersPercent + ' 100'"
+    [attr.stroke-dashoffset]="-(djPercent + musicianPercent + singerPercent + performerPercent + photographerPercent + technicianPercent)"
+  />
+
+</svg>
+        <!-- CENTER -->
+
+        <div class="chart-center">
+
+          <h2>{{ totalArtists }}</h2>
+
+          <span>Total</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LIST -->
+
+    <div class="artists-category-list">
+
+      <!-- DJs -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#3b82f6"
+          ></span>
+
+          <p>DJs</p>
+
+        </div>
+
+        <span>
+
+          {{ djCount }}
+
+          ({{ djPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- Musicians -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#a855f7"
+          ></span>
+
+          <p>Musicians</p>
+
+        </div>
+
+        <span>
+
+          {{ musicianCount }}
+
+          ({{ musicianPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- Singers -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#ff335f"
+          ></span>
+
+          <p>Singers</p>
+
+        </div>
+
+        <span>
+
+          {{ singerCount }}
+
+          ({{ singerPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- Performers -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#f7b731"
+          ></span>
+
+          <p>Performers</p>
+
+        </div>
+
+        <span>
+
+          {{ performerCount }}
+
+          ({{ performerPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- Photographers -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#93c5fd"
+          ></span>
+
+          <p>Photographers</p>
+
+        </div>
+
+        <span>
+
+          {{ photographerCount }}
+
+          ({{ photographerPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- Technicians -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#38bdf8"
+          ></span>
+
+          <p>Technicians</p>
+
+        </div>
+
+        <span>
+
+          {{ technicianCount }}
+
+          ({{ technicianPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- Others -->
+
+      <div class="artist-category-item">
+
+        <div class="artist-category-left">
+
+          <span
+            class="artist-dot"
+            style="background:#6dd56d"
+          ></span>
+
+          <p>Others</p>
+
+        </div>
+
+        <span>
+
+          {{ othersCount }}
+
+          ({{ othersPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="top-artists-card my-2">
+
+  <!-- HEADER -->
+
+  <div class="top-artists-header">
+
+    <h3>
+      Top Artists by Bookings (30 Days)
+    </h3>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div class="top-artists-list">
+
+    <div
+      class="top-artist-item"
+      *ngFor="
+  let artist of topArtists;
+  let i = index
+"
+    >
+
+      <!-- LEFT -->
+
+      <div class="top-artist-left">
+
+        <div class="artist-rank">
+
+          {{ i + 1 }}
+
+        </div>
+
+        <h4>
+
+          {{ artist.title }}
+
+        </h4>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <span class="artist-bookings">
+
+        {{ artist.bookings }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- BTN -->
+
+  <button
+    class="view-rankings-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#artistRankingsModal"
+  >
+
+    View All Rankings
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+
+<!-- ====================================== -->
+<!-- MODAL -->
+<!-- ====================================== -->
+
+<div
+  class="modal fade"
+  id="artistRankingsModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content artist-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header artist-modal-header">
+
+        <h5>
+          Top Artists By Bookings
+        </h5>
+<!--
+        <button
+          type="button"
+          class="close-btn-modal"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button> -->
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body artist-modal-body">
+
+        <div
+          class="artist-modal-row"
+          *ngFor="
+  let artist of allArtists;
+  let i = index
+"
+        >
+
+          <!-- LEFT -->
+
+          <div class="artist-modal-left">
+
+            <div class="artist-rank-modal">
+
+              {{ i + 1 }}
+
+            </div>
+
+            <img
+              [src]="artist.image"
+              alt=""
+            >
+
+            <div>
+
+              <h4>
+
+                {{ artist.title }}
+
+              </h4>
+
+              <span>
+
+                {{ artist.subTitle }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="artist-modal-right">
+
+            <h3>
+
+              {{ artist.bookings }}
+
+            </h3>
+
+            <span>
+
+              Bookings
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer artist-modal-footer">
+
+        <button
+          type="button"
+          class="close-artist-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="new-artists-card">
+
+  <!-- HEADER -->
+
+  <div class="new-artists-header">
+
+    <h3>New Artists</h3>
+
+  </div>
+
+  <!-- LIST -->
+
+  <div class="new-artists-list">
+
+    <div
+      class="new-artist-item"
+      *ngFor="
+        let artist of topNewArtists
+      "
+      data-bs-toggle="modal"
+      data-bs-target="#newArtistsModal"
+    >
+
+      <!-- LEFT -->
+
+      <div class="new-artist-left">
+
+        <img
+          [src]="artist.image"
+          alt=""
+        >
+
+        <div>
+
+          <h4>
+
+            {{ artist.title }}
+
+          </h4>
+
+          <span>
+
+            {{ artist.subTitle }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="new-artist-right">
+
+        {{ artist.joinDate }}
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <button
+    class="view-all-artists-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#newArtistsModal"
+  >
+
+    View All New Artists
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ===================================== -->
+<!-- MODAL -->
+<!-- ===================================== -->
+
+<div
+  class="modal fade"
+  id="newArtistsModal"
+  tabindex="-1"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered"
+  >
+
+    <div class="modal-content artist-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header artist-modal-header">
+
+        <h5>
+          All New Artists
+        </h5>
+
+        <!-- <button
+          type="button"
+          class="close-btn-modal"
+          data-bs-dismiss="modal"
+        >
+
+          <i class="fa-solid fa-xmark"></i>
+
+        </button> -->
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body artist-modal-body">
+
+        <div
+          class="artist-modal-row"
+          *ngFor="
+            let artist of allNewArtists
+          "
+        >
+
+          <!-- LEFT -->
+
+          <div class="artist-modal-left">
+
+            <img
+              [src]="artist.image"
+              alt=""
+            >
+
+            <div>
+
+              <h4>
+
+                {{ artist.title }}
+
+              </h4>
+
+              <span>
+
+                {{ artist.subTitle }}
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="artist-modal-right">
+
+            <h3>
+
+              {{ artist.joinDate }}
+
+            </h3>
+
+            <span>
+
+              Joined Date
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer artist-modal-footer">
+
+        <button
+          type="button"
+          class="close-artist-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+
+

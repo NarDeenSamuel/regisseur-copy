@@ -1,0 +1,221 @@
+<nav
+  class="navbar navbar-expand-lg navbar-dark bg-black d-flex justify-content-between align-items-center"
+>
+  <button
+    class="navbar-toggler border-0 shadow-none d-lg-none"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#mobileMenu"
+  >
+    <i class="fa-solid fa-bars text-white fs-4"></i>
+  </button>
+
+  <!-- Desktop -->
+
+  <div class="collapse navbar-collapse d-none d-lg-flex">
+    <ul class="navbar-nav ms-3 me-auto">
+      <li class="nav-item">
+        <a class="nav-link nav-item-custom" routerLink="/home" routerLinkActive="active-nav">
+          <i class="fa-solid fa-border-all"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+       <a
+  class="nav-link nav-item-custom"
+  routerLink="/all-events"
+  routerLinkActive="active-nav"
+>
+          <i class="fa-regular fa-calendar"></i>
+
+          <span>Events</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link nav-item-custom">
+          <i class="fa-regular fa-star"></i>
+
+          <span>Talents</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link nav-item-custom">
+          <i class="fa-solid fa-store"></i>
+
+          <span>Vendors</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link nav-item-custom">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+
+          <span>Service Providers</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link nav-item-custom">
+          <i class="fa-regular fa-building"></i>
+
+          <span>Spaces</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link nav-item-custom">
+          <i class="fa-regular fa-envelope"></i>
+
+          <span>Messages</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Right Side -->
+
+    <div class="d-flex align-items-center gap-3 desktop-right">
+      <div class="position-relative">
+        <i class="fa-solid fa-magnifying-glass text-white fs-6"></i>
+      </div>
+
+      <div class="position-relative">
+        <i class="fa-regular fa-bell text-white fs-6"></i>
+
+        <span class="notification-badge"> 2 </span>
+      </div>
+
+      <i class="fa-regular fa-circle-question text-white fs-5"></i>
+
+      <div class="profile-card">
+        <img
+          src="assets/images/profile.png"
+          width="48"
+          height="48"
+          class="rounded-circle"
+          alt=""
+        />
+
+        <div>
+          <div class="profile-name">
+            {{ user?.firstName }} {{ user?.lastName }}
+          </div>
+
+          <div class="profile-role">
+            {{ user?.primaryRoleName }}
+          </div>
+        </div>
+
+        <i class="fa-solid fa-chevron-down text-white"></i>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- Mobile Sidebar -->
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="mobileMenu">
+  <div class="offcanvas-header">
+    <img src="assets/images/smallLogo.png" height="34" alt="" />
+
+    <button
+      type="button"
+      class="btn-close btn-close-white"
+      data-bs-dismiss="offcanvas"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="profile-card-mobile">
+      <img
+        src="assets/images/profile.png"
+        width="50"
+        height="50"
+        class="rounded-circle"
+        alt=""
+      />
+      <div class="flex-grow-1">
+        <div class="profile-name">Alex Morgan</div>
+
+        <div class="profile-role">Talent</div>
+      </div>
+      <i class="fa-solid fa-chevron-right text-secondary"></i>
+    </div>
+    <!-- Search -->
+    <div class="input-group mb-4">
+      <span
+        class="input-group-text bg-dark-search border-secondary text-secondary"
+      >
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
+      <input
+        type="text"
+        class="form-control bg-dark-search border-secondary text-white"
+        placeholder="Search"
+      />
+    </div>
+    <ul class="navbar-nav">
+      <li>
+        <a class="nav-link mobile-link">
+          <i class="fa-regular fa-bell me-2"></i>
+
+          Notifications
+        </a>
+      </li>
+      <li>
+<a
+  class="nav-link mobile-link"
+  routerLink="/home"
+  routerLinkActive="active-nav"
+
+>          <i class="fa-solid fa-border-all me-2"></i>
+
+          Dashboard
+        </a>
+      </li>
+      <li>
+<a
+  class="nav-link nav-item-custom"
+  routerLink="/all-events"
+  routerLinkActive="active-nav"
+>          <i class="fa-regular fa-calendar me-2"></i>
+
+          Events
+        </a>
+      </li>
+      <li>
+        <a class="nav-link mobile-link">
+          <i class="fa-regular fa-star me-2"></i>
+
+          Talents
+        </a>
+      </li>
+      <li>
+        <a class="nav-link mobile-link">
+          <i class="fa-solid fa-store me-2"></i>
+          Vendors
+        </a>
+      </li>
+
+      <li>
+        <a class="nav-link mobile-link">
+          <i class="fa-solid fa-screwdriver-wrench me-2"></i>
+
+          Service Providers
+        </a>
+      </li>
+      <li>
+        <a class="nav-link mobile-link">
+          <i class="fa-regular fa-building me-2"></i>
+
+          Spaces
+        </a>
+      </li>
+      <li>
+        <a class="nav-link mobile-link">
+          <i class="fa-regular fa-envelope me-2"></i>
+          Messages
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

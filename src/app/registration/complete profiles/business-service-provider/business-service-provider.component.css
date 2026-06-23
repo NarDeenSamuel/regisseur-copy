@@ -1,0 +1,686 @@
+.bg-section{
+  background-color: black;
+}
+
+.logo-img{
+  width: 150px;
+}
+
+
+.header-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  flex-wrap:nowrap;
+}
+
+.left-section{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-shrink:0;
+}
+
+.right-section{
+  margin-left:auto;
+  display:flex;
+  justify-content:flex-end;
+  flex:1;
+  min-width:0;
+}
+
+.logo-img{
+  height:36px;
+  width:auto;
+}
+
+@media (max-width: 991.98px){
+
+  .header-wrapper{
+    justify-content:space-between;
+  }
+
+  .left-section{
+    gap:6px;
+  }
+
+  .logo-img{
+    height:32px;
+  }
+}
+
+
+
+/* ==========================================================================
+   1. Layout & Containers (الهيكل العام والحاويات)
+   ========================================================================== */
+.profile-container {
+  background: #050505;
+  min-height: 100vh;
+}
+
+.profile-header {
+  background: #050505;
+}
+
+.profile-header h2 {
+  font-size: 2rem;
+}
+
+.profile-card {
+  background: #0b0d11;
+  border: 1px solid #1c1f25;
+  border-radius: 12px;
+}
+
+.bg-dark-card {
+  background: #0d0f12;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.profile-note {
+  background: #090909;
+  border: 1px solid #1f1f1f;
+}
+
+.section-title {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   2. Progress Indicators & Steps (مؤشرات التقدم والخطوات)
+   ========================================================================== */
+.progress-line {
+  width: 60px;
+  height: 2px;
+  background: #444;
+}
+
+.progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #444;
+}
+
+.progress-line.active,
+.progress-dot.active {
+  background: #ff1e1e;
+}
+
+.step-circle {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #ff1e1e;
+  color: #ff1e1e;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  margin-right: .5rem;
+}
+
+.step-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid #ff1e1e;
+  color: #ff1e1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   3. Forms & Custom Inputs (الحقول والمدخلات)
+   ========================================================================== */
+.form-label {
+  font-size: .9rem;
+}
+
+.form-control,
+.form-select {
+  background: #0d1117;
+  border: 1px solid #242933;
+  color: #fff;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: #0d1117;
+  color: #fff;
+  border-color: #ff1e1e;
+  box-shadow: none;
+}
+
+.custom-input {
+  background: #090b0f;
+  border: 1px solid #23262d;
+  color: #fff;
+}
+
+.custom-input:focus {
+  background: #090b0f;
+  border-color: #ff1e1e;
+  color: #fff;
+  box-shadow: none;
+}
+
+.custom-input::placeholder {
+  color: #707784;
+}
+
+.custom-switch {
+  width: 48px !important;
+  height: 24px !important;
+  cursor: pointer;
+}
+
+.custom-switch:checked {
+  background-color: #ff1e1e;
+  border-color: #ff1e1e;
+}
+
+.custom-switch:focus {
+  box-shadow: none;
+}
+
+.custom-switch:not(:checked) {
+  background-color: #2b2f36;
+  border-color: #2b2f36;
+}
+
+.atmosphere-btn {
+  background: #11151c;
+  border: 1px solid #232833;
+  color: #d5d5d5;
+  padding: .6rem 1rem;
+  font-size: .9rem;
+}
+
+.atmosphere-btn:hover {
+  background: #171b22;
+  color: #fff;
+}
+
+.active-option {
+  background: #7d0b0b !important;
+  border: 1px solid #ff1e1e !important;
+  color: #fff !important;
+}
+
+/* ==========================================================================
+   4. Phone Input & Country Selector (حقل الهاتف واختيار الدولة)
+   ========================================================================== */
+.phone-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: #090b0f;
+  border: 1px solid #23262d;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+.phone-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+  padding: 12px;
+}
+
+.phone-input:focus {
+  outline: none;
+}
+
+.country-code {
+  color: #fff;
+  padding: 0 12px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.custom-country-select {
+  position: relative;
+  flex-shrink: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.selected-country {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.country-flag {
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+}
+
+.country-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 250px;
+  max-height: 250px;
+  overflow-y: auto;
+  background: #171B22;
+  border: 1px solid #2c3440;
+  border-radius: 10px;
+  z-index: 9999;
+  box-shadow: 0 10px 25px rgba(0,0,0,.5);
+  scrollbar-width: thin;
+  scrollbar-color: #f5f5f5 #11151b;
+}
+
+.country-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.country-menu::-webkit-scrollbar-track {
+  background: #11151b;
+}
+
+.country-menu::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f5f5f5, #f5f5f5);
+  border-radius: 20px;
+}
+
+.country-menu::-webkit-scrollbar-thumb:hover {
+  background: #f5f5f5;
+}
+
+.country-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.country-option:hover {
+  background: #222a35;
+}
+
+/* ==========================================================================
+   5. Custom Dropdowns & Chips (قوائم الاختيار المخصصة)
+   ========================================================================== */
+.language-select-wrapper {
+  position: relative;
+}
+
+.language-select-wrapper select {
+  background: transparent !important;
+  color: #fff !important;
+  box-shadow: none !important;
+}
+
+.custom-language-dropdown {
+  position: relative;
+}
+
+.dropdown-selected {
+  min-height: 48px;
+  background: #090b0f;
+  border: 1px solid #23262d;
+  border-radius: 8px;
+  color: #fff;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.dropdown-selected:hover {
+  border-color: #ff1e1e;
+}
+
+.dropdown-menu-custom {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #171B22;
+  border: 1px solid #2c3440;
+  border-radius: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 9999;
+  scrollbar-width: thin;
+  scrollbar-color: #f5f5f5 #171B22;
+}
+
+.dropdown-menu-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown-menu-custom::-webkit-scrollbar-track {
+  background: #171B22;
+  border-radius: 20px;
+}
+
+.dropdown-menu-custom::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #f5f5f5, #f5f5f5);
+  border-radius: 20px;
+}
+
+.dropdown-menu-custom::-webkit-scrollbar-thumb:hover {
+  background: #f5f5f5;
+}
+
+.dropdown-item-custom {
+  padding: 12px 15px;
+  color: #fff;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.dropdown-item-custom:hover {
+  background: #222a35;
+  color: #ff1e1e;
+}
+
+.selected-languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.language-chip {
+  background: #1b1f26;
+  border: 1px solid #323845;
+  color: #fff;
+  border-radius: 6px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .85rem;
+}
+
+.language-chip i {
+  cursor: pointer;
+}
+
+.language-chip i:hover {
+  color: #ff1e1e;
+}
+
+/* ==========================================================================
+   6. Social Media Section (مواقع التواصل الاجتماعي)
+   ========================================================================== */
+.social-row {
+  margin-bottom: 16px;
+}
+
+.social-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #e5e7eb;
+  font-size: .95rem;
+}
+
+.social-icon {
+  width: 28px;
+  text-align: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.website, .twitter, .tiktok, .additional { color: #ffffff; }
+.instagram { color: #E1306C; }
+.facebook  { color: #1877F2; }
+.linkedin  { color: #0A66C2; }
+.youtube   { color: #FF0000; }
+
+/* ==========================================================================
+   7. Media Uploads & Previews (مرفقات الميديا والمعاينة)
+   ========================================================================== */
+.media-box {
+  height: 100%;
+}
+
+.media-title {
+  color: #fff;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.profile-preview,
+.banner-preview,
+.pdf-preview {
+  border: 1px solid #20252d;
+  border-radius: 12px;
+  background: #0b0e13;
+  overflow: hidden;
+}
+
+.profile-preview {
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-preview img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.banner-preview {
+  height: 170px;
+}
+
+.banner-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empty-media {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #666;
+}
+
+.gallery-grid {
+  height: 170px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.gallery-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gallery-grid::-webkit-scrollbar-track {
+  background: #0b0e13;
+  border-radius: 20px;
+}
+
+.gallery-grid::-webkit-scrollbar-thumb {
+  background: #3a3f47;
+  border-radius: 20px;
+}
+
+.gallery-grid::-webkit-scrollbar-thumb:hover {
+  background: #ff1e1e;
+}
+
+.gallery-item {
+  position: relative;
+  height: 75px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #20252d;
+  background: #0b0e13;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pdf-preview {
+  position: relative;
+  border: 1px solid #20252d;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #070b11;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background: #ff1e1e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 2;
+}
+
+.remove-btn i {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.remove-btn:hover {
+  background: #ff1a1a;
+  transform: scale(1.05);
+}
+
+.pdf-preview .remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: #ff1e1e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 5;
+}
+
+.pdf-preview .remove-btn i {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   8. Responsive Media Queries (التجاوب مع الشاشات المختلفة)
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .progress-line {
+    width: 45px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .profile-header h2 {
+    font-size: 1.7rem;
+  }
+  .section-title {
+    font-size: .95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .progress-line {
+    width: 30px;
+  }
+  .profile-header h2 {
+    font-size: 1.4rem;
+  }
+  .social-label {
+    margin-bottom: 8px;
+  }
+  .social-icon {
+    font-size: 1.5rem;
+  }
+}
+.profile-preview,
+.banner-preview,
+.pdf-preview,
+.gallery-grid {
+
+  min-height: 170px !important;
+  height: 170px !important;
+
+}
+.media-preview,
+.banner-preview,
+.pdf-preview,
+.gallery-grid{
+  min-height:200px;
+}
+
+.empty-media{
+  width:100%;
+  height:100%;
+  min-height:200px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+
+  color:#6c757d;
+  text-align:center;
+}
+
+.empty-text{
+  font-size:14px;
+  color:#6c757d;
+}

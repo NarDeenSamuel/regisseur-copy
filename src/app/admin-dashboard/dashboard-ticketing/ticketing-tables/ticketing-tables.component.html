@@ -1,0 +1,1161 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="tickets-wrapper">
+
+  <div class="tickets-table-card">
+
+    <!-- ===================================== -->
+    <!-- =============== HEADER ============== -->
+    <!-- ===================================== -->
+
+    <div class="tickets-header">
+
+
+       <div class="container-fluid">
+        <div class="row">
+           <!-- FILTERS -->
+          <div class="col-md-7">
+ <div class="tickets-tabs">
+
+        <button
+          *ngFor="let filter of filters"
+          (click)="setFilter(filter)"
+          [class.active]="activeFilter === filter"
+        >
+
+          {{ filter }}
+
+        </button>
+
+      </div>
+
+          </div>
+             <!-- ACTIONS -->
+<div class="col-md-5">
+
+<div class="tickets-actions">
+
+  <!-- FILTER -->
+
+  <div class="filter-dropdown">
+
+    <button
+      class="header-btn"
+      (click)="toggleFilterMenu()"
+    >
+
+      <i class="fa-solid fa-filter"></i>
+
+      Filters
+
+    </button>
+
+    <!-- MENU -->
+
+    <div
+      class="filter-menu"
+      *ngIf="showFilterMenu"
+    >
+
+      <!-- SORT BOOKINGS -->
+
+      <button
+        (click)="sortByBookings()"
+      >
+
+        <i class="fa-solid fa-arrow-down-wide-short"></i>
+
+        Bookings High → Low
+
+      </button>
+
+      <!-- SORT REVENUE -->
+
+      <button
+        (click)="sortByRevenue()"
+      >
+
+        <i class="fa-solid fa-dollar-sign"></i>
+
+        Revenue High → Low
+
+      </button>
+
+      <!-- CATEGORY -->
+
+      <div class="small-select-wrapper">
+
+        <label>Category</label>
+
+        <select
+          [(ngModel)]="selectedCategory"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Categories
+          </option>
+
+          <option
+            *ngFor="let item of categoryOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- TYPE -->
+
+      <div class="small-select-wrapper">
+
+        <label>Type</label>
+
+        <select
+          [(ngModel)]="selectedType"
+          (change)="applyFilters()"
+        >
+
+          <option value="">
+            All Types
+          </option>
+
+          <option
+            *ngFor="let item of typeOptions"
+            [value]="item"
+          >
+
+            {{ item }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DATE -->
+
+<!-- DESKTOP BUTTON -->
+
+<div class="desktop-date-picker">
+
+  <button
+    type="button"
+    class="header-btn"
+    (click)="openDatePicker(dateInput)"
+  >
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </button>
+
+  <input
+    #dateInput
+    type="date"
+    class="hidden-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+</div>
+
+<!-- MOBILE & TABLET BUTTON -->
+
+<div class="mobile-date-picker">
+
+  <input
+    type="date"
+    class="real-date-input"
+    [(ngModel)]="selectedDate"
+    (change)="applyFilters()"
+  >
+
+  <div class="header-btn">
+
+    <i class="fa-regular fa-calendar"></i>
+
+    {{
+      selectedDate
+      ? (selectedDate | date:'MMM d, y')
+      : 'Select Date'
+    }}
+
+  </div>
+
+</div>
+  <!-- EXPORT -->
+
+  <button
+    class="header-btn"
+    (click)="exportPDF()"
+  >
+
+    <i class="fa-solid fa-download"></i>
+
+
+  </button>
+
+</div>
+</div>
+
+        </div>
+
+       </div>
+
+
+
+
+
+
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- ================ TABLE ============== -->
+    <!-- ===================================== -->
+
+    <div class="custom-table-wrapper">
+
+      <table class="tickets-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Order ID</th>
+<th>Event</th>
+<th>Buyer</th>
+<th>Tickets</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Payment Status</th>
+<th>Order Date</th>
+<th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+       <tbody>
+
+  <tr
+    *ngFor="
+      let event of paginatedTickets;
+      let i = index
+    "
+  >
+
+    <!-- ORDER ID -->
+
+    <td>
+
+      <span class="single-text">
+
+        {{ event.orderId }}
+
+      </span>
+
+    </td>
+
+    <!-- EVENT -->
+
+    <td>
+
+      <div class="event-info">
+
+        <img
+          [src]="event.image"
+          alt=""
+        >
+
+        <div class="event-text">
+
+          <h5>{{ event.title }}</h5>
+
+          <span>
+
+            {{ event.date }}
+
+            •
+
+            {{ event.time }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </td>
+
+    <!-- BUYER -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6>{{ event.venue }}</h6>
+
+        <span>{{ event.location }}</span>
+
+      </div>
+
+    </td>
+
+    <!-- TICKETS -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6>{{ event.bookings }}</h6>
+
+        <span>{{ event.organizer }}</span>
+
+      </div>
+
+    </td>
+
+    <!-- AMOUNT -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6 class="revenue">
+
+          {{ event.revenue }}
+
+        </h6>
+
+        <span>Incl. fees</span>
+
+      </div>
+
+    </td>
+
+    <!-- STATUS -->
+
+    <td>
+
+      <span
+        class="status-badge"
+        [ngClass]="event.statusClass"
+      >
+
+        {{ event.status }}
+
+      </span>
+
+    </td>
+
+    <!-- PAYMENT -->
+
+    <td>
+
+      <span
+        class="status-badge"
+        [ngClass]="
+          event.type === 'Refunded'
+          ? 'cancelled'
+          : event.type === 'Deposit Paid'
+          ? 'upcoming'
+          : 'completed'
+        "
+      >
+
+        {{ event.type }}
+
+      </span>
+
+    </td>
+
+    <!-- ORDER DATE -->
+
+    <td>
+
+      <div class="table-double-text">
+
+        <h6>{{ event.fullDate }}</h6>
+
+        <span>{{ event.time }}</span>
+
+      </div>
+
+    </td>
+
+    <!-- ACTIONS -->
+
+    <td class="menu-cell">
+
+      <button
+        class="dots-btn"
+        (click)="toggleMenu(i)"
+      >
+
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+
+      </button>
+
+      <div
+        class="action-menu"
+        *ngIf="openedMenu === i"
+      >
+
+        <button>
+
+          <i class="fa-regular fa-pen-to-square"></i>
+
+          Edit
+
+        </button>
+
+        <button class="delete-btn">
+
+          <i class="fa-regular fa-trash-can"></i>
+
+          Delete
+
+        </button>
+
+      </div>
+
+    </td>
+
+  </tr>
+
+</tbody>
+
+      </table>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- =============== FOOTER ============== -->
+    <!-- ===================================== -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+
+        {{
+          (currentPage - 1) * itemsPerPage + 1
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          filteredTickets.length
+          ? filteredTickets.length
+          : currentPage * itemsPerPage
+        }}
+
+        of {{ filteredTickets.length }} tickets
+
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div class="pagination-box">
+
+        <!-- PREV -->
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+
+          <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <!-- NUMBERS -->
+
+        <ng-container
+          *ngFor="let page of visiblePages"
+        >
+
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+
+            {{ page }}
+
+          </button>
+
+          <span
+            *ngIf="page === '...'"
+            class="dots"
+          >
+
+            ...
+
+          </span>
+
+        </ng-container>
+
+        <!-- NEXT -->
+
+        <button
+          (click)="nextPage()"
+          [disabled]="
+            currentPage === totalPagesCount
+          "
+        >
+
+          <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+
+  <select
+    class="per-page-select"
+    [(ngModel)]="itemsPerPage"
+    (change)="changeItemsPerPage()"
+  >
+
+    <option [value]="5">5 / page</option>
+
+    <option [value]="10">10 / page</option>
+
+    <option [value]="15">15 / page</option>
+
+    <option [value]="20">20 / page</option>
+
+  </select>
+
+  <i class="fa-solid fa-chevron-down select-icon"></i>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+<div class="col-md-4">
+
+<!-- Charts  -->
+
+<div class="revenue-chart-card">
+
+  <!-- HEADER -->
+
+  <div class="revenue-chart-header">
+
+    <div>
+
+      <h3>Revenue Overview</h3>
+
+      <h2>{{ totalRevenue | currency }}</h2>
+
+      <div class="revenue-growth">
+
+        <i class="fa-solid fa-arrow-up"></i>
+
+        <span>16%</span>
+
+        <p>vs last 30 days</p>
+
+      </div>
+
+    </div>
+
+    <!-- FILTER -->
+
+    <select
+      class="days-filter"
+      [(ngModel)]="selectedDays"
+      (change)="generateRevenueChart()"
+    >
+
+      <option value="30">
+        30 Days
+      </option>
+
+      <option value="14">
+        14 Days
+      </option>
+
+      <option value="7">
+        7 Days
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- CHART -->
+
+  <div class="chart-wrapper">
+
+    <!-- Y AXIS -->
+
+    <div class="chart-y-axis">
+
+      <span>$150K</span>
+
+      <span>$100K</span>
+
+      <span>$50K</span>
+
+      <span>$0</span>
+
+    </div>
+
+    <!-- CHART -->
+
+    <div class="chart-content">
+
+      <svg
+        viewBox="0 0 600 220"
+        preserveAspectRatio="none"
+        class="chart-svg"
+      >
+
+        <!-- AREA -->
+
+        <defs>
+
+          <linearGradient
+            id="chartGradient"
+            x1="0"
+            x2="0"
+            y1="0"
+            y2="1"
+          >
+
+            <stop
+              offset="0%"
+              stop-color="#ff1f44"
+              stop-opacity=".45"
+            />
+
+            <stop
+              offset="100%"
+              stop-color="#ff1f44"
+              stop-opacity="0"
+            />
+
+          </linearGradient>
+
+        </defs>
+
+        <!-- GRID -->
+
+        <line
+          x1="0"
+          y1="40"
+          x2="600"
+          y2="40"
+          class="grid-line"
+        />
+
+        <line
+          x1="0"
+          y1="90"
+          x2="600"
+          y2="90"
+          class="grid-line"
+        />
+
+        <line
+          x1="0"
+          y1="140"
+          x2="600"
+          y2="140"
+          class="grid-line"
+        />
+
+        <line
+          x1="0"
+          y1="190"
+          x2="600"
+          y2="190"
+          class="grid-line"
+        />
+
+        <!-- AREA -->
+
+        <path
+          [attr.d]="chartAreaPath"
+          fill="url(#chartGradient)"
+        ></path>
+
+        <!-- LINE -->
+
+        <path
+          [attr.d]="chartLinePath"
+          class="chart-line"
+        ></path>
+
+      </svg>
+
+      <!-- X AXIS -->
+
+      <div class="chart-x-axis">
+
+        <span>May 16</span>
+
+        <span>May 26</span>
+
+        <span>Jun 5</span>
+
+        <span>Jun 16</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ticket-tier -->
+
+<div class="ticket-tier-card my-2">
+
+  <!-- HEADER -->
+
+  <div class="ticket-tier-header">
+
+    <h3>Sales by Ticket Tier</h3>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <div class="ticket-tier-content">
+
+    <!-- CHART -->
+
+    <div class="ticket-chart-wrapper">
+
+      <div class="ticket-chart">
+
+        <svg viewBox="0 0 42 42">
+
+          <!-- BG -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#171717"
+            stroke-width="4"
+          />
+
+          <!-- VIP -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#6d4dff"
+            stroke-width="4"
+            [attr.stroke-dasharray]="vipPercent + ' 100'"
+            stroke-dashoffset="25"
+          />
+
+          <!-- PREMIUM -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#8e5cff"
+            stroke-width="4"
+            [attr.stroke-dasharray]="premiumPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - vipPercent"
+          />
+
+          <!-- GENERAL -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#f2a51a"
+            stroke-width="4"
+            [attr.stroke-dasharray]="generalPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - vipPercent - premiumPercent"
+          />
+
+          <!-- EARLY -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#ff3b30"
+            stroke-width="4"
+            [attr.stroke-dasharray]="earlyBirdPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - vipPercent - premiumPercent - generalPercent"
+          />
+
+        </svg>
+
+        <!-- CENTER -->
+
+        <div class="chart-center">
+
+          <h2>{{ totalSold }}</h2>
+
+          <span>Total Sold</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LEGEND -->
+
+    <div class="ticket-tier-list">
+
+      <!-- VIP -->
+
+      <div class="tier-item">
+
+        <div class="tier-left">
+
+          <span
+            class="tier-dot"
+            style="background:#6d4dff"
+          ></span>
+
+          <p>VIP</p>
+
+        </div>
+
+        <span>
+
+          {{ vipCount }}
+
+          ({{ vipPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- PREMIUM -->
+
+      <div class="tier-item">
+
+        <div class="tier-left">
+
+          <span
+            class="tier-dot"
+            style="background:#8e5cff"
+          ></span>
+
+          <p>Premium</p>
+
+        </div>
+
+        <span>
+
+          {{ premiumCount }}
+
+          ({{ premiumPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- GENERAL -->
+
+      <div class="tier-item">
+
+        <div class="tier-left">
+
+          <span
+            class="tier-dot"
+            style="background:#f2a51a"
+          ></span>
+
+          <p>General</p>
+
+        </div>
+
+        <span>
+
+          {{ generalCount }}
+
+          ({{ generalPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- EARLY -->
+
+      <div class="tier-item">
+
+        <div class="tier-left">
+
+          <span
+            class="tier-dot"
+            style="background:#ff3b30"
+          ></span>
+
+          <p>Early Bird</p>
+
+        </div>
+
+        <span>
+
+          {{ earlyBirdCount }}
+
+          ({{ earlyBirdPercent | number:'1.1-1' }}%)
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ======================================= -->
+<!-- TOP EVENTS BY SALES -->
+<!-- ======================================= -->
+
+<div class="top-sales-card">
+
+  <!-- HEADER -->
+
+  <div class="top-sales-header">
+
+    <h3>Top Events by Sales</h3>
+
+  </div>
+
+  <!-- ITEMS -->
+
+  <div
+    class="top-sales-item"
+    *ngFor="let item of topSalesEvents"
+  >
+
+    <div class="top-sales-row">
+
+      <h4>{{ item.title }}</h4>
+
+      <span>{{ item.totalRevenue }}</span>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <button
+    class="view-sales-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#salesReportsModal"
+  >
+
+    View All Reports
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+
+<!-- ======================================= -->
+<!-- MODAL -->
+<!-- ======================================= -->
+
+<div
+  class="modal fade"
+  id="salesReportsModal"
+  tabindex="-1"
+>
+
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content sales-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header sales-modal-header">
+
+        <h5>Sales Reports</h5>
+
+        <!-- FILTERS -->
+
+        <div class="sales-filters">
+
+          <!-- YEAR -->
+
+          <div class="sales-filter-wrapper">
+
+            <i class="fa-regular fa-calendar"></i>
+
+            <select
+              [(ngModel)]="selectedSalesYear"
+              (change)="filterSalesReports()"
+            >
+
+              <option value="all">
+                All Years
+              </option>
+
+              <option
+                *ngFor="let year of salesYears"
+                [value]="year"
+              >
+
+                {{ year }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+          <!-- MONTH -->
+
+          <div class="sales-filter-wrapper">
+
+            <i class="fa-regular fa-calendar-days"></i>
+
+            <select
+              [(ngModel)]="selectedSalesMonth"
+              (change)="filterSalesReports()"
+            >
+
+              <option value="all">
+                All Months
+              </option>
+
+              <option
+                *ngFor="let month of salesMonths"
+                [value]="month.value"
+              >
+
+                {{ month.label }}
+
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body sales-modal-body">
+
+        <div
+          class="sales-report-row"
+          *ngFor="let item of filteredSalesEvents"
+        >
+
+          <!-- LEFT -->
+
+          <div class="sales-report-left">
+
+            <img
+              [src]="item.image"
+              alt=""
+            >
+
+            <div>
+
+              <h4>{{ item.title }}</h4>
+
+              <span>
+
+                {{ item.totalTickets }}
+
+                Tickets Sold
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="sales-report-right">
+
+            <h3>{{ item.totalRevenue }}</h3>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer sales-modal-footer">
+
+        <button
+          type="button"
+          class="close-sales-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>

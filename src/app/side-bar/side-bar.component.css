@@ -1,0 +1,136 @@
+.offcanvas{
+  width: 320px;
+  background:#070b12 !important;
+}
+
+.list-group-item{
+  font-size:14px;
+  padding:.65rem 1rem;
+}
+
+.list-group-item:hover{
+  background:rgba(255,255,255,.05) !important;
+}
+
+.offcanvas-body{
+  overflow-y:auto;
+}
+.offcanvas-body::-webkit-scrollbar {
+  width: 5px;
+}
+
+.offcanvas-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+  background: #f5f5f5;
+  border-radius: 20px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+  background: #f5f5f5;
+}
+.menu-item{
+  display:block;
+  padding:14px 20px;
+  text-decoration:none;
+  color:#fff;
+  border:0;
+  transition:.3s;
+}
+
+.menu-icon{
+  font-size:24px;
+  width:32px;
+  margin-right:14px;
+  color:#d9d9d9;
+  transition:.3s;
+}
+
+.menu-title{
+  font-size:1.1rem;
+  font-weight:600;
+  color:#fff;
+}
+
+.menu-subtitle{
+  font-size:.82rem;
+  color:#9ca3af;
+  margin-top:2px;
+  line-height:1.4;
+}
+
+.menu-item:hover{
+  background:rgba(255,255,255,.04);
+}
+
+/* Active */
+
+.active-link .menu-title{
+  color:#fff;
+}
+
+.active-link .menu-icon{
+  color:#ff3b30;
+}
+.section-title{
+  color:#a1a1aa;
+  font-size:.8rem;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:16px 20px 10px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.sidebar-logo{
+  width:140px;
+}
+
+.section-title{
+  color:#8a8a8a;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:1px;
+  padding:18px 20px 10px;
+  border-top:1px solid rgba(255,255,255,.08);
+}
+
+.menu-item{
+  display:flex;
+  gap:15px;
+  padding:14px 20px;
+  text-decoration:none;
+  transition:.3s;
+}
+
+.menu-item:hover{
+  background:rgba(255,255,255,.04);
+}
+
+.menu-icon{
+  width:28px;
+  font-size:22px;
+  color:#d1d5db;
+  margin-top:3px;
+}
+
+.menu-title{
+  color:#fff;
+  font-size:14px;
+  font-weight:600;
+}
+
+.menu-subtitle{
+  color:#8f8f8f;
+  font-size:.82rem;
+  line-height:1.4;
+  margin-top:2px;
+}
+
+.active-link .menu-icon{
+  color:#ff3b30;
+}
+
+.active-link .menu-title{
+  color:#fff;
+}

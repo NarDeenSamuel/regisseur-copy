@@ -1,0 +1,2708 @@
+<div class="container-fluid px-3 py-2 bg-section">
+  <div class="header-wrapper">
+    <!-- Left Side -->
+    <div class="left-section">
+      <app-side-bar></app-side-bar>
+
+      <img src="assets/images/smallLogo.png" class="logo-img" alt="logo" />
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+      <app-navbar></app-navbar>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid px-4 py-3 events-header">
+  <div
+    class="d-flex justify-content-between align-items-center flex-wrap gap-3"
+  >
+    <div>
+      <h2 class="text-white fw-semibold mb-1">My Events & Guests</h2>
+
+      <p class="text-secondary small mb-0">
+        Manage your events, ticket orders, guests, RSVP, refunds, check-in, and
+        guest operations.
+      </p>
+    </div>
+
+    <div class="d-flex gap-2 flex-wrap">
+      <button
+        type="button"
+        class="btn btn-dark border-secondary text-white"
+        data-bs-toggle="modal"
+        data-bs-target="#createEventModal"
+      >
+        <i class="fa-solid fa-plus me-2"></i>
+        Create New Event
+      </button>
+
+      <button type="button" class="btn btn-dark border-secondary text-white">
+        <i class="fa-solid fa-arrow-up-from-bracket me-2"></i>
+        Import Guest List
+      </button>
+
+      <button type="button" class="btn btn-danger">
+        <i class="fa-solid fa-qrcode me-2"></i>
+        Open Check-In Mode
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="event-tabs-wrapper">
+
+  <div class="event-tabs">
+
+    <button
+      *ngFor="let tab of tabs"
+      class="event-tab"
+      [class.active]="activeTab === tab.id"
+      (click)="activeTab = tab.id"
+    >
+      <i [class]="tab.icon"></i>
+
+      <span>
+        {{tab.label}}
+      </span>
+
+    </button>
+
+  </div>
+
+</div>
+
+<div class="container-fluid px-3 py-2 overview-grid">
+  <div class="overview-card">
+    <div class="card-content">
+      <div class="icon-circle purple">
+        <i class="fa-regular fa-calendar"></i>
+      </div>
+
+      <div>
+        <div class="card-title">Upcoming Events</div>
+        <div class="card-count">0</div>
+        <div class="card-subtitle">Next 30 days</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <div class="card-content">
+      <div class="icon-circle green">
+        <i class="fa-solid fa-users"></i>
+      </div>
+
+      <div>
+        <div class="card-title">Guests Expected</div>
+        <div class="card-count">0</div>
+        <div class="card-subtitle">Across all upcoming events</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <div class="card-content">
+      <div class="icon-circle orange">
+        <i class="fa-regular fa-envelope"></i>
+      </div>
+
+      <div>
+        <div class="card-title">Pending RSVP</div>
+        <div class="card-count">0</div>
+        <div class="card-subtitle">Awaiting response</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <div class="card-content">
+      <div class="icon-circle blue">
+        <i class="fa-regular fa-circle-check"></i>
+      </div>
+
+      <div>
+        <div class="card-title">Checked In Today</div>
+        <div class="card-count">0</div>
+        <div class="card-subtitle">Across 0 active events</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overview-card">
+    <div class="card-content">
+      <div class="icon-circle red">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+
+      <div>
+        <div class="card-title">Guest Issues</div>
+        <div class="card-count">0</div>
+        <div class="card-subtitle">Requires attention</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid bg-black pb-5 pt-2">
+  <div class="row">
+    <div class="col-md-8 pb-2">
+      <div class="events-card">
+        <!-- EMPTY STATE -->
+
+        <ng-container *ngIf="events.length === 0">
+          <div class="empty-state text-center">
+            <div class="empty-icon mb-4">
+              <i class="fa-regular fa-calendar-plus"></i>
+            </div>
+
+            <h3 class="text-light">No events yet</h3>
+
+            <p class="text-light">
+              Create your first event to start managing guests, tickets, RSVP,
+              refunds, and check-in.
+            </p>
+
+            <div class="d-flex flex-column gap-3 align-items-center mt-4">
+              <button
+                class="btn btn-danger px-5"
+                data-bs-toggle="modal"
+                data-bs-target="#createEventModal"
+              >
+                <i class="fa-solid fa-plus me-2"></i>
+                Create New Event
+              </button>
+
+              <button class="btn btn-outline-light px-5">
+                <i class="fa-solid fa-arrow-up-from-bracket me-2"></i>
+                Import Guest List
+              </button>
+            </div>
+
+            <hr class="my-5" />
+
+            <h6 class="text-secondary">New to Régisseur?</h6>
+
+            <p class="text-secondary small">
+              Learn how to set up your first event and get the most out of
+              Régisseur.
+            </p>
+
+            <button class="btn btn-outline-secondary">
+              <i class="fa-solid fa-book-open me-2"></i> Learn About Event Setup
+            </button>
+          </div>
+        </ng-container>
+
+        <!-- TABLE -->
+
+        <ng-container *ngIf="events.length > 0">
+
+  <div
+    class="d-flex justify-content-between align-items-center mb-3"
+  >
+
+    <h5 class="text-white mb-0">
+      Upcoming & Active Events
+    </h5>
+
+    <button
+      class="btn btn-link text-light text-decoration-none"
+    >
+      View All Events
+
+      <i class="fa-solid fa-arrow-right ms-2"></i>
+    </button>
+
+  </div>
+
+  <div class="table-responsive custom-event-table">
+
+    <table class="table align-middle mb-0">
+
+      <thead>
+
+        <tr>
+
+          <th>Event</th>
+
+          <th>Category</th>
+
+          <th>Capacity</th>
+
+          <th>Visibility</th>
+<th>Currency</th>
+<th>Ticketing</th>
+
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let event of events">
+
+          <td>
+
+            <div class="event-cell">
+
+              <img
+                [src]="event.imageUrl"
+                class="event-thumb"
+                alt=""
+              >
+
+              <div>
+
+                <div class="event-name">
+                  {{event.name}}
+                </div>
+
+                <div class="event-meta">
+
+                  {{event.dateUtc | date:'MMM d, y'}}
+
+                </div>
+
+                <div class="event-meta">
+
+                  {{event.timeZone}}
+
+                </div>
+
+                <span class="sale-badge">
+
+                  {{event.eventTypeName}}
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </td>
+
+          <td>
+
+            {{event.categoryName}}
+
+          </td>
+
+          <td>
+
+            {{event.maxCapacity | number}}
+
+          </td>
+
+          <td>
+
+            <span class="role-pill">
+
+              {{event.yourRole}}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <span
+              class="status-pill"
+              [ngClass]="getStatusClass(event.status)"
+            >
+
+              <i
+                class="fa-regular fa-circle-check"
+              ></i>
+
+              {{event.status}}
+
+            </span>
+
+          </td>
+
+          <td>
+
+            <button
+              class="table-menu-btn"
+              data-bs-toggle="dropdown"
+            >
+
+              <i class="fa-solid fa-ellipsis"></i>
+
+            </button>
+
+            <ul
+              class="dropdown-menu dropdown-menu-dark"
+            >
+
+              <li>
+
+                <button
+                  class="dropdown-item"
+                >
+                  View Event
+                </button>
+
+              </li>
+
+              <li>
+
+                <button
+                  class="dropdown-item"
+                >
+                  Edit Event
+                </button>
+
+              </li>
+
+              <li>
+
+                <button
+                  class="dropdown-item text-danger"
+                >
+                  Delete Event
+                </button>
+
+              </li>
+
+            </ul>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</ng-container>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <!-- TODAY CHECK IN -->
+
+      <div class="side-card">
+        <ng-container *ngIf="todayCheckIn; else noTodayEvent">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="card-title mb-0">Today's Check-In</h5>
+
+            <span class="live-badge"> ● Live Now </span>
+          </div>
+
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <img [src]="todayCheckIn.image" class="event-thumb" />
+
+            <div>
+              <div class="event-name">
+                {{ todayCheckIn.name }}
+              </div>
+
+              <small class="text-secondary">
+                {{ todayCheckIn.venue }}
+              </small>
+            </div>
+          </div>
+
+          <div class="row text-center mb-4">
+            <div class="col-4">
+              <h3>{{ todayCheckIn.checkedIn }}</h3>
+
+              <small>Checked In</small>
+            </div>
+
+            <div class="col-4">
+              <h3>{{ todayCheckIn.expected }}</h3>
+
+              <small>Expected</small>
+            </div>
+
+            <div class="col-4">
+              <h3>{{ todayCheckIn.rate }}%</h3>
+
+              <small>Check-In Rate</small>
+            </div>
+          </div>
+
+          <button class="btn btn-outline-light w-100">
+            Open Check-In Mode
+          </button>
+        </ng-container>
+
+        <ng-template #noTodayEvent>
+          <div class="empty-card">
+            <div class="empty-icon">
+              <i class="fa-regular fa-calendar"></i>
+            </div>
+
+            <div>
+              <h4>No active event today</h4>
+
+              <p>You don't have any events scheduled for today.</p>
+
+              <button class="btn btn-outline-light">Create New Event</button>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- PENDING ACTIONS -->
+
+      <div class="side-card mt-3">
+        <ng-container *ngIf="pendingActions; else noActions">
+          <div class="d-flex justify-content-between mb-4">
+            <h5 class="card-title mb-0">Pending Guest Actions</h5>
+
+            <a class="view-link"> View All </a>
+          </div>
+
+          <div class="action-row">
+            <span> RSVP responses </span>
+
+            <strong class="text-warning">
+              {{ pendingActions.rsvp }}
+            </strong>
+          </div>
+
+          <div class="action-row">
+            <span> Refund requests </span>
+
+            <strong class="text-danger">
+              {{ pendingActions.refunds }}
+            </strong>
+          </div>
+
+          <div class="action-row">
+            <span> Guest issues </span>
+
+            <strong class="text-danger">
+              {{ pendingActions.issues }}
+            </strong>
+          </div>
+
+          <div class="action-row">
+            <span> Unassigned seats </span>
+
+            <strong class="text-purple">
+              {{ pendingActions.seats }}
+            </strong>
+          </div>
+        </ng-container>
+
+        <ng-template #noActions>
+          <div class="empty-card">
+            <div class="empty-icon">
+              <i class="fa-regular fa-user"></i>
+            </div>
+
+            <div>
+              <h4>No pending guest actions</h4>
+
+              <p>
+                All guest actions like RSVP responses, refunds, and issues will
+                appear here.
+              </p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+
+      <div class="side-card mt-3">
+        <ng-container *ngIf="recentActivities.length; else noActivity">
+          <div class="d-flex justify-content-between mb-4">
+            <h5 class="card-title mb-0">Recent Activity</h5>
+
+            <a class="view-link"> View All </a>
+          </div>
+
+          <div class="activity-row" *ngFor="let item of recentActivities">
+            <span>
+              {{ item.title }}
+            </span>
+
+            <small>
+              {{ item.time }}
+            </small>
+          </div>
+        </ng-container>
+
+        <ng-template #noActivity>
+          <div class="empty-card">
+            <div class="empty-icon">
+              <i class="fa-regular fa-clock"></i>
+            </div>
+
+            <div>
+              <h4>No recent activity yet</h4>
+
+              <p>
+                Your recent activity will appear here once you start using
+                Régisseur.
+              </p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="createEventModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content event-modal">
+
+      <form
+        [formGroup]="eventForm"
+        class="h-100 d-flex flex-column"
+      >
+
+        <!-- HEADER -->
+
+        <div class="modal-header border-bottom border-secondary px-4 py-3 flex-shrink-0">
+
+          <div>
+            <h2 class="text-white mb-1 fw-bold">
+              Create New Event
+            </h2>
+
+            <p class="text-secondary mb-0">
+              Start by setting up the event basics, schedule, and access settings.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+          ></button>
+
+        </div>
+
+        <!-- STEPPER -->
+
+        <div class="stepper-wrapper flex-shrink-0">
+
+          <div class="stepper">
+
+            <div
+              class="step"
+              [class.active]="currentStep === 1"
+              [class.completed]="currentStep > 1"
+            >
+              <span>1</span>
+              <label>Event Basics</label>
+            </div>
+
+            <div class="line"></div>
+
+            <div
+              class="step"
+              [class.active]="currentStep === 2"
+              [class.completed]="currentStep > 2"
+            >
+              <span>2</span>
+              <label>Tickets & Guests</label>
+            </div>
+
+            <div class="line"></div>
+
+            <div
+              class="step"
+              [class.active]="currentStep === 3"
+            >
+              <span>3</span>
+              <label>Review & Publish</label>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- SCROLL BODY -->
+
+        <div class="modal-body-custom">
+
+          <ng-container *ngIf="currentStep === 1">
+
+         <ng-container *ngIf="currentStep === 1" >
+          <div class="event-step-card">
+            <!-- Row 1 -->
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label"> Event Name </label>
+
+                <input
+                  type="text"
+                  class="form-control dark-input"
+                  formControlName="eventName"
+                  placeholder="Enter event name"
+                />
+              </div>
+
+            <div class="col-md-6">
+  <label class="form-label">
+    Event Type
+  </label>
+
+  <select
+  class="form-select dark-input"
+  formControlName="eventType"
+>
+
+  <option
+    *ngFor="let type of eventTypes"
+    [ngValue]="type.id"
+  >
+    {{ type.name }}
+  </option>
+
+</select>
+</div>
+            </div>
+
+            <!-- Row 2 -->
+
+            <div class="row g-3 mt-1">
+              <div class="col-md-6">
+                <label class="form-label"> Hosting Space / Venue </label>
+
+                <select
+                  class="form-select dark-input"
+                  formControlName="hostingSpace"
+                >
+                  <option>Select space or venue</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label"> Organizer / Owner </label>
+
+                <select
+  class="form-select dark-input"
+  formControlName="organizer"
+>
+
+  <option value="">
+    Select Organizer / Owner
+  </option>
+
+  <optgroup
+    *ngFor="let group of groupedOwners"
+    [label]="group.letter"
+  >
+
+    <option
+      *ngFor="let owner of group.owners"
+      [ngValue]="owner"
+    >
+
+      {{ owner.name }}
+      ({{ owner.type }})
+
+    </option>
+
+  </optgroup>
+
+</select>
+              </div>
+            </div>
+
+            <!-- Dates -->
+
+            <div class="row g-3 mt-1">
+              <div class="col-lg">
+                <label class="form-label"> Start Date </label>
+
+                <input
+                  type="date"
+                  class="form-control dark-input"
+                  formControlName="startDate"
+                />
+              </div>
+
+              <div class="col-lg">
+                <label class="form-label"> Start Time </label>
+
+                <input
+                  type="time"
+                  class="form-control dark-input"
+                  formControlName="startTime"
+                />
+              </div>
+
+              <div class="col-lg">
+                <label class="form-label"> End Date </label>
+
+                <input
+                  type="date"
+                  class="form-control dark-input"
+                  formControlName="endDate"
+                />
+              </div>
+
+              <div class="col-lg">
+                <label class="form-label"> End Time </label>
+
+                <input
+                  type="time"
+                  class="form-control dark-input"
+                  formControlName="endTime"
+                />
+              </div>
+
+              <div class="col-lg">
+              <label class="form-label">Time Zone</label>
+
+<select
+  class="form-select dark-input"
+  formControlName="timeZone"
+>
+
+  <!-- United States -->
+  <option value="America/New_York">
+    (UTC-05:00) Eastern Time (New York)
+  </option>
+
+  <option value="America/Chicago">
+    (UTC-06:00) Central Time (Chicago)
+  </option>
+
+  <option value="America/Denver">
+    (UTC-07:00) Mountain Time (Denver)
+  </option>
+
+  <option value="America/Los_Angeles">
+    (UTC-08:00) Pacific Time (Los Angeles)
+  </option>
+
+  <!-- Canada -->
+  <option value="America/Toronto">
+    (UTC-05:00) Toronto
+  </option>
+
+  <!-- United Kingdom -->
+  <option value="Europe/London">
+    (UTC+00:00) London
+  </option>
+
+  <!-- Europe -->
+  <option value="Europe/Paris">
+    (UTC+01:00) Paris
+  </option>
+
+  <option value="Europe/Berlin">
+    (UTC+01:00) Berlin
+  </option>
+
+  <option value="Europe/Amsterdam">
+    (UTC+01:00) Amsterdam
+  </option>
+
+  <option value="Europe/Madrid">
+    (UTC+01:00) Madrid
+  </option>
+
+  <!-- Middle East -->
+  <option value="Asia/Dubai">
+    (UTC+04:00) Dubai
+  </option>
+
+  <option value="Asia/Riyadh">
+    (UTC+03:00) Riyadh
+  </option>
+
+  <option value="Africa/Cairo">
+    (UTC+02:00) Cairo
+  </option>
+
+  <!-- Asia -->
+  <option value="Asia/Singapore">
+    (UTC+08:00) Singapore
+  </option>
+
+  <option value="Asia/Shanghai">
+    (UTC+08:00) Shanghai
+  </option>
+
+  <option value="Asia/Tokyo">
+    (UTC+09:00) Tokyo
+  </option>
+
+  <option value="Asia/Seoul">
+    (UTC+09:00) Seoul
+  </option>
+
+  <option value="Asia/Kolkata">
+    (UTC+05:30) Mumbai / New Delhi
+  </option>
+
+  <!-- Australia -->
+  <option value="Australia/Sydney">
+    (UTC+10:00) Sydney
+  </option>
+
+  <!-- Global -->
+  <option value="UTC">
+    (UTC+00:00) UTC
+  </option>
+</select>
+              </div>
+            </div>
+
+            <!-- Event Format -->
+
+            <div class="mt-4">
+  <label class="section-label mb-1">
+    Event Format
+  </label>
+
+  <div class="selection-grid">
+
+    <div
+      class="select-card"
+      [class.active]="eventForm.get('format')?.value === 1"
+      (click)="eventForm.patchValue({ format: 1 })"
+    >
+      In Person
+    </div>
+
+    <div
+      class="select-card"
+      [class.active]="eventForm.get('format')?.value === 2"
+      (click)="eventForm.patchValue({ format: 2 })"
+    >
+      Virtual
+    </div>
+
+    <div
+      class="select-card"
+      [class.active]="eventForm.get('format')?.value === 3"
+      (click)="eventForm.patchValue({ format: 3 })"
+    >
+      Hybrid
+    </div>
+
+  </div>
+</div>
+
+            <!-- Access -->
+
+    <div class="mt-4">
+  <label class="section-label mb-1">
+    Access Type
+  </label>
+
+  <div class="selection-grid">
+
+    <div
+      *ngFor="let type of accessTypes"
+      class="select-card"
+      [class.active]="
+        eventForm.get('accessType')?.value === type.id
+      "
+      (click)="
+        eventForm.patchValue({
+          accessType: type.id
+        })
+      "
+    >
+      {{ type.name }}
+    </div>
+
+  </div>
+</div>
+            <!-- Visibility -->
+
+       <div class="mt-4">
+
+  <label class="section-label mb-1">
+    Event Visibility
+  </label>
+
+  <div class="selection-grid">
+
+    <div
+      *ngFor="let visibility of visibilityTypes"
+      class="select-card"
+      [class.active]="
+        eventForm.get('visibility')?.value === visibility.id
+      "
+      (click)="
+        eventForm.patchValue({
+          visibility: visibility.id
+        })
+      "
+    >
+
+      {{ visibility.name }}
+
+    </div>
+
+  </div>
+
+</div>
+            <!-- Description -->
+
+            <div class="mt-4">
+              <label class="form-label"> Short Description </label>
+
+              <textarea
+                rows="4"
+                class="form-control dark-input"
+                formControlName="description"
+              ></textarea>
+            </div>
+
+            <!-- Switches -->
+
+            <div class="row mt-4">
+              <div class="col-md-4">
+                <div class="setting-item">
+                  <div>
+                    <h6>Enable guest check-in tools</h6>
+
+                    <small> Use QR check-in and validation </small>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="enableGuestCheckIn"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="setting-item">
+                  <div>
+                    <h6>Enable seating / zones</h6>
+
+                    <small> Create seating charts and capacity rules </small>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="enableSeatingZones"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="setting-item">
+                  <div>
+                    <h6>Allow refund requests</h6>
+
+                    <small>
+                      Guests can request refunds based on your policy
+                    </small>
+                  </div>
+
+                  <div class="form-check form-switch">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      formControlName="allowRefunds"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </ng-container>
+
+          </ng-container>
+
+          <ng-container *ngIf="currentStep === 2">
+<div class="event-step-card">
+
+  <!-- Ticketing Setup -->
+
+ <div class="card-dark p-3 mb-4">
+
+  <h6 class="section-title mb-3">
+    Ticketing Setup
+  </h6>
+
+  <!-- ROW 1 -->
+
+  <div class="row g-3 mb-3">
+
+    <div class="col-lg-6">
+
+      <label class="form-label">
+        Ticketing Mode
+      </label>
+
+      <div class="ticket-mode-wrapper">
+
+        <div
+  *ngFor="let mode of ticketModes"
+  class="ticket-mode-btn"
+  [class.active]="eventForm.get('ticketingMode')?.value === mode.id"
+  (click)="eventForm.patchValue({ ticketingMode: mode.id })"
+>
+  {{ mode.name }}
+</div>
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-2">
+
+      <label class="form-label">
+        Currency
+      </label>
+
+      <select
+        class="form-select dark-input"
+        formControlName="currency"
+      >
+
+        <option
+          *ngFor="let currency of currencies"
+          [value]="currency"
+        >
+          {{currency}}
+        </option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+  <!-- ROW 2 -->
+
+  <div class="row g-3 align-items-end">
+
+    <div class="col-lg-3">
+
+      <label class="form-label">
+        Sales Start Date
+      </label>
+
+      <input
+        type="datetime-local"
+        class="form-control dark-input"
+        formControlName="salesStartDate"
+      >
+
+    </div>
+
+    <div class="col-lg-3">
+
+      <label class="form-label">
+        Sales End Date
+      </label>
+
+      <input
+        type="datetime-local"
+        class="form-control dark-input"
+        formControlName="salesEndDate"
+      >
+
+    </div>
+
+    <div class="col-lg-3">
+
+      <label class="form-label">
+        Maximum Tickets / Capacity
+      </label>
+
+      <input
+        type="number"
+        class="form-control dark-input"
+        formControlName="capacity"
+      >
+
+    </div>
+
+    <div class="col-lg-3">
+
+      <label class="form-label">
+        Allow promo / discount codes
+      </label>
+
+      <div class="promo-switch">
+
+        <div class="form-check form-switch m-0">
+
+          <input
+            class="form-check-input"
+            type="checkbox"
+            formControlName="allowPromoCodes"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+  <!-- Ticket Types -->
+
+<div class="card-dark ticket-card mb-4">
+
+  <div class="ticket-header">
+    <h6>Ticket Types</h6>
+  </div>
+
+  <div class="table-responsive">
+
+    <table class="ticket-table">
+
+     <thead>
+
+  <tr>
+
+    <th rowspan="2">Ticket Name</th>
+
+    <th rowspan="2">Price</th>
+
+    <th rowspan="2">Quantity</th>
+
+    <th colspan="2" class="text-center">
+      Sales Window
+    </th>
+
+    <th rowspan="2">Refundable</th>
+
+    <th rowspan="2">Visibility</th>
+
+    <th rowspan="2">Actions</th>
+
+  </tr>
+
+
+
+</thead>
+      <tbody>
+
+<tr
+  *ngFor="let ticket of ticketTypes.controls; let i=index"
+  [formGroup]="getTicketFormGroup(i)"
+>
+
+  <!-- NAME -->
+
+  <td>
+
+    <ng-container *ngIf="!ticket.value.isEditing">
+
+      {{ticket.value.name}}
+
+    </ng-container>
+
+    <input
+      *ngIf="ticket.value.isEditing"
+      class="form-control table-input"
+      formControlName="name"
+      placeholder="Ticket Name"
+    >
+
+  </td>
+
+  <!-- PRICE -->
+
+  <td>
+
+    <ng-container *ngIf="!ticket.value.isEditing">
+
+      ${{ticket.value.price}}
+
+    </ng-container>
+
+    <input
+      *ngIf="ticket.value.isEditing"
+      type="number"
+      class="form-control table-input"
+      formControlName="price"
+    >
+
+  </td>
+
+  <!-- QTY -->
+
+  <td>
+
+    <ng-container *ngIf="!ticket.value.isEditing">
+
+      {{ticket.value.quantity}}
+
+    </ng-container>
+
+    <input
+      *ngIf="ticket.value.isEditing"
+      type="number"
+      class="form-control table-input"
+      formControlName="quantity"
+    >
+
+  </td>
+
+  <!-- SALES WINDOW -->
+
+  <!-- SALES START -->
+
+<td>
+
+  <ng-container *ngIf="!ticket.value.isEditing">
+
+    {{ ticket.value.salesStartDate }}
+
+  </ng-container>
+
+  <input
+    *ngIf="ticket.value.isEditing"
+    type="date"
+    class="form-control table-input"
+    formControlName="salesStartDate"
+  >
+
+</td>
+
+<!-- SALES END -->
+
+<td>
+
+  <ng-container *ngIf="!ticket.value.isEditing">
+
+    {{ ticket.value.salesEndDate }}
+
+  </ng-container>
+
+  <input
+    *ngIf="ticket.value.isEditing"
+    type="date"
+    class="form-control table-input"
+    formControlName="salesEndDate"
+  >
+
+</td>
+
+  <!-- REFUNDABLE -->
+
+  <td>
+
+    <ng-container *ngIf="!ticket.value.isEditing">
+
+      <span
+        class="status-yes"
+        *ngIf="ticket.value.refundable"
+      >
+        <i class="fa-regular fa-circle-check"></i>
+        Yes
+      </span>
+
+      <span
+        class="status-no"
+        *ngIf="!ticket.value.refundable"
+      >
+        <i class="fa-regular fa-circle-xmark"></i>
+        No
+      </span>
+
+    </ng-container>
+
+    <select
+      *ngIf="ticket.value.isEditing"
+      class="form-select table-input"
+      formControlName="refundable"
+    >
+      <option [ngValue]="true">Yes</option>
+      <option [ngValue]="false">No</option>
+    </select>
+
+  </td>
+
+  <!-- VISIBILITY -->
+
+  <td>
+
+    <ng-container *ngIf="!ticket.value.isEditing">
+
+      <span
+        class="visibility"
+        *ngIf="ticket.value.visibility === 'Public'"
+      >
+        <i class="fa-solid fa-globe"></i>
+        Public
+      </span>
+
+      <span
+        class="visibility"
+        *ngIf="ticket.value.visibility === 'Private'"
+      >
+        <i class="fa-solid fa-lock"></i>
+        Private
+      </span>
+
+    </ng-container>
+
+    <select
+      *ngIf="ticket.value.isEditing"
+      class="form-select table-input"
+      formControlName="visibility"
+    >
+      <option value="Public">Public</option>
+      <option value="Private">Private</option>
+    </select>
+
+  </td>
+
+  <!-- ACTIONS -->
+
+  <td>
+
+    <!-- Save -->
+
+    <button
+      *ngIf="ticket.value.isEditing"
+      type="button"
+      class="action-icon text-success"
+      (click)="saveTicket(i)"
+    >
+      <i class="fa-solid fa-check"></i>
+    </button>
+
+    <!-- Edit -->
+
+    <button
+      *ngIf="!ticket.value.isEditing"
+      type="button"
+      class="action-icon"
+      (click)="editTicket(i)"
+    >
+      <i class="fa-solid fa-pen"></i>
+    </button>
+
+    <!-- Delete -->
+
+    <button
+      type="button"
+      class="action-icon text-danger"
+      (click)="removeTicketType(i)"
+    >
+      <i class="fa-regular fa-trash-can"></i>
+    </button>
+
+  </td>
+
+</tr>
+
+</tbody>
+
+    </table>
+
+  </div>
+
+  <div class="ticket-footer">
+
+    <button
+      type="button"
+      class="add-ticket-btn"
+      (click)="addTicketType()"
+    >
+      <i class="fa-solid fa-plus"></i>
+      Add Ticket Type
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="rules-card mb-3">
+
+  <div class="rules-header">
+    Purchase Orders & Buyer Rules
+  </div>
+
+  <div class="rules-body">
+
+    <!-- Row -->
+
+    <div class="rule-row">
+
+      <div class="rule-label">
+
+        <i class="fa-regular fa-clipboard"></i>
+
+        <span>
+          Collect Purchase Orders / Order Records
+        </span>
+
+      </div>
+
+      <div class="form-check form-switch m-0">
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="collectOrders"
+        >
+
+      </div>
+
+    </div>
+
+    <!-- Row -->
+
+    <div class="rule-row">
+
+      <div class="rule-label">
+
+        <i class="fa-regular fa-user"></i>
+
+        <span>
+          Allow buyer to purchase for multiple guests
+        </span>
+
+      </div>
+
+      <div class="form-check form-switch m-0">
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="allowMultipleGuests"
+        >
+
+      </div>
+
+    </div>
+
+    <!-- Row -->
+
+    <div class="rule-row">
+
+      <div class="rule-label">
+
+        <i class="fa-solid fa-users"></i>
+
+        <span>
+          Require attendee names for each ticket
+        </span>
+
+      </div>
+
+      <div class="form-check form-switch m-0">
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="requireAttendeeNames"
+        >
+
+      </div>
+
+    </div>
+
+    <!-- Row with input -->
+
+    <div class="rule-row">
+
+      <div class="rule-label">
+
+        <i class="fa-regular fa-file-lines"></i>
+
+        <span>
+          Limit tickets per order
+        </span>
+
+      </div>
+
+      <input
+        type="number"
+        class="form-control limit-input"
+        formControlName="ticketsPerOrder"
+      >
+
+    </div>
+
+    <!-- Row -->
+
+    <div class="rule-row">
+
+      <div class="rule-label">
+
+        <i class="fa-regular fa-envelope"></i>
+
+        <span>
+          Send order confirmation automatically
+        </span>
+
+      </div>
+
+      <div class="form-check form-switch m-0">
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="sendConfirmation"
+        >
+
+      </div>
+
+    </div>
+
+    <!-- Row -->
+
+    <div class="rule-row border-0">
+
+      <div class="rule-label">
+
+        <i class="fa-regular fa-circle-question"></i>
+
+        <span>
+          Allow ticket transfer
+        </span>
+
+      </div>
+
+      <div class="form-check form-switch m-0">
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="allowTransfer"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+  <!-- Refunds & Guest Access -->
+
+  <div class="row g-4">
+
+    <div class="col-lg-12">
+
+      <div class="card-dark p-3 h-100">
+<div class="refund-access-card">
+
+  <div class="card-header-dark">
+    Refunds & Guest Access
+  </div>
+
+  <div class="row g-0">
+
+    <!-- LEFT SIDE -->
+
+    <div class="col-lg-6 refund-side">
+
+      <label class="form-label mb-2">
+        Refund Policy
+      </label>
+
+      <select
+        class="form-select dark-input mb-4"
+        formControlName="refundPolicy"
+      >
+        <option
+          *ngFor="let policy of refundPolicies"
+          [value]="policy"
+        >
+          {{ policy }}
+        </option>
+      </select>
+
+      <div class="refund-row">
+
+        <span>Full Refund</span>
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="fullRefund"
+        >
+
+      </div>
+
+      <div class="refund-row">
+
+        <span>Partial Refund / Adjustment</span>
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="partialRefund"
+        >
+
+      </div>
+
+      <div class="refund-row">
+
+        <span>Manual Organizer Approval</span>
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="manualApproval"
+        >
+
+      </div>
+
+      <div class="refund-row">
+
+        <span>Chargeback / dispute flagging</span>
+
+        <input
+          class="form-check-input red-switch"
+          type="checkbox"
+          formControlName="chargebackFlag"
+        >
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+   <div class="col-lg-6 access-side">
+
+  <label class="form-label mb-3">
+    Access Type
+  </label>
+
+  <div class="row g-3">
+
+    <!-- RSVP -->
+
+    <div class="col-6">
+
+      <div
+        class="access-card"
+        [class.active]="isAccessSelected('RSVP')"
+        (click)="toggleAccess('RSVP')"
+      >
+
+        <i class="fa-regular fa-envelope access-icon"></i>
+
+        <span>
+          RSVP
+        </span>
+
+        <i
+          *ngIf="isAccessSelected('RSVP')"
+          class="fa-solid fa-circle-check selected-icon"
+        ></i>
+
+      </div>
+
+    </div>
+
+    <!-- Guest List -->
+
+    <div class="col-6">
+
+      <div
+        class="access-card"
+        [class.active]="isAccessSelected('Guest List')"
+        (click)="toggleAccess('Guest List')"
+      >
+
+        <i class="fa-solid fa-list access-icon"></i>
+
+        <span>
+          Guest List / Door List
+        </span>
+
+        <i
+          *ngIf="isAccessSelected('Guest List')"
+          class="fa-solid fa-circle-check selected-icon"
+        ></i>
+
+      </div>
+
+    </div>
+
+    <!-- QR -->
+
+    <div class="col-6">
+
+      <div
+        class="access-card"
+        [class.active]="isAccessSelected('QR Checkin')"
+        (click)="toggleAccess('QR Checkin')"
+      >
+
+        <i class="fa-solid fa-qrcode access-icon"></i>
+
+        <span>
+          QR Ticket Check-In
+        </span>
+
+        <i
+          *ngIf="isAccessSelected('QR Checkin')"
+          class="fa-solid fa-circle-check selected-icon"
+        ></i>
+
+      </div>
+
+    </div>
+
+    <!-- Invite -->
+
+    <div class="col-6">
+
+      <div
+        class="access-card"
+        [class.active]="isAccessSelected('Invite Only')"
+        (click)="toggleAccess('Invite Only')"
+      >
+
+        <i class="fa-solid fa-lock access-icon"></i>
+
+        <span>
+          Invite Only
+        </span>
+
+        <i
+          *ngIf="isAccessSelected('Invite Only')"
+          class="fa-solid fa-circle-check selected-icon"
+        ></i>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+  </div>
+
+</div>
+
+
+
+      </div>
+
+    </div>
+
+    <div class="col-lg-12">
+
+     <div class="card-dark guest-card">
+
+  <div class="card-header-dark">
+    <h6>Guest Information Collection</h6>
+  </div>
+
+  <div class="row g-0">
+
+    <!-- LEFT SIDE -->
+
+    <div class="col-lg-8 guest-left">
+
+      <div class="guest-option">
+
+        <input
+          type="checkbox"
+          id="fullName"
+          formControlName="collectFullName"
+        >
+
+        <label for="fullName">
+          Full Name
+        </label>
+
+      </div>
+
+      <div class="guest-option">
+
+        <input
+          type="checkbox"
+          id="email"
+          formControlName="collectEmail"
+        >
+
+        <label for="email">
+          Email
+        </label>
+
+      </div>
+
+      <div class="guest-option">
+
+        <input
+          type="checkbox"
+          id="phone"
+          formControlName="collectPhone"
+        >
+
+        <label for="phone">
+          Phone Number
+        </label>
+
+      </div>
+
+      <div class="guest-option">
+
+        <input
+          type="checkbox"
+          id="company"
+          formControlName="collectCompany"
+        >
+
+        <label for="company">
+          Company / Organization
+        </label>
+
+      </div>
+
+      <div class="guest-option">
+
+        <input
+          type="checkbox"
+          id="notes"
+          formControlName="collectAccessibilityNotes"
+        >
+
+        <label for="notes">
+          Dietary / Accessibility Notes
+        </label>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT SIDE -->
+
+    <div class="col-lg-4 guest-right">
+
+      <div class="switch-row">
+
+        <span>
+          Allow plus-one requests
+        </span>
+
+        <div class="form-check form-switch m-0">
+
+          <input
+            class="form-check-input custom-switch"
+            type="checkbox"
+            formControlName="allowPlusOne"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="switch-row mt-4">
+
+        <span>
+          Enable waitlist
+        </span>
+
+        <div class="form-check form-switch m-0">
+
+          <input
+            class="form-check-input custom-switch"
+            type="checkbox"
+            formControlName="enableWaitlist"
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+    </div>
+
+  </div>
+
+</div>
+          </ng-container>
+
+       <ng-container *ngIf="currentStep === 3">
+
+<div class="row g-3">
+
+  <!-- LEFT -->
+
+  <div class="col-lg-12">
+
+    <!-- Event Overview -->
+
+    <div class="review-card mb-3">
+
+      <div class="review-header">
+        Event Overview
+      </div>
+
+      <div class="review-body">
+
+        <div class="review-row">
+          <span>Event Name</span>
+          <strong>{{eventForm.value.eventName}}</strong>
+        </div>
+
+        <div class="review-row">
+          <span>Event Type</span>
+          <strong>{{eventForm.value.eventType}}</strong>
+        </div>
+
+        <div class="review-row">
+          <span>Hosting Space / Venue</span>
+          <strong>{{eventForm.value.hostingSpace}}</strong>
+        </div>
+
+        <div class="review-row">
+          <span>Organizer / Owner</span>
+          <strong>{{eventForm.value.organizer}}</strong>
+        </div>
+
+        <hr>
+
+        <div class="review-row">
+          <span>Date</span>
+          <strong>
+            {{eventForm.value.startDate}}
+            -
+            {{eventForm.value.endDate}}
+          </strong>
+        </div>
+
+        <div class="review-row">
+          <span>Time</span>
+          <strong>
+            {{eventForm.value.startTime}}
+            -
+            {{eventForm.value.endTime}}
+          </strong>
+        </div>
+
+        <div class="review-row">
+          <span>Time Zone</span>
+          <strong>{{eventForm.value.timeZone}}</strong>
+        </div>
+
+        <div class="review-row">
+          <span>Format</span>
+          <strong>{{eventForm.value.format}}</strong>
+        </div>
+
+        <div class="review-row">
+          <span>Access Type</span>
+          <strong>{{eventForm.value.accessType}}</strong>
+        </div>
+
+        <div class="review-row">
+          <span>Visibility</span>
+          <strong>{{eventForm.value.visibility}}</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Tickets -->
+
+    <div class="review-card mb-3">
+
+      <div class="review-header">
+        Tickets & Access
+      </div>
+
+      <div class="table-responsive">
+
+        <table class="table review-table">
+
+          <thead>
+
+            <tr>
+              <th>Ticket Type</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Refundable</th>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr
+              *ngFor="let ticket of ticketTypes.controls"
+            >
+
+              <td>{{ticket.value.name}}</td>
+
+              <td>${{ticket.value.price}}</td>
+
+              <td>{{ticket.value.quantity}}</td>
+
+              <td>
+
+                <span
+                  class="text-success"
+                  *ngIf="ticket.value.refundable"
+                >
+                  Yes
+                </span>
+
+                <span
+                  class="text-danger"
+                  *ngIf="!ticket.value.refundable"
+                >
+                  No
+                </span>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div class="review-footer">
+
+        <span>
+          Currency:
+          <strong>{{eventForm.value.currency}}</strong>
+        </span>
+
+        <span>
+          Capacity:
+          <strong>{{eventForm.value.capacity}}</strong>
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- Operations -->
+
+    <div class="review-card">
+
+      <div class="review-header">
+        Guest & Operations Settings
+      </div>
+
+ <div class="row g-2">
+
+  <div class="col-md-12">
+
+    <div class="status-row">
+      <span>
+        <i class="fa-regular fa-clipboard me-2"></i>
+        Purchase Orders
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.collectOrders"
+        [class.status-disabled]="!eventForm.value.collectOrders"
+      >
+        {{ eventForm.value.collectOrders ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-solid fa-users me-2"></i>
+        Buyer can purchase for multiple guests
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.allowMultipleGuests"
+        [class.status-disabled]="!eventForm.value.allowMultipleGuests"
+      >
+        {{ eventForm.value.allowMultipleGuests ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-regular fa-id-card me-2"></i>
+        Attendee names required
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.requireAttendeeNames"
+        [class.status-disabled]="!eventForm.value.requireAttendeeNames"
+      >
+        {{ eventForm.value.requireAttendeeNames ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-solid fa-right-left me-2"></i>
+        Ticket transfer allowed
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.allowTransfer"
+        [class.status-disabled]="!eventForm.value.allowTransfer"
+      >
+        {{ eventForm.value.allowTransfer ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-solid fa-qrcode me-2"></i>
+        QR ticket check-in enabled
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.enableGuestCheckIn"
+        [class.status-disabled]="!eventForm.value.enableGuestCheckIn"
+      >
+        {{ eventForm.value.enableGuestCheckIn ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+  </div>
+
+  <div class="col-md-12">
+
+    <div class="status-row">
+      <span>
+        <i class="fa-solid fa-list me-2"></i>
+        Guest List / Door List
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.accessMethods?.includes('Guest List')"
+        [class.status-disabled]="!eventForm.value.accessMethods?.includes('Guest List')"
+      >
+        {{
+          eventForm.value.accessMethods?.includes('Guest List')
+            ? 'Enabled'
+            : 'Disabled'
+        }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-solid fa-rotate-left me-2"></i>
+        Refund requests allowed
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.allowRefunds"
+        [class.status-disabled]="!eventForm.value.allowRefunds"
+      >
+        {{ eventForm.value.allowRefunds ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-solid fa-users-viewfinder me-2"></i>
+        Waitlist enabled
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.enableWaitlist"
+        [class.status-disabled]="!eventForm.value.enableWaitlist"
+      >
+        {{ eventForm.value.enableWaitlist ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-regular fa-user me-2"></i>
+        Plus-one requests
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.allowPlusOne"
+        [class.status-disabled]="!eventForm.value.allowPlusOne"
+      >
+        {{ eventForm.value.allowPlusOne ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+    <div class="status-row">
+      <span>
+        <i class="fa-solid fa-chair me-2"></i>
+        Seating / Zones
+      </span>
+
+      <span
+        [class.status-enabled]="eventForm.value.enableSeatingZones"
+        [class.status-disabled]="!eventForm.value.enableSeatingZones"
+      >
+        {{ eventForm.value.enableSeatingZones ? 'Enabled' : 'Disabled' }}
+      </span>
+    </div>
+
+  </div>
+
+</div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+
+  <div class="col-lg-12">
+
+    <!-- Publishing -->
+
+    <div class="review-card mb-3">
+
+      <div class="review-header">
+        Publishing Settings
+      </div>
+
+      <div class="publish-row">
+        Publish event now
+        <input
+          type="checkbox"
+          [checked]="eventForm.value.publishNow"
+          disabled
+        >
+      </div>
+
+      <div class="publish-row">
+        Open ticket sales immediately
+        <input
+          type="checkbox"
+          [checked]="eventForm.value.openSalesImmediately"
+          disabled
+        >
+      </div>
+
+      <div class="publish-row">
+        Show on public profile
+        <input
+          type="checkbox"
+          [checked]="eventForm.value.showOnProfile"
+          disabled
+        >
+      </div>
+
+      <div class="publish-row">
+        Notify followers
+        <input
+          type="checkbox"
+          [checked]="eventForm.value.notifyFollowers"
+          disabled
+        >
+      </div>
+
+      <div class="publish-row">
+        Require final confirmation
+        <input
+          type="checkbox"
+          [checked]="eventForm.value.requireConfirmation"
+          disabled
+        >
+      </div>
+
+    </div>
+
+    <!-- Cover -->
+
+  <div class="review-card mb-3">
+
+  <div class="review-header">
+    Event Cover & Preview
+  </div>
+
+  <div class="p-3">
+
+    <input
+      type="file"
+      class="form-control dark-input mb-3"
+      accept="image/*"
+      (change)="onCoverSelected($event)"
+    >
+
+    <img
+      *ngIf="coverPreview"
+      [src]="coverPreview"
+      class="img-fluid rounded preview-image"
+      alt="Event Cover"
+    >
+
+    <div
+      *ngIf="!coverPreview"
+      class="empty-cover"
+    >
+      <i class="fa-regular fa-image"></i>
+
+      <p class="mb-0">
+        Upload Event Cover
+      </p>
+    </div>
+
+  </div>
+
+</div>
+    <!-- Checklist -->
+
+    <div class="review-card">
+
+      <div class="review-header">
+        Pre-Publish Checklist
+      </div>
+
+      <ul class="check-list">
+
+        <li><i class="fa-solid fa-circle-check"></i> Event basics completed</li>
+        <li><i class="fa-solid fa-circle-check"></i> Ticket types configured</li>
+        <li><i class="fa-solid fa-circle-check"></i> Refund policy configured</li>
+        <li><i class="fa-solid fa-circle-check"></i> Guest information configured</li>
+        <li><i class="fa-solid fa-circle-check"></i> Ready to publish</li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</div>
+
+</ng-container>
+
+        </div>
+
+        <!-- FIXED FOOTER -->
+<div
+  *ngIf="showValidationMessage"
+  class="alert alert-danger mt-2"
+>
+  Please fill all required fields before continuing.
+</div>
+<div
+  *ngIf="errorMessage"
+  class="alert alert-danger text-center mb-3"
+>
+  {{ errorMessage }}
+</div>
+        <div class="modal-footer-custom flex-shrink-0">
+
+          <button
+            type="button"
+            class="btn btn-outline-light px-4"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-dark px-4"
+          >
+            Save Draft
+          </button>
+  <button
+            *ngIf="currentStep > 1"
+            type="button"
+            class="btn btn-outline-light"
+            (click)="prevStep()"
+          >
+            Back
+          </button>
+
+
+         <!-- Continue -->
+
+<button
+  *ngIf="currentStep < 3"
+  type="button"
+  class="btn btn-danger px-4"
+  (click)="nextStep()"
+>
+  Continue
+  <i class="fa-solid fa-arrow-right ms-2"></i>
+</button>
+
+<!-- Publish -->
+
+<button
+  *ngIf="currentStep === 3"
+  type="button"
+  class="btn btn-danger px-4"
+  (click)="publishEvent()"
+  [disabled]="isLoading"
+>
+
+  <span
+    *ngIf="isLoading"
+    class="spinner-border spinner-border-sm me-2"
+  ></span>
+
+  <span *ngIf="!isLoading">
+    Publish Event
+    <i class="fa-solid fa-paper-plane ms-2"></i>
+  </span>
+
+  <span *ngIf="isLoading">
+    Publishing...
+  </span>
+
+</button>
+
+
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="eventPublishedModal"
+  tabindex="-1"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+
+    <div class="modal-content success-modal">
+
+      <div class="modal-body p-4">
+
+        <!-- CLOSE -->
+
+        <div class="text-end mb-2">
+
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            (click)="resetEventForm()"
+          ></button>
+
+        </div>
+
+        <!-- HEADER -->
+
+        <div class="d-flex align-items-center gap-4 mb-4">
+
+          <div class="success-check">
+
+            <i class="fa-solid fa-check"></i>
+
+          </div>
+
+          <div>
+
+            <h2 class="success-title">
+              Event Published Successfully
+            </h2>
+
+            <p class="success-subtitle mb-0">
+              Your event is now live and ready to receive guests,
+              ticket orders, and RSVP responses.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- SUMMARY -->
+
+        <div class="summary-box mb-4">
+
+          <div class="summary-row">
+            <span>Event Name</span>
+            <strong>{{ publishedEvent?.eventName }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Event Type</span>
+            <strong>{{ publishedEvent?.eventType }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Venue</span>
+            <strong>{{ publishedEvent?.hostingSpace }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Date</span>
+            <strong>{{ publishedEvent?.startDate }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Time</span>
+            <strong>
+              {{ publishedEvent?.startTime }}
+              -
+              {{ publishedEvent?.endTime }}
+            </strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Access</span>
+            <strong>{{ publishedEvent?.accessType }}</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Visibility</span>
+            <strong>{{ publishedEvent?.visibility }}</strong>
+          </div>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="row g-3 mb-4">
+
+          <div class="col-md-4">
+
+            <div class="success-stat">
+
+              <i class="fa-solid fa-ticket text-success"></i>
+
+              <div>
+
+                <h4>
+                  {{ publishedEvent?.ticketTypes?.length || 0 }}
+                </h4>
+
+                <span>Ticket Types</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-4">
+
+            <div class="success-stat">
+
+              <i class="fa-solid fa-users text-success"></i>
+
+              <div>
+
+                <h4>
+                  {{ publishedEvent?.capacity }}
+                </h4>
+
+                <span>Capacity</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-md-4">
+
+            <div class="success-stat">
+
+              <i class="fa-solid fa-hand-holding-dollar text-success"></i>
+
+              <div>
+
+                <h4>
+                  {{
+                    publishedEvent?.allowRefunds
+                      ? 'Enabled'
+                      : 'Disabled'
+                  }}
+                </h4>
+
+                <span>Refunds</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CHECKLIST -->
+
+        <div class="checklist-box mb-4">
+
+          <div class="check-item">
+            <i class="fa-solid fa-circle-check"></i>
+            Event published
+          </div>
+
+          <div class="check-item">
+            <i class="fa-solid fa-circle-check"></i>
+            Ticket sales active
+          </div>
+
+          <div class="check-item">
+            <i class="fa-solid fa-circle-check"></i>
+            Guest access configured
+          </div>
+
+          <div class="check-item">
+            <i class="fa-solid fa-circle-check"></i>
+            Purchase orders enabled
+          </div>
+
+          <div class="check-item">
+            <i class="fa-solid fa-circle-check"></i>
+            Check-in tools ready
+          </div>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="d-flex justify-content-end gap-3">
+
+          <button
+            class="btn btn-outline-light px-4"
+            data-bs-dismiss="modal"
+            (click)="resetEventForm()"
+          >
+            Create Another Event
+          </button>
+
+          <button
+            class="btn btn-outline-light px-4"
+            data-bs-dismiss="modal"
+          >
+            Go to All Events
+          </button>
+
+          <button
+            class="btn btn-danger px-4"
+          >
+            Open Event Dashboard
+            <i class="fa-solid fa-arrow-right ms-2"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

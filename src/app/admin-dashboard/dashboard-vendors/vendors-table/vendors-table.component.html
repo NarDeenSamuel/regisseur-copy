@@ -1,0 +1,1036 @@
+<div class="container-fluid pt-2 px-0">
+<div class="row g-2">
+<div class="col-md-8">
+<div class="vendors-wrapper">
+
+  <div class="vendors-table-card">
+
+    <!-- ===================================== -->
+    <!-- =============== HEADER ============== -->
+    <!-- ===================================== -->
+
+    <div class="vendors-header">
+
+      <div class="container-fluid">
+
+        <div class="row">
+
+          <!-- FILTERS -->
+
+          <div class="col-md-7">
+
+            <div class="vendors-tabs">
+
+              <button
+                *ngFor="let filter of filters"
+                (click)="setFilter(filter)"
+                [class.active]="activeFilter === filter"
+              >
+
+                {{ filter }}
+
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- ACTIONS -->
+
+          <div class="col-md-5">
+
+            <div class="vendors-actions">
+
+              <!-- FILTER -->
+
+              <div class="filter-dropdown">
+
+                <button
+                  class="header-btn"
+                  (click)="toggleFilterMenu()"
+                >
+
+                  <i class="fa-solid fa-filter"></i>
+
+                  Filters
+
+                </button>
+
+                <!-- MENU -->
+
+                <div
+                  class="filter-menu"
+                  *ngIf="showFilterMenu"
+                >
+
+                  <!-- CATEGORY -->
+
+                  <div class="small-select-wrapper">
+
+                    <label>Category</label>
+
+                    <select
+                      [(ngModel)]="selectedCategory"
+                      (change)="applyFilters()"
+                    >
+
+                      <option value="">
+                        All Categories
+                      </option>
+
+                      <option
+                        *ngFor="let item of categoryOptions"
+                        [value]="item"
+                      >
+
+                        {{ item }}
+
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- EXPORT -->
+
+              <button
+                class="header-btn"
+                (click)="exportPDF()"
+              >
+
+                <i class="fa-solid fa-download"></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- ================ TABLE ============== -->
+    <!-- ===================================== -->
+
+    <div class="custom-table-wrapper">
+
+      <table class="vendors-table">
+
+        <thead>
+
+          <tr>
+
+            <th>Vendor</th>
+
+            <th>Category</th>
+
+            <th>Services</th>
+
+            <th>Location</th>
+
+            <th>Status</th>
+
+            <th>Rating</th>
+
+            <th>Active Bookings</th>
+
+            <th>Total Bookings</th>
+
+            <th>Actions</th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <tr
+            *ngFor="
+              let vendor of paginatedVendors;
+              let i = index
+            "
+          >
+
+            <!-- VENDOR -->
+
+            <td>
+
+              <div class="event-info">
+
+                <img
+                  [src]="vendor.image"
+                  alt=""
+                >
+
+                <div class="event-text">
+
+                  <h5>{{ vendor.title }}</h5>
+
+                  <span>{{ vendor.email }}</span>
+
+                  <span>{{ vendor.phone }}</span>
+
+                </div>
+
+              </div>
+
+            </td>
+
+            <!-- CATEGORY -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="vendor.categoryClass"
+              >
+
+                {{ vendor.type }}
+
+              </span>
+
+            </td>
+
+            <!-- SERVICES -->
+
+            <td>
+
+              <div class="table-double-text">
+
+                <h6>{{ vendor.services }}</h6>
+
+                <span>{{ vendor.subServices }}</span>
+
+              </div>
+
+            </td>
+
+            <!-- LOCATION -->
+
+            <td>
+
+              <span class="single-text">
+
+                {{ vendor.location }}
+
+              </span>
+
+            </td>
+
+            <!-- STATUS -->
+
+            <td>
+
+              <span
+                class="status-badge"
+                [ngClass]="getStatusClass(vendor.status)"
+              >
+
+                {{ vendor.status }}
+
+              </span>
+
+            </td>
+
+            <!-- RATING -->
+
+            <td>
+
+              <div class="table-double-text">
+
+                <h6>
+
+                  {{ vendor.rating }} ⭐
+
+                </h6>
+
+                <span>
+
+                  ({{ vendor.reviews }})
+
+                </span>
+
+              </div>
+
+            </td>
+
+            <!-- ACTIVE BOOKINGS -->
+
+            <td>
+
+              <span class="single-text">
+
+                {{ vendor.activeBookings }}
+
+              </span>
+
+            </td>
+
+            <!-- TOTAL BOOKINGS -->
+
+            <td>
+
+              <span class="single-text">
+
+                {{ vendor.totalBookings }}
+
+              </span>
+
+            </td>
+
+            <!-- ACTIONS -->
+
+            <td class="menu-cell">
+
+              <button
+                class="dots-btn"
+                (click)="toggleMenu(i)"
+              >
+
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+
+              </button>
+
+              <div
+                class="action-menu"
+                *ngIf="openedMenu === i"
+              >
+
+                <button>
+
+                  <i class="fa-regular fa-pen-to-square"></i>
+
+                  Edit
+
+                </button>
+
+                <button class="delete-btn">
+
+                  <i class="fa-regular fa-trash-can"></i>
+
+                  Delete
+
+                </button>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- =============== FOOTER ============== -->
+    <!-- ===================================== -->
+
+    <div class="table-footer">
+
+      <p>
+
+        Showing
+
+        {{
+          (currentPage - 1) * itemsPerPage + 1
+        }}
+
+        to
+
+        {{
+          currentPage * itemsPerPage >
+          filteredVendors.length
+          ? filteredVendors.length
+          : currentPage * itemsPerPage
+        }}
+
+        of {{ filteredVendors.length }} vendors
+
+      </p>
+
+      <!-- PAGINATION -->
+
+      <div class="pagination-box">
+
+        <!-- PREV -->
+
+        <button
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+
+          <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <!-- NUMBERS -->
+
+        <ng-container
+          *ngFor="let page of visiblePages"
+        >
+
+          <button
+            *ngIf="page !== '...'"
+            (click)="changePage(+page)"
+            [class.active]="currentPage === page"
+          >
+
+            {{ page }}
+
+          </button>
+
+          <span
+            *ngIf="page === '...'"
+            class="dots"
+          >
+
+            ...
+
+          </span>
+
+        </ng-container>
+
+        <!-- NEXT -->
+
+        <button
+          (click)="nextPage()"
+          [disabled]="
+            currentPage === totalPagesCount
+          "
+        >
+
+          <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
+      </div>
+
+      <!-- PER PAGE -->
+
+      <div class="per-page-wrapper">
+
+        <select
+          class="per-page-select"
+          [(ngModel)]="itemsPerPage"
+          (change)="changeItemsPerPage()"
+        >
+
+          <option [value]="5">5 / page</option>
+
+          <option [value]="10">10 / page</option>
+
+          <option [value]="15">15 / page</option>
+
+          <option [value]="20">20 / page</option>
+
+        </select>
+
+        <i class="fa-solid fa-chevron-down select-icon"></i>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+</div>
+<div class="col-md-4">
+
+<div class="vendors-category-card">
+
+  <!-- HEADER -->
+
+  <div class="vendors-category-header">
+
+    <h3>Vendors by Category</h3>
+
+  </div>
+
+  <!-- CONTENT -->
+
+  <div class="vendors-category-content">
+
+    <!-- CHART -->
+
+    <div class="vendors-chart-wrapper">
+
+      <div class="vendors-chart">
+
+        <svg viewBox="0 0 42 42">
+
+          <!-- BG -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#171717"
+            stroke-width="4"
+          />
+
+          <!-- AUDIO -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#4a7dff"
+            stroke-width="4"
+            [attr.stroke-dasharray]="audioPercent + ' 100'"
+            stroke-dashoffset="25"
+          />
+
+          <!-- LIGHTING -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#a855f7"
+            stroke-width="4"
+            [attr.stroke-dasharray]="lightingPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - audioPercent"
+          />
+
+          <!-- PRODUCTION -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#ff8c1a"
+            stroke-width="4"
+            [attr.stroke-dasharray]="productionPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - audioPercent - lightingPercent"
+          />
+
+          <!-- CATERING -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#8bd35b"
+            stroke-width="4"
+            [attr.stroke-dasharray]="cateringPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - audioPercent - lightingPercent - productionPercent"
+          />
+
+          <!-- AV -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#c9b3ff"
+            stroke-width="4"
+            [attr.stroke-dasharray]="avPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - audioPercent - lightingPercent - productionPercent - cateringPercent"
+          />
+
+          <!-- STAFFING -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#9b8cff"
+            stroke-width="4"
+            [attr.stroke-dasharray]="staffingPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - audioPercent - lightingPercent - productionPercent - cateringPercent - avPercent"
+          />
+
+          <!-- TRANSPORT -->
+
+          <circle
+            cx="21"
+            cy="21"
+            r="15.915"
+            fill="transparent"
+            stroke="#f5b73b"
+            stroke-width="4"
+            [attr.stroke-dasharray]="transportPercent + ' 100'"
+            [attr.stroke-dashoffset]="25 - audioPercent - lightingPercent - productionPercent - cateringPercent - avPercent - staffingPercent"
+          />
+
+        </svg>
+
+        <!-- CENTER -->
+
+        <div class="vendors-chart-center">
+
+          <h2>{{ totalVendors }}</h2>
+
+          <span>Total</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- LIST -->
+
+    <div class="vendors-category-list">
+
+      <!-- AUDIO -->
+
+      <div class="vendors-category-item">
+
+        <div class="vendors-category-left">
+
+          <span
+            class="vendors-dot"
+            style="background:#4a7dff"
+          ></span>
+
+          <p>Audio</p>
+
+        </div>
+
+        <span>
+
+          {{ audioCount }}
+
+          ({{ audioPercent | number:'1.0-0' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- LIGHTING -->
+
+      <div class="vendors-category-item">
+
+        <div class="vendors-category-left">
+
+          <span
+            class="vendors-dot"
+            style="background:#a855f7"
+          ></span>
+
+          <p>Lighting</p>
+
+        </div>
+
+        <span>
+
+          {{ lightingCount }}
+
+          ({{ lightingPercent | number:'1.0-0' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- PRODUCTION -->
+
+      <div class="vendors-category-item">
+
+        <div class="vendors-category-left">
+
+          <span
+            class="vendors-dot"
+            style="background:#ff8c1a"
+          ></span>
+
+          <p>Production</p>
+
+        </div>
+
+        <span>
+
+          {{ productionCount }}
+
+          ({{ productionPercent | number:'1.0-0' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- CATERING -->
+
+      <div class="vendors-category-item">
+
+        <div class="vendors-category-left">
+
+          <span
+            class="vendors-dot"
+            style="background:#8bd35b"
+          ></span>
+
+          <p>Catering</p>
+
+        </div>
+
+        <span>
+
+          {{ cateringCount }}
+
+          ({{ cateringPercent | number:'1.0-0' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- AV -->
+
+      <div class="vendors-category-item">
+
+        <div class="vendors-category-left">
+
+          <span
+            class="vendors-dot"
+            style="background:#c9b3ff"
+          ></span>
+
+          <p>AV & Visual</p>
+
+        </div>
+
+        <span>
+
+          {{ avCount }}
+
+          ({{ avPercent | number:'1.0-0' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- STAFFING -->
+
+      <div class="vendors-category-item">
+
+        <div class="vendors-category-left">
+
+          <span
+            class="vendors-dot"
+            style="background:#9b8cff"
+          ></span>
+
+          <p>Staffing</p>
+
+        </div>
+
+        <span>
+
+          {{ staffingCount }}
+
+          ({{ staffingPercent | number:'1.0-0' }}%)
+
+        </span>
+
+      </div>
+
+      <!-- TRANSPORT -->
+
+      <div class="vendors-category-item">
+
+        <div class="vendors-category-left">
+
+          <span
+            class="vendors-dot"
+            style="background:#f5b73b"
+          ></span>
+
+          <p>Transportation</p>
+
+        </div>
+
+        <span>
+
+          {{ transportCount }}
+
+          ({{ transportPercent | number:'1.0-0' }}%)
+
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="top-vendors-card my-2">
+
+  <!-- TITLE -->
+
+  <h3 class="top-vendors-title">
+
+    Top Vendors by Bookings
+
+  </h3>
+
+  <!-- LIST -->
+
+  <div class="top-vendors-list">
+
+    <div
+      class="top-vendor-item"
+      *ngFor="
+        let vendor of topVendors;
+        let i = index
+      "
+    >
+
+      <div class="top-vendor-left">
+
+        <div class="top-vendor-rank">
+
+          {{ i + 1 }}
+
+        </div>
+
+        <span class="top-vendor-name">
+
+          {{ vendor.title }}
+
+        </span>
+
+      </div>
+
+      <span class="top-vendor-bookings">
+
+        {{ vendor.totalBookings }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- BUTTON -->
+
+  <button
+    class="view-all-vendors-btn"
+    data-bs-toggle="modal"
+    data-bs-target="#vendorsModal"
+  >
+
+    View All Vendors
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+  </button>
+
+</div>
+
+<!-- ====================================== -->
+<!-- ============== MODAL ================ -->
+<!-- ====================================== -->
+
+<div
+  class="modal fade"
+  id="vendorsModal"
+  tabindex="-1"
+>
+
+  <div
+    class="
+      modal-dialog
+      modal-dialog-centered
+    "
+  >
+
+    <div class="modal-content vendors-modal-content">
+
+      <!-- HEADER -->
+
+      <div class="modal-header vendors-modal-header">
+
+        <h5>
+
+          Top Vendors By Bookings
+
+        </h5>
+
+        <!-- FILTERS -->
+
+
+
+      </div>
+
+      <!-- BODY -->
+
+      <div class="modal-body vendors-modal-body">
+
+       <div
+  class="vendor-modal-row"
+  *ngFor="
+    let item of sortedVendors
+  "
+>
+
+          <!-- LEFT -->
+
+          <div class="vendor-modal-left">
+
+            <img
+              [src]="item.image"
+              alt=""
+              class="vendor-modal-img"
+            >
+
+            <div class="vendor-modal-text">
+
+              <h4>
+
+                {{ item.title }}
+
+              </h4>
+
+              <span>
+
+                {{ item.activeBookings }}
+                Tickets Sold
+
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="vendor-modal-price">
+
+            ${{ item.totalBookings }}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="modal-footer vendors-modal-footer">
+
+        <button
+          class="close-vendors-btn"
+          data-bs-dismiss="modal"
+        >
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="timeline-card">
+
+  <!-- HEADER -->
+
+  <div class="timeline-header">
+
+    <h3>
+
+      Vendor Activity (30 Days)
+
+    </h3>
+
+    <button class="timeline-filter-btn">
+
+      30 Days
+
+      <i class="fa-solid fa-chevron-down"></i>
+
+    </button>
+
+  </div>
+
+  <!-- CHART -->
+
+  <div class="timeline-chart-wrapper">
+
+    <canvas
+      id="vendorsTimelineChart"
+    ></canvas>
+
+  </div>
+
+  <!-- LEGEND -->
+
+  <div class="timeline-legend">
+
+    <div class="legend-item">
+
+      <span
+        class="
+          legend-dot
+          red
+        "
+      ></span>
+
+      New Vendors
+
+    </div>
+
+    <div class="legend-item">
+
+      <span
+        class="
+          legend-dot
+          white
+        "
+      ></span>
+
+      Bookings
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+</div>
+
+
+</div>
+
+
+
+
+
