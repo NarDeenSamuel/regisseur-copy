@@ -292,8 +292,7 @@ this.isCreatingProduct = true;
     requirementsNotes:
       this.productForm.notes || '',
 
-    productImageUrl:
-      this.productImagePreview,
+    productImageUrl:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500',
 
     limitedStock:
       this.productForm.limitedStock,
@@ -370,7 +369,6 @@ loadProducts(): void {
             item.id,
 
           image:
-            item.productImageUrl ||
 
             'https://images.unsplash.com/photo-1560393464-5c69a73c5770?w=500',
 

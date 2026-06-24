@@ -3,6 +3,9 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { SideBarComponent } from '../../side-bar/side-bar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { forkJoin } from 'rxjs';
+import { EventService } from '../../core/services/event/event-service.service';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-all-events',
@@ -11,205 +14,347 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './all-events.component.css'
 })
 export class AllEventsComponent implements OnInit{
-ngOnInit(){
-  this.filteredEvents = [...this.events];
-}
-// events: any[] = [];
-events = [
+ngOnInit(): void {
 
-{
-  title:'Neon Nights Live',
-  type:'Concert',
-  organizer:'Live Nation',
-  location:'Los Angeles, CA',
-  date:'Wed, Jun 25, 2026',
-  eventDate:'2026-06-25',
-  price:45,
-  priceLabel:'From $45',
-  status:'Published Event',
-  category:'All Events',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1501386761578-eac5c94b800a'
-},
+  this.loadEvents();
 
-{
-  title:'Bassline Festival 2025',
-  type:'Festival',
-  organizer:'Event Masters',
-  location:'San Diego, CA',
-  date:'Sat, Jun 28, 2026',
-  eventDate:'2026-06-28',
-  price:99,
-  priceLabel:'From $99',
-  status:'Published Event',
-  category:'This Month',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f'
-},
-
-{
-  title:'Laugh Track Comedy Night',
-  type:'Comedy',
-  organizer:'Creative Studio',
-  location:'Hollywood, CA',
-  date:'Mon, Jun 23, 2026',
-  eventDate:'2026-06-23',
-  price:25,
-  priceLabel:'From $25',
-  status:'Published Event',
-  category:'All Events',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1516280440614-37939bbacd81'
-},
-
-{
-  title:'Symphony Under The Stars',
-  type:'Theater',
-  organizer:'Entertainment Hub',
-  location:'Los Angeles, CA',
-  date:'Sat, Jul 05, 2026',
-  eventDate:'2026-07-05',
-  price:65,
-  priceLabel:'From $65',
-  status:'Published Event',
-  category:'This Month',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2'
-},
-
-{
-  title:'Summer Sounds Festival',
-  type:'Festival',
-  organizer:'Live Nation',
-  location:'San Diego, CA',
-  date:'Jul 11 - Jul 13, 2026',
-  eventDate:'2026-07-11',
-  price:75,
-  priceLabel:'From $75',
-  status:'Published Event',
-  category:'This Weekend',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1459749411175-04bf5292ceea'
-},
-
-{
-  title:'The Midnight Collective',
-  type:'Theater',
-  organizer:'Creative Studio',
-  location:'Los Angeles, CA',
-  date:'Thu, Jun 26, 2026',
-  eventDate:'2026-06-26',
-  price:40,
-  priceLabel:'From $40',
-  status:'Published Event',
-  category:'All Events',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1503095396549-807759245b35'
-},
-
-{
-  title:'Warehouse Techno Night',
-  type:'Festival',
-  organizer:'Event Masters',
-  location:'Los Angeles, CA',
-  date:'Sat, Jun 29, 2026',
-  eventDate:'2026-06-29',
-  price:50,
-  priceLabel:'From $50',
-  status:'Published Event',
-  category:'This Weekend',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1503095396549-807759245b35'
-},
-
-{
-  title:'Entrepreneur Networking Mixer',
-  type:'Networking',
-  organizer:'Organizer 1',
-  location:'Downtown LA',
-  date:'Tue, Jun 24, 2026',
-  eventDate:'2026-06-24',
-  price:0,
-  priceLabel:'Free',
-  status:'Upcoming',
-  category:'Free Events',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1511578314322-379afb476865'
-},
-
-{
-  title:'LA Night Hoops',
-  type:'Sports',
-  organizer:'Organizer 2',
-  location:'Los Angeles, CA',
-  date:'Sun, Jun 30, 2026',
-  eventDate:'2026-06-30',
-  price:30,
-  priceLabel:'From $30',
-  status:'Published Event',
-  category:'All Events',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1546519638-68e109498ffc'
-},
-
-{
-  title:'Urban Art Exhibition',
-  type:'Workshop',
-  organizer:'Creative Studio',
-  location:'Arts District, LA',
-  date:'Jul 02 - Jul 12, 2026',
-  eventDate:'2026-07-02',
-  price:0,
-  priceLabel:'Free',
-  status:'Upcoming',
-  category:'Free Events',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b'
-},
-
-{
-  title:'Startup Founders Meetup',
-  type:'Networking',
-  organizer:'Organizer 1',
-  location:'Cairo',
-  date:'Fri, Jul 04, 2026',
-  eventDate:'2026-07-04',
-  price:20,
-  priceLabel:'From $20',
-  status:'Upcoming',
-  category:'This Month',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1522202176988-66273c2fd55f'
-},
-
-{
-  title:'Tech Innovators Summit',
-  type:'Workshop',
-  organizer:'Event Masters',
-  location:'Alexandria',
-  date:'Sat, Jul 19, 2026',
-  eventDate:'2026-07-19',
-  price:120,
-  priceLabel:'From $120',
-  status:'Published Event',
-  category:'This Month',
-  favorite:false,
-  saved:false,
-  image:'https://images.unsplash.com/photo-1515169067868-5387ec356754'
 }
 
-];
+  countries = [
+    { name: 'United States', code: '+1', flag: 'assets/flags/us.svg' },
+    { name: 'Egypt', code: '+20', flag: 'assets/flags/eg.svg' },
+    { name: 'Saudi Arabia', code: '+966', flag: 'assets/flags/sa.svg' },
+    { name: 'United Arab Emirates', code: '+971', flag: 'assets/flags/ae.svg' },
+    { name: 'United Kingdom', code: '+44', flag: 'assets/flags/gb.svg' },
+    { name: 'France', code: '+33', flag: 'assets/flags/fr.svg' },
+    { name: 'Germany', code: '+49', flag: 'assets/flags/de.svg' },
+    { name: 'Italy', code: '+39', flag: 'assets/flags/it.svg' },
+    { name: 'Spain', code: '+34', flag: 'assets/flags/es.svg' },
+    { name: 'Canada', code: '+1', flag: 'assets/flags/ca.svg' },
+    { name: 'Brazil', code: '+55', flag: 'assets/flags/br.svg' },
+    { name: 'Argentina', code: '+54', flag: 'assets/flags/ar.svg' },
+    { name: 'Mexico', code: '+52', flag: 'assets/flags/mx.svg' },
+    { name: 'India', code: '+91', flag: 'assets/flags/in.svg' },
+    { name: 'China', code: '+86', flag: 'assets/flags/cn.svg' },
+    { name: 'Japan', code: '+81', flag: 'assets/flags/jp.svg' },
+    { name: 'South Korea', code: '+82', flag: 'assets/flags/kr.svg' },
+    { name: 'Turkey', code: '+90', flag: 'assets/flags/tr.svg' },
+    { name: 'Russia', code: '+7', flag: 'assets/flags/ru.svg' },
+    { name: 'Australia', code: '+61', flag: 'assets/flags/au.svg' },
+    { name: 'South Africa', code: '+27', flag: 'assets/flags/za.svg' },
+    { name: 'Qatar', code: '+974', flag: 'assets/flags/qa.svg' },
+    { name: 'Kuwait', code: '+965', flag: 'assets/flags/kw.svg' },
+    { name: 'Bahrain', code: '+973', flag: 'assets/flags/bh.svg' },
+    { name: 'Oman', code: '+968', flag: 'assets/flags/om.svg' },
+    { name: 'Jordan', code: '+962', flag: 'assets/flags/jo.svg' },
+    { name: 'Lebanon', code: '+961', flag: 'assets/flags/lb.svg' },
+    { name: 'Morocco', code: '+212', flag: 'assets/flags/ma.svg' },
+    { name: 'Tunisia', code: '+216', flag: 'assets/flags/tn.svg' },
+    { name: 'Algeria', code: '+213', flag: 'assets/flags/dz.svg' }
+  ];
+selectedCountry = this.countries[1];
+showCountryDropdown = false;
+
+selectCountry(country:any){
+  this.selectedCountry = country;
+  this.showCountryDropdown = false;
+}
+selectedEvent: any = null;
+
+quantity = 1;
+
+selectedTicket: any = null;
+
+openEventModal(event: any) {
+
+  this.selectedEvent = event;
+
+  if (
+    event.ticketTiers &&
+    event.ticketTiers.length
+  ) {
+
+    this.selectedTicket =
+      event.ticketTiers[0];
+
+  }
+
+  this.quantity = 1;
+
+}
+selectTicket(ticket: any) {
+
+  this.selectedTicket = ticket;
+
+}
+
+increaseQty() {
+
+  const maxQty =
+    this.selectedTicket?.quantity || 1;
+
+  if (this.quantity < maxQty) {
+
+    this.quantity++;
+
+  }
+
+}
+
+decreaseQty() {
+
+  if (this.quantity > 1) {
+
+    this.quantity--;
+
+  }
+
+}
+get subtotal(): number {
+
+  return (
+    (this.selectedTicket?.price || 0)
+    * this.quantity
+  );
+
+}
+
+get serviceFee(): number {
+
+  return +(this.subtotal * 0.15)
+    .toFixed(2);
+
+}
+
+get total(): number {
+
+  return this.subtotal +
+         this.serviceFee;
+
+}
+closeModal() {
+
+  const modalElement =
+    document.getElementById(
+      'eventDetailsModal'
+    );
+
+  if (!modalElement) return;
+
+  const modal =
+    bootstrap.Modal.getInstance(
+      modalElement
+    );
+
+  modal?.hide();
+
+  this.currentStep = 1;
+
+  this.quantity = 1;
+
+}
+
+currentStep = 1;
+today = new Date();
+completePurchase() {
+  this.currentStep = 3;
+}
+goToCheckout() {
+
+  if (!this.selectedTicket) {
+    return;
+  }
+
+  this.currentStep = 2;
+}
+
+backToTickets() {
+
+  this.currentStep = 1;
+}
+
+constructor(
+  private eventService: EventService
+) {}
+setSort(type: string) {
+
+  this.sortBy = type;
+
+  this.applyFilters();
+
+}
+
+loadEvents(): void {
+
+  this.eventService
+    .getEvents()
+    .subscribe({
+
+      next: (res) => {
+
+        this.events = res.items.map((event: any) => ({
+          ...event,
+          favorite: false,
+          saved: false
+        }));
+
+        this.filteredEvents = [...this.events];
+
+        this.loadWishlist();
+this.loadSavedEvents();
+      },
+
+      error: (err) => {
+
+        console.error(err);
+
+      }
+
+    });
+
+}
+loadWishlist() {
+
+  const user = JSON.parse(
+    localStorage.getItem('user') || '{}'
+  );
+
+  if (!user.id) return;
+
+  this.eventService
+    .getFavorites(user.id)
+    .subscribe({
+
+      next: (favorites) => {
+
+        const favoriteIds =
+          favorites.map(
+            (f: any) => f.id
+          );
+
+        this.wishlistEvents =
+          this.events
+            .filter(event =>
+              favoriteIds.includes(
+                event.id
+              )
+            )
+            .map(event => ({
+              ...event,
+              favorite: true
+            }));
+
+        this.events.forEach(event => {
+
+          event.favorite =
+            favoriteIds.includes(
+              event.id
+            );
+
+        });
+
+        this.savedEvents.forEach(event => {
+
+          event.favorite =
+            favoriteIds.includes(
+              event.id
+            );
+
+        });
+
+        if (
+          this.selectedCategory ===
+          'Wishlist'
+        ) {
+
+          this.filteredEvents =
+            [...this.wishlistEvents];
+
+        }
+
+      },
+
+      error: err => {
+
+        console.error(err);
+
+      }
+
+    });
+
+}
+loadSavedEvents() {
+
+  const user = JSON.parse(
+    localStorage.getItem('user') || '{}'
+  );
+
+  if (!user.id) return;
+
+  this.eventService
+    .getWishlist(user.id)
+    .subscribe({
+
+      next: (saved) => {
+
+        const savedIds =
+          saved.map(
+            (s: any) => s.id
+          );
+
+        this.savedEvents =
+          this.events
+            .filter(event =>
+              savedIds.includes(
+                event.id
+              )
+            )
+            .map(event => ({
+              ...event,
+              saved: true
+            }));
+
+        this.events.forEach(event => {
+
+          event.saved =
+            savedIds.includes(
+              event.id
+            );
+
+        });
+
+        this.wishlistEvents.forEach(event => {
+
+          event.saved =
+            savedIds.includes(
+              event.id
+            );
+
+        });
+
+        if (
+          this.selectedCategory ===
+          'Saved Events'
+        ) {
+
+          this.filteredEvents =
+            [...this.savedEvents];
+
+        }
+
+      },
+
+      error: err => {
+
+        console.error(err);
+
+      }
+
+    });
+
+}
+events: any[] = [];
+savedEvents: any[] = [];
 filteredEvents: any[] = [];
 
 viewMode: 'grid' | 'list' = 'grid';
@@ -228,28 +373,39 @@ sortBy = 'relevant';
 
 currentPage = 1;
 organizers = [
-  'Live Nation',
-  'Event Masters',
-  'Creative Studio',
-  'Entertainment Hub',
-  'Organizer 1',
-  'Organizer 2'
+  'Organizer',
+  'Producer'
 ];
 pageSize = 6;
 eventTypes = [
-  'Concert',
-  'Festival',
-  'Theater',
-  'Comedy',
-  'Workshop',
-  'Sports',
-  'Networking'
+  'CONFERENCE',
+  'FESTIVAL',
+  'EXHIBITION',
+  'COMPETITION',
+  'SCREENING / BROADCAST'
 ];
-selectTab(tabName:string){
+selectTab(tabName: string) {
 
   this.selectedCategory = tabName;
 
   this.currentPage = 1;
+
+  if (tabName === 'Wishlist') {
+
+    this.filteredEvents =
+      [...this.wishlistEvents];
+
+    return;
+
+  }
+  if (tabName === 'Saved Events') {
+
+  this.filteredEvents =
+    [...this.savedEvents];
+
+  return;
+
+}
 
   this.applyFilters();
 
@@ -262,7 +418,7 @@ locations = [
   'Alexandria',
   'Giza'
 ];
-
+wishlistEvents: any[] = [];
 get allEventsCount() {
   return this.events.length;
 }
@@ -272,7 +428,7 @@ get freeEventsCount() {
 }
 
 get savedEventsCount() {
-  return this.events.filter(x => x.favorite).length;
+  return this.savedEvents.length;
 }
 
 get tabs() {
@@ -281,51 +437,197 @@ get tabs() {
       name: 'All Events',
       count: this.events.length
     },
+   {
+  name: 'This Weekend',
+  count: this.events.filter(event => {
+
+    const today = new Date();
+
+    const weekendEnd = new Date(today);
+
+    weekendEnd.setDate(today.getDate() + 7);
+
+    const eventDate =
+      new Date(event.dateUtc);
+
+    return (
+      eventDate >= today &&
+      eventDate <= weekendEnd
+    );
+
+  }).length
+},
     {
-      name: 'This Weekend',
-      count: this.events.filter(
-        x => x.category === 'This Weekend'
-      ).length
-    },
-    {
-      name: 'This Month',
-      count: this.events.filter(
-        x => x.category === 'This Month'
-      ).length
-    },
-    {
-      name: 'Free Events',
-      count: this.events.filter(
-        x => x.price === 0
-      ).length
-    },
-    {
-  name: 'Wishlist',
+  name: 'This Month',
+  count: this.events.filter(event => {
+
+    const now = new Date();
+
+    const eventDate =
+      new Date(event.dateUtc);
+
+    return (
+      eventDate.getMonth() === now.getMonth() &&
+      eventDate.getFullYear() === now.getFullYear()
+    );
+
+  }).length
+},
+   {
+  name: 'Free Events',
   count: this.events.filter(
-    x => x.favorite
+    x => x.ticketingMode === 'Free'
   ).length
+},
+{
+  name: 'Wishlist',
+  count: this.wishlistEvents.length
 },
 
 {
   name: 'Saved Events',
-  count: this.events.filter(
-    x => x.saved
-  ).length
+  count: this.savedEvents.length
 }
   ];
 }
-toggleFavorite(event:any){
+toggleFavorite(event: any) {
 
-  event.favorite = !event.favorite;
+  const user = JSON.parse(
+    localStorage.getItem('user') || '{}'
+  );
 
-  this.applyFilters();
+  const userId = user.id;
+
+  if (!userId) return;
+
+  const request = event.favorite
+
+    ? this.eventService.removeFromFavorite(
+        event.id,
+        userId
+      )
+
+    : this.eventService.addToFavorite(
+        event.id,
+        userId
+      );
+
+  request.subscribe({
+
+    next: () => {
+
+      this.loadWishlist();
+
+      if (
+        this.selectedCategory ===
+        'Wishlist'
+      ) {
+
+        setTimeout(() => {
+
+          this.filteredEvents =
+            [...this.wishlistEvents];
+
+        });
+
+      }
+
+      if (
+        this.selectedCategory ===
+        'Saved Events'
+      ) {
+
+        setTimeout(() => {
+
+          this.filteredEvents =
+            [...this.savedEvents];
+
+        });
+
+      }
+
+    },
+
+    error: err => {
+
+      console.error(
+        'Favorite Error',
+        err
+      );
+
+    }
+
+  });
 
 }
-toggleSave(event:any){
+toggleSave(event: any) {
 
-  event.saved = !event.saved;
+  const user = JSON.parse(
+    localStorage.getItem('user') || '{}'
+  );
 
-  this.applyFilters();
+  const userId = user.id;
+
+  if (!userId) return;
+
+  const request = event.saved
+
+    ? this.eventService.removeFromWishlist(
+        event.id,
+        userId
+      )
+
+    : this.eventService.addToWishlist(
+        event.id,
+        userId
+      );
+
+  request.subscribe({
+
+    next: () => {
+
+      this.loadSavedEvents();
+
+      if (
+        this.selectedCategory ===
+        'Saved Events'
+      ) {
+
+        setTimeout(() => {
+
+          this.filteredEvents =
+            [...this.savedEvents];
+
+        });
+
+      }
+
+      if (
+        this.selectedCategory ===
+        'Wishlist'
+      ) {
+
+        setTimeout(() => {
+
+          this.filteredEvents =
+            [...this.wishlistEvents];
+
+        });
+
+      }
+
+    },
+
+    error: err => {
+
+      console.error(
+        'Save Error',
+        err
+      );
+
+    }
+
+  });
 
 }
 selectedTypes: string[] = [];
@@ -351,111 +653,174 @@ applyFilters() {
 
   let result = [...this.events];
 
-  result = result.filter(event => {
+  // Search
 
-    const matchSearch =
-      !this.searchTerm ||
-      event.title
-        .toLowerCase()
-        .includes(this.searchTerm.toLowerCase());
+  if (this.searchTerm) {
 
-    const matchType =
-      !this.selectedTypes.length ||
-      this.selectedTypes.includes(event.type);
-const matchDate =
-  !this.selectedDateRange ||
-  event.eventDate === this.selectedDateRange;
-    const matchLocation =
-      !this.selectedLocation ||
-      event.location.includes(this.selectedLocation);
-
-    const matchOrganizer =
-      !this.selectedOrganizer ||
-      event.organizer === this.selectedOrganizer;
-
-    const matchPrice =
-      event.price <= this.priceRange;
-
-    return (
-  matchSearch &&
-  matchType &&
-  matchLocation &&
-  matchOrganizer &&
-  matchPrice &&
-  matchDate
-);
-
-  });
-
-  if(this.selectedCategory === 'Free Events'){
-
-    result =
-      result.filter(x => x.price === 0);
+    result = result.filter(event =>
+      event.name?.toLowerCase()
+      .includes(this.searchTerm.toLowerCase())
+    );
 
   }
 
-  if(this.selectedCategory === 'Wishlist'){
+  // Event Type
 
-  result =
-    result.filter(x => x.favorite);
+  if (this.selectedTypes.length) {
 
-}
-
-if(this.selectedCategory === 'Saved Events'){
-
-  result =
-    result.filter(x => x.saved);
-
-}
-switch (this.sortBy) {
-
-  case 'price':
-
-    result.sort((a, b) => a.price - b.price);
-
-    break;
-
-  case 'newest':
-
-    result.sort(
-      (a, b) =>
-        new Date(b.eventDate).getTime() -
-        new Date(a.eventDate).getTime()
+    result = result.filter(event =>
+      this.selectedTypes.includes(
+        event.eventTypeName
+      )
     );
 
-    break;
+  }
 
-  case 'oldest':
+  // Date
 
-    result.sort(
-      (a, b) =>
-        new Date(a.eventDate).getTime() -
-        new Date(b.eventDate).getTime()
+  if (this.selectedDateRange) {
+
+    result = result.filter(event => {
+
+      const eventDate =
+        new Date(event.dateUtc)
+          .toISOString()
+          .split('T')[0];
+
+      return eventDate === this.selectedDateRange;
+
+    });
+
+  }
+
+  // Location (Timezone)
+
+  if (this.selectedLocation) {
+
+    result = result.filter(event =>
+      event.timeZone
+        ?.toLowerCase()
+        .includes(
+          this.selectedLocation.toLowerCase()
+        )
     );
 
-    break;
+  }
 
-  case 'relevant':
+  // Organizer
 
-  default:
+  if (this.selectedOrganizer) {
 
-    break;
-}
-  if(
-  this.selectedCategory !== 'All Events' &&
-  this.selectedCategory !== 'Free Events' &&
-  this.selectedCategory !== 'Wishlist' &&
-  this.selectedCategory !== 'Saved Events'
-){
+    result = result.filter(event =>
+      event.yourRole ===
+      this.selectedOrganizer
+    );
 
-    result =
-      result.filter(
-        x => x.category === this.selectedCategory
+  }
+
+  // Free Events
+
+  if (this.selectedCategory === 'Free Events') {
+
+    result = result.filter(
+      event => event.ticketingMode === 'Free'
+    );
+
+  }
+
+  // This Weekend
+
+  if (this.selectedCategory === 'This Weekend') {
+
+    const today = new Date();
+
+    const nextWeek = new Date();
+
+    nextWeek.setDate(today.getDate() + 7);
+
+    result = result.filter(event => {
+
+      const eventDate =
+        new Date(event.dateUtc);
+
+      return (
+        eventDate >= today &&
+        eventDate <= nextWeek
       );
 
+    });
+
   }
 
+  // This Month
+
+  if (this.selectedCategory === 'This Month') {
+
+    const now = new Date();
+
+    result = result.filter(event => {
+
+      const eventDate =
+        new Date(event.dateUtc);
+
+      return (
+        eventDate.getMonth() ===
+          now.getMonth() &&
+        eventDate.getFullYear() ===
+          now.getFullYear()
+      );
+
+    });
+
+  }
+
+  if (this.selectedCategory === 'Wishlist') {
+
+    result = result.filter(
+      event => event.favorite
+    );
+
+  }
+
+  if (this.selectedCategory === 'Saved Events') {
+
+    result = result.filter(
+      event => event.saved
+    );
+
+  }
+  if (this.sortBy === 'newest') {
+
+  result.sort(
+    (a, b) =>
+      new Date(b.dateUtc).getTime() -
+      new Date(a.dateUtc).getTime()
+  );
+
+}
+
+if (this.sortBy === 'oldest') {
+
+  result.sort(
+    (a, b) =>
+      new Date(a.dateUtc).getTime() -
+      new Date(b.dateUtc).getTime()
+  );
+
+}
+
+if (this.sortBy === 'name') {
+
+  result.sort(
+    (a, b) =>
+      a.name.localeCompare(b.name)
+  );
+
+}
+
   this.filteredEvents = result;
+
+  this.currentPage = 1;
 
 }
 clearFilters(){
