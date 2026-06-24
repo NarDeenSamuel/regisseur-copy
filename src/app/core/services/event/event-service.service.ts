@@ -14,7 +14,7 @@ export class EventService {
   //   'https://localhost:7163/api';
 
     private baseUrl =
-    'http://eventservice.runasp.net/api';
+    'https://eventservice.runasp.net/api';
   constructor(
     private http: HttpClient
   ) {}

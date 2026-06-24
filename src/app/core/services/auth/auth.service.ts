@@ -10,7 +10,7 @@ export class AuthService {
 
   // private baseUrl = 'https://localhost:7041/api';
 private baseUrl =
-    'http://regussierservices.runasp.net/api';
+    'https://regussierservices.runasp.net/api';
   signUp(data: any) {
 
     return this.http.post(

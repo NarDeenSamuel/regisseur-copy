@@ -8,7 +8,7 @@ export class ProfileService {
 
   // private baseUrl = 'https://localhost:7041/api';
 private baseUrl =
-    'http://regussierservices.runasp.net/api';
+    'https://regussierservices.runasp.net/api';
   constructor(private http: HttpClient) {}
 
  completeExplorerProfile(data: any) {
