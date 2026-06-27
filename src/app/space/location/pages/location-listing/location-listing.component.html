@@ -1,0 +1,338 @@
+<div class="listing-page">
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <div class="listing-header">
+
+    <div>
+
+      <h1 class="page-title">
+        My Spaces
+      </h1>
+
+      <p class="page-subtitle">
+
+        Manage all your created spaces,
+        drafts, and published listings.
+
+      </p>
+
+    </div>
+
+    <button
+      class="create-btn"
+      routerLink="/locations/create">
+
+      + Create New Space
+
+    </button>
+
+  </div>
+
+  <!-- =========================
+       FILTERS
+  ========================== -->
+
+  <div class="filters-wrapper">
+
+    <!-- SEARCH -->
+
+    <input
+      type="text"
+
+      class="search-input"
+
+      placeholder="Search spaces..."
+
+      [(ngModel)]="searchText"
+
+      (input)="search()">
+
+    <!-- STATUS -->
+
+    <select
+  class="filter-select"
+
+  [(ngModel)]="selectedStatus"
+
+  (change)="search()">
+
+  <option value="">
+    All Status
+  </option>
+
+  <option value="Draft">
+    Draft
+  </option>
+
+  <option value="Inactive">
+    Inactive
+  </option>
+
+  <option value="Active">
+    Active
+  </option>
+
+</select>
+
+  </div>
+
+  <!-- =========================
+       EMPTY STATE
+  ========================== -->
+
+  @if (locations.length === 0) {
+
+    <div class="empty-state">
+
+      <h3>
+        No Spaces Found
+      </h3>
+
+      <p>
+        Try adjusting your search or filters.
+      </p>
+
+    </div>
+
+  }
+
+  <!-- =========================
+       SPACES GRID
+  ========================== -->
+
+  <div class="spaces-grid">
+
+    @for (
+      location of locations;
+      track location.id
+    ) {
+
+      <div class="space-card">
+
+        <!-- IMAGE -->
+
+        <!-- IMAGE -->
+
+<div class="space-image-wrapper">
+
+  <img
+    [src]="
+      location.imageUrl ||
+      'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1400&auto=format&fit=crop'
+    "
+    class="space-image">
+
+  <!-- LOCATION STATUS -->
+
+  <span
+    class="status-badge"
+    [class.draft]="location.locationStatus === 'Draft'"
+    [class.active]="location.locationStatus === 'Active'"
+   [class.inactive]="location.locationStatus === 'Inactive'">
+
+    {{ location.locationStatus }}
+
+  </span>
+
+  <!-- EMAIL VERIFICATION -->
+
+  <span
+    class="verification-badge"
+    [class.verified]="location.emailVerified"
+    [class.unverified]="!location.emailVerified">
+
+    @if (location.emailVerified) {
+
+      Claimed
+
+    } @else {
+
+      Unclaimed
+
+    }
+
+  </span>
+
+  <!-- APPROVAL STATUS -->
+
+  <span
+    class="approval-badge"
+    [class.pending]="location.approvalStatus === 'Pending'"
+    [class.approved]="location.approvalStatus === 'Approved'"
+    [class.rejected]="location.approvalStatus === 'Rejected'">
+
+   @if (
+  location.approvalStatus === 'Approved'
+) {
+
+  Verified
+
+}
+
+@if (
+  location.approvalStatus === 'Pending'
+) {
+
+  Pending
+
+}
+
+@if (
+  location.approvalStatus === 'Rejected'
+) {
+
+  Rejected
+
+}
+
+  </span>
+
+</div>
+
+        <!-- CONTENT -->
+
+        <div class="space-content">
+
+          <!-- TOP -->
+
+          <div class="space-top">
+
+            <h3 class="space-name">
+
+              {{ location.name }}
+
+            </h3>
+
+            <span class="price">
+
+              ${{ location.pricePerHour }}/hr
+
+            </span>
+
+          </div>
+
+          <!-- LOCATION -->
+
+          <p class="space-location">
+
+            {{ location.city }},
+            {{ location.state }}
+
+          </p>
+
+          <!-- DESCRIPTION -->
+
+          <p class="space-description">
+
+            {{ location.description }}
+
+          </p>
+
+          <!-- USAGE TAGS -->
+
+          <div class="usage-tags">
+
+            @for (
+              usage of location.usageTypes;
+              track usage.id
+            ) {
+
+              <span class="usage-tag">
+
+                {{ usage.name }}
+
+              </span>
+
+            }
+
+          </div>
+
+          <!-- FOOTER -->
+
+          <div class="space-footer">
+
+            <!-- EDIT -->
+
+            <button
+              class="secondary-btn"
+              [routerLink]="[
+                '/locations/update',
+                location.id
+              ]">
+
+              Edit
+
+            </button>
+
+            <!-- DETAILS -->
+
+            <button
+              class="primary-btn"
+              [routerLink]="[
+                '/locations/details',
+                location.id
+              ]">
+
+              View Details
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+  <!-- =========================
+       PAGINATION
+  ========================== -->
+
+  @if (locations.length > 0) {
+
+    <div class="pagination-wrapper">
+
+      <!-- PREVIOUS -->
+
+      <button
+        class="pagination-btn"
+        (click)="previousPage()"
+        [disabled]="currentPage === 1">
+
+        Previous
+
+      </button>
+
+      <!-- PAGE -->
+
+      <span class="page-number">
+
+        Page
+        {{ currentPage }}
+        of
+        {{ totalPages }}
+
+      </span>
+
+      <!-- NEXT -->
+
+      <button
+        class="pagination-btn"
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages">
+
+        Next
+
+      </button>
+
+    </div>
+
+  }
+
+</div>

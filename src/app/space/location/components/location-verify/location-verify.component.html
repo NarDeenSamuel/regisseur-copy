@@ -1,0 +1,74 @@
+<div class="space-info-container">
+
+  <!-- HEADER -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      8
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Verify Your Location
+      </h1>
+
+      <p class="section-subtitle">
+
+        We sent a verification code
+        to your email address.
+        Enter the OTP below to verify
+        your location listing.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- CARD -->
+
+  <div class="form-card verify-card">
+
+    <!-- OTP -->
+
+    <div class="form-group">
+
+      <label class="form-label">
+
+        Verification Code
+
+      </label>
+
+      <input
+        type="text"
+
+        class="form-input otp-input"
+
+        [(ngModel)]="otp"
+
+        placeholder="Enter 6-digit OTP">
+
+    </div>
+
+    <!-- ACTIONS -->
+
+    <div class="footer-actions verify-actions">
+
+      
+
+      <button
+        class="next-btn"
+        type="button"
+        (click)="verify()">
+
+        Verify Location
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,233 @@
+<div class="guest-list-container">
+
+  <!-- Header -->
+
+  <div class="page-header">
+
+    <h1 class="page-title">
+      Guest List Management
+    </h1>
+
+    <p class="page-subtitle">
+      Search event attendees and monitor guest check-in status.
+    </p>
+
+  </div>
+
+  <!-- Search -->
+
+  <div class="search-card">
+
+      <div class="search-row">
+
+    <input
+      type="number"
+      class="search-input"
+      placeholder="Enter Event ID"
+      [(ngModel)]="eventId">
+
+    <button
+      class="search-btn"
+      (click)="search()">
+
+      Search Guests
+
+    </button>
+
+    <button
+      class="search-btn"
+      (click)="scannerEnabled = !scannerEnabled">
+
+      {{ scannerEnabled
+          ? 'Close Scanner'
+          : 'Scan QR Code' }}
+
+    </button>
+
+  </div>
+
+  </div>
+<div
+  class="scanner-wrapper"
+  *ngIf="scannerEnabled">
+
+  <zxing-scanner
+    (scanSuccess)="onQrScan($event)">
+  </zxing-scanner>
+
+</div>
+  <!-- Statistics -->
+
+  <div
+    class="stats-grid"
+    *ngIf="statistics">
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Total Guests
+      </div>
+
+      <div class="stat-value">
+        {{ statistics.totalGuests }}
+      </div>
+
+    </div>
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Checked In
+      </div>
+
+      <div class="stat-value">
+        {{ statistics.checkedIn }}
+      </div>
+
+    </div>
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Pending
+      </div>
+
+      <div class="stat-value">
+        {{ statistics.notCheckedIn }}
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Table -->
+
+  <div
+    class="table-card"
+    *ngIf="guests.length">
+
+    <div class="table-header">
+
+      <h3 class="table-title">
+        Guest List
+      </h3>
+
+    </div>
+
+    <table class="guest-table">
+
+     <thead>
+
+  <tr>
+
+    <th>Ticket ID</th>
+
+    <th>Guest Name</th>
+
+    <th>Email</th>
+
+    <th>Phone Number</th>
+
+    <th>Tier</th>
+
+    <th>QR Code</th>
+
+    <th>Status</th>
+<th>Actions</th>
+  </tr>
+
+</thead>
+
+      <tbody>
+
+        <tr *ngFor="let guest of guests">
+
+          <td>
+            #{{ guest.ticketId }}
+          </td>
+
+          <td>
+            {{ guest.guestName }}
+          </td>
+
+          <td>
+            {{ guest.email }}
+          </td>
+
+          <td>
+            {{ guest.phoneNumber }}
+          </td>
+
+          <td>
+            {{ guest.tierName }}
+          </td>
+<td>
+
+  <img
+    class="qr-image"
+    [src]="'data:image/png;base64,' + guest.qrCode"
+    alt="QR Code">
+
+</td>
+          <td>
+
+            <span
+              *ngIf="guest.isCheckedIn"
+              class="badge-success">
+
+              Checked In
+
+            </span>
+
+            <span
+              *ngIf="!guest.isCheckedIn"
+              class="badge-pending">
+
+              Pending
+
+            </span>
+
+          </td>
+<td>
+
+  <button
+    *ngIf="!guest.isCheckedIn"
+    class="search-btn"
+    (click)="checkInGuest(guest.ticketId)">
+
+    Check In
+
+  </button>
+
+  <span
+    *ngIf="guest.isCheckedIn"
+    class="badge-success">
+
+    Checked In
+
+  </span>
+
+</td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- Empty State -->
+
+  <div
+    class="empty-state"
+    *ngIf="!guests.length">
+
+    <h3>No Guest List Loaded</h3>
+
+    <p>
+      Enter an Event ID and click Search Guests to view attendees.
+    </p>
+
+  </div>
+
+</div>

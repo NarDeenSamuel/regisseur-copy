@@ -10,11 +10,11 @@ import { map } from 'rxjs/operators';
 })
 export class EventService {
 
-  // private baseUrl =
-  //   'https://localhost:7163/api';
+  private baseUrl =
+    'https://localhost:7163/api';
 
-    private baseUrl =
-    'https://eventservice.runasp.net/api';
+    // private baseUrl =
+    // 'https://eventservice.runasp.net/api';
   constructor(
     private http: HttpClient
   ) {}

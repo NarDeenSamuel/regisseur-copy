@@ -69,6 +69,8 @@
 
         <button
           class="btn btn-danger rounded-1 d-flex align-items-center"
+            data-bs-toggle="modal"
+  data-bs-target="#addSpaceModal"
         >
           <i class="fa-solid fa-plus me-2"></i>
           Add Space
@@ -441,7 +443,9 @@
           Start by creating your first space.
         </p>
 
-        <button class="btn btn-danger add-btn">
+        <button class="btn btn-danger add-btn"
+          data-bs-toggle="modal"
+  data-bs-target="#addSpaceModal">
           <i class="fa-solid fa-plus me-2"></i>
           Add Space
         </button>
@@ -609,7 +613,9 @@
   <div class="action-list">
 
     <button class="action-item">
-      <div class="d-flex align-items-center gap-3">
+      <div class="d-flex align-items-center gap-3"
+        data-bs-toggle="modal"
+  data-bs-target="#addSpaceModal">
 
         <div class="action-icon danger">
           <i class="fa-solid fa-plus"></i>
@@ -697,4 +703,42 @@
 
 </div>
 </div>
+</div>
+<div
+  class="modal fade"
+  id="addSpaceModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title">Add New Space</h5>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal">
+        </button>
+      </div>
+
+      <div class="modal-body">
+<app-create-location></app-create-location>
+      </div>
+
+      <div class="modal-footer border-secondary">
+        <button
+          class="btn btn-secondary"
+          data-bs-dismiss="modal">
+          Cancel
+        </button>
+
+        <button class="btn btn-danger">
+          Save
+        </button>
+      </div>
+
+    </div>
+  </div>
 </div>

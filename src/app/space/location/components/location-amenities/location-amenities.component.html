@@ -1,0 +1,193 @@
+<div class="amenities-page">
+
+  <!-- HEADER -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      3
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Pricing & Amenities
+      </h1>
+
+      <p class="section-subtitle">
+
+        Set pricing and manage your amenities
+        individually.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- AMENITIES -->
+
+ <div class="amenities-wrapper">
+
+  @for (
+    amenity of amenities.controls;
+    track $index
+  ) {
+
+    <div
+      class="amenity-card"
+      [formGroup]="asFormGroup(amenity)">
+
+      <!-- TOP -->
+
+      <div class="amenity-top">
+
+        <div class="amenity-icon">
+          ⭐
+        </div>
+
+        <div>
+
+          <h3>
+
+            {{
+              getAmenityName(
+                amenity.value.amenityId
+              )
+            }}
+
+          </h3>
+
+          <p class="amenity-category-text">
+
+            {{
+              getAmenityCategoryName(
+                amenity.value.amenityId
+              )
+            }}
+
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- PRICE -->
+
+      <div class="amenity-grid">
+
+        <div class="field-group full-width">
+
+          <label>
+            Price Per Hour
+          </label>
+
+          <div class="price-wrapper">
+
+            <span class="currency">
+              $
+            </span>
+
+            <input
+              type="number"
+
+              class="form-input"
+
+              [class.input-error]="
+                asFormGroup(amenity)
+                  .get('price')
+                  ?.touched &&
+
+                asFormGroup(amenity)
+                  .get('price')
+                  ?.invalid
+              "
+
+              formControlName="price">
+
+          </div>
+
+          @if (
+
+            asFormGroup(amenity)
+              .get('price')
+              ?.touched &&
+
+            asFormGroup(amenity)
+              .get('price')
+              ?.invalid
+
+          ) {
+
+            <small class="error-text">
+
+              Price is required
+
+            </small>
+
+          }
+
+        </div>
+
+      </div>
+
+      <!-- REMOVE -->
+
+      <button
+        type="button"
+        class="remove-btn"
+        (click)="removeAmenity($index)">
+
+        Remove Amenity
+
+      </button>
+
+    </div>
+
+  }
+
+</div>
+
+  <!-- FOOTER -->
+
+  <div class="listing-footer">
+
+    <button
+  type="button"
+  class="footer-back"
+  (click)="goBack()">
+
+      <span class="back-arrow">
+        ←
+      </span>
+
+      <span>
+        Back
+      </span>
+
+    </button>
+
+    <div class="footer-actions">
+
+      <button
+        type="button"
+        class="draft-btn">
+
+        Save as draft
+
+      </button>
+
+     <button
+  type="button"
+  class="next-btn"
+  (click)="goNext()">
+
+        Next
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

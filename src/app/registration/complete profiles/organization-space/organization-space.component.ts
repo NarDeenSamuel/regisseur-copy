@@ -42,6 +42,22 @@ ngOnInit(): void {
   this.profileForm.patchValue({
     organizationEmail: user.email || ''
   });
+   this.profileForm.patchValue({
+    firstName: user.firstName || ''
+  });
+   this.profileForm.patchValue({
+    lastName: user.lastName || ''
+  });
+   this.profileForm.patchValue({
+    city: user.city || ''
+  });
+   this.profileForm.patchValue({
+    country: user.country || ''
+  });
+     this.profileForm.patchValue({
+    organizationName: user.organizationName || ''
+  });
+
 }
   profileForm: FormGroup;
 

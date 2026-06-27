@@ -686,12 +686,7 @@ publishEvent(): void {
     localStorage.getItem('user') || '{}'
   );
 
-  const yourRole =
-    user?.primaryRoleName === 'Producer'
-      ? 1
-      : user?.primaryRoleName === 'Organizer'
-      ? 2
-      : null;
+  const yourRole =user.primaryRoleName;
       const userId = user.id;
   const form = this.eventForm.value;
 

@@ -1,0 +1,112 @@
+<div class="container py-5">
+
+  <!-- STEPPER -->
+
+  <app-location-stepper
+    [currentStep]="currentStep">
+  </app-location-stepper>
+
+  <!-- STEP 1 -->
+
+  @if (currentStep === 0) {
+
+    <div class="mt-5">
+
+      <app-location-space-info
+        [form]="form"
+        (nextStep)="goToStep(1)">
+      </app-location-space-info>
+
+    </div>
+
+  }
+
+  <!-- STEP 2 -->
+
+  @if (currentStep === 1) {
+
+    <div class="mt-5">
+
+      <app-location-media
+        (backStep)="goToStep(0)"
+        (nextStep)="goToStep(2)">
+      </app-location-media>
+
+    </div>
+
+  }
+
+  <!-- STEP 3 -->
+
+  @if (currentStep === 2) {
+
+  <div class="mt-5">
+
+    <app-location-amenities
+      [form]="form"
+      [amenityCategories]="amenityCategories"
+      (backStep)="goToStep(1)"
+      (nextStep)="goToStep(3)">
+    </app-location-amenities>
+
+  </div>
+
+}
+
+  <!-- STEP 4 -->
+
+  @if (currentStep === 3) {
+
+    <app-location-physical-info
+      [form]="form"
+      (backStep)="goToStep(2)"
+      (nextStep)="goToStep(4)">
+    </app-location-physical-info>
+
+  }
+
+  <!-- STEP 5 -->
+
+  @if (currentStep === 4) {
+
+    <app-location-food-beverage
+      [form]="form"
+      (backStep)="goToStep(3)"
+      (nextStep)="goToStep(5)">
+    </app-location-food-beverage>
+
+  }
+
+  <!-- STEP 6 -->
+
+  @if (currentStep === 5) {
+
+    <app-location-sections
+      [form]="form"
+      (backStep)="goToStep(4)"
+      (nextStep)="goToStep(6)">
+    </app-location-sections>
+
+  }
+
+  <!-- STEP 7 -->
+
+  @if (currentStep === 6) {
+
+    <app-location-rules
+
+      [form]="form"
+
+      [isSubmitting]="isSubmitting"
+
+      (backStep)="goToStep(5)"
+
+      (submitForm)="updateLocation()"
+
+      (saveDraft)="updateLocation(true)">
+
+    </app-location-rules>
+
+  }
+
+</div>

@@ -1,0 +1,34 @@
+<div class="stepper-wrapper">
+
+  <div
+    class="step-item"
+    *ngFor="let step of steps; let i = index">
+
+    <div class="step-top">
+
+      <div
+        class="step-circle"
+        [class.active]="i <= currentStep">
+
+        {{ i + 1 }}
+
+      </div>
+
+      <div
+        class="step-line"
+        *ngIf="i < steps.length - 1">
+      </div>
+
+    </div>
+
+    <div
+      class="step-title"
+      [class.active-title]="i <= currentStep">
+
+      {{ step }}
+
+    </div>
+
+  </div>
+
+</div>

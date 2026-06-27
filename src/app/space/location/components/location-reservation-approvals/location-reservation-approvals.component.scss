@@ -1,0 +1,375 @@
+.listing-page {
+
+  padding: 32px;
+
+  min-height: 100vh;
+
+  background: #f8fafc;
+
+}
+
+.listing-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 32px;
+
+  gap: 20px;
+
+}
+
+.page-title {
+
+  margin: 0;
+
+  font-size: 32px;
+
+  font-weight: 800;
+
+  color: #111827;
+
+}
+
+.page-subtitle {
+
+  margin-top: 8px;
+
+  color: #6b7280;
+
+  font-size: 15px;
+
+}
+
+.summary-card {
+
+  min-width: 200px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 24px;
+
+  text-align: center;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.06);
+
+}
+
+.summary-number {
+
+  font-size: 40px;
+
+  font-weight: 800;
+
+  color: #111827;
+
+}
+
+.summary-label {
+
+  margin-top: 8px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+}
+
+.spaces-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fill, minmax(420px, 1fr));
+
+  gap: 24px;
+
+}
+
+.space-card {
+
+  background: white;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  border: 1px solid #e5e7eb;
+
+  border-top: 6px solid #f59e0b;
+
+  transition: .25s ease;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.05);
+
+}
+
+.space-card:hover {
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.10);
+
+}
+
+.space-content {
+
+  padding: 24px;
+
+}
+
+.space-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 16px;
+
+}
+
+.space-name {
+
+  margin: 0;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: #111827;
+
+}
+
+.space-location {
+
+  margin-top: 8px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+
+}
+
+.status-badge {
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: .5px;
+
+}
+
+.status-badge.pending {
+
+  background: #fef3c7;
+
+  color: #92400e;
+
+}
+
+.status-badge.approved {
+
+  background: #dcfce7;
+
+  color: #166534;
+
+}
+
+.status-badge.rejected {
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+}
+
+.reservation-info {
+
+  margin-top: 24px;
+
+  border-top: 1px solid #f1f5f9;
+
+  padding-top: 12px;
+
+}
+
+.info-row {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 14px 0;
+
+  border-bottom: 1px solid #f1f5f9;
+
+}
+
+.info-row:last-child {
+
+  border-bottom: none;
+
+}
+
+.info-row span {
+
+  color: #64748b;
+
+  font-size: 14px;
+
+}
+
+.info-row strong {
+
+  color: #111827;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  text-align: right;
+
+}
+
+.space-footer {
+
+  display: flex;
+
+  gap: 12px;
+
+  margin-top: 24px;
+
+}
+
+.primary-btn,
+.secondary-btn {
+
+  flex: 1;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  transition: .2s ease;
+
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+
+  transform: translateY(-2px);
+
+}
+
+.approve-btn {
+
+  background: linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+
+  color: white;
+
+}
+
+.reject-btn {
+
+  background: linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626
+  );
+
+  color: white;
+
+}
+
+.empty-state {
+
+  background: white;
+
+  border-radius: 24px;
+
+  padding: 80px 24px;
+
+  text-align: center;
+
+  border: 1px solid #e5e7eb;
+
+}
+
+.empty-state h3 {
+
+  margin-bottom: 12px;
+
+  font-size: 24px;
+
+  color: #111827;
+
+}
+
+.empty-state p {
+
+  color: #6b7280;
+
+}
+
+@media (max-width: 768px) {
+
+  .listing-page {
+
+    padding: 20px;
+
+  }
+
+  .listing-header {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+  }
+
+  .spaces-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .space-footer {
+
+    flex-direction: column;
+
+  }
+
+}

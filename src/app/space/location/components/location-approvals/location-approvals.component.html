@@ -1,0 +1,286 @@
+<div class="sections-container">
+
+  <!-- HEADER -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      A
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+
+        Pending Location Approvals
+
+      </h1>
+
+      <p class="section-subtitle">
+
+        Review submitted locations
+        and approve or reject them.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- LOADING -->
+
+  @if (isLoading) {
+
+    <div class="form-card">
+
+      <p class="section-subtitle">
+
+        Loading locations...
+
+      </p>
+
+    </div>
+
+  }
+
+  <!-- EMPTY -->
+
+  @if (!isLoading && locations.length === 0) {
+
+    <div class="form-card empty-state">
+
+      <div class="empty-icon">
+        🏢
+      </div>
+
+      <h3>
+        No Pending Locations
+      </h3>
+
+      <p>
+
+        All submitted locations
+        have already been reviewed.
+
+      </p>
+
+    </div>
+
+  }
+
+  <!-- LIST -->
+
+  @if (!isLoading && locations.length > 0) {
+
+    <div class="sections-list">
+
+      @for (
+        location of locations;
+        track location.id
+      ) {
+
+        <div class="section-card">
+
+          <!-- HEADER -->
+
+          <div class="section-card-header">
+
+            <div>
+
+              <h3 class="section-card-title">
+
+                {{ location.name }}
+
+              </h3>
+
+              <p class="section-card-subtitle">
+
+                {{ location.city }}
+                •
+                {{ location.email }}
+
+              </p>
+
+            </div>
+
+            <span class="status-badge">
+
+              {{ location.approvalStatus }}
+
+            </span>
+
+          </div>
+
+          <!-- GRID -->
+
+          <div class="section-grid">
+
+            <div class="form-group">
+
+              <label class="form-label">
+
+                Location Status
+
+              </label>
+
+              <input
+                class="form-input"
+                [value]="location.locationStatus"
+                readonly>
+
+            </div>
+
+            <div class="form-group">
+
+              <label class="form-label">
+
+                Email Verified
+
+              </label>
+
+              <input
+                class="form-input"
+                [value]="location.emailVerified ? 'Yes' : 'No'"
+                readonly>
+
+            </div>
+
+            <div class="form-group">
+
+              <label class="form-label">
+
+                Price Per Hour
+
+              </label>
+
+              <input
+                class="form-input"
+                [value]="location.pricePerHour"
+                readonly>
+
+            </div>
+
+          </div>
+
+          <!-- ACTIONS -->
+
+          <div class="listing-footer">
+
+  <button
+    class="footer-back"
+    type="button">
+
+    View Details
+
+  </button>
+
+  <!-- PENDING -->
+
+  @if (location.approvalStatus === 'Pending') {
+
+    <div class="footer-actions">
+
+      <button
+        class="draft-btn"
+        type="button"
+        (click)="rejectLocation(location.id!)">
+
+        Reject
+
+      </button>
+
+      <button
+        class="next-btn"
+        type="button"
+        (click)="approveLocation(location.id!)">
+
+        Approve
+
+      </button>
+
+    </div>
+
+  }
+
+  <!-- APPROVED -->
+
+  @if (location.approvalStatus === 'Approved') {
+
+    <div class="footer-actions">
+
+      <button
+        class="approved-btn"
+        type="button"
+        disabled>
+
+        Approved
+
+      </button>
+
+    </div>
+
+  }
+
+  <!-- REJECTED -->
+
+  @if (location.approvalStatus === 'Rejected') {
+
+    <div class="footer-actions">
+
+      <button
+        class="rejected-btn"
+        type="button"
+        disabled>
+
+        Rejected
+
+      </button>
+
+    </div>
+
+  }
+
+</div>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+<!-- TOAST -->
+
+@if (showToast) {
+
+  <div
+    class="toast-message"
+    [class.success-toast]="toastType === 'success'"
+    [class.error-toast]="toastType === 'error'">
+
+    <div class="toast-icon">
+
+      @if (toastType === 'success') {
+
+        ✓
+
+      }
+
+      @if (toastType === 'error') {
+
+        !
+
+      }
+
+    </div>
+
+    <span>
+
+      {{ toastMessage }}
+
+    </span>
+
+  </div>
+
+}
+</div>

@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 })
 export class ListingService {
 
-  // private baseUrl = 'https://localhost:7041/api';
-  private baseUrl =
-    'https://regussierservices.runasp.net/api';
+  private baseUrl = 'https://localhost:7041/api';
+  // private baseUrl =
+  //   'https://regussierservices.runasp.net/api';
   constructor(
     private http: HttpClient
   ) {}

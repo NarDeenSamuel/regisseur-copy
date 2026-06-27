@@ -1,0 +1,1262 @@
+<div class="space-info-container">
+
+  <!-- Header -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      1
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Space Listing
+      </h1>
+
+      <p class="section-subtitle">
+        let’s start with fundamentals of your space.
+        This information helps residents find exactly
+        what they’re looking for
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Form -->
+
+  <form class="form-card" [formGroup]="form">
+
+    <!-- Space Name -->
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Space Name
+      </label>
+
+      <input type="text" class="form-input" [class.input-error]="
+  form.get('name')?.touched &&
+  form.get('name')?.invalid
+" formControlName="name" placeholder="e.g Sunny Brooklyn Studio Loft">
+      @if (
+      form.get('name')?.touched &&
+      form.get('name')?.invalid
+      ) {
+
+      <small class="error-text">
+
+        Space Name is required
+
+      </small>
+
+      }
+    </div>
+
+    <!-- CATEGORY -->
+
+    <div class="category-card">
+
+      <label class="form-label">
+        Space Category
+      </label>
+
+      <!-- PARENT DROPDOWN -->
+
+      <select
+  class="form-select"
+
+  [value]="selectedParentCategory?.id"
+
+  (change)="onParentCategoryChange($event)">
+
+        <option value="">
+          Select Parent Category
+        </option>
+
+        @for (
+        parent of parentCategories;
+        track parent.id
+        ) {
+
+        <option [value]="parent.id">
+
+          {{ parent.name }}
+
+        </option>
+
+        }
+
+      </select>
+      <!-- ADD PARENT CATEGORY -->
+
+      <div class="category-add-box">
+
+        <input type="text" class="form-input" [(ngModel)]="newParentCategoryName" [ngModelOptions]="{standalone: true}"
+          placeholder="New Parent Category">
+
+        <button type="button" class="mini-tag" (click)="addParentCategory()">
+
+          + Add Parent
+
+        </button>
+
+      </div>
+      <!-- CHILD TAGS -->
+
+      @if (selectedParentCategory) {
+
+      <div class="tags-wrapper child-tags">
+
+        @for (
+        category of childCategories;
+        track category.id
+        ) {
+
+        <button type="button" class="tag-btn" [class.active-tag]="
+  selectedCategoryId === +category.id
+" (click)="selectCategory(category)">
+
+          {{ category.name }}
+
+        </button>
+
+        }
+
+      </div>
+
+      }
+      @if (selectedParentCategory) {
+
+      <div class="category-add-box">
+
+        <input type="text" class="form-input" [(ngModel)]="newChildCategoryName" [ngModelOptions]="{standalone: true}"
+          placeholder="New Child Category">
+
+        <button type="button" class="mini-tag" (click)="addChildCategory()">
+
+          + Add Child
+
+        </button>
+
+      </div>
+
+      }
+      @if (
+      form.get('locationCategoryId')?.touched &&
+      form.get('locationCategoryId')?.invalid
+      ) {
+
+      <small class="error-text">
+
+        Please select category
+
+      </small>
+
+      }
+    </div>
+
+    <!-- Price -->
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Price Per Hour
+      </label>
+
+      <input type="number" class="form-input" [class.input-error]="
+    form.get('pricePerHour')?.touched &&
+    form.get('pricePerHour')?.invalid
+  " formControlName="pricePerHour" placeholder="500">
+
+      @if (
+      form.get('pricePerHour')?.touched &&
+      form.get('pricePerHour')?.invalid
+      ) {
+
+      <small class="error-text">
+
+        Price Per Hour is required
+
+      </small>
+
+      }
+
+    </div>
+
+    <!-- Host -->
+
+    <div class="host-section">
+
+      <label class="form-label">
+        What can this space host?
+      </label>
+
+      <div class="host-options" [class.host-error]="
+      form.get('usageTypes')?.touched &&
+      form.get('usageTypes')?.invalid
+    ">
+
+        <!-- Meetings -->
+
+        <div class="host-box">
+
+          <input type="checkbox" [checked]="isUsageSelected('Meetings')" (change)="toggleUsageType(
+    'Meetings',
+    $event
+  )">
+
+          <span>
+            Meetings
+          </span>
+
+        </div>
+
+        <!-- Events -->
+
+        <div class="host-box">
+
+          <input type="checkbox" [checked]="isUsageSelected('Events')" (change)="toggleUsageType(
+          'Events',
+          $event
+        )">
+
+          <span>
+            Events
+          </span>
+
+        </div>
+
+        <!-- Media Production -->
+
+        <div class="host-box">
+
+          <input type="checkbox" [checked]="isUsageSelected('Media Production')" (change)="toggleUsageType(
+          'Media Production',
+          $event
+        )">
+
+          <span>
+            Media Production
+          </span>
+
+        </div>
+
+        <!-- Dinners -->
+
+        <div class="host-box">
+
+          <input type="checkbox" [checked]="isUsageSelected('Dinners')" (change)="toggleUsageType(
+          'Dinners',
+          $event
+        )">
+
+          <span>
+            Dinners
+          </span>
+
+        </div>
+
+        <!-- Live Performances -->
+
+        <div class="host-box">
+
+          <input type="checkbox" [checked]="isUsageSelected('Live Performances')" (change)="toggleUsageType(
+          'Live Performances',
+          $event
+        )">
+
+          <span>
+            Live Performances
+          </span>
+
+        </div>
+
+      </div>
+
+      @if (
+      form.get('usageTypes')?.touched &&
+      form.get('usageTypes')?.invalid
+      ) {
+
+      <small class="error-text">
+
+        Please select at least one option
+
+      </small>
+
+      }
+
+    </div>
+    <!-- Description -->
+
+    <div class="description-section">
+
+      <div class="description-header">
+
+        <label class="form-label">
+          Short Description
+        </label>
+
+        <span class="counter">
+          0/240
+        </span>
+
+      </div>
+
+      <textarea class="description-textarea" [class.input-error]="
+    form.get('description')?.touched &&
+    form.get('description')?.invalid
+  " formControlName="description" placeholder="Tell us what makes your space special . . .">
+      </textarea>
+      @if (
+      form.get('description')?.touched &&
+      form.get('description')?.invalid
+      ) {
+
+      <small class="error-text">
+
+        Description is required
+
+      </small>
+
+      }
+      <p class="description-note">
+        Keep it brief and engaging. You can add more details later steps
+      </p>
+
+    </div>
+
+    <!-- Bottom Grid -->
+
+    <div class="bottom-grid">
+
+      <!-- LEFT -->
+
+      <div class="left-column">
+
+        <!-- Contact -->
+
+        <div class="info-card">
+
+          <h3 class="card-title">
+            Contact Information
+          </h3>
+
+          <!-- Phone -->
+
+          <div class="contact-row">
+
+            <span class="contact-label">
+
+              <i data-lucide="phone"></i>
+
+              Phone Number
+
+            </span>
+
+            <div class="contact-input-wrapper">
+
+              <input type="text" [class.input-error]="
+          form.get('phone')?.touched &&
+          form.get('phone')?.invalid
+        " formControlName="phone" placeholder="Add Phone Number">
+
+              @if (
+              form.get('phone')?.touched &&
+              form.get('phone')?.invalid
+              ) {
+
+              <small class="error-text">
+
+                Phone is required
+
+              </small>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- Website -->
+
+          <div class="contact-row">
+
+            <span class="contact-label">
+
+              <i data-lucide="globe"></i>
+
+              Website
+
+            </span>
+
+            <input type="text" formControlName="website" placeholder="Add Website Link">
+
+          </div>
+          <!-- Email -->
+
+          <div class="contact-row">
+
+            <span class="contact-label">
+
+              <i data-lucide="mail"></i>
+
+              Email
+
+            </span>
+
+            <div class="contact-input-wrapper">
+
+              <input type="email" [class.input-error]="
+        form.get('email')?.touched &&
+        form.get('email')?.invalid
+      " formControlName="email" placeholder="Add Email Address">
+
+              @if (
+              form.get('email')?.touched &&
+              form.get('email')?.invalid
+              ) {
+
+              <small class="error-text">
+
+                Email is required
+
+              </small>
+
+              }
+
+            </div>
+
+          </div>
+          <!-- FULL MENU -->
+
+          <div class="contact-row">
+
+  <span class="contact-label">
+
+    <i data-lucide="utensils-crossed"></i>
+
+    Food Menu
+
+  </span>
+
+  <input
+    type="text"
+    formControlName="foodMenuUrl"
+    placeholder="Add Food Menu Link">
+
+</div>
+          <!-- Beverage MENU -->
+
+<div class="contact-row">
+
+  <span class="contact-label">
+
+    <i data-lucide="wine"></i>
+
+    Beverage Menu
+
+  </span>
+
+  <input
+    type="text"
+    formControlName="beverageMenuUrl"
+    placeholder="Add Beverage Menu Link">
+
+</div>
+          <!-- Venue Layout -->
+
+          <div class="contact-row">
+
+            <span class="contact-label">
+
+              <i data-lucide="layout-panel-top"></i>
+
+              Venue Layout
+
+            </span>
+
+            <input type="text" placeholder="Add Venue Layout Link">
+
+          </div>
+
+        </div>
+
+        <!-- Area Details -->
+
+        <div class="info-card">
+
+          <h3 class="card-title">
+            Area Details
+          </h3>
+
+          <!-- Indoor -->
+
+          <div class="check-row">
+
+            <span class="check-label">
+
+              <i data-lucide="house"></i>
+
+              Indoor
+
+            </span>
+
+            <input type="checkbox" formControlName="indoorFlag">
+
+          </div>
+
+          <!-- Outdoor -->
+
+          <div class="check-row">
+
+            <span class="check-label">
+
+              <i data-lucide="tent"></i>
+
+              Outdoor
+
+            </span>
+
+            <input type="checkbox" formControlName="outdoorFlag">
+
+          </div>
+
+          <!-- Private Area -->
+
+          <div class="check-row">
+
+            <span class="check-label">
+
+              <i data-lucide="lock"></i>
+
+              Private Area
+
+            </span>
+
+            <input type="checkbox" formControlName="privateAreaFlag">
+
+          </div>
+
+          <!-- Check-in -->
+
+          <div class="check-row">
+
+            <span class="check-label">
+
+              <i data-lucide="shield"></i>
+
+              Check-in Staff
+
+            </span>
+
+            <input type="checkbox" formControlName="checkInEnabled">
+
+          </div>
+
+          <!-- Bathrooms -->
+
+          <div class="check-row">
+
+            <span class="check-label">
+
+              <i data-lucide="bath"></i>
+
+              Bathrooms
+
+            </span>
+
+            <input type="number" formControlName="numberOfBathrooms">
+
+          </div>
+
+        </div>
+
+      
+      <!-- AMENITIES -->
+
+<div class="info-card">
+
+  <h3 class="card-title">
+    ⭐ Available Amenities
+  </h3>
+
+  <label class="mini-label">
+    What does your space offer?
+  </label>
+
+  <!-- ADD CATEGORY -->
+
+  <div class="category-add-box">
+
+    <input
+      type="text"
+      class="form-input"
+      [(ngModel)]="newAmenityCategoryName"
+      [ngModelOptions]="{standalone:true}"
+      placeholder="New Amenity Category">
+
+    <button
+      type="button"
+      class="mini-tag"
+      (click)="addAmenityCategory()">
+
+      + Add Category
+
+    </button>
+
+  </div>
+
+  <!-- SELECT CATEGORY + ADD AMENITY -->
+
+  <div class="category-add-box">
+
+    <select
+      class="form-select"
+      [(ngModel)]="selectedAmenityCategoryId"
+      [ngModelOptions]="{standalone:true}">
+
+      <option [ngValue]="null">
+
+        Select Category
+
+      </option>
+
+      @for (
+        category of amenityCategories;
+        track category.id
+      ) {
+
+        <option [ngValue]="category.id">
+
+          {{ category.name }}
+
+        </option>
+
+      }
+
+    </select>
+
+    <input
+      type="text"
+      class="form-input"
+      [(ngModel)]="newAmenityName"
+      [ngModelOptions]="{standalone:true}"
+      placeholder="New Amenity">
+
+    <button
+      type="button"
+      class="mini-tag"
+      (click)="addAmenity()">
+
+      + Add Amenity
+
+    </button>
+
+  </div>
+
+  
+
+  <!-- SELECTED CATEGORY AMENITIES -->
+
+  @if (selectedAmenityCategory) {
+
+    <div class="amenity-category">
+
+      <h5 class="amenity-category-title">
+
+        {{ selectedAmenityCategory.name }}
+
+      </h5>
+<div class="selected-amenities">
+
+  @for (amenity of amenities.controls; track $index) {
+
+    <span class="selected-chip">
+
+      {{ getAmenityName(amenity.value.amenityId) }}
+
+    </span>
+
+  }
+
+</div>
+      <div class="amenity-grid">
+
+        @for (
+          amenity of selectedAmenityCategory.amenities;
+          track amenity.id
+        ) {
+
+          <div>
+
+            <label class="amenity-item">
+
+              <input
+                type="checkbox"
+
+                [checked]="
+                  isAmenitySelected(
+                    amenity.id
+                  )
+                "
+
+                (change)="
+                  toggleAmenity(
+                    amenity.id,
+                    $any($event.target).checked
+                  )
+                ">
+
+              <span>
+
+                {{ amenity.name }}
+
+              </span>
+
+            </label>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  }
+@if (
+    amenities.controls.length === 0
+  ) {
+
+    <small class="error-text">
+
+      Please select at least one amenity
+
+    </small>
+
+  }
+</div>
+
+      </div>
+
+      <!-- RIGHT -->
+
+      <div class="right-column">
+
+        <!-- Address -->
+
+        <div class="info-card">
+
+          <h3 class="card-title">
+            Address
+          </h3>
+
+          <div class="address-grid">
+
+            <!-- Neighborhood -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                Neighborhood
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('neighborhood')?.touched &&
+          form.get('neighborhood')?.invalid
+        " formControlName="neighborhood">
+
+                @if (
+                form.get('neighborhood')?.touched &&
+                form.get('neighborhood')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  Neighborhood is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+            <!-- Building -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                Building
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('building')?.touched &&
+          form.get('building')?.invalid
+        " formControlName="building">
+
+                @if (
+                form.get('building')?.touched &&
+                form.get('building')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  Building is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+            <!-- Street -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                Street
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('street')?.touched &&
+          form.get('street')?.invalid
+        " formControlName="street">
+
+                @if (
+                form.get('street')?.touched &&
+                form.get('street')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  Street is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+            <!-- Floor -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                Floor
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('floor')?.touched &&
+          form.get('floor')?.invalid
+        " formControlName="floor">
+
+                @if (
+                form.get('floor')?.touched &&
+                form.get('floor')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  Floor is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+            <!-- Unit -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                Unit
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('unit')?.touched &&
+          form.get('unit')?.invalid
+        " formControlName="unit">
+
+                @if (
+                form.get('unit')?.touched &&
+                form.get('unit')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  Unit is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+            <!-- City -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                City
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('city')?.touched &&
+          form.get('city')?.invalid
+        " formControlName="city">
+
+                @if (
+                form.get('city')?.touched &&
+                form.get('city')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  City is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+            <!-- State -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                State
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('state')?.touched &&
+          form.get('state')?.invalid
+        " formControlName="state">
+
+                @if (
+                form.get('state')?.touched &&
+                form.get('state')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  State is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+            <!-- Zip Code -->
+
+            <div class="address-field">
+
+              <label class="address-label">
+
+                Zip-code
+
+              </label>
+
+              <div class="address-input-wrapper">
+
+                <input type="text" class="form-input" [class.input-error]="
+          form.get('zipCode')?.touched &&
+          form.get('zipCode')?.invalid
+        " formControlName="zipCode">
+
+                @if (
+                form.get('zipCode')?.touched &&
+                form.get('zipCode')?.invalid
+                ) {
+
+                <small class="error-text">
+
+                  Zip Code is required
+
+                </small>
+
+                }
+
+              </div>
+
+            </div>
+
+          </div>
+          <!-- Features -->
+
+          <div class="features-grid">
+
+            <!-- Accessibility -->
+
+            <div class="feature-item">
+
+              <i data-lucide="accessibility"></i>
+
+              Accessibility Friendly
+
+              <input type="checkbox" formControlName="accessibilityFriendly">
+
+            </div>
+
+            <!-- Security -->
+
+            <div class="feature-item">
+
+              <i data-lucide="shield"></i>
+
+              Security Personnel
+
+              <input type="checkbox" formControlName="securityPersonnelAvailable">
+
+            </div>
+
+            <!-- CCTV -->
+
+            <div class="feature-item">
+
+              <i data-lucide="camera"></i>
+
+              24/7 CCTV
+
+              <input type="checkbox" formControlName="cctv24_7">
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- HOURS -->
+
+        <div class="info-card">
+
+          <h3 class="card-title">
+            Hours
+          </h3>
+
+          <!-- ADD -->
+
+        
+
+          <!-- HOURS LIST -->
+
+          <div class="hours-wrapper">
+
+            @for (
+            hour of workingHours.controls;
+            track $index
+            ) {
+
+            <div class="hour-row" [formGroup]="asFormGroup(hour)">
+
+              <!-- DAY -->
+
+              <div class="hour-field">
+
+                <label>
+                  Day
+                </label>
+
+              <input
+  type="text"
+  formControlName="day"
+  class="form-input"
+  readonly
+>
+
+              </div>
+
+              <!-- FROM -->
+
+              <div class="hour-field">
+
+                <label>
+                  From
+                </label>
+
+                <input
+  type="time"
+  formControlName="from"
+  class="form-input"
+  [disabled]="hour.get('isClosed')?.value">
+
+              </div>
+
+              <!-- TO -->
+
+              <div class="hour-field">
+
+                <label>
+                  To
+                </label>
+
+                <input
+  type="time"
+  formControlName="to"
+  class="form-input"
+  [disabled]="hour.get('isClosed')?.value">
+
+              </div>
+
+              <!-- CLOSED -->
+
+              <div class="hour-field closed-field">
+
+                <label>
+                  Closed
+                </label>
+
+                <input type="checkbox" formControlName="isClosed">
+
+              </div>
+
+              <!-- REMOVE -->
+
+              
+
+            </div>
+
+            }
+
+          </div>
+          @if (
+          workingHours.controls.length === 0
+          ) {
+
+          <small class="error-text">
+
+            Please add working hours
+
+          </small>
+
+          }
+          <div class="hours-update">
+
+            Recent update,
+            <strong>Mar. 1, 2026</strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- ACCESS NOTES -->
+
+    <div class="rules-card" style="margin-top: 30px;">
+
+      <div class="card-header">
+
+        <h3>
+          Access Notes (Optional)
+        </h3>
+
+      </div>
+
+      <div class="access-notes-wrapper">
+
+        <textarea class="access-notes-textarea" formControlName="accessNotes"
+          placeholder="Provide extra information regarding how to reach or enter a location">
+    </textarea>
+
+        <p class="access-note-helper">
+
+          These notes will be shared
+          with guests once their booking
+          is confirmed.
+
+        </p>
+
+      </div>
+
+    </div>
+    <!-- FOOTER NAVIGATION -->
+
+    <div class="listing-footer">
+
+      <!-- BACK -->
+
+      <button type="button" class="footer-back">
+
+        <span class="back-arrow">
+          ←
+        </span>
+
+        <span>
+          Back
+        </span>
+
+      </button>
+
+      <!-- RIGHT ACTIONS -->
+
+      <div class="footer-actions">
+
+        <button type="button" class="draft-btn">
+
+          Save as draft
+
+        </button>
+
+        <button type="button" (click)="goNext()" class="next-btn">
+
+          Next
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

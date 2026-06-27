@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SideBarComponent } from '../side-bar/side-bar.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+
+declare const bootstrap: any;
+
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink,RouterLinkActive],
@@ -17,6 +20,16 @@ ngOnInit(): void {
 
 }
 
+closeMenu() {
+  const offcanvasEl = document.getElementById('mobileMenu');
 
+  if (offcanvasEl) {
+    const offcanvas =
+      bootstrap.Offcanvas.getInstance(offcanvasEl) ||
+      new bootstrap.Offcanvas(offcanvasEl);
+
+    offcanvas.hide();
+  }
+}
 
 }

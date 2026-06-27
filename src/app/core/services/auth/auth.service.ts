@@ -8,9 +8,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // private baseUrl = 'https://localhost:7041/api';
-private baseUrl =
-    'https://regussierservices.runasp.net/api';
+  private baseUrl = 'https://localhost:7041/api';
+// private baseUrl =
+//     'https://regussierservices.runasp.net/api';
   signUp(data: any) {
 
     return this.http.post(

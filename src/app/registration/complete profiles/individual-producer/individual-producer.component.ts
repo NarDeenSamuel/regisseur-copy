@@ -52,7 +52,18 @@ ngOnInit(): void {
     email: user.email || ''
   });
 
-
+ this.profileForm.patchValue({
+    firstName: user.firstName || ''
+  });
+   this.profileForm.patchValue({
+    lastName: user.lastName || ''
+  });
+   this.profileForm.patchValue({
+    city: user.city || ''
+  });
+   this.profileForm.patchValue({
+    country: user.country || ''
+  });
 }
   profileForm: FormGroup;
 

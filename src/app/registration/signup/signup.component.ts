@@ -114,6 +114,7 @@ showValidationMessage = false;
         this.onCountrySelected(code);
         this.signUpForm.patchValue({ region: '' }, { emitEvent: false });
       });
+
   }
 numbersOnly(event: KeyboardEvent): void {
 
@@ -1106,6 +1107,7 @@ this.isLoading = true;
 
  error: (error) => {
       this.isLoading = false;
+  this.showValidationMessage = true;
 
   console.log(error);
 

@@ -1,0 +1,781 @@
+.rules-page {
+
+  width: 100%;
+
+  max-width: 1320px;
+
+  margin: 0 auto;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.section-header {
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  margin-bottom: 34px;
+
+}
+
+.section-number {
+
+  width: 32px;
+
+  height: 32px;
+
+  border-radius: 50%;
+
+  background: #FFF2BE;
+
+  color: #D8A800;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+}
+
+.section-title {
+
+  margin: 0;
+
+  font-size: 40px;
+
+  font-weight: 700;
+
+  color: #111111;
+
+}
+
+.section-subtitle {
+
+  margin-top: 10px;
+
+  max-width: 620px;
+
+  color: #777777;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
+}
+
+/* =========================
+   CARD
+========================= */
+
+.rules-card {
+
+  background: white;
+
+  border: 1px solid #ECECEC;
+
+  border-radius: 24px;
+
+  padding: 24px;
+
+  margin-bottom: 24px;
+
+}
+
+/* HEADER */
+
+.card-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+
+}
+
+.card-header h3 {
+
+  margin: 0;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+}
+
+.card-icon {
+
+  font-size: 18px;
+
+}
+
+/* =========================
+   POLICY
+========================= */
+
+.policy-option {
+
+  border: 1px solid #E4E4E4;
+
+  border-radius: 14px;
+
+  padding: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  margin-bottom: 14px;
+
+}
+
+.policy-option:hover {
+
+  border-color: #F2C81E;
+
+}
+
+.policy-option.active {
+
+  border-color: #F2C81E;
+
+  background: #FFFDF4;
+
+}
+
+.policy-option h4 {
+
+  margin: 0;
+
+  font-size: 16px;
+
+  font-weight: 700;
+
+}
+
+.policy-option p {
+
+  margin-top: 8px;
+
+  color: #7A7A7A;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+}
+
+/* RADIO */
+
+.radio-circle {
+
+  width: 22px;
+
+  height: 22px;
+
+  border-radius: 50%;
+
+  border: 2px solid #D7D7D7;
+
+}
+
+.policy-option.active .radio-circle {
+
+  border-color: #F2C81E;
+
+  background: #F2C81E;
+
+}
+
+/* =========================
+   RULES GRID
+========================= */
+
+.rules-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+
+}
+
+.rule-item {
+
+  height: 56px;
+
+  border: 1px solid #E4E4E4;
+
+  border-radius: 10px;
+
+  padding: 0 16px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+}
+
+.rule-item.selected {
+
+  border-color: #F2C81E;
+
+  background: #FFFDF4;
+
+}
+
+/* CHECKBOX */
+
+.checkbox {
+
+  width: 22px;
+
+  height: 22px;
+
+  border-radius: 6px;
+
+  border: 1px solid #D7D7D7;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 12px;
+
+  color: #F2C81E;
+
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.listing-footer {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-top: 38px;
+
+}
+
+.footer-back {
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+.back-arrow {
+
+  font-size: 20px;
+
+}
+
+.footer-actions {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+}
+
+.draft-btn {
+
+  height: 40px;
+
+  padding: 0 18px;
+
+  border-radius: 999px;
+
+  border: 1px solid #DDDDDD;
+
+  background: white;
+
+  font-size: 12px;
+
+  cursor: pointer;
+
+}
+
+.submit-btn {
+
+  min-width: 120px;
+
+  height: 40px;
+
+  border: none;
+
+  border-radius: 999px;
+
+  background: #F2C81E;
+
+  color: white;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+}
+.card-icon {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #F2C81E;
+
+}
+
+.card-icon i {
+
+  width: 18px;
+
+  height: 18px;
+
+  stroke-width: 2.2;
+
+}
+/* =========================
+   ADDITIONAL RULES
+========================= */
+
+.additional-rules-wrapper {
+
+  margin-top: 24px;
+
+}
+
+.additional-rules-label {
+
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  color: #111111;
+
+}
+
+.additional-rules-textarea {
+
+  width: 100%;
+
+  min-height: 120px;
+
+  resize: vertical;
+
+  border: 1px solid #D7D7D7;
+
+  border-radius: 18px;
+
+  padding: 18px;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  background: #FAFAFA;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    background 0.2s;
+
+  box-sizing: border-box;
+
+}
+
+.additional-rules-textarea:focus {
+
+  outline: none;
+
+  border-color: #F2C81E;
+
+  background: white;
+
+  box-shadow:
+    0 0 0 4px rgba(242, 200, 30, 0.12);
+
+}
+
+.additional-rules-helper {
+
+  margin-top: 12px;
+
+  font-size: 13px;
+
+  font-style: italic;
+
+  color: #8A8A8A;
+
+  line-height: 1.6;
+
+}
+/* =========================
+   MOBILE ONLY
+========================= */
+
+@media (max-width: 768px) {
+
+  .rules-page {
+
+    padding: 16px;
+
+  }
+
+  /* HEADER */
+
+  .section-header {
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+
+  }
+
+  .section-number {
+
+    width: 34px;
+
+    height: 34px;
+
+    font-size: 14px;
+
+  }
+
+  .section-title {
+
+    font-size: 28px;
+
+    line-height: 1.2;
+
+  }
+
+  .section-subtitle {
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+  }
+
+  /* CARD */
+
+  .rules-card {
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    margin-bottom: 18px;
+
+  }
+
+  /* CARD HEADER */
+
+  .card-header {
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+  }
+
+  .card-header h3 {
+
+    font-size: 20px;
+
+    line-height: 1.3;
+
+  }
+
+  .card-icon i {
+
+    width: 17px;
+
+    height: 17px;
+
+  }
+
+  /* POLICY */
+
+  .policy-option {
+
+    padding: 16px;
+
+    border-radius: 14px;
+
+    gap: 14px;
+
+    align-items: flex-start;
+
+  }
+
+  .policy-option h4 {
+
+    font-size: 15px;
+
+    line-height: 1.4;
+
+  }
+
+  .policy-option p {
+
+    margin-top: 6px;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+  }
+
+  .radio-circle {
+
+    width: 20px;
+
+    height: 20px;
+
+    flex-shrink: 0;
+
+  }
+
+  /* RULES GRID */
+
+  .rules-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+
+  }
+
+  .rule-item {
+
+    height: auto;
+
+    min-height: 54px;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    align-items: center;
+
+  }
+
+  .rule-item span {
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+  }
+
+  .checkbox {
+
+    width: 20px;
+
+    height: 20px;
+
+    flex-shrink: 0;
+
+  }
+
+  /* ADDITIONAL RULES */
+
+  .additional-rules-wrapper {
+
+    margin-top: 20px;
+
+  }
+
+  .additional-rules-label {
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
+
+  }
+
+  .additional-rules-textarea {
+
+    min-height: 110px;
+
+    padding: 14px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+  }
+
+  .additional-rules-helper {
+
+    margin-top: 10px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+  }
+
+  /* FOOTER */
+
+  .listing-footer {
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 16px;
+
+    margin-top: 28px;
+
+  }
+
+  .footer-actions {
+
+    flex-direction: column;
+
+    width: 100%;
+
+    gap: 12px;
+
+  }
+
+  .draft-btn,
+  .next-btn,
+  .submit-btn
+  .footer-back {
+
+    width: 100%;
+
+  }
+
+  .draft-btn,
+  .next-btn {
+
+    height: 44px;
+
+    font-size: 13px;
+
+  }
+
+  .footer-back {
+
+    justify-content: center;
+
+    height: 44px;
+
+    border-radius: 999px;
+
+    background: #F8F8F8;
+
+  }
+
+}
+/* =========================
+   VALIDATION
+========================= */
+
+.input-error {
+
+  border: 1px solid #ef4444 !important;
+
+  background: #fff5f5 !important;
+
+}
+
+.input-error:focus {
+
+  border-color: #ef4444 !important;
+
+  box-shadow:
+    0 0 0 4px rgba(239, 68, 68, 0.12);
+
+}
+
+.error-text {
+
+  display: block;
+
+  margin-top: 10px;
+
+  color: #ef4444;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+}
+.submit-btn:disabled {
+
+  opacity: 0.7;
+
+  cursor: not-allowed;
+
+}

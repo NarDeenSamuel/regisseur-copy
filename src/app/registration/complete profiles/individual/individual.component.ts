@@ -48,7 +48,18 @@ ngOnInit(): void {
     email: user.email || ''
   });
 
-
+ this.profileForm.patchValue({
+    firstName: user.firstName || ''
+  });
+   this.profileForm.patchValue({
+    lastName: user.lastName || ''
+  });
+   this.profileForm.patchValue({
+    city: user.city || ''
+  });
+   this.profileForm.patchValue({
+    country: user.country || ''
+  });
 
 }
 
@@ -517,154 +528,7 @@ getTravelRadius(value: string): number {
   return 0;
 
 }
-// submitForm(isDraft: boolean = false): void {
 
-//   if (!isDraft && this.profileForm.invalid) {
-
-//     this.profileForm.markAllAsTouched();
-
-//     return;
-
-//   }
-
-//   const form = this.profileForm.getRawValue();
-
-//   const user = JSON.parse(
-//     localStorage.getItem('user') || '{}'
-//   );
-
-//   const payload = {
-
-//     userId: user.id,
-
-//     isDraft: isDraft,
-
-//     firstName: form.firstName || '',
-
-//     lastName: form.lastName || '',
-
-//     phone: `${this.selectedCountry.code}${form.phone}`,
-
-//     displayName: form.displayName || '',
-
-//     country: form.country || '',
-
-//     city: form.city || '',
-
-//     state: form.region || '',
-
-//     address: form.address || '',
-
-//     postalCode: form.postalCode || '',
-
-//     shortBio: form.bio || '',
-
-//     languages: this.selectedLanguages.join(','),
-
-//     occupation: form.occupation || '',
-
-//     discoveryGoal: form.discoveryGoal || '',
-
-//     availability: form.availability || '',
-
-//     websiteUrl: form.website || '',
-
-//     instagramUrl: form.instagram || '',
-
-//     facebookUrl: form.facebook || '',
-
-//     linkedInUrl: form.linkedin || '',
-
-//     tikTokUrl: form.tiktok || '',
-
-//     youtubeUrl: form.youtube || '',
-
-//     additionalLinkUrl: form.additionalLink || '',
-
-//     preferredCities: this.selectedAreas.join(','),
-
-//     allowDirectMessages:
-//       form.allowDirectMessages ?? true,
-
-//     showProfilePublicly:
-//       form.showProfilePublicly ?? true,
-
-//     showSocialLinksPublicly:
-//       form.showSocialLinks ?? true,
-
-//     preferredContactMethod:
-//       form.preferredContactMethod || '',
-
-//     publicContactEmail:
-//       form.publicContactEmail || '',
-
-//     budgetMin:
-//       this.getBudgetMin(form.budgetRange),
-
-//     budgetMax:
-//       this.getBudgetMax(form.budgetRange),
-
-//     favoriteAtmosphere:
-//       form.favoriteAtmosphere || '',
-
-//     travelRadiusMiles:
-//       this.getTravelRadius(form.travelRadius),
-
-//     preferredEventSize:
-//       form.preferredEventSize || '',
-
-//     accessibilityNeeds:
-//       form.accessibilityNeeds || '',
-
-//     avatarUrl:
-//       this.profilePhotoPreview || '',
-
-//     bannerUrl:
-//       this.bannerPreview || '',
-
-//     galleryUrls:
-//       this.galleryPreviews.join(','),
-
-//     introFileUrl:
-//       this.aboutFileName || ''
-
-//   };
-
-//   console.log(payload);
-
-//   this.profileService
-//     .completeExplorerProfile(payload)
-//     .subscribe({
-
-//       next: (res) => {
-
-//         console.log(res);
-
-//         if (isDraft) {
-
-//           this.router.navigate([
-//             '/Individual'
-//           ]);
-
-//         } else {
-
-//           this.router.navigate([
-//             '/Individual-interests'
-//           ]);
-
-//         }
-
-//       },
-
-//       error: (err) => {
-
-//         console.log(err);
-
-//       }
-
-//     });
-
-// }
 
 submitForm(isDraft: boolean = false): void {
 this.isLoading = true;

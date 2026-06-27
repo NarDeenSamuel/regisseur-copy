@@ -1,0 +1,517 @@
+<div class="sections-container">
+
+  <!-- HEADER -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      6
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Venue Sections
+      </h1>
+
+      <p class="section-subtitle">
+
+        Create custom venue sections,
+        halls, rooms, and event zones
+        with dimensions and capacities
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+
+  <form
+    class="form-card"
+    [formGroup]="form">
+
+    <!-- TOP BAR -->
+
+    <div class="top-bar">
+
+      <div>
+
+        <h3 class="card-title">
+          Sections Configuration
+        </h3>
+
+        <p class="card-subtitle">
+
+          Manage all venue areas
+          and hosting spaces
+
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="add-btn"
+        (click)="addSection()">
+
+        + Add Section
+
+      </button>
+
+    </div>
+
+    <!-- EMPTY STATE -->
+
+    @if (sections.length === 0) {
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          ⬚
+        </div>
+
+        <h3>
+          No Sections Added
+        </h3>
+
+        <p>
+
+          Add halls, rooms, lounges,
+          rooftops, VIP areas, or
+          custom venue spaces
+
+        </p>
+
+      </div>
+
+    }
+@if (
+  form.get('sections')?.touched &&
+  form.get('sections')?.invalid
+) {
+
+  <small class="error-text">
+
+    Please add at least one section
+
+  </small>
+
+}
+    <!-- LIST -->
+
+    <div
+      class="sections-list"
+      formArrayName="sections">
+
+      @for (
+  section of sections.controls;
+  track $index;
+  let sectionIndex = $index
+) {
+        <div
+          class="section-card"
+          [formGroupName]="$index">
+
+          <!-- CARD HEADER -->
+
+          <div class="section-card-header">
+
+            <div>
+
+              <h3 class="section-card-title">
+
+                Section {{ $index + 1 }}
+
+              </h3>
+
+              <p class="section-card-subtitle">
+
+                Configure section details
+                and dimensions
+
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="remove-btn"
+              (click)="removeSection($index)">
+
+              Remove
+
+            </button>
+
+          </div>
+
+          <!-- GRID -->
+
+          <div class="section-grid">
+
+            <!-- NAME -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Section Name
+              </label>
+
+            <input
+  type="text"
+
+  class="form-input"
+
+  [class.input-error]="
+    section.get('name')?.touched &&
+    section.get('name')?.invalid
+  "
+
+  formControlName="name"
+  placeholder="VIP Hall">
+
+@if (
+  section.get('name')?.touched &&
+  section.get('name')?.invalid
+) {
+
+  <small class="error-text">
+
+    Section Name is required
+
+  </small>
+
+}
+
+            </div>
+
+            <!-- TYPE -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Section Type
+              </label>
+
+              <select
+                class="form-input"
+                formControlName="type">
+
+                <option value="Indoor">
+                  Indoor
+                </option>
+
+                <option value="Outdoor">
+                  Outdoor
+                </option>
+
+                <option value="SemiPrivate">
+                  Semi Private
+                </option>
+
+              </select>
+
+            </div>
+
+            <!-- CAPACITY -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Capacity
+              </label>
+
+             <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    section.get('capacity')?.touched &&
+    section.get('capacity')?.invalid
+  "
+
+  formControlName="capacity"
+  placeholder="200">
+
+@if (
+  section.get('capacity')?.touched &&
+  section.get('capacity')?.invalid
+) {
+
+  <small class="error-text">
+
+    Capacity is required
+
+  </small>
+
+}
+
+            </div>
+
+            <!-- WIDTH -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Width (m)
+              </label>
+
+             <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    section.get('width')?.touched &&
+    section.get('width')?.invalid
+  "
+
+  formControlName="width"
+  placeholder="15">
+
+@if (
+  section.get('width')?.touched &&
+  section.get('width')?.invalid
+) {
+
+  <small class="error-text">
+
+    Width is required
+
+  </small>
+
+}
+            </div>
+
+            <!-- LENGTH -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Length (m)
+              </label>
+
+             <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    section.get('length')?.touched &&
+    section.get('length')?.invalid
+  "
+
+  formControlName="length"
+  placeholder="25">
+
+@if (
+  section.get('length')?.touched &&
+  section.get('length')?.invalid
+) {
+
+  <small class="error-text">
+
+    Length is required
+
+  </small>
+
+}
+
+            </div>
+
+            <!-- HEIGHT -->
+
+            <div class="form-group">
+
+              <label class="form-label">
+                Height (m)
+              </label>
+
+              <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    section.get('height')?.touched &&
+    section.get('height')?.invalid
+  "
+
+  formControlName="height"
+  placeholder="6">
+
+@if (
+  section.get('height')?.touched &&
+  section.get('height')?.invalid
+) {
+
+  <small class="error-text">
+
+    Height is required
+
+  </small>
+
+}
+
+            </div>
+ <!-- SECTION AVAILABILITY -->
+
+<div class="info-card full-width">
+
+  <h3 class="small-muted-title">
+    SECTION AVAILABILITY
+  </h3>
+
+  <button
+    type="button"
+    class="tag-btn"
+    (click)="addAvailability(sectionIndex)">
+
+    + Add Availability
+
+  </button>
+
+  <div class="availability-wrapper">
+
+    @for (
+      availability of getAvailabilities(sectionIndex).controls;
+      track availability;
+      let availabilityIndex = $index
+    ) {
+
+      <div
+        class="availability-item"
+        [formGroup]="asFormGroup(availability)">
+
+        <!-- START DATE -->
+
+        <div class="availability-field">
+
+          <label>
+            Start Date
+          </label>
+
+          <input
+            type="datetime-local"
+            class="form-input"
+            formControlName="startDate">
+
+        </div>
+
+        <!-- END DATE -->
+
+        <div class="availability-field">
+
+          <label>
+            End Date
+          </label>
+
+          <input
+            type="datetime-local"
+            class="form-input"
+            formControlName="endDate">
+
+        </div>
+
+        <!-- TIME ZONE -->
+
+        <div class="availability-field">
+
+          <label>
+            Time Zone
+          </label>
+
+          <input
+            type="text"
+            class="form-input"
+            formControlName="timeZone">
+
+        </div>
+
+        <!-- REMOVE -->
+
+        <button
+          type="button"
+          class="mini-tag"
+          (click)="removeAvailability(
+            sectionIndex,
+            availabilityIndex
+          )">
+
+          Remove ✕
+
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+  @if (
+    getAvailabilities(sectionIndex).length === 0
+  ) {
+
+    <small class="error-text">
+
+      Please add at least one availability
+
+    </small>
+
+  }
+
+</div>
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="listing-footer">
+
+      <!-- BACK -->
+
+      <button
+        type="button"
+        class="footer-back"
+        (click)="goBack()">
+
+        ← Back
+
+      </button>
+
+      <!-- ACTIONS -->
+
+      <div class="footer-actions">
+
+        <button
+          type="button"
+          class="draft-btn">
+
+          Save Draft
+
+        </button>
+
+        <button
+          type="button"
+          class="next-btn"
+          (click)="goNext()">
+
+          Next
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

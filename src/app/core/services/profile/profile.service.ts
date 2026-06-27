@@ -6,9 +6,11 @@ import { Injectable } from '@angular/core';
 })
 export class ProfileService {
 
-  // private baseUrl = 'https://localhost:7041/api';
-private baseUrl =
-    'https://regussierservices.runasp.net/api';
+  private baseUrl = 'https://localhost:7041/api';
+// private baseUrl =
+//     'https://regussierservices.runasp.net/api';
+
+
   constructor(private http: HttpClient) {}
 
  completeExplorerProfile(data: any) {

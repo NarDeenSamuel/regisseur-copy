@@ -1,0 +1,391 @@
+<div
+  class="rules-page"
+  [formGroup]="form">
+
+  <!-- HEADER -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      7
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Set Your Rules
+      </h1>
+
+      <p class="section-subtitle">
+
+        Clearly define your expectations to ensure smooth
+        experience for both you and your guests.
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- CLEANING POLICY -->
+
+  <div class="rules-card">
+
+    <div class="card-header">
+
+      <span class="card-icon">
+
+  <i data-lucide="brush-cleaning"></i>
+
+</span>
+
+      <h3>
+        Cleaning Policy
+      </h3>
+
+    </div>
+
+    <!-- INCLUDED -->
+
+    <div
+      class="policy-option"
+      [class.active]="
+        selectedCleaningPolicy === 1
+      "
+      (click)="selectCleaningPolicy(1)">
+
+      <div>
+
+        <h4>
+          Included in Price
+        </h4>
+
+        <p>
+          Professional cleaning handled by the host
+          after every booking.
+        </p>
+
+      </div>
+
+      <div class="radio-circle"></div>
+
+    </div>
+
+    <!-- ADDITIONAL -->
+
+    <div
+      class="policy-option"
+      [class.active]="
+        selectedCleaningPolicy === 2
+      "
+      (click)="selectCleaningPolicy(2)">
+
+      <div>
+
+        <h4>
+          Additional Cleaning Fee
+        </h4>
+
+        <p>
+          Fee will be added to the total booking
+          price for professional cleanup services.
+        </p>
+
+      </div>
+
+      <div class="radio-circle"></div>
+
+    </div>
+
+    <!-- GUEST -->
+
+    <div
+      class="policy-option"
+      [class.active]="
+        selectedCleaningPolicy === 3
+      "
+      (click)="selectCleaningPolicy(3)">
+
+      <div>
+
+        <h4>
+          Guest is Responsible
+        </h4>
+
+        <p>
+          Guests are expected to leave the space
+          in the same condition as they found it.
+        </p>
+
+      </div>
+
+      <div class="radio-circle"></div>
+
+    </div>
+@if (
+  form.get('cleaningPolicyType')?.invalid
+) {
+
+  <small class="error-text">
+
+    Please select a cleaning policy
+
+  </small>
+
+}
+  </div>
+
+  <!-- HOUSE RULES -->
+
+  <div class="rules-card">
+
+    <div class="card-header">
+
+      <span class="card-icon">
+
+  <i data-lucide="sparkles"></i>
+
+</span>
+
+      <h3>
+        House Rules
+      </h3>
+
+    </div>
+
+    <div class="rules-grid">
+
+      @for (
+        rule of houseRules;
+        track rule.label
+      ) {
+
+        <div
+          class="rule-item"
+          [class.selected]="rule.selected"
+          (click)="toggleRule(rule)">
+
+          <div class="checkbox">
+
+            @if (rule.selected) {
+
+              ✓
+
+            }
+
+          </div>
+
+          <span>
+            {{ rule.label }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+<!-- ADDITIONAL RULES -->
+
+<div class="additional-rules-wrapper">
+
+  <label class="additional-rules-label">
+
+    Additional House Rules
+
+  </label>
+
+ <textarea
+
+  class="additional-rules-textarea"
+
+  [class.input-error]="
+    form.get('additionalHouseRules')?.touched &&
+    form.get('additionalHouseRules')?.invalid
+  "
+
+  placeholder="Add any extra rules guests should know before booking..."
+
+  formControlName="additionalHouseRules">
+
+</textarea>
+
+@if (
+  form.get('additionalHouseRules')?.touched &&
+  form.get('additionalHouseRules')?.invalid
+) {
+
+  <small class="error-text">
+
+    Additional house rules are required
+
+  </small>
+
+}
+
+  <p class="additional-rules-helper">
+
+    These rules will be visible
+    to guests before booking confirmation.
+
+  </p>
+
+</div>
+  </div>
+
+  <!-- CANCELLATION -->
+
+  <div class="rules-card">
+
+    <div class="card-header">
+
+      <span class="card-icon">
+
+  <i data-lucide="badge-dollar-sign"></i>
+
+</span>
+
+      <h3>
+        Cancellation Policy
+      </h3>
+
+    </div>
+
+    <!-- FLEXIBLE -->
+
+    <div
+      class="policy-option"
+      [class.active]="
+        selectedCancellationPolicy === 1
+      "
+      (click)="selectCancellationPolicy(1)">
+
+      <div>
+
+        <h4>
+          Flexible
+        </h4>
+
+        <p>
+          Full refund for cancellations made at least 24 hours before the schedule event.
+        </p>
+
+      </div>
+
+      <div class="radio-circle"></div>
+
+    </div>
+
+    <!-- MODERATE -->
+
+    <div
+      class="policy-option"
+      [class.active]="
+        selectedCancellationPolicy === 2
+      "
+      (click)="selectCancellationPolicy(2)">
+
+      <div>
+
+        <h4>
+          Moderate
+        </h4>
+
+        <p>
+          Full refund for cancellations made within 14 days of the event. 50% refund prior.
+        </p>
+
+      </div>
+
+      <div class="radio-circle"></div>
+
+    </div>
+
+    <!-- STRICT -->
+
+    <div
+      class="policy-option"
+      [class.active]="
+        selectedCancellationPolicy === 3
+      "
+      (click)="selectCancellationPolicy(3)">
+
+      <div>
+
+        <h4>
+          Strict
+        </h4>
+
+        <p>
+          No refunds for cancellations made within 14 days of the event. 50% refund prior.
+        </p>
+
+      </div>
+
+      <div class="radio-circle"></div>
+
+    </div>
+@if (
+  form.get('cancellationPolicyType')?.invalid
+) {
+
+  <small class="error-text">
+
+    Please select a cancellation policy
+
+  </small>
+
+}
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="listing-footer">
+
+    <button
+  type="button"
+  class="footer-back"
+  (click)="goBack()">
+
+      <span class="back-arrow">
+        ←
+      </span>
+
+      <span>
+        Back
+      </span>
+
+    </button>
+
+    <div class="footer-actions">
+
+     <button
+  type="button"
+  class="draft-btn"
+  (click)="saveAsDraft()">
+
+  Save as draft
+
+</button>
+
+     <button
+  class="submit-btn"
+  [disabled]="isSubmitting"
+  (click)="submitForm.emit()">
+
+  @if (!isSubmitting) {
+
+    Submit Location
+
+  } @else {
+
+    Creating Location...
+
+  }
+
+</button>
+
+    </div>
+
+  </div>
+
+</div>

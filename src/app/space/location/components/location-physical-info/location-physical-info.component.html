@@ -1,0 +1,475 @@
+<div class="physical-container">
+
+  <!-- HEADER -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      4
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Physical Information
+      </h1>
+
+      <p class="section-subtitle">
+
+        Add detailed physical information
+        about your venue and hosting capacity
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+
+  <form
+    class="form-card"
+    [formGroup]="form">
+
+    <!-- GRID -->
+
+    <div class="physical-grid">
+
+      <!-- TOTAL CAPACITY -->
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Total Capacity
+        </label>
+
+        <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    form.get('totalCapacity')?.touched &&
+    form.get('totalCapacity')?.invalid
+  "
+
+  formControlName="totalCapacity"
+  placeholder="200">
+
+@if (
+  form.get('totalCapacity')?.touched &&
+  form.get('totalCapacity')?.invalid
+) {
+
+  <small class="error-text">
+
+    Total Capacity is required
+
+  </small>
+
+}
+      </div>
+
+      <!-- ROOMS -->
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Number Of Rooms
+        </label>
+
+       <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    form.get('numberOfRooms')?.touched &&
+    form.get('numberOfRooms')?.invalid
+  "
+
+  formControlName="numberOfRooms"
+  placeholder="5">
+
+@if (
+  form.get('numberOfRooms')?.touched &&
+  form.get('numberOfRooms')?.invalid
+) {
+
+  <small class="error-text">
+
+    Number Of Rooms is required
+
+  </small>
+
+}
+
+      </div>
+
+      <!-- TABLES -->
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Number Of Tables
+        </label>
+
+       <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    form.get('numberOfTables')?.touched &&
+    form.get('numberOfTables')?.invalid
+  "
+
+  formControlName="numberOfTables"
+  placeholder="20">
+
+@if (
+  form.get('numberOfTables')?.touched &&
+  form.get('numberOfTables')?.invalid
+) {
+
+  <small class="error-text">
+
+    Number Of Tables is required
+
+  </small>
+
+}
+
+      </div>
+
+      <!-- SEATS -->
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Number Of Seats
+        </label>
+
+        <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    form.get('numberOfSeats')?.touched &&
+    form.get('numberOfSeats')?.invalid
+  "
+
+  formControlName="numberOfSeats"
+  placeholder="150">
+
+@if (
+  form.get('numberOfSeats')?.touched &&
+  form.get('numberOfSeats')?.invalid
+) {
+
+  <small class="error-text">
+
+    Number Of Seats is required
+
+  </small>
+
+}
+
+      </div>
+
+      <!-- SQUARE FOOTAGE -->
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Square Footage
+        </label>
+
+        <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    form.get('squareFootage')?.touched &&
+    form.get('squareFootage')?.invalid
+  "
+
+  formControlName="squareFootage"
+  placeholder="1200">
+
+@if (
+  form.get('squareFootage')?.touched &&
+  form.get('squareFootage')?.invalid
+) {
+
+  <small class="error-text">
+
+    Square Footage is required
+
+  </small>
+
+}
+
+      </div>
+
+      <!-- BATHROOMS -->
+
+      <div class="form-group">
+
+        <label class="form-label">
+          Number Of Bathrooms
+        </label>
+
+        <input
+  type="number"
+
+  class="form-input"
+
+  [class.input-error]="
+    form.get('numberOfBathrooms')?.touched &&
+    form.get('numberOfBathrooms')?.invalid
+  "
+
+  formControlName="numberOfBathrooms"
+  placeholder="3">
+
+@if (
+  form.get('numberOfBathrooms')?.touched &&
+  form.get('numberOfBathrooms')?.invalid
+) {
+
+  <small class="error-text">
+
+    Number Of Bathrooms is required
+
+  </small>
+
+}
+
+      </div>
+
+    </div>
+
+    <!-- ROOMS JSON -->
+
+    <div class="form-group full-width">
+
+     <!-- ROOMS LIST -->
+
+<div class="rooms-section">
+
+  <label class="form-label">
+    Rooms List
+  </label>
+
+  <p class="rooms-helper">
+
+    Add all available rooms or sections
+    inside your venue
+
+  </p>
+
+  <!-- ADD ROOM -->
+
+  <div class="room-input-wrapper">
+
+    <input
+      #roomInput
+      type="text"
+      class="form-input"
+      placeholder="e.g Main Hall">
+
+    <button
+      type="button"
+      class="add-room-btn"
+      (click)="addRoom(roomInput.value);
+               roomInput.value = ''">
+
+      + Add Room
+
+    </button>
+
+  </div>
+
+  <!-- ROOM TAGS -->
+
+  <div class="rooms-tags">
+
+    @for (
+      room of roomsList;
+      track $index
+    ) {
+
+      <div class="room-tag">
+
+        <span>
+          {{ room }}
+        </span>
+
+        <button
+          type="button"
+          (click)="removeRoom($index)">
+
+          ✕
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>
+@if (
+  form.get('roomsListJson')?.touched &&
+  form.get('roomsListJson')?.invalid
+) {
+
+  <small class="error-text">
+
+    Please add at least one room
+
+  </small>
+
+}
+    </div>
+
+  <!-- FLAGS -->
+
+<div class="flags-wrapper">
+
+  <!-- INDOOR -->
+
+  <label class="flag-card">
+
+    <div class="flag-content">
+
+      <span class="flag-title">
+        Indoor Venue
+      </span>
+
+      <span class="flag-subtitle">
+        This venue supports indoor hosting
+      </span>
+
+    </div>
+
+    <input
+      type="checkbox"
+      formControlName="indoorFlag">
+
+  </label>
+
+  <!-- OUTDOOR -->
+
+  <label class="flag-card">
+
+    <div class="flag-content">
+
+      <span class="flag-title">
+        Outdoor Venue
+      </span>
+
+      <span class="flag-subtitle">
+        This venue supports outdoor hosting
+      </span>
+
+    </div>
+
+    <input
+      type="checkbox"
+      formControlName="outdoorFlag">
+
+  </label>
+
+  <!-- PRIVATE AREA -->
+
+  <label class="flag-card">
+
+    <div class="flag-content">
+
+      <span class="flag-title">
+        Private Area
+      </span>
+
+      <span class="flag-subtitle">
+        Venue contains restricted/private areas
+      </span>
+
+    </div>
+
+    <input
+      type="checkbox"
+      formControlName="privateAreaFlag">
+
+  </label>
+
+  <!-- CHECK-IN -->
+
+  <label class="flag-card">
+
+    <div class="flag-content">
+
+      <span class="flag-title">
+        Check-in Staff
+      </span>
+
+      <span class="flag-subtitle">
+        Staff available for guest assistance
+      </span>
+
+    </div>
+
+    <input
+      type="checkbox"
+      formControlName="checkInEnabled">
+
+  </label>
+
+</div>
+
+    <!-- FOOTER -->
+
+    <div class="listing-footer">
+
+      <!-- BACK -->
+
+      <button
+        type="button"
+        class="footer-back"
+        (click)="goBack()">
+
+        ← Back
+
+      </button>
+
+      <!-- ACTIONS -->
+
+      <div class="footer-actions">
+
+        <button
+          type="button"
+          class="draft-btn">
+
+          Save Draft
+
+        </button>
+
+        <button
+          type="button"
+          class="next-btn"
+          (click)="goNext()">
+
+          Next
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

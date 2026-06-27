@@ -1,0 +1,170 @@
+<div class="media-page-container">
+
+  <!-- HEADER -->
+
+  <div class="media-header">
+
+    <div class="section-number">
+      2
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Media
+      </h1>
+
+      <p class="section-subtitle">
+
+        Showcase your space. High-quality visuals
+        help the people find exactly what
+        they’re looking for
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- CARD -->
+
+  <div class="media-card">
+
+    <!-- UPLOAD BOX -->
+
+    <div class="upload-box">
+
+      <div class="upload-icon">
+        📸
+      </div>
+
+      <h3>
+        Drag and drop Images or Video
+      </h3>
+
+      <p>
+        Supports JPEG, PNG Max file size
+        10MB per photo
+      </p>
+
+      <button
+        type="button"
+        class="select-btn">
+
+        Select Files
+
+      </button>
+
+    </div>
+
+    <!-- MEDIA GRID -->
+
+    <div class="media-grid">
+
+      <!-- UPLOADED -->
+
+      <div class="media-slot uploaded">
+
+        <img
+          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop"
+          alt="preview">
+
+        <div class="upload-overlay">
+
+          <div class="upload-bar">
+
+            <div class="upload-progress">
+            </div>
+
+          </div>
+
+          <span>
+            75% UPLOADING
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- EMPTY SLOTS -->
+
+      @for (
+        slot of slots;
+        track slot
+      ) {
+
+        <div class="media-slot empty-slot">
+
+          <div class="slot-icon">
+            🖼️
+          </div>
+
+          <span>
+            slot {{ slot }}
+          </span>
+
+        </div>
+
+      }
+
+      <!-- VIDEO -->
+
+      <div class="media-slot video-slot">
+
+        <div class="slot-icon">
+          🎥
+        </div>
+
+        <span>
+          Optional Video
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <div class="listing-footer">
+
+   <button
+  type="button"
+  class="footer-back"
+  (click)="goBack()">
+
+      <span class="back-arrow">
+        ←
+      </span>
+
+      <span>
+        Back
+      </span>
+
+    </button>
+
+    <div class="footer-actions">
+
+      <button
+        type="button"
+        class="draft-btn">
+
+        Save as draft
+
+      </button>
+
+      <button
+  type="button"
+  class="next-btn"
+  (click)="goNext()">
+
+  Next
+
+</button>
+
+    </div>
+
+  </div>
+
+</div>

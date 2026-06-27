@@ -1,0 +1,295 @@
+<div class="food-container">
+
+  <!-- HEADER -->
+
+  <div class="section-header">
+
+    <div class="section-number">
+      5
+    </div>
+
+    <div>
+
+      <h1 class="section-title">
+        Food & Beverage
+      </h1>
+
+      <p class="section-subtitle">
+
+        Configure food services,
+        drinks policies, kitchen setup,
+        and cuisine options
+
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- FORM -->
+
+  <form
+    class="form-card"
+    [formGroup]="form">
+
+    <!-- MENU URL -->
+
+   <!-- FOOD MENU URL -->
+
+<div class="form-group">
+
+  <label class="form-label">
+
+    Food Menu URL
+
+  </label>
+
+  <input
+    type="text"
+    class="form-input"
+
+    [class.input-error]="
+      form.get('foodMenuUrl')?.touched &&
+      form.get('foodMenuUrl')?.invalid
+    "
+
+    formControlName="foodMenuUrl"
+
+    placeholder="https://foodmenu.com">
+
+  @if (
+    form.get('foodMenuUrl')?.touched &&
+    form.get('foodMenuUrl')?.invalid
+  ) {
+
+    <small class="error-text">
+
+      Food Menu URL is required
+
+    </small>
+
+  }
+
+</div>
+<!-- BEVERAGE MENU URL -->
+
+<div class="form-group">
+
+  <label class="form-label">
+
+    Beverage Menu URL
+
+  </label>
+
+  <input
+    type="text"
+    class="form-input"
+
+    [class.input-error]="
+      form.get('beverageMenuUrl')?.touched &&
+      form.get('beverageMenuUrl')?.invalid
+    "
+
+    formControlName="beverageMenuUrl"
+
+    placeholder="https://drinksmenu.com">
+
+  @if (
+    form.get('beverageMenuUrl')?.touched &&
+    form.get('beverageMenuUrl')?.invalid
+  ) {
+
+    <small class="error-text">
+
+      Beverage Menu URL is required
+
+    </small>
+
+  }
+
+</div>
+
+    <!-- CUISINE TYPES -->
+
+    <div class="form-group">
+
+      <label class="form-label">
+        Cuisine Types
+      </label>
+
+     <textarea
+
+  class="description-textarea"
+
+  [class.input-error]="
+    form.get('cuisineTypes')?.touched &&
+    form.get('cuisineTypes')?.invalid
+  "
+
+  formControlName="cuisineTypes"
+
+  placeholder="Italian, Egyptian, Asian, Seafood...">
+
+</textarea>
+
+@if (
+  form.get('cuisineTypes')?.touched &&
+  form.get('cuisineTypes')?.invalid
+) {
+
+  <small class="error-text">
+
+    Cuisine Types are required
+
+  </small>
+
+}
+
+    </div>
+
+    <!-- FLAGS -->
+
+    <div class="flags-wrapper">
+
+      <!-- FULL BAR -->
+
+      <label class="flag-card">
+
+        <div class="flag-content">
+
+          <span class="flag-title">
+            Full Equipped Bar
+          </span>
+
+          <span class="flag-subtitle">
+
+            Venue includes complete
+            bar setup and serving area
+
+          </span>
+
+        </div>
+
+        <input
+          type="checkbox"
+          formControlName="fullEquippedBar">
+
+      </label>
+
+      <!-- BYO DRINKS -->
+
+      <label class="flag-card">
+
+        <div class="flag-content">
+
+          <span class="flag-title">
+            BYO Drinks Allowed
+          </span>
+
+          <span class="flag-subtitle">
+
+            Guests can bring their own drinks
+
+          </span>
+
+        </div>
+
+        <input
+          type="checkbox"
+          formControlName="byoDrinksAllowed">
+
+      </label>
+
+      <!-- FULL KITCHEN -->
+
+      <label class="flag-card">
+
+        <div class="flag-content">
+
+          <span class="flag-title">
+            Full Kitchen
+          </span>
+
+          <span class="flag-subtitle">
+
+            Venue contains fully equipped kitchen
+
+          </span>
+
+        </div>
+
+        <input
+          type="checkbox"
+          formControlName="fullKitchen">
+
+      </label>
+
+      <!-- BYO FOOD -->
+
+      <label class="flag-card">
+
+        <div class="flag-content">
+
+          <span class="flag-title">
+            BYO Food Allowed
+          </span>
+
+          <span class="flag-subtitle">
+
+            Guests can bring external food
+
+          </span>
+
+        </div>
+
+        <input
+          type="checkbox"
+          formControlName="byoFoodAllowed">
+
+      </label>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="listing-footer">
+
+      <!-- BACK -->
+
+      <button
+        type="button"
+        class="footer-back"
+        (click)="goBack()">
+
+        ← Back
+
+      </button>
+
+      <!-- ACTIONS -->
+
+      <div class="footer-actions">
+
+        <button
+          type="button"
+          class="draft-btn">
+
+          Save Draft
+
+        </button>
+
+        <button
+          type="button"
+          class="next-btn"
+          (click)="goNext()">
+
+          Next
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

@@ -1,0 +1,141 @@
+<div class="listing-page">
+
+  <div class="listing-header">
+
+    <div>
+      <h1 class="page-title">
+        Reservation Requests
+      </h1>
+
+      <p class="page-subtitle">
+        Review, approve, or reject reservation requests submitted by event organizers.
+      </p>
+    </div>
+
+    <div class="summary-card">
+      <div class="summary-number">
+        {{ reservations.length }}
+      </div>
+
+      <div class="summary-label">
+        Total Requests
+      </div>
+    </div>
+
+  </div>
+
+  <div
+    class="spaces-grid"
+    *ngIf="reservations.length">
+
+    <div
+      class="space-card"
+      *ngFor="let reservation of reservations">
+
+      <div class="space-content">
+
+        <div class="space-top">
+
+          <div>
+
+           <div>
+
+  <h3 class="space-name">
+    {{ reservation.eventName }}
+  </h3>
+
+  <div class="space-location">
+
+    {{ reservation.requestedByRole }}
+    •
+    {{ reservation.requestedByName }}
+
+  </div>
+
+</div>
+
+          </div>
+
+          <span
+            class="status-badge"
+            [ngClass]="reservation.status.toLowerCase()">
+
+            {{ reservation.status }}
+
+          </span>
+
+        </div>
+
+        <div class="reservation-info">
+
+          <div class="info-row">
+            <span>Booking Type</span>
+            <strong>{{ reservation.bookingType }}</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Section</span>
+            <strong>
+              {{reservation.sectionName || reservation.locationSectionId || 'Full Place' }}
+            </strong>
+          </div>
+
+          <div class="info-row">
+            <span>Start Date</span>
+            <strong>
+              {{ reservation.startDateTime | date:'MMM d, y h:mm a' }}
+            </strong>
+          </div>
+
+          <div class="info-row">
+            <span>End Date</span>
+            <strong>
+              {{ reservation.endDateTime | date:'MMM d, y h:mm a' }}
+            </strong>
+          </div>
+
+        </div>
+
+        <div
+          class="space-footer"
+          *ngIf="reservation.status === 'Pending'">
+
+          <button
+            class="secondary-btn reject-btn"
+            (click)="reject(reservation.id)">
+
+            Reject
+
+          </button>
+
+          <button
+            class="primary-btn approve-btn"
+            (click)="approve(reservation.id)">
+
+            Approve
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div
+    class="empty-state"
+    *ngIf="!reservations.length">
+
+    <h3>
+      No Reservation Requests
+    </h3>
+
+    <p>
+      All reservation requests have been processed.
+    </p>
+
+  </div>
+
+</div>

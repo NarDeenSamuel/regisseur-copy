@@ -134,9 +134,11 @@
         alt=""
       />
       <div class="flex-grow-1">
-        <div class="profile-name">Alex Morgan</div>
+        <div class="profile-name">            {{ user?.firstName }} {{ user?.lastName }}
+</div>
 
-        <div class="profile-role">Talent</div>
+        <div class="profile-role">            {{ user?.primaryRoleName }}
+</div>
       </div>
       <i class="fa-solid fa-chevron-right text-secondary"></i>
     </div>
@@ -166,6 +168,7 @@
   class="nav-link mobile-link"
   routerLink="/home"
   routerLinkActive="active-nav"
+  (click)="closeMenu()"
 
 >          <i class="fa-solid fa-border-all me-2"></i>
 
@@ -177,34 +180,44 @@
   class="nav-link nav-item-custom"
   routerLink="/all-events"
   routerLinkActive="active-nav"
+    (click)="closeMenu()"
+
 >          <i class="fa-regular fa-calendar me-2"></i>
 
           Events
         </a>
       </li>
       <li>
-        <a class="nav-link mobile-link">
+        <a class="nav-link mobile-link"
+          (click)="closeMenu()"
+>
           <i class="fa-regular fa-star me-2"></i>
 
           Talents
         </a>
       </li>
       <li>
-        <a class="nav-link mobile-link">
+        <a class="nav-link mobile-link"
+          (click)="closeMenu()"
+>
           <i class="fa-solid fa-store me-2"></i>
           Vendors
         </a>
       </li>
 
       <li>
-        <a class="nav-link mobile-link">
+        <a class="nav-link mobile-link"
+          (click)="closeMenu()"
+>
           <i class="fa-solid fa-screwdriver-wrench me-2"></i>
 
           Service Providers
         </a>
       </li>
       <li>
-        <a class="nav-link mobile-link">
+        <a class="nav-link mobile-link"
+          (click)="closeMenu()"
+>
           <i class="fa-regular fa-building me-2"></i>
 
           Spaces

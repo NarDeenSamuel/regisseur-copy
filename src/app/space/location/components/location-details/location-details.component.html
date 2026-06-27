@@ -1,0 +1,1257 @@
+@if (location) {
+
+<div class="details-page">
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <div class="hero-section">
+
+    <img
+      [src]="
+        location.imageUrl &&
+        location.imageUrl.trim()
+          ? location.imageUrl
+          : 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1400&auto=format&fit=crop'
+      "
+      class="hero-image">
+
+    <div class="hero-overlay">
+
+      <!-- STATUS -->
+
+      <span
+        class="status-badge"
+        [class.active]="location.locationStatus === 'Active'"
+[class.draft]="location.locationStatus === 'Draft'"
+[class.closed]="location.locationStatus === 'Closed'"
+[class.inactive]="location.locationStatus === 'Inactive'">
+
+        {{ location.locationStatus }}
+
+      </span>
+
+      <!-- TITLE -->
+
+      <h1 class="location-title">
+
+        {{ location.name }}
+
+      </h1>
+
+      <!-- ADDRESS -->
+
+      <p class="location-address">
+
+        {{ location.street }},
+        {{ location.city }},
+        {{ location.state }}
+
+      </p>
+
+      <!-- ACTIONS -->
+
+      <div class="hero-actions">
+
+      <!-- UPDATE -->
+
+  <button
+    class="update-btn"
+    [routerLink]="[
+      '/locations/update',
+      location.id
+    ]">
+
+    Update Location
+
+  </button>
+<!-- VERIFY -->
+
+@if (
+  !location.emailVerified &&
+  location.locationStatus !== 'Draft'
+) {
+
+  <button
+    class="verify-btn"
+    [routerLink]="[
+      '/location/verify',
+      location.id
+    ]">
+
+    Verify Location
+
+  </button>
+
+}
+
+@if (
+  location.emailVerified &&
+  location.approvalStatus === 'Pending'
+) {
+
+  <div class="workflow-message pending-message">
+
+    Waiting For Admin Approval
+
+  </div>
+
+}
+@if (
+  location.approvalStatus === 'Rejected'
+) {
+
+  <div class="workflow-message rejected-message">
+
+    Location Rejected
+
+  </div>
+
+}
+        <!-- CLOSE -->
+
+      @if (
+  location.locationStatus === 'Active'
+) {
+
+  <button
+    class="danger-btn"
+    (click)="closeLocation()">
+
+    Close Location
+
+  </button>
+
+}
+
+        <!-- ACTIVATE -->
+
+    @if (
+  location.locationStatus === 'Closed'
+) {
+
+  <button
+    class="success-btn"
+    (click)="activateLocation()">
+
+    Activate Location
+
+  </button>
+
+}
+
+        <!-- Submit -->
+
+       @if (location.locationStatus === 'Draft') {
+
+  <button
+    class="publish-btn"
+    (click)="submitDraft()">
+
+    Submit Draft
+
+  </button>
+
+}
+  <!-- Publish -->
+@if (
+
+  location.emailVerified &&
+
+  location.approvalStatus === 'Approved' &&
+
+  location.locationStatus === 'Inactive'
+
+) {
+
+  <button
+    class="publish-btn"
+    (click)="publishLocation()">
+
+    Publish Location
+
+  </button>
+
+}
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================
+       MAIN GRID
+  ========================== -->
+
+  <div class="details-grid">
+
+    <!-- =========================
+         LEFT COLUMN
+    ========================== -->
+
+    <div class="left-column">
+
+      <!-- DESCRIPTION -->
+
+      <div class="details-card">
+
+        <h2>
+          Description
+        </h2>
+
+        <p>
+
+          {{ location.description }}
+
+        </p>
+
+      </div>
+
+      <!-- CATEGORY -->
+
+      @if (location.locationCategoryName) {
+
+      <div class="details-card">
+
+        <h2>
+          Category
+        </h2>
+
+        <div class="info-row">
+
+          <span>
+
+            Space Category
+
+          </span>
+
+          <strong>
+
+            {{ location.locationCategoryName }}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- USAGE TYPES -->
+
+      @if (location.usageTypes?.length > 0) {
+
+      <div class="details-card">
+
+        <h2>
+          Usage Types
+        </h2>
+
+        <div class="tags-wrapper">
+
+          @for (
+            usage of location.usageTypes;
+            track usage.id
+          ) {
+
+            <span class="tag">
+
+              {{ usage.name }}
+
+            </span>
+
+          }
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- AMENITIES -->
+
+      @if (location.amenities?.length > 0) {
+
+      <div class="details-card">
+
+        <h2>
+          Amenities
+        </h2>
+
+        <div class="amenities-list">
+
+          @for (
+            amenity of location.amenities;
+            track amenity.name
+          ) {
+
+            <div class="amenity-item">
+
+              <span>
+
+                {{ amenity.name }}
+
+              </span>
+
+              <strong>
+
+                ${{ amenity.price }}
+
+              </strong>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- WORKING HOURS -->
+
+      @if (location.workingHours?.length > 0) {
+
+      <div class="details-card">
+
+        <h2>
+          Working Hours
+        </h2>
+
+        <div class="hours-list">
+
+          @for (
+            hour of location.workingHours;
+            track hour.day
+          ) {
+
+            <div
+  class="hour-item"
+  [class.closed-hour]="hour.isClosed">
+
+              <span class="hour-day">
+
+  {{ hour.day }}
+
+</span>
+
+             <div class="hour-time">
+
+               @if (hour.isClosed) {
+
+  Closed
+
+} @else {
+
+  {{ formatTime(hour.from) }}
+
+  -
+  {{ formatTime(hour.to) }}
+
+  @if (hour.isOvernight) {
+
+    <span class="overnight-badge">
+
+      Next Day
+
+    </span>
+
+  }
+
+}
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- AVAILABILITY -->
+
+      @if (location.availabilities?.length > 0) {
+
+      <div class="details-card">
+
+        <h2>
+          Availability
+        </h2>
+
+        <div class="hours-list">
+
+          @for (
+            item of location.availabilities;
+            track item.startDate
+          ) {
+
+            <div class="hour-item">
+
+              <span>
+
+                {{ item.startDate | date:'mediumDate' }}
+
+              </span>
+
+              <strong>
+
+                {{ item.endDate | date:'mediumDate' }}
+
+              </strong>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- SECTIONS -->
+
+    @if (location.sections?.length > 0) {
+
+<div class="details-card">
+
+  <h2>
+    Sections
+  </h2>
+
+  <div class="sections-grid">
+
+    @for (
+      section of location.sections;
+      track section.name
+    ) {
+
+      <div class="section-card">
+
+        <!-- HEADER -->
+
+        <div class="section-top">
+
+          <h3>
+
+            {{ section.name }}
+
+          </h3>
+
+          <span class="section-type">
+
+            {{ section.type }}
+
+          </span>
+
+        </div>
+
+        <!-- DETAILS -->
+
+        <div class="section-info">
+
+          <div class="info-item">
+
+            <span>
+              Capacity
+            </span>
+
+            <strong>
+
+              {{ section.capacity }}
+
+            </strong>
+
+          </div>
+
+          <div class="info-item">
+
+            <span>
+              Width
+            </span>
+
+            <strong>
+
+              {{ section.width }}
+
+              m
+
+            </strong>
+
+          </div>
+
+          <div class="info-item">
+
+            <span>
+              Length
+            </span>
+
+            <strong>
+
+              {{ section.length }}
+
+              m
+
+            </strong>
+
+          </div>
+
+          <div class="info-item">
+
+            <span>
+              Height
+            </span>
+
+            <strong>
+
+              {{ section.height }}
+
+              m
+
+            </strong>
+
+          </div>
+
+        </div>
+@if (section.availabilities?.length > 0) {
+
+  <div class="section-availability">
+
+    <h4>Availability</h4>
+
+    @for (
+      availability of section.availabilities;
+      track availability.startDate
+    ) {
+<h5 class="month-title">
+  {{ availability.startDate | date:'MMMM yyyy' }}
+</h5>
+     <div class="calendar-grid">
+
+  @for (
+  day of availability.calendarDays;
+  track $index
+) {
+
+    <div class="calendar-day available">
+
+      {{ day }}
+
+    </div>
+
+  }
+
+</div>
+
+    }
+
+  </div>
+
+}
+      </div>
+
+    }
+
+  </div>
+
+</div>
+
+}
+
+      <!-- MEDIA -->
+
+      @if (location.media?.length > 0) {
+
+      <div class="details-card">
+
+        <h2>
+          Media Gallery
+        </h2>
+
+        <div class="media-grid">
+
+          @for (
+            item of location.media;
+            track item.url
+          ) {
+
+            <img
+              [src]="item.url"
+              class="media-image">
+
+          }
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+    <!-- =========================
+         RIGHT COLUMN
+    ========================== -->
+
+    <div class="right-column">
+
+      <!-- PRICING -->
+
+      <div class="details-card">
+
+        <h2>
+          Pricing
+        </h2>
+
+        <div class="info-row">
+
+          <span>
+
+            Price Per Hour
+
+          </span>
+
+          <strong>
+
+            ${{ location.pricePerHour }}
+
+          </strong>
+
+        </div>
+
+      </div>
+
+      <!-- CONTACT -->
+
+      <div class="details-card">
+
+        <h2>
+          Contact Information
+        </h2>
+
+        <div class="contact-list">
+
+  <!-- PHONE -->
+
+  <div class="contact-item">
+
+    <div class="contact-icon">
+
+      <i
+        data-lucide="phone">
+      </i>
+
+    </div>
+
+    <div class="contact-content">
+
+      <label>
+        Phone
+      </label>
+
+      <span>
+
+        {{ location.phone }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- EMAIL -->
+
+  <div class="contact-item">
+
+    <div class="contact-icon">
+
+      <i
+        data-lucide="mail">
+      </i>
+
+    </div>
+
+    <div class="contact-content">
+
+      <label>
+        Email
+      </label>
+
+      <span>
+
+        {{ location.email }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- WEBSITE -->
+
+  <div class="contact-item">
+
+    <div class="contact-icon">
+
+      <i
+        data-lucide="globe">
+      </i>
+
+    </div>
+
+    <div class="contact-content">
+
+      <label>
+        Website
+      </label>
+
+      <span>
+
+        {{ location.website }}
+
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+      </div>
+
+      <!-- ADDRESS -->
+
+      <div class="details-card">
+
+        <h2>
+          Address Information
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Street:
+            {{ location.street }}
+
+          </span>
+
+          <span>
+
+            Building:
+            {{ location.building }}
+
+          </span>
+
+          <span>
+
+            Floor:
+            {{ location.floor }}
+
+          </span>
+
+          <span>
+
+            Unit:
+            {{ location.unit }}
+
+          </span>
+
+          <span>
+
+            Neighborhood:
+            {{ location.neighborhood }}
+
+          </span>
+
+          <span>
+
+            Zip Code:
+            {{ location.zipCode }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- VERIFICATION -->
+
+      <div class="details-card">
+
+        <h2>
+          Verification
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Email Verified:
+            {{ location.emailVerified ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Location Verified:
+            {{ location.locationVerificationState ? 'Yes' : 'No' }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- CLASSIFICATION -->
+
+      @if (location.classification) {
+
+      <div class="details-card">
+
+        <h2>
+          Classification
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Ownership Type:
+            {{ location.classification.ownershipType }}
+
+          </span>
+
+          <span>
+
+            Access Type:
+            {{ location.classification.accessType }}
+
+          </span>
+
+          <span>
+
+            Commercial:
+            {{ location.classification.commercialFlag ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Private Area:
+            {{ location.classification.privateAreaFlag ? 'Yes' : 'No' }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- TECHNICAL -->
+
+      @if (location.technicalSpecification) {
+
+      <div class="details-card">
+
+        <h2>
+          Technical Specifications
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Width:
+            {{ location.technicalSpecification.width }}
+
+          </span>
+
+          <span>
+
+            Length:
+            {{ location.technicalSpecification.length }}
+
+          </span>
+
+          <span>
+
+            Height:
+            {{ location.technicalSpecification.height }}
+
+          </span>
+
+          <span>
+
+            Max Capacity:
+            {{ location.technicalSpecification.maxCapacity }}
+
+          </span>
+
+          <span>
+
+            Accessibility:
+            {{ location.technicalSpecification.accessibility }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- PHYSICAL INFO -->
+
+      @if (location.physicalInfo) {
+
+      <div class="details-card">
+
+        <h2>
+          Physical Information
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Total Capacity:
+            {{ location.physicalInfo.totalCapacity }}
+
+          </span>
+
+          <span>
+
+            Indoor:
+            {{ location.physicalInfo.indoorFlag ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Outdoor:
+            {{ location.physicalInfo.outdoorFlag ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Number Of Rooms:
+            {{ location.physicalInfo.numberOfRooms }}
+
+          </span>
+
+          <span>
+
+            Number Of Seats:
+            {{ location.physicalInfo.numberOfSeats }}
+
+          </span>
+
+          <span>
+
+            Number Of Tables:
+            {{ location.physicalInfo.numberOfTables }}
+
+          </span>
+
+          <span>
+
+            Bathrooms:
+            {{ location.physicalInfo.numberOfBathrooms }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- FOOD & BEVERAGE -->
+
+      @if (location.foodAndBeverage) {
+
+      <div class="details-card">
+
+        <h2>
+          Food & Beverage
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Full Kitchen:
+            {{ location.foodAndBeverage.fullKitchen ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Full Bar:
+            {{ location.foodAndBeverage.fullEquippedBar ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            BYO Food:
+            {{ location.foodAndBeverage.byoFoodAllowed ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            BYO Drinks:
+            {{ location.foodAndBeverage.byoDrinksAllowed ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Cuisine Types:
+            {{ location.foodAndBeverage.cuisineTypes }}
+
+          </span>
+
+       <!-- FOOD MENU -->
+
+@if (
+  location.foodAndBeverage.foodMenuUrl
+) {
+
+  <a
+    class="menu-link food-menu-link"
+
+    [href]="
+      location.foodAndBeverage.foodMenuUrl
+    "
+
+    target="_blank">
+
+    <i data-lucide="utensils-crossed"></i>
+
+    View Food Menu
+
+  </a>
+
+}
+
+<!-- BEVERAGE MENU -->
+
+@if (
+  location.foodAndBeverage.beverageMenuUrl
+) {
+
+  <a
+    class="menu-link beverage-menu-link"
+
+    [href]="
+      location.foodAndBeverage.beverageMenuUrl
+    "
+
+    target="_blank">
+
+    <i data-lucide="wine"></i>
+
+    View Beverage Menu
+
+  </a>
+
+}
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- COMPLIANCE -->
+
+      @if (location.compliance) {
+
+      <div class="details-card">
+
+        <h2>
+          Compliance
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Alcohol License:
+            {{ location.compliance.alcoholLicense ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Insurance Required:
+            {{ location.compliance.insuranceRequired ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Noise Restriction:
+            {{ location.compliance.noiseRestriction ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            CCTV 24/7:
+            {{ location.compliance.cctV24_7 ? 'Yes' : 'No' }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- POLICIES -->
+
+      @if (location.policy) {
+
+      <div class="details-card">
+
+        <h2>
+          Policies
+        </h2>
+
+        <div class="info-column">
+
+          <span>
+
+            Cleaning:
+            {{ location.policy.cleaningPolicyType }}
+
+          </span>
+
+          <span>
+
+            Cancellation:
+            {{ location.policy.cancellationPolicyType }}
+
+          </span>
+
+          <span>
+
+            Minimum Booking:
+            {{ location.policy.minBookingHours }}
+            hrs
+
+          </span>
+
+          <span>
+
+            Instant Booking:
+            {{ location.policy.instantBookingAllowed ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Requires Approval:
+            {{ location.policy.requiresApproval ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Access Notes:
+            {{ location.policy.accessNotes }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      }
+
+      <!-- HOUSE RULES -->
+
+      @if (location.houseRules) {
+
+      <div class="details-card">
+
+        <h2>
+          House Rules
+        </h2>
+
+        <div class="rules-list">
+
+          <span>
+
+            No Smoking:
+            {{ location.houseRules.noSmoking ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            No Outside Alcohol:
+            {{ location.houseRules.noOutsideAlcohol ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            No Loud Music:
+            {{ location.houseRules.noLoudMusic ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Catering Allowed:
+            {{ location.houseRules.cateringAllowed ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Pet Friendly:
+            {{ location.houseRules.petFriendly ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            All Ages Welcome:
+            {{ location.houseRules.allAgesWelcome ? 'Yes' : 'No' }}
+
+          </span>
+
+          <span>
+
+            Additional Rules:
+            {{ location.houseRules.additionalHouseRules }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>
+
+}

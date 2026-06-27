@@ -3,10 +3,11 @@ import { SideBarComponent } from '../side-bar/side-bar.component';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CreateLocationComponent } from "./location/pages/create-location/create-location.component";
 
 @Component({
   selector: 'app-space',
-  imports: [SideBarComponent, NavbarComponent, CommonModule, FormsModule],
+  imports: [SideBarComponent, NavbarComponent, CommonModule, FormsModule, CreateLocationComponent],
   templateUrl: './space.component.html',
   styleUrls: ['./space.component.css']
 })
