@@ -32,11 +32,11 @@
 
   border-radius: 50%;
 
-  border: 1.8px solid #F2C81E;
+  border: 1.8px solid #e30613;
 
-  background: white;
+  background: black;
 
-  color: #F2C81E;
+  color: #e30613;
 
   display: flex;
   align-items: center;
@@ -49,8 +49,8 @@
 }
 
 .step-circle.active {
-  background: #F2C81E;
-  border-color: #F2C81E;
+  background: #e30613;
+  border-color: #e30613;
 
   color: white;
 }
@@ -64,7 +64,7 @@
   width: 108px;
   height: 1.5px;
 
-  background: #F2C81E;
+  background: #e30613;
 
   transform: translateY(-50%);
 }
@@ -81,7 +81,7 @@
 }
 
 .active-title {
-  color: #F2C81E;
+  color: #e30613;
   font-weight: 500;
 }
 @media (max-width: 768px) {

@@ -632,3 +632,6 @@ select option:hover{
 .tip-link:hover {
   color: #ff5a5a;
 }
+.modal-header ,.modal-body ,.modal-footer{
+  background-color: #05080d;
+}

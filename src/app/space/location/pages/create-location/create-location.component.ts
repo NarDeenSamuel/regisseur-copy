@@ -50,14 +50,14 @@ imports: [
   LocationPhysicalInfoComponent,
 
   LocationFoodBeverageComponent,
-  
+
   LocationSectionsComponent,
 
   LocationRulesComponent
 
 ],
   templateUrl: './create-location.component.html',
-  styleUrl: './create-location.component.scss'
+  styleUrl: './create-location.component.css'
 })
 export class CreateLocationComponent implements OnInit{
 private locationService =
@@ -204,7 +204,7 @@ numberOfBathrooms: [0],
     sections: this.fb.array([])
 
   });
-  
+
 submitLocation(
   saveAsDraft: boolean = false
 ): void {
@@ -282,7 +282,7 @@ email:
     workingHours:
       formValue.workingHours,
 
-   
+
     media:
       formValue.media,
 
