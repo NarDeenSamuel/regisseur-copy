@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './location-stepper.component.html',
-  styleUrl: './location-stepper.component.scss'
+  styleUrl: './location-stepper.component.css'
 })
 export class LocationStepperComponent {
 

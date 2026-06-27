@@ -54,10 +54,10 @@ import { AmenityCategory } from '../../models/amenity-category';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    DatePipe
+    // DatePipe
   ],
   templateUrl: './location-space-info.component.html',
-  styleUrl: './location-space-info.component.scss'
+  styleUrl: './location-space-info.component.css'
 })
 export class LocationSpaceInfoComponent
   implements
@@ -105,7 +105,7 @@ newAmenityName = '';
 
 selectedAmenityCategoryId: number | null = null;
 
-  
+
   get usageTypes(): FormArray {
 
     return this.form.get(
@@ -584,7 +584,7 @@ restoreSelectedCategory(): void {
   }
 
 }
-  
+
   // ICONS
 
   ngAfterViewChecked(): void {
@@ -758,7 +758,7 @@ getAmenityName(
 
   }
 
-  
+
   // =========================
   // MEDIA
   // =========================
@@ -930,7 +930,7 @@ getAmenityName(
 
     }
 
-   
+
     // WORKING HOURS REQUIRED
 
     if (
@@ -989,5 +989,5 @@ getAmenityName(
     this.nextStep.emit();
 
   }
-  
+
 }

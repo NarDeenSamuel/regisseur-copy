@@ -23,7 +23,7 @@ import {
     './location-media.component.html',
 
   styleUrls: [
-    './location-media.component.scss'
+    './location-media.component.css'
   ]
 
 })

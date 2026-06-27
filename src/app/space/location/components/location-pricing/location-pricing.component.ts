@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-location-pricing',
   imports: [],
   templateUrl: './location-pricing.component.html',
-  styleUrl: './location-pricing.component.scss'
+  styleUrl: './location-pricing.component.css'
 })
 export class LocationPricingComponent {
 

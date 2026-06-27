@@ -23,7 +23,7 @@ import {
   templateUrl:
     './location-verify.component.html',
   styleUrls:
-  ['./location-verify.component.scss']
+  ['./location-verify.component.css']
 })
 export class LocationVerifyComponent {
 

@@ -15,7 +15,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
      ZXingScannerModule
   ],
   templateUrl: './location-guest-list.component.html',
-  styleUrl: './location-guest-list.component.scss'
+  styleUrl: './location-guest-list.component.css'
 })
 export class LocationGuestListComponent {
  constructor(

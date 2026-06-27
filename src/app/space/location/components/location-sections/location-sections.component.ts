@@ -32,7 +32,7 @@ import {
     './location-sections.component.html',
 
   styleUrl:
-    './location-sections.component.scss'
+    './location-sections.component.css'
 })
 export class LocationSectionsComponent {
 

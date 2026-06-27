@@ -36,7 +36,7 @@ import {
     './location-rules.component.html',
 
   styleUrls: [
-    './location-rules.component.scss'
+    './location-rules.component.css'
   ]
 
 })

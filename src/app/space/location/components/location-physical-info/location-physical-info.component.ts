@@ -25,7 +25,7 @@ import {
     './location-physical-info.component.html',
 
   styleUrl:
-    './location-physical-info.component.scss'
+    './location-physical-info.component.css'
 })
 export class LocationPhysicalInfoComponent
 implements OnInit {

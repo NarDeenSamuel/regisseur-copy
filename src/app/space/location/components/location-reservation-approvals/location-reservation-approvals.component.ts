@@ -21,7 +21,7 @@ import {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './location-reservation-approvals.component.html',
-  styleUrl: './location-reservation-approvals.component.scss'
+  styleUrl: './location-reservation-approvals.component.css'
 })
 export class LocationReservationApprovalsComponent
   implements OnInit {
