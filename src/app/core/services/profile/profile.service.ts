@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ProfileService {
 
   // private baseUrl = 'https://localhost:7041/api';
-private baseUrl ='http://regisseur-app.runasp.net/api';
+private baseUrl ='https://regisseur-app.runasp.net/api';
 
 
   constructor(private http: HttpClient) {}
