@@ -1028,18 +1028,23 @@ passwordsMatch(): boolean {
 }
 isOtpModalOpen = false;
 otp = '';
-
+registeredEmail = '';
 verifyOtp() {
 
-  this.otpErrorMessage = '';
+ this.otpErrorMessage = '';
+
+  const email =
+    this.registerPayload?.email ||
+    this.signUpForm.value.email ||
+    this.signUpForm.value.businessEmail ||
+    this.signUpForm.value.organizationEmail;
 
   const payload = {
-
-    email: this.signUpForm.value.email,
-
+    email,
     otp: this.otp
-
   };
+
+  console.log(payload);
 
   this.authService.verifyOtp(payload).subscribe({
 
@@ -1095,6 +1100,7 @@ this.isLoading = true;
   this.authService.signUp(this.registerPayload).subscribe({
 
     next: (response) => {
+
       this.isLoading = false;
 
       console.log('Registration successful', response);
