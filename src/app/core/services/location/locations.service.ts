@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class LocationsService {
 
-  private baseUrl = 'https://localhost:7225/api';
+  private baseUrl = 'https://spacemodule.runasp.net/api';
 
   constructor(
     private http: HttpClient

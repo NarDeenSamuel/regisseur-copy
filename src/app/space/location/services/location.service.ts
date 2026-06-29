@@ -30,7 +30,7 @@ export class LocationService {
     inject(HttpClient);
 
   private baseUrl =
-    'http://localhost:5180/api';
+    'https://spacemodule.runasp.net/api';
 
   // =========================
   // LOCATIONS
