@@ -53,6 +53,7 @@ import { SettingsComponent } from './events/single-event/settings/settings.compo
 import { AllEventsComponent } from './events/all-events/all-events.component';
 import { AllSpacesComponent } from './space/all-spaces/all-spaces.component';
 import { LocationVerifyComponent } from './space/location/components/location-verify/location-verify.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const routes: Routes = [
 {path:'',redirectTo:'registration',pathMatch:'full'}
@@ -148,6 +149,16 @@ export const routes: Routes = [
       // {path:"logOut",redirectTo:"/home" , pathMatch:'full'}
     ]
   }
+
+
+
+
+
+
+
+
+,{path:'**',component:NotFoundComponent}
+
 
 
 
