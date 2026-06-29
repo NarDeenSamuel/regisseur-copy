@@ -1,0 +1,813 @@
+
+<div class="bg-black">
+<div class="container-fluid px-3 py-2 bg-section">
+
+  <div class="header-wrapper">
+
+    <!-- Left Side -->
+    <div class="left-section">
+
+      <app-side-bar></app-side-bar>
+
+      <img
+        src="assets/images/smallLogo.png"
+        class="logo-img"
+        alt="logo"
+      >
+
+    </div>
+
+    <!-- Right Side -->
+    <div class="right-section">
+
+      <app-navbar></app-navbar>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="spaces-page container-fluid px-3 bg-black">
+
+  <!-- Title -->
+
+  <div class="page-top">
+
+    <h1 class="page-title">
+      SPACES
+    </h1>
+
+    <p class="page-subtitle">
+      Discover and book venues, studios, rooftops, rooms, and creative spaces.
+    </p>
+
+  </div>
+
+  <!-- Categories -->
+
+  <div class="categories-bar">
+
+    <button
+      *ngFor="let tab of tabs"
+      class="category-btn"
+      [class.active]="selectedCategory === tab.name"
+      (click)="selectTab(tab.name)"
+    >
+      {{ tab.name }}
+
+<span
+  class="tab-count"
+  *ngIf="
+    tab.name !== 'SPACE INQUIRIES' &&
+    tab.name !== 'SPACE BOOKINGS'
+  "
+>
+  {{ tab.count }}
+</span>
+    </button>
+
+  </div>
+
+  <!-- Search Header -->
+
+<div
+  class="spaces-toolbar"
+  [class.d-none]="selectedCategory === 'SPACE INQUIRIES' ||
+                  selectedCategory === 'SPACE BOOKINGS'"
+>
+    <!-- Left -->
+
+    <div class="toolbar-left">
+
+      <span class="spaces-count">
+
+        <span class="count-number">
+          {{filteredSpaces.length | number}}
+        </span>
+
+        spaces found
+
+      </span>
+
+    </div>
+
+    <!-- Right -->
+
+    <div class="toolbar-right">
+
+      <!-- Map -->
+
+      <button class="map-btn">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        Map View
+
+      </button>
+
+      <!-- Sort -->
+
+      <div class="dropdown">
+
+        <button
+          class="sort-btn dropdown-toggle"
+          data-bs-toggle="dropdown"
+        >
+
+          Sort:
+          {{
+            sortBy === 'recommended'
+              ? 'Recommended'
+              : (sortBy | titlecase)
+          }}
+
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-dark">
+
+          <li>
+
+            <button
+              class="dropdown-item"
+              (click)="setSort('recommended')"
+            >
+              Recommended
+            </button>
+
+          </li>
+
+          <li>
+
+            <button
+              class="dropdown-item"
+              (click)="setSort('newest')"
+            >
+              Newest
+            </button>
+
+          </li>
+
+          <li>
+
+            <button
+              class="dropdown-item"
+              (click)="setSort('price')"
+            >
+              Price
+            </button>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+      <!-- View -->
+
+      <div class="view-switch">
+
+        <button
+          class="view-btn"
+          [class.active]="viewMode==='grid'"
+          (click)="viewMode='grid'"
+        >
+          <i class="fa-solid fa-border-all"></i>
+        </button>
+
+        <button
+          class="view-btn"
+          [class.active]="viewMode==='list'"
+          (click)="viewMode='list'"
+        >
+          <i class="fa-solid fa-list"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="container-fluid bg-black py-2">
+  <div class="row">
+    <div class="col-md-3">
+<div class="filters-card">
+
+  <!-- Search -->
+
+  <div class="filter-group">
+
+    <div class="search-box">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search spaces..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+      >
+
+    </div>
+
+  </div>
+
+  <!-- Location -->
+
+  <div class="filter-group">
+
+    <label>LOCATION</label>
+
+    <select
+      class="form-select custom-select"
+      [(ngModel)]="selectedLocation"
+      (change)="applyFilters()"
+    >
+
+      <option value="">All Locations</option>
+
+      <option
+        *ngFor="let item of locations"
+        [value]="item"
+      >
+        {{item}}
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- Radius -->
+
+  <div class="filter-group">
+
+    <select
+      class="form-select custom-select"
+      [(ngModel)]="selectedRadius"
+      (change)="applyFilters()"
+    >
+
+      <option
+        *ngFor="let radius of radiusList"
+        [value]="radius"
+      >
+        Within {{radius}} Miles
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- Space Type -->
+
+  <div class="filter-group">
+
+    <label>SPACE TYPE</label>
+
+    <select
+      class="form-select custom-select"
+      [(ngModel)]="selectedSpaceType"
+      (change)="applyFilters()"
+    >
+
+      <option value="">All Space Types</option>
+
+      <option
+        *ngFor="let item of spaceTypes"
+        [value]="item"
+      >
+        {{item}}
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- Capacity -->
+
+  <div class="filter-group">
+
+    <label>CAPACITY</label>
+
+    <input
+      type="range"
+      class="form-range"
+      min="10"
+      max="1000"
+      [(ngModel)]="capacity"
+      (input)="applyFilters()"
+    >
+
+    <div class="range-values">
+
+      <span>10</span>
+
+      <span>{{capacity}}+</span>
+
+    </div>
+
+  </div>
+
+  <!-- Booking -->
+
+  <div class="filter-group">
+
+    <label>BOOKING TYPE</label>
+
+    <div class="booking-switch">
+
+      <button
+        class="booking-btn"
+        [class.active]="bookingType=='Whole Space'"
+        (click)="setBookingType('Whole Space')"
+      >
+        Whole Space
+      </button>
+
+      <button
+        class="booking-btn"
+        [class.active]="bookingType=='Partial Space'"
+        (click)="setBookingType('Partial Space')"
+      >
+        Partial Space
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Date -->
+
+  <div class="filter-group">
+
+    <label>DATE & TIME</label>
+
+    <div class="row g-2">
+
+      <div class="col-6">
+
+        <input
+          type="date"
+          class="form-control dark-input"
+          [(ngModel)]="selectedDate"
+          (change)="applyFilters()"
+        >
+
+      </div>
+
+      <div class="col-6">
+
+        <input
+          type="time"
+          class="form-control dark-input"
+          [(ngModel)]="selectedTime"
+          (change)="applyFilters()"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Price -->
+
+  <div class="filter-group">
+
+    <label>PRICE RANGE (USD)</label>
+
+    <input
+      type="range"
+      class="form-range"
+      min="0"
+      max="10000"
+      [(ngModel)]="priceRange"
+      (input)="applyFilters()"
+    >
+
+    <div class="range-values">
+
+      <span>$0</span>
+
+      <span>${{priceRange}}</span>
+
+    </div>
+
+  </div>
+
+  <!-- Amenities -->
+
+  <div class="filter-group">
+
+    <label>AMENITIES</label>
+
+    <select
+      class="form-select custom-select"
+      [(ngModel)]="selectedAmenity"
+      (change)="applyFilters()"
+    >
+
+      <option value="">Select amenities</option>
+
+      <option
+        *ngFor="let item of amenities"
+        [value]="item"
+      >
+        {{item}}
+      </option>
+
+    </select>
+
+  </div>
+
+  <!-- Buttons -->
+
+  <div class="filter-buttons">
+
+    <button
+      class="reset-btn"
+      (click)="clearFilters()"
+    >
+      Reset
+    </button>
+
+
+  </div>
+
+</div>
+    </div>
+  <div class="col-md-9 py-3">
+
+  <!-- Tabs -->
+  <div class="events-wrapper">
+
+
+
+    <!-- Grid View -->
+
+  <div
+  *ngIf="
+    viewMode === 'grid' &&
+    selectedCategory !== 'SPACE INQUIRIES' &&
+    selectedCategory !== 'SPACE BOOKINGS'
+  "
+  class="spaces-grid"
+>
+  <div
+    class="space-card"
+    *ngFor="let space of paginatedSpaces">
+
+    <!-- Image -->
+
+    <div class="space-image-wrapper">
+
+      <img
+        [src]="space.imageUrl"
+        class="space-image"
+        [alt]="space.name">
+
+      <span class="space-status">
+
+        {{space.status}}
+
+      </span>
+<span
+  class="space-type-badge"
+  [ngClass]="{
+    venue: space.spaceType==='Event Venue',
+    rooftop: space.spaceType==='Rooftop',
+    studio: space.spaceType==='Studio',
+    gallery: space.spaceType==='Gallery',
+    meeting: space.spaceType==='Meeting Room',
+    outdoor: space.spaceType==='Outdoor Space'
+  }">
+
+  {{space.spaceType}}
+
+</span>
+      <button
+        class="favorite-btn"
+        (click)="toggleFavorite(space);$event.stopPropagation()">
+
+        <i
+          class="fa-heart"
+          [class.fa-solid]="space.favorite"
+          [class.fa-regular]="!space.favorite">
+        </i>
+
+      </button>
+
+    </div>
+
+    <!-- Body -->
+
+    <div class="space-body">
+
+      <h5>
+
+        {{space.name}}
+
+      </h5>
+
+      <p class="space-type">
+
+        {{space.spaceType}}
+
+      </p>
+
+      <div class="space-info">
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        {{space.city}}
+
+      </div>
+
+      <div class="space-info">
+
+        <i class="fa-solid fa-users"></i>
+
+        {{space.capacity}} Guests
+
+      </div>
+
+      <div class="space-price">
+
+        From
+
+        <span>
+
+          ${{space.price}}
+
+        </span>
+
+        /hour
+
+      </div>
+
+      <!-- Actions -->
+
+      <div class="space-actions">
+
+        <button
+          class="details-btn"
+          (click)="openSpace(space)">
+
+          View Details
+
+        </button>
+
+        <button
+          class="save-btn"
+          (click)="toggleSave(space)">
+
+          <i
+            class="fa-bookmark"
+            [class.fa-solid]="space.saved"
+            [class.fa-regular]="!space.saved">
+          </i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+   <!-- List View -->
+
+<div
+  *ngIf="
+    viewMode === 'list' &&
+    selectedCategory !== 'SPACE INQUIRIES' &&
+    selectedCategory !== 'SPACE BOOKINGS'
+  "
+  class="spaces-list"
+>
+
+  <div
+    class="space-list-card"
+    *ngFor="let space of paginatedSpaces">
+
+    <!-- Image -->
+
+    <div class="space-list-image">
+
+      <img
+        [src]="space.imageUrl"
+        [alt]="space.name">
+
+      <span class="space-status">
+
+        {{space.status}}
+
+      </span>
+<span
+  class="space-type-badge"
+  [ngClass]="{
+    venue: space.spaceType==='Event Venue',
+    rooftop: space.spaceType==='Rooftop',
+    studio: space.spaceType==='Studio',
+    gallery: space.spaceType==='Gallery',
+    meeting: space.spaceType==='Meeting Room',
+    outdoor: space.spaceType==='Outdoor Space'
+  }">
+
+  {{space.spaceType}}
+
+</span>
+    </div>
+
+    <!-- Content -->
+
+    <div class="space-list-content">
+
+      <h4>
+
+        {{space.name}}
+
+      </h4>
+
+      <p class="space-type">
+
+        {{space.spaceType}}
+
+      </p>
+
+      <div class="space-list-info">
+
+        <span>
+
+          <i class="fa-solid fa-location-dot"></i>
+
+          {{space.city}}
+
+        </span>
+
+        <span>
+
+          <i class="fa-solid fa-users"></i>
+
+          {{space.capacity}} Guests
+
+        </span>
+
+      </div>
+
+      <div class="space-price">
+
+        From
+
+        <strong>
+
+          ${{space.price}}
+
+        </strong>
+
+        /hour
+
+      </div>
+
+    </div>
+
+    <!-- Right -->
+
+    <div class="space-list-actions">
+
+      <button
+        class="favorite-circle"
+        (click)="toggleFavorite(space)">
+
+        <i
+          class="fa-heart"
+          [class.fa-solid]="space.favorite"
+          [class.fa-regular]="!space.favorite">
+        </i>
+
+      </button>
+
+      <div class="bottom-actions">
+
+        <button
+          class="details-btn"
+          (click)="openSpace(space)">
+
+          View Details
+
+        </button>
+
+        <button
+          class="save-btn"
+          (click)="toggleSave(space)">
+
+          <i
+            class="fa-bookmark"
+            [class.fa-solid]="space.saved"
+            [class.fa-regular]="!space.saved">
+          </i>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+<div *ngIf="selectedCategory=='SPACE INQUIRIES'">
+
+    <!-- هنا هيتحط Layout الـ Inquiries -->
+<app-space-inquirie></app-space-inquirie>
+</div>
+
+<!-- Space Bookings -->
+
+<div *ngIf="selectedCategory=='SPACE BOOKINGS'">
+
+  <app-space-bookings></app-space-bookings>
+
+</div>
+ <!-- Footer -->
+
+    <div
+  class="events-footer"
+  *ngIf="
+    selectedCategory !== 'SPACE INQUIRIES' &&
+    selectedCategory !== 'SPACE BOOKINGS'
+  "
+>
+
+      <div class="results-count">
+
+        Showing
+        {{startItem}}
+        -
+        {{endItem}}
+        of
+        {{filteredSpaces.length}}
+        events
+
+      </div>
+
+      <div class="pagination-custom">
+
+        <button
+          class="page-btn"
+          [disabled]="currentPage === 1"
+          (click)="changePage(currentPage - 1)"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <button
+          *ngFor="let page of visiblePages"
+          class="page-btn"
+          [class.active]="page === currentPage"
+          (click)="changePage(page)"
+        >
+          {{page}}
+        </button>
+
+        <button
+          class="page-btn"
+          [disabled]="currentPage === totalPages"
+          (click)="changePage(currentPage + 1)"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+      </div>
+
+      <div class="page-size-wrapper">
+
+        <span>Events per page:</span>
+
+        <select
+          [(ngModel)]="pageSize"
+          (change)="changePage(1)"
+          class="page-size-select"
+        >
+          <option [value]="6">6</option>
+          <option [value]="12">12</option>
+          <option [value]="20">20</option>
+        </select>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+  </div>
+</div>
+</div>

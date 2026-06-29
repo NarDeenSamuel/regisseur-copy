@@ -1,733 +1,657 @@
 <div class="container-fluid px-3 py-2 bg-section">
-
   <div class="header-wrapper">
-
     <!-- Left Side -->
     <div class="left-section">
-
       <app-side-bar></app-side-bar>
 
-      <img
-        src="assets/images/smallLogo.png"
-        class="logo-img"
-        alt="logo"
-      >
-
+      <img src="assets/images/smallLogo.png" class="logo-img" alt="logo" />
     </div>
 
     <!-- Right Side -->
     <div class="right-section">
-
       <app-navbar></app-navbar>
-
     </div>
-
   </div>
-
 </div>
-
-
 
 <div class="container-fluid bg-section">
-
   <div class="row g-3">
-
     <!-- Main Content -->
     <div class="col-lg-9">
-
       <!-- Header -->
       <!-- Space Header -->
-<div class="space-header position-relative overflow-hidden">
+      <div class="space-header position-relative overflow-hidden">
+        <!-- Red Line -->
+        <div
+          class="top-indicator position-absolute top-0 start-50 translate-middle-x"
+        ></div>
+
+        <div class="d-flex justify-content-between align-items-center py-3">
+          <!-- Left -->
+          <div>
+            <h2 class="space-title text-white text-uppercase fw-light mb-1">
+              MY SPACE OPERATIONS
+            </h2>
 
-    <!-- Red Line -->
-    <div class="top-indicator position-absolute top-0 start-50 translate-middle-x"></div>
-
-    <div class="d-flex justify-content-between align-items-center  py-3">
-
-      <!-- Left -->
-      <div>
-
-        <h2 class="space-title text-white text-uppercase fw-light mb-1">
-          MY SPACE OPERATIONS
-        </h2>
-
-        <small class="text-secondary">
-          Manage your spaces, venues, locations, rooms, studios, and event spaces.
-        </small>
-
-      </div>
-
-      <!-- Right -->
-      <div class="d-flex align-items-center">
-
-        <button
-          class="btn btn-dark border-secondary rounded-1 d-flex align-items-center me-2"
-        >
-          <i class="fa-solid fa-link me-2"></i>
-          Connect Existing Space
-        </button>
-
-        <button
-          class="btn btn-danger rounded-1 d-flex align-items-center"
-            data-bs-toggle="modal"
-  data-bs-target="#addSpaceModal"
-        >
-          <i class="fa-solid fa-plus me-2"></i>
-          Add Space
-        </button>
-
-      </div>
-
-    </div>
-      <!-- Stats -->
-      <!-- Stats Cards -->
-<div class="row g-3 stats-row">
-
-  <div class="col">
-    <div class="stat-card">
-      <i class="fa-regular fa-building stat-icon text-success"></i>
-
-      <h6>Active Spaces</h6>
-
-      <div class="stat-number">0</div>
-
-      <small>Currently live & available</small>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="stat-card">
-      <i class="fa-regular fa-file-lines stat-icon text-warning"></i>
-
-      <h6>Draft Spaces</h6>
-
-      <div class="stat-number">0</div>
-
-      <small>In progress & not published</small>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="stat-card">
-      <i class="fa-regular fa-calendar stat-icon text-purple"></i>
-
-      <h6>Total Bookings</h6>
-
-      <div class="stat-number">0</div>
-
-      <small>All time bookings</small>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="stat-card">
-      <i class="fa-regular fa-comments stat-icon text-cyan"></i>
-
-      <h6>Open Inquiries</h6>
-
-      <div class="stat-number">0</div>
-
-      <small>Requiring a response</small>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="stat-card">
-      <i class="fa-solid fa-globe stat-icon text-gold"></i>
-
-      <h6>Published Listings</h6>
-
-      <div class="stat-number">0</div>
-
-      <small>Live on marketplace</small>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="stat-card">
-      <i class="fa-solid fa-users stat-icon text-danger"></i>
-
-      <h6>Team Members Assigned</h6>
-
-      <div class="stat-number">0</div>
-
-      <small>Across all spaces</small>
-    </div>
-  </div>
-
-</div>
-      <!-- Structure Snapshot -->
-      <!-- Snapshot Section -->
-<div class="snapshot-card my-3">
-
-  <div class="snapshot-title">
-    SPACE STRUCTURE SNAPSHOT
-    <i class="fa-solid fa-info ms-2"></i>
-  </div>
-
-  <div class="row g-0">
-
-    <div class="col snapshot-item">
-      <i class="fa-regular fa-building"></i>
-      <span>Facility / Sites</span>
-      <h3>0</h3>
-    </div>
-
-    <div class="col snapshot-item">
-      <i class="fa-solid fa-code-branch"></i>
-      <span>Parent Spaces</span>
-      <h3>0</h3>
-    </div>
-
-    <div class="col snapshot-item">
-      <i class="fa-solid fa-cube"></i>
-      <span>Single Managed Spaces</span>
-      <h3>0</h3>
-    </div>
-
-    <div class="col snapshot-item">
-      <i class="fa-solid fa-border-all"></i>
-      <span>Units</span>
-      <h3>0</h3>
-    </div>
-
-    <div class="col snapshot-item">
-      <i class="fa-solid fa-layer-group"></i>
-      <span>Sub-Units</span>
-      <h3>0</h3>
-    </div>
-
-    <div class="col snapshot-item">
-      <i class="fa-solid fa-grip"></i>
-      <span>Sections</span>
-      <h3>0</h3>
-    </div>
-
-    <div class="col snapshot-item border-0">
-      <i class="fa-regular fa-rectangle-list"></i>
-      <span>Sets</span>
-      <h3>0</h3>
-    </div>
-
-  </div>
-
-</div>
-   <div class="spaces-container">
-<div class="tabs-wrapper">
-
-  <ul class="nav custom-tabs flex-nowrap">
-
-    <li
-      class="nav-item flex-shrink-0"
-      *ngFor="let tab of tabs"
-    >
-      <button
-        class="nav-link"
-        [class.active]="selectedTab === tab"
-        (click)="selectedTab = tab"
-      >
-        {{tab}}
-      </button>
-    </li>
-
-  </ul>
-
-</div>
-  <!-- Tabs -->
- <div class="row g-3 filters-row align-items-end">
-
-  <!-- Search -->
-  <div class="col-lg-3">
-
-    <label class="filter-label">
-      Search
-    </label>
-
-    <div class="position-relative">
-
-      <input
-        type="text"
-        class="form-control dark-input pe-5"
-        placeholder="Search spaces..."
-        [(ngModel)]="searchTerm"
-      >
-
-      <i class="fa-solid fa-magnifying-glass search-icon"></i>
-
-    </div>
-
-  </div>
-
-  <!-- Type -->
-  <div class="col-lg-2">
-
-   <div class="dropdown w-100">
-
-  <button
-    class="btn custom-dropdown dropdown-toggle w-100 text-start"
-    data-bs-toggle="dropdown"
-  >
-    All Types
-  </button>
-
-  <ul class="dropdown-menu custom-menu w-100">
-
-    <li>
-      <a class="dropdown-item" href="#">
-        Facility
-      </a>
-    </li>
-
-    <li>
-      <a class="dropdown-item" href="#">
-        Parent Space
-      </a>
-    </li>
-
-    <li>
-      <a class="dropdown-item" href="#">
-        Unit
-      </a>
-    </li>
-
-  </ul>
-
-</div>
-  </div>
-
-  <!-- Status -->
-  <div class="col-lg-2">
-
-    <div class="dropdown">
-
-  <button
-    class="form-select dark-select text-start"
-    type="button"
-    data-bs-toggle="dropdown"
-  >
-    {{ selectedStatus || 'All Statuses' }}
-  </button>
-
-  <ul class="dropdown-menu custom-menu w-100">
-
-    <li
-      *ngFor="let status of statuses"
-      (click)="selectedStatus = status"
-    >
-      <a class="dropdown-item">
-        {{ status }}
-      </a>
-    </li>
-
-  </ul>
-
-</div>
-  </div>
-
-  <!-- Location -->
-  <div class="col-lg-2">
-
-  <label class="filter-label">
-    Location
-  </label>
-
-  <div class="dropdown">
-
-    <button
-      class="form-select dark-select text-start"
-      type="button"
-      data-bs-toggle="dropdown"
-    >
-      {{ selectedLocation || 'All Locations' }}
-    </button>
-
-    <ul class="dropdown-menu custom-menu w-100">
-
-      <li>
-        <a
-          class="dropdown-item"
-          (click)="selectedLocation = ''"
-        >
-          All Locations
-        </a>
-      </li>
-
-      <li
-        *ngFor="let location of locations"
-      >
-        <a
-          class="dropdown-item"
-          (click)="selectedLocation = location"
-        >
-          {{ location }}
-        </a>
-      </li>
-
-    </ul>
-
-  </div>
-
-</div>
-
-  <!-- Sort -->
-  <div class="col-lg-2">
-
-  <label class="filter-label">
-    Sort By
-  </label>
-
-  <div class="dropdown">
-
-    <button
-      class="form-select dark-select text-start"
-      type="button"
-      data-bs-toggle="dropdown"
-    >
-      {{ sortBy || 'Newest' }}
-    </button>
-
-    <ul class="dropdown-menu custom-menu w-100">
-
-      <li>
-        <a
-          class="dropdown-item"
-          (click)="sortBy = 'newest'"
-        >
-          Newest
-        </a>
-      </li>
-
-      <li>
-        <a
-          class="dropdown-item"
-          (click)="sortBy = 'oldest'"
-        >
-          Oldest
-        </a>
-      </li>
-
-      <li>
-        <a
-          class="dropdown-item"
-          (click)="sortBy = 'name'"
-        >
-          Name
-        </a>
-      </li>
-
-    </ul>
-
-  </div>
-
-</div>
-
-</div>
-
-  <!-- Results Area -->
-  <div class="results-container">
-
-    <!-- Empty State -->
-    <div *ngIf="!spaces?.length" class="empty-state">
-
-      <div class="empty-content">
-
-        <div class="empty-icon-wrapper">
-          <i class="fa-solid fa-location-dot empty-icon"></i>
+            <small class="text-secondary">
+              Manage your spaces, venues, locations, rooms, studios, and event
+              spaces.
+            </small>
+          </div>
+
+          <!-- Right -->
+          <div class="d-flex align-items-center">
+            <button
+              class="btn btn-dark border-secondary rounded-1 d-flex align-items-center me-2"
+            >
+              <i class="fa-solid fa-link me-2"></i>
+              Connect Existing Space
+            </button>
+
+            <button
+              class="btn btn-danger rounded-1 d-flex align-items-center"
+              (click)="openSpaceModal()"
+            >
+              <i class="fa-solid fa-plus me-2"></i>
+
+              Add Space
+            </button>
+          </div>
+        </div>
+        <!-- Stats -->
+        <!-- Stats Cards -->
+        <div class="row g-3 stats-row">
+          <div class="col">
+            <div class="stat-card">
+              <i class="fa-regular fa-building stat-icon text-success"></i>
+
+              <h6>Active Spaces</h6>
+
+              <div class="stat-number">0</div>
+
+              <small>Currently live & available</small>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="stat-card">
+              <i class="fa-regular fa-file-lines stat-icon text-warning"></i>
+
+              <h6>Draft Spaces</h6>
+
+              <div class="stat-number">0</div>
+
+              <small>In progress & not published</small>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="stat-card">
+              <i class="fa-regular fa-calendar stat-icon text-purple"></i>
+
+              <h6>Total Bookings</h6>
+
+              <div class="stat-number">0</div>
+
+              <small>All time bookings</small>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="stat-card">
+              <i class="fa-regular fa-comments stat-icon text-cyan"></i>
+
+              <h6>Open Inquiries</h6>
+
+              <div class="stat-number">0</div>
+
+              <small>Requiring a response</small>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="stat-card">
+              <i class="fa-solid fa-globe stat-icon text-gold"></i>
+
+              <h6>Published Listings</h6>
+
+              <div class="stat-number">0</div>
+
+              <small>Live on marketplace</small>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="stat-card">
+              <i class="fa-solid fa-users stat-icon text-danger"></i>
+
+              <h6>Team Members Assigned</h6>
+
+              <div class="stat-number">0</div>
+
+              <small>Across all spaces</small>
+            </div>
+          </div>
+        </div>
+        <!-- Structure Snapshot -->
+        <!-- Snapshot Section -->
+        <div class="snapshot-card my-3">
+          <div class="snapshot-title">
+            SPACE STRUCTURE SNAPSHOT
+            <i class="fa-solid fa-info ms-2"></i>
+          </div>
+
+          <div class="row g-0">
+            <div class="col snapshot-item">
+              <i class="fa-regular fa-building"></i>
+              <span>Facility / Sites</span>
+              <h3>0</h3>
+            </div>
+
+            <div class="col snapshot-item">
+              <i class="fa-solid fa-code-branch"></i>
+              <span>Parent Spaces</span>
+              <h3>0</h3>
+            </div>
+
+            <div class="col snapshot-item">
+              <i class="fa-solid fa-cube"></i>
+              <span>Single Managed Spaces</span>
+              <h3>0</h3>
+            </div>
+
+            <div class="col snapshot-item">
+              <i class="fa-solid fa-border-all"></i>
+              <span>Units</span>
+              <h3>0</h3>
+            </div>
+
+            <div class="col snapshot-item">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Sub-Units</span>
+              <h3>0</h3>
+            </div>
+
+            <div class="col snapshot-item">
+              <i class="fa-solid fa-grip"></i>
+              <span>Sections</span>
+              <h3>0</h3>
+            </div>
+
+            <div class="col snapshot-item border-0">
+              <i class="fa-regular fa-rectangle-list"></i>
+              <span>Sets</span>
+              <h3>0</h3>
+            </div>
+          </div>
         </div>
 
-        <h3>No spaces yet</h3>
+        <div class="spaces-container">
+          <div class="tabs-wrapper">
+            <ul class="nav custom-tabs flex-nowrap">
+              <li class="nav-item flex-shrink-0" *ngFor="let tab of tabs">
+                <button
+                  class="nav-link"
+                  [class.active]="selectedTab === tab"
+                  (click)="selectedTab = tab"
+                >
+                  {{ tab }}
+                </button>
+              </li>
+            </ul>
+          </div>
+          <!-- Tabs -->
+          <div class="row g-3 filters-row align-items-end">
+            <!-- Search -->
+            <div class="col-lg-3">
+              <label class="filter-label"> Search </label>
+
+              <div class="position-relative">
+                <input
+  class="form-control dark-input pe-5"
+  [(ngModel)]="searchTerm"
+  (ngModelChange)="applyFilters()">
+
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              </div>
+            </div>
+
+            <!-- Type -->
+            <!-- <div class="col-lg-2">
+              <div class="dropdown w-100">
+                <button
+                  class="btn custom-dropdown dropdown-toggle w-100 text-start"
+                  data-bs-toggle="dropdown"
+                >
+                  All Types
+                </button>
+
+                <ul class="dropdown-menu custom-menu w-100">
+                  <li>
+                    <a class="dropdown-item" href="#"> Facility </a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="#"> Parent Space </a>
+                  </li>
+
+                  <li>
+                    <a class="dropdown-item" href="#"> Unit </a>
+                  </li>
+                </ul>
+              </div>
+            </div> -->
+
+            <!-- Status -->
+            <div class="col-lg-2">
+              <div class="dropdown">
+                <button
+                  class="form-select dark-select text-start"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  {{ selectedStatus || "All Statuses" }}
+                </button>
+
+                <ul class="dropdown-menu custom-menu w-100">
+                 <li
+  *ngFor="let status of statuses">
+
+  <a
+    class="dropdown-item"
+    (click)="selectedStatus = status; applyFilters()">
+
+    {{status}}
 
-        <p>
-          You haven't added any spaces, venues, rooms, or locations yet.
-          <br>
-          Start by creating your first space.
-        </p>
-
-        <button class="btn btn-danger add-btn"
-          data-bs-toggle="modal"
-  data-bs-target="#addSpaceModal">
-          <i class="fa-solid fa-plus me-2"></i>
-          Add Space
-        </button>
-
-      </div>
-
-    </div>
-
-    <!-- Table -->
-    <div *ngIf="spaces?.length">
-
-      <table class="table table-dark table-hover align-middle mb-0">
-
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Location</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <tr *ngFor="let space of spaces">
-
-            <td>{{space.name}}</td>
-            <td>{{space.type}}</td>
-            <td>{{space.status}}</td>
-            <td>{{space.location}}</td>
-
-            <td>
-              <button class="btn btn-sm btn-outline-light">
-                View
-              </button>
-            </td>
-
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-</div>
-    </div>
-
-    <!-- Sidebar -->
-    <div class="col-lg-3">
-
-      <!-- Upcoming Bookings -->
-
-      <!-- Alerts -->
-
-      <!-- Quick Actions -->
-
-      <!-- Setup Tips -->
-
-    </div>
-
-  </div>
-<div class="col-lg-3 py-3">
-<div class="booking-card">
-
-  <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-5">
-
-    <div class="d-flex align-items-center gap-2">
-
-      <i class="fa-regular fa-calendar-days booking-header-icon"></i>
-
-      <span class="booking-title">
-        UPCOMING BOOKINGS
-      </span>
-
-    </div>
-
-    <div class="count-badge">
-      0
-    </div>
-
-  </div>
-
-  <!-- Content -->
-
-  <div class="text-center">
-
-    <i class="fa-regular fa-calendar-days empty-calendar-icon"></i>
-
-    <h5 class="booking-empty-title">
-      No upcoming bookings
-    </h5>
-
-    <p class="booking-empty-text">
-      You have no upcoming bookings.
-    </p>
-
-    <button class="btn calendar-btn">
-      View Calendar
-    </button>
-
-  </div>
-
-</div>
-<div class="booking-card my-2">
-
-  <!-- Header -->
-  <div class="d-flex justify-content-between align-items-center mb-5">
-
-    <div class="d-flex align-items-center gap-2">
-
-      <i class="fa-solid fa-shield-halved booking-header-icon"></i>
-
-      <span class="booking-title">
-        SPACE ALERTS
-      </span>
-
-    </div>
-
-    <div class="count-badge">
-      0
-    </div>
-
-  </div>
-
-  <!-- Content -->
-
-  <div class="text-center">
-
-    <i class="fa-regular fa-bell empty-calendar-icon"></i>
-
-    <h5 class="booking-empty-title">
-      No alerts yet
-    </h5>
-
-    <p class="booking-empty-text">
-      You're all caught up. We'll notify
-      <br>
-      you when something needs attention.
-    </p>
-
-    <button class="btn calendar-btn">
-      View All Alerts
-    </button>
-
-  </div>
-
-</div>
-<div class="booking-card my-3">
-
-  <div class="d-flex align-items-center gap-2 mb-3">
-
-    <i class="fa-solid fa-bolt booking-header-icon"></i>
-
-    <span class="booking-title">
-      QUICK ACTIONS
-    </span>
-
-  </div>
-
-  <div class="action-list">
-
-    <button class="action-item">
-      <div class="d-flex align-items-center gap-3"
-        data-bs-toggle="modal"
-  data-bs-target="#addSpaceModal">
-
-        <div class="action-icon danger">
-          <i class="fa-solid fa-plus"></i>
-        </div>
-
-        <span>Add New Space</span>
-
-      </div>
-
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-    <button class="action-item">
-      <div class="d-flex align-items-center gap-3">
-
-        <div class="action-icon">
-          <i class="fa-regular fa-calendar-days"></i>
-        </div>
-
-        <span>Create Booking</span>
-
-      </div>
-
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-    <button class="action-item">
-      <div class="d-flex align-items-center gap-3">
-
-        <div class="action-icon">
-          <i class="fa-solid fa-user-plus"></i>
-        </div>
-
-        <span>Invite Team</span>
-
-      </div>
-
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-    <button class="action-item">
-      <div class="d-flex align-items-center gap-3">
-
-        <div class="action-icon">
-          <i class="fa-regular fa-calendar"></i>
-        </div>
-
-        <span>Manage Calendar</span>
-
-      </div>
-
-      <i class="fa-solid fa-chevron-right"></i>
-    </button>
-
-  </div>
-
-</div>
-<div class="booking-card">
-
-  <div class="d-flex align-items-center gap-2 mb-4">
-
-    <i class="fa-regular fa-lightbulb booking-header-icon"></i>
-
-    <span class="booking-title">
-      SETUP TIPS
-    </span>
-
-  </div>
-
-  <h6 class="tip-title">
-    Start building your space structure
-  </h6>
-
-  <p class="tip-text">
-    Begin by creating a Facility / Site,
-    Parent Space, Single Managed Space,
-    or any other space type that fits
-    your business.
-  </p>
-
-  <a href="#" class="tip-link">
-    Learn more about space structure
-    <i class="fa-solid fa-arrow-right ms-2"></i>
   </a>
 
-</div>
-</div>
-</div>
-<div
-  class="modal fade"
-  id="addSpaceModal"
-  tabindex="-1"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content bg-dark text-white">
+</li>
+                </ul>
+              </div>
+            </div>
 
-      <div class="modal-header border-secondary">
-        <h5 class="modal-title">Add New Space</h5>
+            <!-- Location -->
+            <div class="col-lg-2">
+              <label class="filter-label"> Location </label>
 
-        <button
-          type="button"
-          class="btn-close btn-close-white"
-          data-bs-dismiss="modal">
-        </button>
+              <div class="dropdown">
+                <button
+                  class="form-select dark-select text-start"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  {{ selectedLocation || "All Locations" }}
+                </button>
+
+                <ul class="dropdown-menu custom-menu w-100">
+                  <li>
+                    <a class="dropdown-item" (click)="selectedLocation = ''">
+                      All Locations
+                    </a>
+                  </li>
+
+                  <li *ngFor="let location of locations">
+                    <a
+  class="dropdown-item"
+  (click)="selectedLocation = location; applyFilters()">
+
+  {{location}}
+
+</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Sort -->
+            <div class="col-lg-2">
+              <label class="filter-label"> Sort By </label>
+
+              <div class="dropdown">
+                <button
+                  class="form-select dark-select text-start"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  {{ sortBy || "Newest" }}
+                </button>
+
+                <ul class="dropdown-menu custom-menu w-100">
+                  <li>
+                   <a
+  class="dropdown-item"
+  (click)="sortBy='newest'; applyFilters()">
+
+  Newest
+
+</a>
+                  </li>
+
+                  <li>
+                   <a
+  class="dropdown-item"
+  (click)="sortBy='oldest'; applyFilters()">
+
+  Oldest
+
+</a>
+                  </li>
+
+                  <li>
+                  <a
+  class="dropdown-item"
+  (click)="sortBy='name'; applyFilters()">
+
+  Name
+
+</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Area -->
+          <div class="results-container">
+            <!-- Empty State -->
+            <div *ngIf="!spaces?.length" class="empty-state">
+              <div class="empty-content">
+                <div class="empty-icon-wrapper">
+                  <i class="fa-solid fa-location-dot empty-icon"></i>
+                </div>
+
+                <h3>No spaces yet</h3>
+
+                <p>
+                  You haven't added any spaces, venues, rooms, or locations yet.
+                  <br />
+                  Start by creating your first space.
+                </p>
+
+                <button
+                  class="btn btn-danger add-btn"
+                  (click)="openSpaceModal()"
+                >
+                  <i class="fa-solid fa-plus me-2"></i>
+                  Add Space
+                </button>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <div *ngIf="spaces?.length">
+            <div class="table-scroll">
+                <table class="table space-table align-middle mb-0">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+
+                    <th>City</th>
+
+                    <th>Price / Hour</th>
+
+                    <th>Email</th>
+
+                    <th>Approval</th>
+
+                    <th>Created</th>
+
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                 <tr *ngFor="let space of filteredSpaces">
+                    <td>
+                      <div class="space-info">
+                        <img
+                          [src]="
+                            space.imageUrl ||
+                            'https://picsum.photos/80/80?random=' + space.id
+                          "
+                          class="space-image"
+                          alt="Space"
+                        />
+
+                        <div>
+                          <div class="space-name">
+                            {{ space.name }}
+                          </div>
+
+                          <small class="space-state">
+                            {{ space.state }}
+                          </small>
+                        </div>
+                      </div>
+                    </td>
+
+                    <td>
+                      {{ space.city }}
+                    </td>
+
+                    <td>
+                      {{ space.pricePerHour | number }}
+                    </td>
+
+                    <td>
+                      <span
+                        class="badge"
+                        [ngClass]="
+                          space.emailVerified ? 'bg-success' : 'bg-danger'
+                        "
+                      >
+                        {{ space.emailVerified ? "Verified" : "Pending" }}
+                      </span>
+                    </td>
+
+                   <td>
+
+  <span
+    class="badge"
+    [ngClass]="getApprovalClass(space.approvalStatus)">
+
+    {{ getApproval(space.approvalStatus) }}
+
+  </span>
+
+</td>
+
+                    <td>
+                      {{ space.createdAt | date: "dd/MM/yyyy" }}
+                    </td>
+
+                   <td>
+
+  <button
+    *ngIf="space.locationStatus === 2"
+    class="btn btn-success btn-sm"
+    (click)="publishSpace(space)">
+
+    Publish
+
+  </button>
+
+  <button
+    *ngIf="space.locationStatus !== 2"
+    class="btn btn-warning btn-sm"
+    (click)="activateSpace(space.id)">
+
+    Activate
+
+  </button>
+
+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="modal-body">
-<app-create-location></app-create-location>
-      </div>
+      <!-- Sidebar -->
+      <div class="col-lg-3">
+        <!-- Upcoming Bookings -->
 
-      <div class="modal-footer border-secondary">
+        <!-- Alerts -->
+
+        <!-- Quick Actions -->
+
+        <!-- Setup Tips -->
+      </div>
+    </div>
+    <div class="col-lg-3 py-3">
+      <div class="booking-card">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fa-regular fa-calendar-days booking-header-icon"></i>
+
+            <span class="booking-title"> UPCOMING BOOKINGS </span>
+          </div>
+
+          <div class="count-badge">0</div>
+        </div>
+
+        <!-- Content -->
+
+        <div class="text-center">
+          <i class="fa-regular fa-calendar-days empty-calendar-icon"></i>
+
+          <h5 class="booking-empty-title">No upcoming bookings</h5>
+
+          <p class="booking-empty-text">You have no upcoming bookings.</p>
+
+          <button class="btn calendar-btn">View Calendar</button>
+        </div>
+      </div>
+      <div class="booking-card my-2">
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-5">
+          <div class="d-flex align-items-center gap-2">
+            <i class="fa-solid fa-shield-halved booking-header-icon"></i>
+
+            <span class="booking-title"> SPACE ALERTS </span>
+          </div>
+
+          <div class="count-badge">0</div>
+        </div>
+
+        <!-- Content -->
+
+        <div class="text-center">
+          <i class="fa-regular fa-bell empty-calendar-icon"></i>
+
+          <h5 class="booking-empty-title">No alerts yet</h5>
+
+          <p class="booking-empty-text">
+            You're all caught up. We'll notify
+            <br />
+            you when something needs attention.
+          </p>
+
+          <button class="btn calendar-btn">View All Alerts</button>
+        </div>
+      </div>
+      <div class="booking-card my-3">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <i class="fa-solid fa-bolt booking-header-icon"></i>
+
+          <span class="booking-title"> QUICK ACTIONS </span>
+        </div>
+
+        <div class="action-list">
+          <button class="action-item" (click)="openSpaceModal()">
+            <div class="d-flex align-items-center gap-3">
+              <div class="action-icon danger">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+
+              <span>Add New Space</span>
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <button class="action-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="action-icon">
+                <i class="fa-regular fa-calendar-days"></i>
+              </div>
+
+              <span>Create Booking</span>
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <button class="action-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="action-icon">
+                <i class="fa-solid fa-user-plus"></i>
+              </div>
+
+              <span>Invite Team</span>
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <button class="action-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="action-icon">
+                <i class="fa-regular fa-calendar"></i>
+              </div>
+
+              <span>Manage Calendar</span>
+            </div>
+
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="booking-card">
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <i class="fa-regular fa-lightbulb booking-header-icon"></i>
+
+          <span class="booking-title"> SETUP TIPS </span>
+        </div>
+
+        <h6 class="tip-title">Start building your space structure</h6>
+
+        <p class="tip-text">
+          Begin by creating a Facility / Site, Parent Space, Single Managed
+          Space, or any other space type that fits your business.
+        </p>
+
+        <a href="#" class="tip-link">
+          Learn more about space structure
+          <i class="fa-solid fa-arrow-right ms-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="addSpaceModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-dark text-white">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title">Add New Space</h5>
+
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+
+        <div class="modal-body">
+          <app-create-location (closeModal)="closeModal()">
+            ></app-create-location
+          >
+        </div>
+
+        <!-- <div class="modal-footer border-secondary">
         <button
           class="btn btn-secondary"
           data-bs-dismiss="modal">
@@ -737,8 +661,133 @@
         <button class="btn btn-danger">
           Save
         </button>
+      </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="notAllowedModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header border-secondary">
+          <h5 class="modal-title">Access Restricted</h5>
+
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+          ></button>
+        </div>
+
+        <div class="modal-body text-center py-4">
+          <i class="fa-solid fa-circle-exclamation text-warning fs-1 mb-3"> </i>
+
+          <h5>You cannot add a new space.</h5>
+
+          <p class="text-secondary mb-0">
+            Your current account role does not have permission to create spaces.
+            Please switch to a <strong>Venue</strong> account.
+          </p>
+        </div>
+
+        <div class="modal-footer border-secondary">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div
+  class="modal fade"
+  id="pendingApprovalModal"
+  tabindex="-1">
+
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+
+    <div class="modal-content bg-dark text-white border-secondary">
+
+      <div class="modal-body text-center p-4">
+
+        <i
+          class="fa-solid fa-clock text-warning fs-1 mb-3">
+        </i>
+
+        <h5>
+          Approval Pending
+        </h5>
+
+        <p class="text-secondary">
+
+          Your space is waiting for admin approval.
+          You can't publish it until it is approved.
+
+        </p>
+
+        <button
+          class="btn btn-warning w-100"
+          data-bs-dismiss="modal">
+
+          OK
+
+        </button>
+
       </div>
 
     </div>
+
   </div>
+
+</div>
+<div
+  class="modal fade"
+  id="rejectedModal"
+  tabindex="-1">
+
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+
+    <div class="modal-content bg-dark text-white border-secondary">
+
+      <div class="modal-body text-center p-4">
+
+        <i
+          class="fa-solid fa-circle-xmark text-danger fs-1 mb-3">
+        </i>
+
+        <h5>
+          Space Rejected
+        </h5>
+
+        <p class="text-secondary">
+
+          Your space was rejected by the administrator.
+          Please update the information and submit it again.
+
+        </p>
+
+        <button
+          class="btn btn-danger w-100"
+          data-bs-dismiss="modal">
+
+          Close
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>

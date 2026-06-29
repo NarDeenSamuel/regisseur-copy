@@ -635,3 +635,142 @@ select option:hover{
 .modal-header ,.modal-body ,.modal-footer{
   background-color: #05080d;
 }
+/* ================= TABLE ================= */
+
+.space-table{
+
+    --bs-table-bg: transparent;
+    --bs-table-color: #fff;
+    --bs-table-border-color: rgba(255,255,255,.08);
+    --bs-table-hover-bg: rgba(255,255,255,.03);
+
+    background: transparent !important;
+    color: #fff;
+}
+
+.space-table thead,
+.space-table tbody,
+.space-table tr,
+.space-table th,
+.space-table td{
+
+    background: transparent !important;
+    color: #fff;
+    border-color: rgba(255,255,255,.08);
+
+}
+
+.space-table th{
+
+    font-size: 13px;
+    font-weight: 600;
+    color:#9ca3af;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+
+}
+
+/* ================= SPACE INFO ================= */
+
+.space-info{
+
+    display:flex !important;
+    align-items:center !important;
+    gap:14px;
+
+}
+
+.space-image{
+
+    width:60px;
+    height:60px;
+
+    border-radius:12px;
+
+    object-fit:cover;
+
+    flex-shrink:0;
+
+    display:block;
+
+}
+
+.space-name{
+
+    color:#fff;
+    font-weight:600;
+    font-size:15px;
+
+}
+
+.space-state{
+
+    color:#9ca3af;
+    display:block;
+    margin-top:3px;
+
+}
+
+/* ================= ROW ================= */
+
+.space-table tbody tr{
+
+    transition:.25s;
+
+}
+
+.space-table tbody tr:hover{
+
+    background:rgba(255,255,255,.03) !important;
+
+}
+
+.space-table td{
+
+    vertical-align:middle;
+    padding:18px 14px;
+
+}
+.table-scroll{
+
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    scrollbar-width:thin;
+    scrollbar-color:#dc2626 #111827;
+
+}
+
+/* Chrome */
+
+.table-scroll::-webkit-scrollbar{
+
+    height:8px;
+
+}
+
+.table-scroll::-webkit-scrollbar-track{
+
+    background:#111827;
+    border-radius:20px;
+
+}
+
+.table-scroll::-webkit-scrollbar-thumb{
+
+    background:#dc2626;
+    border-radius:20px;
+
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover{
+
+    background:#ef4444;
+
+}
+
+.space-table{
+
+    min-width:1100px;
+
+}

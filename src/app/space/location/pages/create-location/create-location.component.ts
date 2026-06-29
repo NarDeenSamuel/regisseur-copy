@@ -34,6 +34,9 @@ import {
 } from '../../components/location-sections/location-sections.component';
 import { Router } from '@angular/router';
 import { AmenityCategory } from '../../models/amenity-category';
+import {
+  Validators
+} from '@angular/forms';
 @Component({
   selector: 'app-create-location',
   standalone: true,
@@ -60,6 +63,8 @@ imports: [
   styleUrl: './create-location.component.css'
 })
 export class CreateLocationComponent implements OnInit{
+  @Output()
+closeModal = new EventEmitter<void>();
 private locationService =
   inject(LocationService);
 
@@ -114,8 +119,15 @@ loadAmenities(): void {
 
     phone: [''],
     website: [''],
-    email: [''],
-   foodMenuUrl: [''],
+email: [
+  '',
+  [
+    Validators.required,
+    Validators.pattern(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    )
+  ]
+],   foodMenuUrl: [''],
 
 beverageMenuUrl: [''],
 
@@ -214,14 +226,18 @@ submitLocation(
   this.isSubmitting = true;
   const formValue =
     this.form.value;
+const user = JSON.parse(
+  localStorage.getItem('user') || '{}'
+);
 
+const locationOwnerAccountId = user.id;
   const payload = {
 
     // BASIC
 
     name:
       formValue.name,
-
+locationOwnerAccountId:locationOwnerAccountId,
     description:
       formValue.description,
 
@@ -504,9 +520,10 @@ saveAsDraft:
   // DRAFT
 
   if (saveAsDraft) {
+this.closeModal.emit();
 
     this.router.navigate([
-      '/locations'
+      '/spaces'
     ]);
 
     return;
@@ -514,6 +531,7 @@ saveAsDraft:
   }
 
   // SUBMIT FLOW
+this.closeModal.emit();
 
   this.router.navigate([
     '/location/verify',

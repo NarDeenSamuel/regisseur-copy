@@ -1,15 +1,9 @@
 .media-page-container {
-
   width: 100%;
-
   max-width: 1320px;
-
   margin: 0 auto;
-
   padding: 24px;
-
   box-sizing: border-box;
-
 }
 
 /* =========================
@@ -17,71 +11,41 @@
 ========================= */
 
 .media-header {
-
   display: flex;
-
   align-items: flex-start;
-
   gap: 14px;
-
   margin-bottom: 30px;
-
 }
 
 .section-number {
-
   width: 30px;
-
   height: 30px;
-
   min-width: 30px;
-
   border-radius: 50%;
-
-  background: #FFF2BE;
-
-  color: #E7B800;
-
+  background: #FFCCCC; /* كان أصفر فاتح */
+  color: #CC0000; /* كان أصفر غامق */
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   font-size: 14px;
-
   font-weight: 700;
-
   margin-top: 4px;
-
 }
 
 .section-title {
-
   margin: 0;
-
   font-size: 24px;
-
   font-weight: 700;
-
-  color: #111111;
-
+  color: #FFFFFF; /* كان أسود */
   line-height: 1;
-
 }
 
 .section-subtitle {
-
   margin-top: 10px;
-
   max-width: 560px;
-
   font-size: 15px;
-
   line-height: 1.4;
-
-  color: #7C7C7C;
-
+  color: #CCCCCC; /* تفتيح الرمادي ليناسب الخلفية السوداء */
 }
 
 /* =========================
@@ -89,15 +53,10 @@
 ========================= */
 
 .media-card {
-
-  background: white;
-
-  border: 1px solid #E9E9E9;
-
+  background: #000000; /* كانت بيضاء */
+  border: 1px solid #333333; /* تغميق الحدود */
   border-radius: 24px;
-
   padding: 34px;
-
 }
 
 /* =========================
@@ -105,101 +64,58 @@
 ========================= */
 
 .upload-box {
-
   min-height: 240px;
-
-  border: 1.5px dashed #BDBDBD;
-
+  border: 1.5px dashed #555555; /* تغميق الحدود المنقطة */
   border-radius: 18px;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   text-align: center;
-
   padding: 24px;
-
 }
 
 /* ICON */
-
 .upload-icon {
-
   width: 72px;
-
   height: 72px;
-
   border-radius: 50%;
-
-  background: #FFF2BE;
-
+  background: #FFCCCC; /* كان أصفر فاتح */
+  color: #CC0000;
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   font-size: 30px;
-
   margin-bottom: 20px;
-
 }
 
 /* TITLE */
-
 .upload-box h3 {
-
   margin: 0;
-
   font-size: 18px;
-
   font-weight: 700;
-
-  color: #111111;
-
+  color: #FFFFFF; /* كان أسود */
 }
 
 /* SUBTITLE */
-
 .upload-box p {
-
   margin-top: 8px;
-
   font-size: 12px;
-
-  color: #909090;
-
+  color: #BBBBBB; /* رمادي فاتح مقروء */
 }
 
 /* BUTTON */
-
 .select-btn {
-
   margin-top: 18px;
-
   height: 38px;
-
   padding: 0 18px;
-
   border: none;
-
   border-radius: 8px;
-
-  background: #FFE58A;
-
-  color: #E1AF00;
-
+  background: #FF9999; /* كان أصفر */
+  color: #FFFFFF; /* كان أسود/أصفر داكن */
   font-size: 13px;
-
   font-weight: 700;
-
   cursor: pointer;
-
 }
 
 /* =========================
@@ -207,145 +123,87 @@
 ========================= */
 
 .media-grid {
-
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-
   gap: 16px;
-
   margin-top: 30px;
-
 }
 
 /* SLOT */
-
 .media-slot {
-
   position: relative;
-
   height: 128px;
-
   border-radius: 12px;
-
   overflow: hidden;
-
-  background: #F7F7FB;
-
+  background: #1A1A1A; /* خلفية داكنة بدلاً من الفاتحة */
 }
 
 /* EMPTY */
-
 .empty-slot,
 .video-slot {
-
-  border: 1px solid #EFEFEF;
-
+  border: 1px solid #333333;
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 10px;
-
+  height: 100%;
 }
 
 /* SLOT ICON */
-
 .slot-icon {
-
   font-size: 22px;
-
   opacity: 0.7;
-
+  color: #FFFFFF;
 }
 
 /* SLOT TEXT */
-
 .empty-slot span,
 .video-slot span {
-
   font-size: 12px;
-
-  color: #7C7C7C;
-
+  color: #CCCCCC;
 }
 
 /* IMAGE */
-
 .uploaded img {
-
   width: 100%;
-
   height: 100%;
-
   object-fit: cover;
-
 }
 
 /* OVERLAY */
-
 .upload-overlay {
-
   position: absolute;
-
   inset: 0;
-
-  background: rgba(0,0,0,0.22);
-
+  background: rgba(0,0,0,0.5); /* تعتيم أقوى قليلاً */
   display: flex;
-
   flex-direction: column;
-
   justify-content: flex-end;
-
   padding: 14px;
-
 }
 
 /* BAR */
-
 .upload-bar {
-
   width: 100%;
-
   height: 6px;
-
   border-radius: 999px;
-
   background: rgba(255,255,255,0.3);
-
   overflow: hidden;
-
 }
 
 /* PROGRESS */
-
 .upload-progress {
-
   width: 75%;
-
   height: 100%;
-
-  background: #4A84FF;
-
+  background: #4A84FF; /* تركته أزرق لشريط التحميل، يمكن تغييره لأحمر إذا أردت */
 }
 
 /* TEXT */
-
 .upload-overlay span {
-
   margin-top: 8px;
-
   font-size: 10px;
-
   font-weight: 700;
-
-  color: white;
-
+  color: #FFFFFF;
 }
 
 /* =========================
@@ -353,383 +211,194 @@
 ========================= */
 
 .listing-footer {
-
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   margin-top: 36px;
-
   padding-top: 22px;
-
+  border-top: 1px solid #333333;
 }
 
 /* BACK */
-
 .footer-back {
-
   border: none;
-
   background: transparent;
-
   padding: 0;
-
   display: inline-flex;
-
   align-items: center;
-
   gap: 10px;
-
   font-size: 15px;
-
   font-weight: 600;
-
-  color: #2B2B2B;
-
+  color: #FFFFFF; /* كان أسود */
   cursor: pointer;
-
 }
 
 /* ARROW */
-
 .back-arrow {
-
   font-size: 20px;
-
   display: flex;
-
   align-items: center;
-
 }
 
 /* RIGHT ACTIONS */
-
 .footer-actions {
-
   display: flex;
-
   align-items: center;
-
   gap: 14px;
-
 }
 
 /* DRAFT */
-
 .draft-btn {
-
   height: 34px;
-
   padding: 0 18px;
-
-  border: 1px solid #DDDDDD;
-
+  border: 1px solid #555555;
   border-radius: 999px;
-
-  background: white;
-
-  color: #666666;
-
+  background: #000000; /* كانت بيضاء */
+  color: #FFFFFF; /* كان رمادي */
   font-size: 11px;
-
   cursor: pointer;
-
 }
 
 /* NEXT */
-
 .next-btn {
-
   min-width: 100px;
-
   height: 34px;
-
   border: none;
-
   border-radius: 999px;
-
-  background: #F2C81E;
-
-  color: white;
-
+  background: #E60000; /* كان أصفر */
+  color: #FFFFFF;
   font-size: 12px;
-
   font-weight: 700;
-
   cursor: pointer;
-
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIVE (تم دمج التكرار)
 ========================= */
 
 @media (max-width: 992px) {
-
   .media-grid {
-
     grid-template-columns: repeat(2, 1fr);
-
   }
-
 }
 
 @media (max-width: 768px) {
-
-  .media-grid {
-
-    grid-template-columns: 1fr;
-
-  }
-
-  .listing-footer {
-
-    flex-direction: column;
-
-    gap: 18px;
-
-    align-items: stretch;
-
-  }
-
-  .footer-actions {
-
-    width: 100%;
-
-  }
-
-  .draft-btn,
-  .next-btn {
-
-    flex: 1;
-
-  }
-
-}
-/* =========================
-   MOBILE ONLY
-========================= */
-
-@media (max-width: 768px) {
-
   .media-page-container {
-
     padding: 16px;
-
   }
 
   /* HEADER */
-
   .media-header {
-
     flex-direction: column;
-
     gap: 12px;
-
     margin-bottom: 24px;
-
   }
-
   .section-number {
-
     width: 34px;
-
     height: 34px;
-
     min-width: 34px;
-
     font-size: 14px;
-
     margin-top: 0;
-
   }
-
   .section-title {
-
     font-size: 28px;
-
     line-height: 1.2;
-
   }
-
   .section-subtitle {
-
     margin-top: 8px;
-
     font-size: 14px;
-
     line-height: 1.6;
-
   }
 
   /* CARD */
-
   .media-card {
-
     padding: 18px;
-
     border-radius: 20px;
-
   }
 
   /* UPLOAD BOX */
-
   .upload-box {
-
     min-height: 220px;
-
     padding: 20px;
-
     border-radius: 16px;
-
   }
-
   .upload-icon {
-
     width: 62px;
-
     height: 62px;
-
     font-size: 24px;
-
     margin-bottom: 16px;
-
   }
-
   .upload-box h3 {
-
     font-size: 17px;
-
     line-height: 1.4;
-
   }
-
   .upload-box p {
-
     margin-top: 8px;
-
     font-size: 13px;
-
     line-height: 1.5;
-
   }
-
   .select-btn {
-
     width: 100%;
-
     height: 42px;
-
     margin-top: 18px;
-
     border-radius: 12px;
-
     font-size: 13px;
-
   }
 
   /* GRID */
-
   .media-grid {
-
     grid-template-columns: 1fr;
-
     gap: 14px;
-
     margin-top: 22px;
-
   }
-
   .media-slot {
-
     height: 180px;
-
     border-radius: 14px;
-
   }
-
   .empty-slot span,
   .video-slot span {
-
     font-size: 13px;
-
   }
-
   .slot-icon {
-
     font-size: 24px;
-
   }
 
   /* OVERLAY */
-
   .upload-overlay {
-
     padding: 12px;
-
   }
-
   .upload-overlay span {
-
     font-size: 11px;
-
   }
 
   /* FOOTER */
-
   .listing-footer {
-
     flex-direction: column;
-
     align-items: stretch;
-
     gap: 16px;
-
     margin-top: 28px;
-
     padding-top: 20px;
-
   }
-
   .footer-actions {
-
     width: 100%;
-
     flex-direction: column;
-
     gap: 12px;
-
   }
-
   .footer-back,
   .draft-btn,
   .next-btn {
-
     width: 100%;
-
   }
-
   .footer-back {
-
     justify-content: center;
-
     height: 44px;
-
     border-radius: 999px;
-
-    background: #F8F8F8;
-
+    background: #1A1A1A; /* خلفية داكنة لزر الرجوع في الموبايل */
   }
-
   .draft-btn,
   .next-btn {
-
     height: 44px;
-
     font-size: 13px;
-
+    flex: 1;
   }
-
 }

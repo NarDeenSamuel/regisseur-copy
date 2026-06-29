@@ -12,7 +12,8 @@ import {
 
   ElementRef,
 
-  ViewChild
+  ViewChild,
+  inject
 
 } from '@angular/core';
 
@@ -29,6 +30,7 @@ import {
   Legend
 
 } from 'chart.js';
+import { LocationsService } from '../../../core/services/location/locations.service';
 Chart.register(
 
   DoughnutController,
@@ -86,283 +88,41 @@ filters = [
   'Outdoor Spaces'
 ];
 
-categoryOptions = [
 
-  'Venue',
-  'Room',
-  'Stage',
-  'Outdoor'
-];
 
 typeOptions = [
-
-  'Available',
-  'Booked',
-  'Maintenance'
+'Draft',
+'Pending',
+'Active',
+'Archived'
 ];
 
-locationOptions = [
-
-  'New York, USA',
-  'Miami, USA',
-  'Chicago, USA',
-  'Los Angeles, USA',
-  'Toronto, Canada',
-  'Beverly Hills, USA'
-];
   /* ====================================== */
   /* ================ DATA ================ */
   /* ====================================== */
+categoryOptions: string[] = [];
 
-space = [
+locationOptions: string[] = [];
+space: any[] = [];
+private locationService = inject(LocationsService);
+getStatusClass(status: string): string {
 
-  {
-    image:'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop',
+  switch (status) {
 
-    title:'Le Bain NYC',
-
-    subTitle:'Main Room',
-
-    type:'Venue',
-
-    typeClass:'status-red',
-
-    location:'New York, USA',
-
-    city:'New York',
-
-    capacity:'1,200',
-
-    capacityType:'Standing',
-
-    availability:'Jun 16 – Jun 17',
-
-    availableDates:'2 dates',
-
-    progress:78,
-
-    status:'Available'
-  },
-
-  {
-    image:'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1200&auto=format&fit=crop',
-
-    title:'The Mercer Ballroom',
-
-    subTitle:'Grand Ballroom',
-
-    type:'Room',
-
-    typeClass:'status-purple',
-
-    location:'New York, USA',
-
-    city:'New York',
-
-    capacity:'450',
-
-    capacityType:'Seated',
-
-    availability:'Jun 18 – Jun 20',
-
-    availableDates:'3 dates',
-
-    progress:65,
-
-    status:'Available'
-  },
-
-  {
-    image:'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop',
-
-    title:'Club Nebula Stage',
-
-    subTitle:'Main Stage',
-
-    type:'Stage',
-
-    typeClass:'status-orange',
-
-    location:'Miami, USA',
-
-    city:'Miami',
-
-    capacity:'800',
-
-    capacityType:'Standing',
-
-    availability:'Jun 16',
-
-    availableDates:'1 date',
-
-    progress:90,
-
-    status:'Booked'
-  },
-
-  {
-    image:'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop',
-
-    title:'Palm Court Terrace',
-
-    subTitle:'Outdoor Space',
-
-    type:'Outdoor',
-
-    typeClass:'status-green',
-
-    location:'Beverly Hills, USA',
-
-    city:'California',
-
-    capacity:'300',
-
-    capacityType:'Standing',
-
-    availability:'Jun 19 – Jun 21',
-
-    availableDates:'3 dates',
-
-    progress:40,
-
-    status:'Available'
-  },
-
-  {
-    image:'https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1200&auto=format&fit=crop',
-
-    title:'City Theater',
-
-    subTitle:'Main Theater',
-
-    type:'Venue',
-
-    typeClass:'status-red',
-
-    location:'Chicago, USA',
-
-    city:'Illinois',
-
-    capacity:'1,800',
-
-    capacityType:'Seated',
-
-    availability:'Jun 22 – Jun 23',
-
-    availableDates:'2 dates',
-
-    progress:55,
-
-    status:'Maintenance'
-  },
-
-  {
-    image:'https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=1200&auto=format&fit=crop',
-
-    title:'SoHo House Studio',
-
-    subTitle:'Studio A',
-
-    type:'Room',
-
-    typeClass:'status-purple',
-
-    location:'New York, USA',
-
-    city:'New York',
-
-    capacity:'80',
-
-    capacityType:'Seated',
-
-    availability:'Jun 16',
-
-    availableDates:'1 date',
-
-    progress:30,
-
-    status:'Available'
-  },
-
-  {
-    image:'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop',
-
-    title:'Rooftop 360',
-
-    subTitle:'Rooftop',
-
-    type:'Outdoor',
-
-    typeClass:'status-green',
-
-    location:'Los Angeles, USA',
-
-    city:'California',
-
-    capacity:'500',
-
-    capacityType:'Standing',
-
-    availability:'Jun 17 – Jun 18',
-
-    availableDates:'2 dates',
-
-    progress:60,
-
-    status:'Available'
-  },
-
-  {
-    image:'https://images.unsplash.com/photo-1497366412874-3415097a27e7?q=80&w=1200&auto=format&fit=crop',
-
-    title:'Executive Boardroom',
-
-    subTitle:'Boardroom',
-
-    type:'Room',
-
-    typeClass:'status-purple',
-
-    location:'Toronto, Canada',
-
-    city:'Ontario',
-
-    capacity:'30',
-
-    capacityType:'Seated',
-
-    availability:'Jun 16 – Jun 19',
-
-    availableDates:'4 dates',
-
-    progress:25,
-
-    status:'Available'
-  }
-
-];
-getStatusClass(status:string):string{
-
-  switch(status){
-
-    case 'In Progress':
-      return 'upcoming';
-
-    case 'Planning':
-      return 'planning';
-
-    case 'On Hold':
-      return 'hold';
-
-    case 'Completed':
+    case 'Active':
       return 'completed';
 
-    case 'Cancelled':
+    case 'Inactive':
       return 'cancelled';
 
+    case 'Draft':
+      return 'planning';
+
     default:
-      return 'upcoming';
+      return 'hold';
+
   }
+
 }
 
 getProgressClass(
@@ -457,71 +217,95 @@ getProgressClass(
   /* ============== FILTERED ============== */
   /* ====================================== */
 
-get filteredspace(){
+get filteredspace() {
 
   let data = [...this.space];
 
   /* TOP TABS */
 
-  if(this.activeFilter === 'Venues'){
+  if (this.activeFilter === 'Venues') {
 
     data = data.filter(
-      item => item.type === 'Venue'
+      item => item.type?.toLowerCase().includes('venue')
     );
+
   }
 
-  if(this.activeFilter === 'Rooms'){
+  if (this.activeFilter === 'Rooms') {
 
     data = data.filter(
-      item => item.type === 'Room'
+      item => item.type?.toLowerCase().includes('room')
     );
+
   }
 
-  if(this.activeFilter === 'Stages'){
+  if (this.activeFilter === 'Stages') {
 
     data = data.filter(
-      item => item.type === 'Stage'
+      item => item.type?.toLowerCase().includes('stage')
     );
+
   }
 
-  if(this.activeFilter === 'Outdoor Spaces'){
+  if (this.activeFilter === 'Outdoor Spaces') {
 
     data = data.filter(
-      item => item.type === 'Outdoor'
+      item => item.type?.toLowerCase().includes('outdoor')
     );
+
   }
 
-  /* TYPE */
+  /* CATEGORY */
 
-  if(this.selectedCategory){
+  if (this.selectedCategory) {
 
     data = data.filter(
-      item =>
-      item.type === this.selectedCategory
+      item => item.type === this.selectedCategory
     );
+
   }
 
   /* STATUS */
 
-  if(this.selectedType){
+  if (this.selectedType) {
 
-    data = data.filter(
-      item =>
-      item.status === this.selectedType
-    );
+    data = data.filter(item => {
+
+      switch (this.selectedType) {
+
+        case 'Draft':
+          return item.status === 0;
+
+        case 'Pending':
+          return item.status === 1;
+
+        case 'Active':
+          return item.status === 2;
+
+        case 'Archived':
+          return item.status === 3;
+
+        default:
+          return true;
+
+      }
+
+    });
+
   }
 
   /* LOCATION */
 
-  if(this.selectedLocation){
+  if (this.selectedLocation) {
 
     data = data.filter(
-      item =>
-      item.location === this.selectedLocation
-    );
+    item => item.city === this.selectedLocation
+  );
+
   }
 
   return data;
+
 }
   /* ====================================== */
   /* ============== PAGINATION ============ */
@@ -906,14 +690,108 @@ selectedDate2:Date | null = null;
 /* INIT */
 /* ========================================= */
 
-ngOnInit(){
+ngOnInit() {
 
   this.generateCalendar();
 
-
+  this.loadLocations();
 
 }
+loadLocations() {
 
+  this.locationService
+      .getAllLocations()
+      .subscribe({
+
+        next: (res: any) => {
+
+          this.space = res.items.map((item: any) => ({
+
+            id: item.id,
+
+            image:
+              item.imageUrl ||
+              `https://picsum.photos/80/80?random=${item.id}`,
+
+            title: item.name,
+
+            subTitle: item.locationCategoryName,
+
+            type: item.locationCategoryName,
+
+            typeClass: this.getTypeClass(item.locationCategoryName),
+
+            location: item.state,
+
+            city: item.city,
+
+            capacity:
+              item.physicalInfo?.totalCapacity ?? '-',
+
+            capacityType: 'People',
+
+            availability:
+              item.workingHours?.length
+                ? 'Available'
+                : 'No Schedule',
+
+            availableDates:
+              `${item.sections?.length ?? 0} Sections`,
+
+            progress: this.randomProgress(),
+
+            status: item.locationStatus,
+
+            approvalStatus: item.approvalStatus,
+
+            createdAt: item.createdAt,
+
+
+          }));
+this.categoryOptions = [
+  ...new Set<string>(
+    res.items
+      .map((x: any) => String(x.locationCategoryName))
+  )
+];
+
+this.locationOptions = [
+  ...new Set<string>(
+    res.items
+      .map((x: any) => String(x.city))
+  )
+];
+        },
+
+        error: err => console.log(err)
+
+      });
+
+}
+getTypeClass(type: string): string {
+
+  switch (type) {
+
+    case 'Video Studio':
+      return 'status-purple';
+
+    case 'Restaurant':
+      return 'status-orange';
+
+    case 'Rooftop':
+      return 'status-green';
+
+    default:
+      return 'status-red';
+
+  }
+
+}
+randomProgress() {
+
+  return Math.floor(Math.random() * 50) + 50;
+
+}
 /* ========================================= */
 /* MONTH NAME */
 /* ========================================= */
@@ -1364,7 +1242,57 @@ topLocations = [
 ];
 
 
+submitLocation(id: number) {
 
+  this.locationService
+    .submitLocation(id)
+    .subscribe({
+
+      next: () => {
+
+  alert('Location submitted successfully');
+
+  this.loadLocations();
+
+},
+
+      error: (err) => {
+
+  console.log(err);
+
+  console.log(err.error);
+
+  console.log(err.error.errors);
+
+}
+
+    });
+
+}
+
+rejectLocation(id: number) {
+
+  this.locationService
+    .rejectLocation(id)
+    .subscribe({
+
+      next: () => {
+
+  alert('Location rejected successfully');
+
+  this.loadLocations();
+
+},
+
+      error: err => {
+
+        console.log(err);
+
+      }
+
+    });
+
+}
 
 
 

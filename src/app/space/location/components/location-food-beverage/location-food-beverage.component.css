@@ -1,17 +1,10 @@
 .food-container {
-
   width: 100%;
-
   max-width: 1320px;
-
   margin: 0 auto;
-
   padding: 28px;
-
   box-sizing: border-box;
-
   animation: fadeIn 0.25s ease;
-
 }
 
 /* =========================
@@ -19,76 +12,41 @@
 ========================= */
 
 .section-header {
-
   display: flex;
-
   align-items: flex-start;
-
   gap: 16px;
-
   margin-bottom: 34px;
-
 }
 
 .section-number {
-
   width: 38px;
-
   height: 38px;
-
   border-radius: 50%;
-
-  background: linear-gradient(
-    135deg,
-    #FFF4C7,
-    #FFE27A
-  );
-
-  color: #B98500;
-
+  background: linear-gradient(135deg, #ffcccc, #ff9999); /* أحمر فاتح (كان أصفر فاتح) */
+  color: #cc0000; /* أحمر داكن */
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   font-size: 15px;
-
   font-weight: 700;
-
   flex-shrink: 0;
-
-  box-shadow:
-    0 6px 18px rgba(242, 200, 30, 0.18);
-
+  box-shadow: 0 6px 18px rgba(227, 6, 19, 0.18); /* ظل أحمر */
 }
 
 .section-title {
-
   margin: 0;
-
   font-size: 40px;
-
   font-weight: 700;
-
-  color: #111111;
-
+  color: #ffffff; /* أبيض (كان أسود) */
   letter-spacing: -1px;
-
 }
 
 .section-subtitle {
-
   margin-top: 10px;
-
   max-width: 620px;
-
-  color: #777777;
-
+  color: #aaaaaa; /* رمادي فاتح ليناسب الوضع الليلي */
   font-size: 15px;
-
   line-height: 1.7;
-
 }
 
 /* =========================
@@ -96,84 +54,56 @@
 ========================= */
 
 .form-card {
-
-  background: white;
-
-  border: 1px solid #ECECEC;
-
+  background: #000000; /* أسود (كان أبيض) */
+  border: 1px solid #333333; /* حدود داكنة */
   border-radius: 28px;
-
   padding: 30px;
-
-  box-shadow:
-    0 10px 35px rgba(0, 0, 0, 0.04);
-
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================
-   FORM
+   FORM & INPUTS
 ========================= */
 
 .form-group {
-
   display: flex;
-
   flex-direction: column;
-
   margin-bottom: 24px;
-
 }
 
 .form-label {
-
   font-size: 14px;
-
   font-weight: 700;
-
-  color: #222222;
-
+  color: #ffffff; /* أبيض */
   margin-bottom: 10px;
+}
 
+/* تنسيق الـ Placeholder ليكون أبيض */
+::placeholder {
+  color: #ffffff !important;
+  opacity: 0.6 !important;
 }
 
 .form-input {
-
   height: 54px;
-
-  border: 1px solid #E5E5E5;
-
+  border: 1px solid #444444;
   border-radius: 16px;
-
   padding: 0 18px;
-
   font-size: 14px;
-
-  background: #FCFCFC;
-
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s,
-    background 0.2s;
-
+  background: #111111; /* خلفية داكنة للحقل */
+  color: #ffffff; /* نص أبيض داخل الحقل */
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .form-input:hover {
-
-  border-color: #D8D8D8;
-
+  border-color: #666666;
 }
 
 .form-input:focus {
-
   outline: none;
-
-  border-color: #F2C81E;
-
-  background: white;
-
-  box-shadow:
-    0 0 0 4px rgba(242, 200, 30, 0.12);
-
+  border-color: #e30613; /* أحمر */
+  background: #000000;
+  box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.12); /* ظل أحمر */
 }
 
 /* =========================
@@ -181,45 +111,25 @@
 ========================= */
 
 .description-textarea {
-
   width: 100%;
-
   min-height: 130px;
-
   resize: vertical;
-
-  border: 1px solid #E5E5E5;
-
+  border: 1px solid #444444;
   border-radius: 18px;
-
   padding: 18px;
-
   font-size: 14px;
-
-  background: #FCFCFC;
-
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s,
-    background 0.2s;
-
+  background: #111111; /* خلفية داكنة */
+  color: #ffffff; /* نص أبيض */
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   box-sizing: border-box;
-
   line-height: 1.6;
-
 }
 
 .description-textarea:focus {
-
   outline: none;
-
-  border-color: #F2C81E;
-
-  background: white;
-
-  box-shadow:
-    0 0 0 4px rgba(242, 200, 30, 0.12);
-
+  border-color: #e30613; /* أحمر */
+  background: #000000;
+  box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.12); /* ظل أحمر */
 }
 
 /* =========================
@@ -227,95 +137,54 @@
 ========================= */
 
 .flags-wrapper {
-
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
-
   gap: 18px;
-
   margin-top: 30px;
-
 }
 
 .flag-card {
-
-  border: 1px solid #ECECEC;
-
+  border: 1px solid #333333;
   border-radius: 20px;
-
   padding: 22px;
-
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   cursor: pointer;
-
-  transition:
-    border-color 0.2s,
-    transform 0.15s,
-    box-shadow 0.2s;
-
-  background: white;
-
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  background: #000000; /* أسود */
 }
 
 .flag-card:hover {
-
-  border-color: #F2C81E;
-
+  border-color: #e30613; /* أحمر */
   transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 22px rgba(242, 200, 30, 0.12);
-
+  box-shadow: 0 10px 22px rgba(227, 6, 19, 0.12);
 }
 
 .flag-content {
-
   display: flex;
-
   flex-direction: column;
-
   max-width: 85%;
-
 }
 
 .flag-title {
-
   font-size: 15px;
-
   font-weight: 700;
-
-  color: #111111;
-
+  color: #ffffff; /* أبيض */
 }
 
 .flag-subtitle {
-
   margin-top: 6px;
-
-  color: #777777;
-
+  color: #aaaaaa;
   font-size: 13px;
-
   line-height: 1.5;
-
 }
 
 .flag-card input[type="checkbox"] {
-
   width: 22px;
-
   height: 22px;
-
-  accent-color: #F2C81E;
-
+  accent-color: #e30613; /* أحمر (كان أصفر) */
   cursor: pointer;
-
 }
 
 /* =========================
@@ -323,193 +192,88 @@
 ========================= */
 
 .listing-footer {
-
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   margin-top: 42px;
-
   padding-top: 28px;
-
-  border-top: 1px solid #F1F1F1;
-
+  border-top: 1px solid #333333; /* خط داكن */
 }
 
 .footer-back {
-
   border: none;
-
   background: transparent;
-
   display: flex;
-
   align-items: center;
-
   gap: 10px;
-
   font-size: 15px;
-
   font-weight: 600;
-
   cursor: pointer;
-
-  color: #333333;
-
+  color: #ffffff; /* أبيض */
   transition: 0.2s;
-
 }
 
 .footer-back:hover {
-
-  color: #000000;
-
+  color: #cccccc;
 }
 
 .footer-actions {
-
   display: flex;
-
   align-items: center;
-
   gap: 14px;
-
 }
 
 .draft-btn {
-
   height: 44px;
-
   padding: 0 22px;
-
   border-radius: 999px;
-
-  border: 1px solid #DDDDDD;
-
-  background: white;
-
+  border: 1px solid #444444;
+  background: #000000; /* أسود */
+  color: #ffffff; /* أبيض */
   font-size: 13px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: 0.2s;
-
 }
 
 .draft-btn:hover {
-
-  background: #FAFAFA;
-
+  background: #1a1a1a;
 }
 
 .next-btn {
-
   min-width: 140px;
-
   height: 44px;
-
   border: none;
-
   border-radius: 999px;
-
-  background: linear-gradient(
-    135deg,
-    #F2C81E,
-    #E1B100
-  );
-
+  background: linear-gradient(135deg, #ff3333, #cc0000); /* تدرج أحمر */
   color: white;
-
   font-size: 13px;
-
   font-weight: 700;
-
   cursor: pointer;
-
-  transition:
-    transform 0.15s,
-    box-shadow 0.2s;
-
-  box-shadow:
-    0 10px 24px rgba(242, 200, 30, 0.24);
-
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 10px 24px rgba(227, 6, 19, 0.24);
 }
 
 .next-btn:hover {
-
   transform: translateY(-1px);
-
-  box-shadow:
-    0 14px 28px rgba(242, 200, 30, 0.32);
-
+  box-shadow: 0 14px 28px rgba(227, 6, 19, 0.32);
 }
 
 /* =========================
-   MOBILE
+   VALIDATION
 ========================= */
 
-@media (max-width: 900px) {
-
-  .flags-wrapper {
-
-    grid-template-columns: 1fr;
-
-  }
-
+.input-error {
+  border: 1px solid #ef4444 !important;
+  background: #2a0000 !important; /* أحمر داكن جداً ليتناسب مع الخلفية السوداء */
 }
 
-@media (max-width: 768px) {
-
-  .food-container {
-
-    padding: 18px;
-
-  }
-
-  .form-card {
-
-    padding: 22px;
-
-    border-radius: 22px;
-
-  }
-
-  .section-title {
-
-    font-size: 30px;
-
-  }
-
-  .listing-footer {
-
-    flex-direction: column;
-
-    gap: 16px;
-
-    align-items: stretch;
-
-  }
-
-  .footer-actions {
-
-    width: 100%;
-
-    flex-direction: column;
-
-  }
-
-  .footer-back,
-  .draft-btn,
-  .next-btn {
-
-    width: 100%;
-
-  }
-
+.error-text {
+  display: block;
+  margin-top: 8px;
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 /* =========================
@@ -517,490 +281,139 @@
 ========================= */
 
 @keyframes fadeIn {
-
   from {
-
     opacity: 0;
-
     transform: translateY(10px);
-
   }
-
   to {
-
     opacity: 1;
-
     transform: translateY(0);
-
   }
-
 }
+
 /* =========================
-   MOBILE ONLY
+   RESPONSIVE (Merged & Cleaned)
 ========================= */
 
+@media (max-width: 900px) {
+  .flags-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-
   .food-container {
-
-    padding: 16px;
-
+    padding: 16px; /* توحيد الـ padding */
   }
 
   /* HEADER */
-
   .section-header {
-
     flex-direction: column;
-
     gap: 12px;
-
     margin-bottom: 24px;
-
   }
-
   .section-number {
-
     width: 34px;
-
     height: 34px;
-
     font-size: 14px;
-
   }
-
   .section-title {
-
     font-size: 28px;
-
     line-height: 1.2;
-
     letter-spacing: -0.5px;
-
   }
-
   .section-subtitle {
-
     margin-top: 8px;
-
     font-size: 14px;
-
     line-height: 1.6;
-
   }
 
   /* CARD */
-
   .form-card {
-
     padding: 18px;
-
     border-radius: 20px;
-
   }
 
   /* FORM */
-
   .form-group {
-
     margin-bottom: 18px;
-
   }
-
   .form-label {
-
     font-size: 13px;
-
     margin-bottom: 8px;
-
   }
-
   .form-input {
-
     height: 50px;
-
     padding: 0 14px;
-
     border-radius: 14px;
-
     font-size: 14px;
-
   }
 
   /* TEXTAREA */
-
   .description-textarea {
-
     min-height: 120px;
-
     padding: 14px;
-
     border-radius: 16px;
-
     font-size: 14px;
-
     line-height: 1.6;
-
   }
 
   /* FLAGS */
-
   .flags-wrapper {
-
     grid-template-columns: 1fr;
-
     gap: 14px;
-
     margin-top: 24px;
-
   }
-
   .flag-card {
-
     padding: 18px;
-
     border-radius: 16px;
-
     align-items: flex-start;
-
     gap: 16px;
-
   }
-
   .flag-content {
-
     max-width: 100%;
-
   }
-
   .flag-title {
-
     font-size: 14px;
-
   }
-
   .flag-subtitle {
-
     margin-top: 4px;
-
     font-size: 12px;
-
     line-height: 1.5;
-
   }
-
   .flag-card input[type="checkbox"] {
-
     width: 20px;
-
     height: 20px;
-
     flex-shrink: 0;
-
     margin-top: 2px;
-
   }
 
   /* FOOTER */
-
   .listing-footer {
-
     flex-direction: column;
-
     align-items: stretch;
-
     gap: 16px;
-
     margin-top: 28px;
-
     padding-top: 22px;
-
   }
-
   .footer-actions {
-
     width: 100%;
-
     flex-direction: column;
-
     gap: 12px;
-
   }
-
   .footer-back,
   .draft-btn,
   .next-btn {
-
     width: 100%;
-
     height: 44px;
-
+    border-radius: 999px;
   }
-
   .footer-back {
-
     justify-content: center;
-
-    border-radius: 999px;
-
-    background: #F8F8F8;
-
+    background: #111111; /* خلفية داكنة لزر الرجوع في الموبايل */
   }
-
   .draft-btn,
   .next-btn {
-
-    border-radius: 999px;
-
     font-size: 13px;
-
   }
-
-}
-/* =========================
-   MOBILE ONLY
-========================= */
-
-@media (max-width: 768px) {
-
-  .food-container {
-
-    padding: 16px;
-
-  }
-
-  /* HEADER */
-
-  .section-header {
-
-    flex-direction: column;
-
-    gap: 12px;
-
-    margin-bottom: 24px;
-
-  }
-
-  .section-number {
-
-    width: 34px;
-
-    height: 34px;
-
-    font-size: 14px;
-
-  }
-
-  .section-title {
-
-    font-size: 28px;
-
-    line-height: 1.2;
-
-    letter-spacing: -0.5px;
-
-  }
-
-  .section-subtitle {
-
-    margin-top: 8px;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-
-  }
-
-  /* CARD */
-
-  .form-card {
-
-    padding: 18px;
-
-    border-radius: 20px;
-
-  }
-
-  /* FORM */
-
-  .form-group {
-
-    margin-bottom: 18px;
-
-  }
-
-  .form-label {
-
-    font-size: 13px;
-
-    margin-bottom: 8px;
-
-  }
-
-  .form-input {
-
-    height: 50px;
-
-    padding: 0 14px;
-
-    border-radius: 14px;
-
-    font-size: 14px;
-
-  }
-
-  /* TEXTAREA */
-
-  .description-textarea {
-
-    min-height: 120px;
-
-    padding: 14px;
-
-    border-radius: 16px;
-
-    font-size: 14px;
-
-    line-height: 1.6;
-
-  }
-
-  /* FLAGS */
-
-  .flags-wrapper {
-
-    grid-template-columns: 1fr;
-
-    gap: 14px;
-
-    margin-top: 24px;
-
-  }
-
-  .flag-card {
-
-    padding: 18px;
-
-    border-radius: 16px;
-
-    align-items: flex-start;
-
-    gap: 16px;
-
-  }
-
-  .flag-content {
-
-    max-width: 100%;
-
-  }
-
-  .flag-title {
-
-    font-size: 14px;
-
-  }
-
-  .flag-subtitle {
-
-    margin-top: 4px;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-
-  }
-
-  .flag-card input[type="checkbox"] {
-
-    width: 20px;
-
-    height: 20px;
-
-    flex-shrink: 0;
-
-    margin-top: 2px;
-
-  }
-
-  /* FOOTER */
-
-  .listing-footer {
-
-    flex-direction: column;
-
-    align-items: stretch;
-
-    gap: 16px;
-
-    margin-top: 28px;
-
-    padding-top: 22px;
-
-  }
-
-  .footer-actions {
-
-    width: 100%;
-
-    flex-direction: column;
-
-    gap: 12px;
-
-  }
-
-  .footer-back,
-  .draft-btn,
-  .next-btn {
-
-    width: 100%;
-
-    height: 44px;
-
-  }
-
-  .footer-back {
-
-    justify-content: center;
-
-    border-radius: 999px;
-
-    background: #F8F8F8;
-
-  }
-
-  .draft-btn,
-  .next-btn {
-
-    border-radius: 999px;
-
-    font-size: 13px;
-
-  }
-
-}
-/* =========================
-   VALIDATION
-========================= */
-
-.input-error {
-
-  border: 1px solid #ef4444 !important;
-
-  background: #fff5f5 !important;
-
-}
-
-.error-text {
-
-  display: block;
-
-  margin-top: 8px;
-
-  color: #ef4444;
-
-  font-size: 13px;
-
-  font-weight: 500;
-
 }

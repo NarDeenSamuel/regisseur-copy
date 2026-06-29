@@ -51,6 +51,8 @@ import { RefundsComponent } from './events/single-event/refunds/refunds.componen
 import { ReportsComponent } from './events/single-event/reports/reports.component';
 import { SettingsComponent } from './events/single-event/settings/settings.component';
 import { AllEventsComponent } from './events/all-events/all-events.component';
+import { AllSpacesComponent } from './space/all-spaces/all-spaces.component';
+import { LocationVerifyComponent } from './space/location/components/location-verify/location-verify.component';
 
 export const routes: Routes = [
 {path:'',redirectTo:'registration',pathMatch:'full'}
@@ -83,7 +85,13 @@ export const routes: Routes = [
       {path:'settings',component:SettingsComponent}
     ]
 }
+,{path:'all-spaces',component:AllSpacesComponent}
+
 ,{path:'spaces',component:SpaceComponent}
+,{
+    path: 'location/verify/:id',
+    component: LocationVerifyComponent
+  }
 
 
 

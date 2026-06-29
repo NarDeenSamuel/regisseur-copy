@@ -1,17 +1,10 @@
 .physical-container {
-
   width: 100%;
-
   max-width: 1320px;
-
   margin: 0 auto;
-
   padding: 28px;
-
   box-sizing: border-box;
-
   animation: fadeIn 0.25s ease;
-
 }
 
 /* =========================
@@ -19,76 +12,41 @@
 ========================= */
 
 .section-header {
-
   display: flex;
-
   align-items: flex-start;
-
   gap: 16px;
-
   margin-bottom: 34px;
-
 }
 
 .section-number {
-
   width: 38px;
-
   height: 38px;
-
   border-radius: 50%;
-
-  background: linear-gradient(
-    135deg,
-    #FFF4C7,
-    #FFE27A
-  );
-
-  color: #B98500;
-
+  background: linear-gradient(135deg, #ffcccc, #ff9999); /* أحمر فاتح (كان أصفر فاتح) */
+  color: #cc0000; /* أحمر داكن */
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   font-size: 15px;
-
   font-weight: 700;
-
   flex-shrink: 0;
-
-  box-shadow:
-    0 6px 18px rgba(242, 200, 30, 0.18);
-
+  box-shadow: 0 6px 18px rgba(227, 6, 19, 0.18); /* ظل أحمر */
 }
 
 .section-title {
-
   margin: 0;
-
   font-size: 40px;
-
   font-weight: 700;
-
-  color: #111111;
-
+  color: #ffffff; /* أبيض */
   letter-spacing: -1px;
-
 }
 
 .section-subtitle {
-
   margin-top: 10px;
-
   max-width: 620px;
-
-  color: #777777;
-
+  color: #aaaaaa; /* رمادي فاتح ليناسب الوضع الليلي */
   font-size: 15px;
-
   line-height: 1.7;
-
 }
 
 /* =========================
@@ -96,18 +54,11 @@
 ========================= */
 
 .form-card {
-
-  background: white;
-
-  border: 1px solid #ECECEC;
-
+  background: #000000; /* أسود (كان أبيض) */
+  border: 1px solid #333333; /* حدود داكنة */
   border-radius: 28px;
-
   padding: 30px;
-
-  box-shadow:
-    0 10px 35px rgba(0, 0, 0, 0.04);
-
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================
@@ -115,85 +66,58 @@
 ========================= */
 
 .physical-grid {
-
   display: grid;
-
   grid-template-columns: repeat(2, 1fr);
-
   gap: 22px;
-
   margin-bottom: 30px;
-
 }
 
 /* =========================
-   FORM
+   FORM & INPUTS
 ========================= */
 
 .form-group {
-
   display: flex;
-
   flex-direction: column;
-
 }
 
 .full-width {
-
   margin-bottom: 30px;
-
 }
 
 .form-label {
-
   font-size: 14px;
-
   font-weight: 700;
-
-  color: #222222;
-
+  color: #ffffff; /* أبيض */
   margin-bottom: 10px;
+}
 
+/* تنسيق الـ Placeholder ليكون أبيض */
+::placeholder {
+  color: #ffffff !important;
+  opacity: 0.6 !important;
 }
 
 .form-input {
-
   height: 54px;
-
-  border: 1px solid #E5E5E5;
-
+  border: 1px solid #444444; /* حدود داكنة */
   border-radius: 16px;
-
   padding: 0 18px;
-
   font-size: 14px;
-
-  background: #FCFCFC;
-
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s,
-    background 0.2s;
-
+  background: #111111; /* خلفية داكنة للحقل */
+  color: #ffffff; /* لون النص داخل الحقل أبيض */
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
 .form-input:hover {
-
-  border-color: #D8D8D8;
-
+  border-color: #666666;
 }
 
 .form-input:focus {
-
   outline: none;
-
-  border-color: #F2C81E;
-
-  background: white;
-
-  box-shadow:
-    0 0 0 4px rgba(242, 200, 30, 0.12);
-
+  border-color: #e30613; /* أحمر (كان أصفر) */
+  background: #000000;
+  box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.12);
 }
 
 /* =========================
@@ -201,159 +125,88 @@
 ========================= */
 
 .rooms-section {
-
   padding: 22px;
-
   border-radius: 22px;
-
-  background: #FFFDF8;
-
-  border: 1px solid #F7E7A5;
-
+  background: #1a1a1a; /* داكن جداً (كان أصفر باهت) */
+  border: 1px solid #330000; /* أحمر داكن جداً */
 }
 
 .rooms-helper {
-
   margin-top: -2px;
-
   margin-bottom: 18px;
-
-  color: #777777;
-
+  color: #aaaaaa;
   font-size: 13px;
-
   line-height: 1.5;
-
 }
 
 .room-input-wrapper {
-
   display: flex;
-
   gap: 14px;
-
 }
 
 .room-input-wrapper .form-input {
-
   flex: 1;
-
 }
 
 .add-room-btn {
-
   min-width: 130px;
-
   border: none;
-
   border-radius: 16px;
-
-  background: linear-gradient(
-    135deg,
-    #F2C81E,
-    #E4B700
-  );
-
+  background: linear-gradient(135deg, #ff3333, #cc0000); /* تدرج أحمر */
   color: white;
-
   font-size: 13px;
-
   font-weight: 700;
-
   cursor: pointer;
-
-  transition:
-    transform 0.15s,
-    box-shadow 0.2s;
-
-  box-shadow:
-    0 8px 20px rgba(242, 200, 30, 0.25);
-
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 8px 20px rgba(227, 6, 19, 0.25);
 }
 
 .add-room-btn:hover {
-
   transform: translateY(-1px);
-
-  box-shadow:
-    0 12px 24px rgba(242, 200, 30, 0.32);
-
+  box-shadow: 0 12px 24px rgba(227, 6, 19, 0.32);
 }
 
 .rooms-tags {
-
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 12px;
-
   margin-top: 20px;
-
 }
 
 .room-tag {
-
   min-height: 42px;
-
   padding: 0 16px;
-
   border-radius: 999px;
-
-  background: white;
-
-  border: 1px solid #F2C81E;
-
+  background: #111111; /* أسود/داكن */
+  border: 1px solid #e30613; /* أحمر */
   display: flex;
-
   align-items: center;
-
   gap: 10px;
-
   font-size: 13px;
-
   font-weight: 600;
-
-  color: #5A4A00;
-
+  color: #ffcccc; /* أحمر فاتح للنص */
   transition: 0.2s;
-
 }
 
 .room-tag:hover {
-
-  background: #FFF8DD;
-
+  background: #2a0000; /* أحمر داكن للخلفية عند المرور */
 }
 
 .room-tag button {
-
   width: 22px;
-
   height: 22px;
-
   border: none;
-
   border-radius: 50%;
-
-  background: #FFF2BE;
-
-  color: #B98500;
-
+  background: #ffcccc; /* أحمر فاتح */
+  color: #cc0000; /* أحمر داكن */
   cursor: pointer;
-
   font-size: 12px;
-
   transition: 0.2s;
-
 }
 
 .room-tag button:hover {
-
-  background: #F2C81E;
-
+  background: #e30613;
   color: white;
-
 }
 
 /* =========================
@@ -361,93 +214,53 @@
 ========================= */
 
 .flags-wrapper {
-
   display: grid;
-
   grid-template-columns: 1fr 1fr;
-
   gap: 18px;
-
   margin-top: 30px;
-
 }
 
 .flag-card {
-
-  border: 1px solid #ECECEC;
-
+  border: 1px solid #333333;
   border-radius: 20px;
-
   padding: 22px;
-
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   cursor: pointer;
-
-  transition:
-    border-color 0.2s,
-    transform 0.15s,
-    box-shadow 0.2s;
-
-  background: white;
-
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  background: #000000; /* أسود */
 }
 
 .flag-card:hover {
-
-  border-color: #F2C81E;
-
+  border-color: #e30613; /* أحمر */
   transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 22px rgba(242, 200, 30, 0.12);
-
+  box-shadow: 0 10px 22px rgba(227, 6, 19, 0.12);
 }
 
 .flag-content {
-
   display: flex;
-
   flex-direction: column;
-
 }
 
 .flag-title {
-
   font-size: 15px;
-
   font-weight: 700;
-
-  color: #111111;
-
+  color: #ffffff; /* أبيض */
 }
 
 .flag-subtitle {
-
   margin-top: 6px;
-
-  color: #777777;
-
+  color: #aaaaaa;
   font-size: 13px;
-
   line-height: 1.5;
-
 }
 
 .flag-card input[type="checkbox"] {
-
   width: 22px;
-
   height: 22px;
-
-  accent-color: #F2C81E;
-
+  accent-color: #e30613; /* أحمر */
   cursor: pointer;
-
 }
 
 /* =========================
@@ -455,211 +268,88 @@
 ========================= */
 
 .listing-footer {
-
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   margin-top: 42px;
-
   padding-top: 28px;
-
-  border-top: 1px solid #F1F1F1;
-
+  border-top: 1px solid #333333; /* خط داكن */
 }
 
 .footer-back {
-
   border: none;
-
   background: transparent;
-
   display: flex;
-
   align-items: center;
-
   gap: 10px;
-
   font-size: 15px;
-
   font-weight: 600;
-
   cursor: pointer;
-
-  color: #333333;
-
+  color: #ffffff; /* أبيض */
   transition: 0.2s;
-
 }
 
 .footer-back:hover {
-
-  color: #000000;
-
+  color: #cccccc;
 }
 
 .footer-actions {
-
   display: flex;
-
   align-items: center;
-
   gap: 14px;
-
 }
 
 .draft-btn {
-
   height: 44px;
-
   padding: 0 22px;
-
   border-radius: 999px;
-
-  border: 1px solid #DDDDDD;
-
-  background: white;
-
+  border: 1px solid #444444;
+  background: #000000;
+  color: #ffffff;
   font-size: 13px;
-
   font-weight: 600;
-
   cursor: pointer;
-
   transition: 0.2s;
-
 }
 
 .draft-btn:hover {
-
-  background: #FAFAFA;
-
+  background: #1a1a1a;
 }
 
 .next-btn {
-
   min-width: 140px;
-
   height: 44px;
-
   border: none;
-
   border-radius: 999px;
-
-  background: linear-gradient(
-    135deg,
-    #F2C81E,
-    #E1B100
-  );
-
+  background: linear-gradient(135deg, #ff3333, #cc0000); /* تدرج أحمر */
   color: white;
-
   font-size: 13px;
-
   font-weight: 700;
-
   cursor: pointer;
-
-  transition:
-    transform 0.15s,
-    box-shadow 0.2s;
-
-  box-shadow:
-    0 10px 24px rgba(242, 200, 30, 0.24);
-
+  transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 10px 24px rgba(227, 6, 19, 0.24);
 }
 
 .next-btn:hover {
-
   transform: translateY(-1px);
-
-  box-shadow:
-    0 14px 28px rgba(242, 200, 30, 0.32);
-
+  box-shadow: 0 14px 28px rgba(227, 6, 19, 0.32);
 }
 
 /* =========================
-   MOBILE
+   VALIDATION
 ========================= */
 
-@media (max-width: 900px) {
-
-  .physical-grid {
-
-    grid-template-columns: 1fr;
-
-  }
-
-  .flags-wrapper {
-
-    grid-template-columns: 1fr;
-
-  }
-
+.input-error {
+  border: 1px solid #ef4444 !important;
+  background: #2a0000 !important; /* لون أحمر غامق جداً ليناسب الخلفية السوداء */
 }
 
-@media (max-width: 768px) {
-
-  .physical-container {
-
-    padding: 18px;
-
-  }
-
-  .form-card {
-
-    padding: 22px;
-
-    border-radius: 22px;
-
-  }
-
-  .section-title {
-
-    font-size: 30px;
-
-  }
-
-  .room-input-wrapper {
-
-    flex-direction: column;
-
-  }
-
-  .add-room-btn {
-
-    height: 52px;
-
-  }
-
-  .listing-footer {
-
-    flex-direction: column;
-
-    gap: 16px;
-
-    align-items: stretch;
-
-  }
-
-  .footer-actions {
-
-    width: 100%;
-
-    flex-direction: column;
-
-  }
-
-  .footer-back,
-  .draft-btn,
-  .next-btn {
-
-    width: 100%;
-
-  }
-
+.error-text {
+  display: block;
+  margin-top: 8px;
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 /* =========================
@@ -667,319 +357,166 @@
 ========================= */
 
 @keyframes fadeIn {
-
   from {
-
     opacity: 0;
-
     transform: translateY(10px);
-
   }
-
   to {
-
     opacity: 1;
-
     transform: translateY(0);
-
   }
-
 }
+
 /* =========================
-   MOBILE ONLY
+   RESPONSIVE (Merged & Cleaned)
 ========================= */
 
+@media (max-width: 900px) {
+  .physical-grid {
+    grid-template-columns: 1fr;
+  }
+  .flags-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-
   .physical-container {
-
     padding: 16px;
-
   }
 
   /* HEADER */
-
   .section-header {
-
     flex-direction: column;
-
     gap: 12px;
-
     margin-bottom: 24px;
-
   }
-
   .section-number {
-
     width: 34px;
-
     height: 34px;
-
     font-size: 14px;
-
   }
-
   .section-title {
-
     font-size: 28px;
-
     line-height: 1.2;
-
     letter-spacing: -0.5px;
-
   }
-
   .section-subtitle {
-
     margin-top: 8px;
-
     font-size: 14px;
-
     line-height: 1.6;
-
   }
 
-  /* CARD */
-
+  /* CARD & GRID */
   .form-card {
-
     padding: 18px;
-
     border-radius: 20px;
-
   }
-
-  /* GRID */
-
   .physical-grid {
-
     grid-template-columns: 1fr;
-
     gap: 16px;
-
     margin-bottom: 22px;
-
   }
 
   /* FORM */
-
   .form-label {
-
     font-size: 13px;
-
     margin-bottom: 8px;
-
   }
-
   .form-input {
-
     height: 50px;
-
     padding: 0 14px;
-
     border-radius: 14px;
-
     font-size: 14px;
-
   }
 
   /* ROOMS */
-
   .rooms-section {
-
     padding: 18px;
-
     border-radius: 18px;
-
   }
-
   .rooms-helper {
-
     margin-bottom: 16px;
-
     font-size: 12px;
-
     line-height: 1.6;
-
   }
-
   .room-input-wrapper {
-
     flex-direction: column;
-
     gap: 12px;
-
   }
-
   .add-room-btn {
-
     width: 100%;
-
     height: 48px;
-
     border-radius: 14px;
-
     font-size: 13px;
-
   }
-
   .rooms-tags {
-
     gap: 10px;
-
     margin-top: 18px;
-
   }
-
   .room-tag {
-
     width: 100%;
-
     justify-content: space-between;
-
     min-height: 46px;
-
     padding: 0 14px;
-
     border-radius: 14px;
-
     font-size: 13px;
-
   }
-
   .room-tag button {
-
     width: 20px;
-
     height: 20px;
-
     font-size: 11px;
-
   }
 
   /* FLAGS */
-
   .flags-wrapper {
-
     grid-template-columns: 1fr;
-
     gap: 14px;
-
     margin-top: 24px;
-
   }
-
   .flag-card {
-
     padding: 18px;
-
     border-radius: 16px;
-
     gap: 16px;
-
     align-items: flex-start;
-
   }
-
   .flag-title {
-
     font-size: 14px;
-
   }
-
   .flag-subtitle {
-
     margin-top: 4px;
-
     font-size: 12px;
-
     line-height: 1.5;
-
   }
-
   .flag-card input[type="checkbox"] {
-
     width: 20px;
-
     height: 20px;
-
     margin-top: 2px;
-
     flex-shrink: 0;
-
   }
 
   /* FOOTER */
-
   .listing-footer {
-
     flex-direction: column;
-
     align-items: stretch;
-
     gap: 16px;
-
     margin-top: 28px;
-
     padding-top: 22px;
-
   }
-
   .footer-actions {
-
     width: 100%;
-
     flex-direction: column;
-
     gap: 12px;
-
   }
-
   .footer-back,
   .draft-btn,
   .next-btn {
-
     width: 100%;
-
-  }
-
-  .footer-back,
-  .draft-btn,
-  .next-btn {
-
     height: 44px;
-
     border-radius: 999px;
-
   }
-
   .footer-back {
-
     justify-content: center;
-
-    background: #F8F8F8;
-
+    background: #111111; /* لون داكن للزر على الموبايل */
   }
-
-}
-.input-error {
-
-  border: 1px solid #ef4444 !important;
-
-  background: #fff5f5 !important;
-
-}
-
-.error-text {
-
-  display: block;
-
-  margin-top: 8px;
-
-  color: #ef4444;
-
-  font-size: 13px;
-
-  font-weight: 500;
-
 }

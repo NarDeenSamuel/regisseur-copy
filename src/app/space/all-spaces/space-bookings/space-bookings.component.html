@@ -1,0 +1,761 @@
+<div class="row">
+  <div class="col-lg-9">
+    <!-- Summary Cards -->
+    <div class="booking-summary row g-3">
+      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+        <div class="summary-card blue">
+          <div class="card-top">
+            <div class="icon-circle">
+              <i class="fa-regular fa-calendar-check"></i>
+            </div>
+
+            <div class="card-content">
+              <h6>CONFIRMED BOOKINGS</h6>
+              <h2>38</h2>
+              <p>Upcoming & ongoing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+        <div class="summary-card green">
+          <div class="card-top">
+            <div class="icon-circle">
+              <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div class="card-content">
+              <h6>COMPLETED</h6>
+              <h2>128</h2>
+              <p>Past bookings</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+        <div class="summary-card orange">
+          <div class="card-top">
+            <div class="icon-circle">
+              <i class="fa-regular fa-clock"></i>
+            </div>
+
+            <div class="card-content">
+              <h6>UPCOMING</h6>
+              <h2>17</h2>
+              <p>Next 30 days</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+        <div class="summary-card purple">
+          <div class="card-top">
+            <div class="icon-circle">
+              <i class="fa-solid fa-dollar-sign"></i>
+            </div>
+
+            <div class="card-content">
+              <h6>TOTAL REVENUE</h6>
+              <h2>$285,450</h2>
+              <p>From confirmed bookings</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+        <div class="summary-card yellow">
+          <div class="card-top">
+            <div class="icon-circle">
+              <i class="fa-regular fa-file-lines"></i>
+            </div>
+
+            <div class="card-content">
+              <h6>PENDING PAYMENT</h6>
+              <h2>9</h2>
+              <p>Require attention</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+        <div class="summary-card red">
+          <div class="card-top">
+            <div class="icon-circle">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+
+            <div class="card-content">
+              <h6>CANCELLED</h6>
+              <h2>6</h2>
+              <p>This year</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="inquiries-section">
+      <!-- Toolbar -->
+
+      <div class="inquiry-toolbar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search bookings by space, event, or client..."
+            [(ngModel)]="searchTerm"
+            (input)="applyFilters()"
+          />
+        </div>
+
+        <div class="toolbar-actions">
+          <!-- Filter -->
+
+          <div class="dropdown">
+            <button class="toolbar-btn" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-sliders"></i>
+
+              Filters
+
+              <span
+                class="filter-dot"
+                *ngIf="selectedStatus || selectedPayment"
+              ></span>
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-dark filter-menu">
+              <div class="filter-item">
+                <label>Status</label>
+
+                <select
+                  class="form-select"
+                  [(ngModel)]="selectedStatus"
+                  (change)="applyFilters()"
+                >
+                  <option value="">All Status</option>
+
+                  <option *ngFor="let item of statuses" [value]="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="filter-item mt-3">
+                <label>Payment</label>
+
+                <select
+                  class="form-select"
+                  [(ngModel)]="selectedPayment"
+                  (change)="applyFilters()"
+                >
+                  <option value="">All Payments</option>
+
+                  <option *ngFor="let item of payments" [value]="item">
+                    {{ item }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sort -->
+
+          <div class="dropdown">
+            <button class="toolbar-btn" data-bs-toggle="dropdown">
+              Sort by:
+
+              <strong>{{ sortBy }}</strong>
+
+              <i class="fa-solid fa-chevron-down ms-2"></i>
+            </button>
+
+            <ul class="dropdown-menu dropdown-menu-dark">
+              <li>
+                <button class="dropdown-item" (click)="setSort('Booking Date')">
+                  Booking Date
+                </button>
+              </li>
+
+              <li>
+                <button
+                  class="dropdown-item"
+                  (click)="setSort('Highest Price')"
+                >
+                  Highest Price
+                </button>
+              </li>
+
+              <li>
+                <button class="dropdown-item" (click)="setSort('Lowest Price')">
+                  Lowest Price
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+
+      <div class="table-responsive inquiries-table-wrapper">
+        <table class="inquiries-table">
+          <thead>
+            <tr>
+              <th>BOOKING</th>
+
+              <th>SPACE</th>
+
+              <th>BOOKED BY</th>
+
+              <th>DATE & TIME</th>
+
+              <th>STATUS</th>
+
+              <th>PAYMENT</th>
+
+              <th>TOTAL</th>
+
+              <th class="text-center">ACTIONS</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              *ngFor="let booking of paginatedBookings; trackBy: trackByBooking"
+            >
+              <!-- Booking -->
+
+              <td>
+                <div class="space-cell">
+                  <img [src]="booking.image" class="space-thumb" />
+
+                  <div>
+                    <h6>
+                      {{ booking.bookingName }}
+                    </h6>
+
+                    <span>
+                      Booking ID:
+
+                      {{ booking.bookingId }}
+                    </span>
+                  </div>
+                </div>
+              </td>
+
+              <!-- Space -->
+
+              <td>
+                <div class="host-cell">
+                  <strong>
+                    {{ booking.space }}
+                  </strong>
+
+                  <span>
+                    {{ booking.location }}
+                  </span>
+                </div>
+              </td>
+
+              <!-- Client -->
+
+              <td>
+                <div class="host-cell">
+                  <strong>
+                    {{ booking.bookedBy }}
+                  </strong>
+
+                  <span>
+                    {{ booking.contact }}
+                  </span>
+                </div>
+              </td>
+
+              <!-- Date -->
+
+              <td>
+                <div class="update-cell">
+                  <strong>
+                    {{ booking.date }}
+                  </strong>
+
+                  <span>
+                    {{ booking.time }}
+                  </span>
+                </div>
+              </td>
+
+              <!-- Status -->
+
+              <td>
+                <span
+                  class="status-badge"
+                  [ngClass]="{
+                    'status-replied': booking.status == 'CONFIRMED',
+
+                    'status-closed': booking.status == 'COMPLETED',
+
+                    'status-waiting': booking.status == 'PENDING',
+                  }"
+                >
+                  {{ booking.status }}
+                </span>
+              </td>
+
+              <!-- Payment -->
+
+              <td>
+                <div>
+                  <span
+                    class="status-badge"
+                    [ngClass]="{
+                      'status-replied': booking.payment == 'PAID',
+
+                      'status-open': booking.payment == 'DEPOSIT PAID',
+
+                      'status-waiting': booking.payment == 'PENDING',
+                    }"
+                  >
+                    {{ booking.payment }}
+                  </span>
+
+                  <div class="payment-date">
+                    {{ booking.paymentDate }}
+                  </div>
+                </div>
+              </td>
+
+              <!-- Total -->
+
+              <td>
+                <strong>
+                  {{ booking.total | currency }}
+                </strong>
+              </td>
+
+              <!-- Actions -->
+
+              <td>
+                <div class="action-buttons">
+                  <button class="action-btn" (click)="viewBooking(booking)">
+                    <i class="fa-regular fa-eye"></i>
+                  </button>
+
+                  <button class="action-btn" (click)="chatBooking(booking)">
+                    <i class="fa-regular fa-message"></i>
+                  </button>
+
+                  <button class="action-btn" (click)="moreBooking(booking)">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Footer -->
+
+      <div class="table-footer">
+        <div class="results-count">
+          Showing
+
+          {{ startItem }}
+
+          -
+
+          {{ endItem }}
+
+          of
+
+          {{ filteredBookings.length }}
+
+          bookings
+        </div>
+
+        <div class="pagination-custom">
+          <button
+            class="page-btn"
+            (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage == 1"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+
+          <button
+            *ngFor="let page of visiblePages"
+            class="page-btn"
+            [class.active]="page == currentPage"
+            (click)="changePage(page)"
+          >
+            {{ page }}
+          </button>
+
+          <button
+            class="page-btn"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage == totalPages"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <div class="page-size-wrapper">
+          <span>Show</span>
+
+          <select
+            [(ngModel)]="pageSize"
+            (change)="changePage(1)"
+            class="page-size-select"
+          >
+            <option [value]="10">10</option>
+
+            <option [value]="20">20</option>
+
+            <option [value]="30">30</option>
+          </select>
+
+          <span>per page</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <!-- Booking Summary -->
+<div class="booking-summary-widget">
+
+  <!-- Header -->
+
+  <div class="summary-header">
+
+    <h5>BOOKING SUMMARY</h5>
+
+    <select
+      class="summary-year"
+      [(ngModel)]="selectedYear"
+      (change)="buildBookingSummary()"
+    >
+      <option>This Year</option>
+      <option>Last Year</option>
+      <option>All Time</option>
+    </select>
+
+  </div>
+
+  <!-- Chart -->
+
+  <div class="booking-chart">
+
+    <div class="chart-wrapper">
+
+      <canvas id="bookingChart"></canvas>
+
+      <div class="chart-center">
+
+        <h2>{{totalBookings}}</h2>
+
+        <span>Total</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Legend -->
+
+  <div class="booking-legend">
+
+    <div
+      class="legend-item"
+      *ngFor="let item of bookingSummary"
+    >
+
+      <div class="legend-left">
+
+        <span
+          class="legend-color"
+          [style.background]="item.color">
+        </span>
+
+        {{item.name}}
+
+      </div>
+
+      <div class="legend-right">
+
+        {{item.count}}
+
+        ({{item.percent}}%)
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Divider -->
+
+  <div class="summary-divider"></div>
+
+  <!-- Footer -->
+
+  <div class="summary-footer">
+
+    <div class="summary-box">
+
+      <small>Total Revenue</small>
+
+      <h4>
+
+        {{totalRevenue | currency:'USD':'symbol':'1.0-0'}}
+
+      </h4>
+
+    </div>
+
+    <div class="summary-box">
+
+      <small>Average Booking Value</small>
+
+      <h4>
+
+        {{averageBooking | currency:'USD':'symbol':'1.2-2'}}
+
+      </h4>
+
+    </div>
+
+  </div>
+
+</div>
+    <!-- Quick Actions -->
+<div class="quick-actions-card my-2">
+
+  <h5 class="quick-title">
+
+    QUICK ACTIONS
+
+  </h5>
+
+  <!-- Item 1 -->
+
+  <div
+    class="quick-item"
+    (click)="newBooking()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+
+        <i class="fa-solid fa-plus"></i>
+
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+
+          New Space Booking
+
+        </h6>
+
+        <p>
+
+          Create a new booking
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Item 2 -->
+
+  <div
+    class="quick-item"
+    (click)="calendarView()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+
+        <i class="fa-regular fa-calendar"></i>
+
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+
+          Calendar View
+
+        </h6>
+
+        <p>
+
+          View bookings calendar
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Item 3 -->
+
+  <div
+    class="quick-item"
+    (click)="managePayments()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+
+        <i class="fa-regular fa-credit-card"></i>
+
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+
+          Manage Payments
+
+        </h6>
+
+        <p>
+
+          Track payments & invoices
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Item 4 -->
+
+  <div
+    class="quick-item"
+    (click)="downloadReport()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+
+        <i class="fa-solid fa-download"></i>
+
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+
+          Download Report
+
+        </h6>
+
+        <p>
+
+          Export bookings report
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Item 5 -->
+
+  <div
+    class="quick-item"
+    (click)="savedBookings()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+
+        <i class="fa-regular fa-bookmark"></i>
+
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+
+          Saved Bookings
+
+        </h6>
+
+        <p>
+
+          View your saved bookings
+
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+</div>
+    <!-- Help -->
+<div class="help-card">
+
+  <div class="help-icon">
+    <i class="fa-solid fa-headset"></i>
+  </div>
+
+  <h5>
+    NEED HELP?
+  </h5>
+
+  <p>
+    Our team is here to help you find the
+    perfect space for your event.
+  </p>
+
+  <button
+    class="help-btn"
+    (click)="visitHelpCenter()"
+  >
+    Visit Help Center
+  </button>
+
+</div>
+
+  </div>
+</div>

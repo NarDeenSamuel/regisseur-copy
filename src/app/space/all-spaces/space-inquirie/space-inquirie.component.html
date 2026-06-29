@@ -1,0 +1,855 @@
+<div class="row">
+
+    <!-- Left -->
+
+    <div class="col-lg-9">
+
+       <div class="booking-summary row g-3">
+
+  <!-- Open Inquiries -->
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+
+    <div class="summary-card blue">
+
+      <div class="card-top">
+
+        <div class="icon-circle">
+          <i class="fa-regular fa-comments"></i>
+        </div>
+
+        <div>
+
+          <h6>OPEN INQUIRIES</h6>
+
+          <h2>18</h2>
+
+          <p>Awaiting response</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Replied -->
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+
+    <div class="summary-card green">
+
+      <div class="card-top">
+
+        <div class="icon-circle">
+          <i class="fa-solid fa-reply"></i>
+        </div>
+
+        <div>
+
+          <h6>REPLIED</h6>
+
+          <h2>12</h2>
+
+          <p>From hosts</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Waiting -->
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+
+    <div class="summary-card orange">
+
+      <div class="card-top">
+
+        <div class="icon-circle">
+          <i class="fa-regular fa-clock"></i>
+        </div>
+
+        <div>
+
+          <h6>WAITING ON ME</h6>
+
+          <h2>4</h2>
+
+          <p>Need your response</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Quotes -->
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+
+    <div class="summary-card purple">
+
+      <div class="card-top">
+
+        <div class="icon-circle">
+          <i class="fa-regular fa-file-lines"></i>
+        </div>
+
+        <div>
+
+          <h6>QUOTES RECEIVED</h6>
+
+          <h2>9</h2>
+
+          <p>Ready to review</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Shortlisted -->
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+
+    <div class="summary-card violet">
+
+      <div class="card-top">
+
+        <div class="icon-circle">
+          <i class="fa-regular fa-star"></i>
+        </div>
+
+        <div>
+
+          <h6>SHORTLISTED</h6>
+
+          <h2>6</h2>
+
+          <p>Top choices</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Closed -->
+
+  <div class="col-xl-4 col-lg-4 col-md-6 col-12">
+
+    <div class="summary-card gray">
+
+      <div class="card-top">
+
+        <div class="icon-circle">
+          <i class="fa-solid fa-check"></i>
+        </div>
+
+        <div>
+
+          <h6>CLOSED</h6>
+
+          <h2>21</h2>
+
+          <p>Completed inquiries</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<div class="inquiries-section">
+
+  <!-- Toolbar -->
+
+  <div class="inquiry-toolbar">
+
+    <div class="search-box">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search inquiries by space, host, or keyword..."
+        [(ngModel)]="searchTerm"
+        (input)="applyFilters()"
+      >
+
+    </div>
+
+    <div class="toolbar-actions">
+
+      <!-- Filter -->
+
+      <div class="dropdown">
+
+        <button
+          class="toolbar-btn"
+          data-bs-toggle="dropdown"
+        >
+
+          <i class="fa-solid fa-sliders"></i>
+
+          Filters
+
+          <span
+            class="filter-dot"
+            *ngIf="selectedStatus || selectedHost"
+          ></span>
+
+        </button>
+
+        <div class="dropdown-menu dropdown-menu-dark filter-menu">
+
+          <div class="filter-item">
+
+            <label>Status</label>
+
+            <select
+              class="form-select"
+              [(ngModel)]="selectedStatus"
+              (change)="applyFilters()"
+            >
+
+              <option value="">All</option>
+
+              <option
+                *ngFor="let item of statuses"
+                [value]="item"
+              >
+                {{item}}
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="filter-item mt-3">
+
+            <label>Host</label>
+
+            <select
+              class="form-select"
+              [(ngModel)]="selectedHost"
+              (change)="applyFilters()"
+            >
+
+              <option value="">All Hosts</option>
+
+              <option
+                *ngFor="let host of hosts"
+                [value]="host"
+              >
+                {{host}}
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Sort -->
+
+      <div class="dropdown">
+
+        <button
+          class="toolbar-btn"
+          data-bs-toggle="dropdown"
+        >
+
+          Sort by:
+
+          <strong>
+
+            {{sortBy}}
+
+          </strong>
+
+          <i class="fa-solid fa-chevron-down ms-2"></i>
+
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-dark">
+
+          <li>
+
+            <button
+              class="dropdown-item"
+              (click)="setSort('Last Updated')"
+            >
+              Last Updated
+            </button>
+
+          </li>
+
+          <li>
+
+            <button
+              class="dropdown-item"
+              (click)="setSort('Newest')"
+            >
+              Newest
+            </button>
+
+          </li>
+
+          <li>
+
+            <button
+              class="dropdown-item"
+              (click)="setSort('Oldest')"
+            >
+              Oldest
+            </button>
+
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Table -->
+
+  <div class="table-responsive inquiries-table-wrapper">
+
+    <table class="inquiries-table align-middle">
+
+      <thead>
+
+        <tr>
+
+          <th>SPACE INQUIRIES</th>
+
+          <th>INQUIRY DETAILS</th>
+
+          <th>HOST / VENUE</th>
+
+          <th>STATUS</th>
+
+          <th>LAST UPDATE</th>
+
+          <th class="text-center">ACTIONS</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="let inquiry of paginatedInquiries"
+        >
+
+          <!-- Space -->
+
+          <td>
+
+            <div class="space-cell">
+
+              <img
+                [src]="inquiry.image"
+                class="space-thumb"
+              >
+
+              <div>
+
+                <h6>
+
+                  {{inquiry.space}}
+
+                </h6>
+
+                <span>
+
+                  {{inquiry.location}}
+
+                </span>
+
+              </div>
+
+            </div>
+
+          </td>
+
+          <!-- Details -->
+
+          <td>
+
+            <div class="details-cell">
+
+              <h6>
+
+                {{inquiry.title}}
+
+              </h6>
+
+              <div>
+
+                <i class="fa-regular fa-calendar"></i>
+
+                {{inquiry.date}}
+
+              </div>
+
+              <div>
+
+                <i class="fa-solid fa-users"></i>
+
+                {{inquiry.guests}} Guests
+
+              </div>
+
+            </div>
+
+          </td>
+
+          <!-- Host -->
+
+          <td>
+
+            <div class="host-cell">
+
+              <strong>
+
+                {{inquiry.host}}
+
+              </strong>
+
+              <span>
+
+                {{inquiry.hostLocation}}
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- Status -->
+
+          <td>
+
+            <span
+class="status-badge"
+[ngClass]="{
+
+'status-open': inquiry.status=='OPEN',
+
+'status-replied': inquiry.status=='REPLIED',
+
+'status-waiting': inquiry.status=='WAITING ON ME',
+
+'status-quote': inquiry.status=='QUOTE RECEIVED',
+
+'status-shortlisted': inquiry.status=='SHORTLISTED',
+
+'status-closed': inquiry.status=='CLOSED'
+
+}">
+
+              {{inquiry.status}}
+
+            </span>
+
+          </td>
+
+          <!-- Last Update -->
+
+          <td>
+
+            <div class="update-cell">
+
+              <strong>
+
+                {{inquiry.lastDate}}
+
+              </strong>
+
+              <span>
+
+                {{inquiry.lastTime}}
+
+              </span>
+
+            </div>
+
+          </td>
+
+          <!-- Actions -->
+
+          <td>
+
+            <div class="action-buttons">
+
+              <button
+                class="action-btn"
+                (click)="chatInquiry(inquiry)"
+              >
+                <i class="fa-regular fa-message"></i>
+              </button>
+
+              <button
+                class="action-btn"
+                (click)="calendarInquiry(inquiry)"
+              >
+                <i class="fa-regular fa-calendar"></i>
+              </button>
+
+              <button
+                class="action-btn"
+                (click)="saveInquiry(inquiry)"
+              >
+                <i class="fa-regular fa-bookmark"></i>
+              </button>
+
+              <button
+                class="action-btn"
+                (click)="moreInquiry(inquiry)"
+              >
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+  <!-- Footer -->
+
+  <div class="table-footer">
+
+    <div class="results-count">
+
+      Showing
+
+      {{startItem}}
+
+      -
+
+      {{endItem}}
+
+      of
+
+      {{filteredInquiries.length}}
+
+      inquiries
+
+    </div>
+
+    <div class="pagination-custom">
+
+      <button
+        class="page-btn"
+        (click)="changePage(currentPage-1)"
+        [disabled]="currentPage===1"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <button
+        *ngFor="let page of visiblePages"
+        class="page-btn"
+        [class.active]="page===currentPage"
+        (click)="changePage(page)"
+      >
+        {{page}}
+      </button>
+
+      <button
+        class="page-btn"
+        (click)="changePage(currentPage+1)"
+        [disabled]="currentPage===totalPages"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+    </div>
+
+    <!-- Right -->
+
+    <div class="col-lg-3">
+
+       <div class="summary-chart-card">
+<div class="summary-widget">
+
+    <h5 class="widget-title">
+
+        SPACE INQUIRY SUMMARY
+
+    </h5>
+
+    <div class="chart-wrapper">
+
+        <canvas id="inquiryChart"></canvas>
+
+        <div class="chart-center">
+
+            <h2>{{totalInquiries}}</h2>
+
+            <span>Total</span>
+
+        </div>
+
+    </div>
+
+    <div class="summary-legend">
+
+        <div
+            class="legend-item"
+            *ngFor="let item of inquirySummary">
+
+            <div class="legend-left">
+
+                <span
+                    class="legend-color"
+                    [style.background]="item.color">
+                </span>
+
+                {{item.name}}
+
+            </div>
+
+            <div class="legend-right">
+
+                {{item.count}}
+
+                ({{item.percent}}%)
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+
+<div class="quick-actions-card my-2">
+
+  <h5 class="quick-title">
+    QUICK ACTIONS
+  </h5>
+
+  <!-- New Inquiry -->
+
+  <div
+    class="quick-item"
+    (click)="newInquiry()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+        <i class="fa-solid fa-plus"></i>
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+          New Space Inquiry
+        </h6>
+
+        <p>
+          Send an inquiry to a space
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Browse Spaces -->
+
+  <div
+    class="quick-item"
+    (click)="browseSpaces()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+          Browse Spaces
+        </h6>
+
+        <p>
+          Find and explore available spaces
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Saved Spaces -->
+
+  <div
+    class="quick-item"
+    (click)="savedSpaces()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+        <i class="fa-regular fa-bookmark"></i>
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+          View Saved Spaces
+        </h6>
+
+        <p>
+          See your saved spaces and lists
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Review Proposals -->
+
+  <div
+    class="quick-item"
+    (click)="reviewProposals()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+        <i class="fa-regular fa-rectangle-list"></i>
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+          Review Proposals
+        </h6>
+
+        <p>
+          Compare proposals & quotes
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+  <!-- Help -->
+
+  <div
+    class="quick-item"
+    (click)="spaceBookingHelp()"
+  >
+
+    <div class="quick-left">
+
+      <div class="quick-icon">
+        <i class="fa-regular fa-circle-question"></i>
+      </div>
+
+      <div class="quick-content">
+
+        <h6>
+          Space Booking Help
+        </h6>
+
+        <p>
+          Get help with bookings & inquiries
+        </p>
+
+      </div>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right arrow"></i>
+
+  </div>
+
+</div>
+<div class="help-card">
+<div class="help-card">
+
+  <div class="help-icon">
+    <i class="fa-solid fa-headset"></i>
+  </div>
+
+  <h5>
+    NEED HELP?
+  </h5>
+
+  <p>
+    Our team is here to help you find the
+    perfect space for your event.
+  </p>
+
+  <button
+    class="help-btn"
+    (click)="visitHelpCenter()"
+  >
+    Visit Help Center
+  </button>
+
+</div>
+</div>
+
+    </div>
+
+</div>

@@ -409,29 +409,34 @@
 
         </button>
 
-        <div
-          class="action-menu"
-          *ngIf="openedMenu === i"
-        >
+      <div
+  class="action-menu"
+  [class.open-up]="i >= paginatedspace.length - 2"
+  *ngIf="openedMenu === i"
+>
+  <button
+    class="accept-btn"
+    (click)="submitLocation(project.id)"
+  >
 
-          <button>
+    <i class="fa-solid fa-circle-check"></i>
 
-            <i class="fa-regular fa-pen-to-square"></i>
+    Accept
 
-            Edit
+  </button>
 
-          </button>
+  <button
+    class="reject-btn"
+    (click)="rejectLocation(project.id)"
+  >
 
-          <button class="delete-btn">
+    <i class="fa-solid fa-circle-xmark"></i>
 
-            <i class="fa-regular fa-trash-can"></i>
+    Reject
 
-            Delete
+  </button>
 
-          </button>
-
-        </div>
-
+</div>
       </td>
 
     </tr>

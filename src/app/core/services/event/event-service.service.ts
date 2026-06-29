@@ -122,4 +122,11 @@ removeFromWishlist(
   );
 
 }
+
+
+getLocations() {
+  return this.http.get<any[]>(
+    `${this.baseUrl}/Locations`
+  );
+}
 }

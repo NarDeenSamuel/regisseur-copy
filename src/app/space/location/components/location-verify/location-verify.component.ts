@@ -1,6 +1,7 @@
 import {
   Component,
-  inject
+  inject,
+  OnInit
 } from '@angular/core';
 
 import {
@@ -15,20 +16,41 @@ import {
 import {
   LocationService
 } from '../../services/location.service';
+import { NavbarComponent } from "../../../../navbar/navbar.component";
+import { SideBarComponent } from "../../../../side-bar/side-bar.component";
 
 @Component({
   selector: 'app-location-verify',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, NavbarComponent, SideBarComponent],
   templateUrl:
     './location-verify.component.html',
   styleUrls:
   ['./location-verify.component.css']
 })
-export class LocationVerifyComponent {
+export class LocationVerifyComponent implements OnInit{
 
   otp = '';
+  ngOnInit(): void {
 
+    if (!sessionStorage.getItem('locationVerifyReload')) {
+
+      sessionStorage.setItem(
+        'locationVerifyReload',
+        'true'
+      );
+
+      window.location.reload();
+
+    } else {
+
+      sessionStorage.removeItem(
+        'locationVerifyReload'
+      );
+
+    }
+
+  }
   private route =
     inject(ActivatedRoute);
 
@@ -59,7 +81,7 @@ export class LocationVerifyComponent {
           );
 
           this.router.navigate([
-            '/'
+            '/spaces'
           ]);
 
         },

@@ -833,6 +833,7 @@ getAmenityName(
     return control;
 
   }
+  emailError = '';
   goNext(): void {
 
     const requiredFields = [
@@ -982,7 +983,21 @@ getAmenityName(
       )?.setErrors(null);
 
     }
+// EMAIL VALIDATION
 
+this.emailError = '';
+
+const emailControl = this.form.get('email');
+
+if (emailControl?.value && emailControl.invalid) {
+
+  this.emailError = 'Please enter a valid email address';
+
+  emailControl.markAsTouched();
+
+  hasError = true;
+
+}
     if (hasError)
       return;
 

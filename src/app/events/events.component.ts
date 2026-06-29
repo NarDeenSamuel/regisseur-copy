@@ -235,13 +235,14 @@ constructor(
 
 ngOnInit(): void {
   this.loadOwners();
-
+this.loadLocations();
 this.eventForm = this.fb.group({
 
   // STEP 1
   eventName: ['', Validators.required],
   eventType: ['', Validators.required],
-  hostingSpace: ['', Validators.required],
+hostingSpace: ['', Validators.required],
+customLocationName: [''],
   organizer: ['', Validators.required],
 
   startDate: ['', Validators.required],
@@ -676,7 +677,26 @@ isStep2Valid(): boolean {
   );
 
 }
+locations: any[] = [];
+loadLocations() {
 
+  this.eventService
+    .getLocations()
+    .subscribe({
+
+      next: (res) => {
+
+        this.locations = res;
+
+        console.log(this.locations);
+
+      },
+
+      error: err => console.log(err)
+
+    });
+
+}
 publishEvent(): void {
 
   this.errorMessage = '';
@@ -760,7 +780,15 @@ userId:userId,
     eventTypeId:
       Number(form.eventType),
 
-    locationId: null,
+    locationId:
+  form.hostingSpace === 'custom'
+    ? null
+    : Number(form.hostingSpace),
+
+customLocationName:
+  form.hostingSpace === 'custom'
+    ? form.customLocationName
+    : null,
 
     bookingType: 1,
 

@@ -329,16 +329,12 @@
     </div>
 
     <!-- Bottom Grid -->
+<div class="container">
+  <div class="row g-4">
 
-    <div class="bottom-grid">
-
-      <!-- LEFT -->
-
-      <div class="left-column">
-
-        <!-- Contact -->
-
-        <div class="info-card">
+  <div class="col-12">
+    <!-- Contact -->
+     <div class="info-card">
 
           <h3 class="card-title">
             Contact Information
@@ -467,27 +463,13 @@
     placeholder="Add Beverage Menu Link">
 
 </div>
-          <!-- Venue Layout -->
-
-          <div class="contact-row">
-
-            <span class="contact-label">
-
-              <i data-lucide="layout-panel-top"></i>
-
-              Venue Layout
-
-            </span>
-
-            <input type="text" placeholder="Add Venue Layout Link">
-
-          </div>
 
         </div>
+  </div>
 
-        <!-- Area Details -->
-
-        <div class="info-card">
+  <div class="col-12">
+    <!-- Area Details -->
+    <div class="info-card">
 
           <h3 class="card-title">
             Area Details
@@ -574,11 +556,11 @@
           </div>
 
         </div>
+  </div>
 
-      
-      <!-- AMENITIES -->
-
-<div class="info-card">
+  <div class="col-12">
+    <!-- Amenities -->
+ <div class="info-card">
 
   <h3 class="card-title">
     ⭐ Available Amenities
@@ -658,7 +640,7 @@
 
   </div>
 
-  
+
 
   <!-- SELECTED CATEGORY AMENITIES -->
 
@@ -740,16 +722,11 @@
 
   }
 </div>
+  </div>
 
-      </div>
-
-      <!-- RIGHT -->
-
-      <div class="right-column">
-
-        <!-- Address -->
-
-        <div class="info-card">
+  <div class="col-12">
+    <!-- Address -->
+   <div class="info-card">
 
           <h3 class="card-title">
             Address
@@ -1073,10 +1050,11 @@
           </div>
 
         </div>
+  </div>
 
-        <!-- HOURS -->
-
-        <div class="info-card">
+  <div class="col-12">
+    <!-- Hours -->
+  <div class="info-card">
 
           <h3 class="card-title">
             Hours
@@ -1084,7 +1062,7 @@
 
           <!-- ADD -->
 
-        
+
 
           <!-- HOURS LIST -->
 
@@ -1160,7 +1138,7 @@
 
               <!-- REMOVE -->
 
-              
+
 
             </div>
 
@@ -1187,9 +1165,11 @@
 
         </div>
 
-      </div>
+  </div>
 
-    </div>
+</div>
+</div>
+
     <!-- ACCESS NOTES -->
 
     <div class="rules-card" style="margin-top: 30px;">
@@ -1238,7 +1218,13 @@
       </button>
 
       <!-- RIGHT ACTIONS -->
+@if (emailError) {
 
+  <div class="text-danger text-center mb-3">
+    {{ emailError }}
+  </div>
+
+}
       <div class="footer-actions">
 
         <button type="button" class="draft-btn">
